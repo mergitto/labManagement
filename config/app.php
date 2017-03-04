@@ -64,7 +64,7 @@ return [
      *   You should treat it as extremely sensitive data.
      */
     'Security' => [
-        'salt' => env('SECURITY_SALT', '240adf4c6e33d380343360a4296a24f600a1d97a54ef0c5fa515194439c23c6d'),
+        'salt' => env('SECURITY_SALT', '2cf346d6b0c912b151694cbbaaf74574f58d3e4505f73d9de90adf7dda6c7beb'),
     ],
 
     /**
@@ -220,7 +220,7 @@ return [
     'Datasources' => [
         'default' => [
             'className' => 'Cake\Database\Connection',
-            'driver' => 'Cake\Database\Driver\Mysql',
+            'driver' => 'Cake\Database\Driver\Postgres',
             'persistent' => false,
             'host' => 'localhost',
             /**
@@ -229,11 +229,11 @@ return [
              * the following line and set the port accordingly
              */
             //'port' => 'non_standard_port_number',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'my_app',
+            'username' => 'postgres',
+            'password' => 'postgres',
+            'database' => 'laboratory',
             'encoding' => 'utf8',
-            'timezone' => 'UTC',
+            'timezone' => 'Asia/Tokyo',
             'flags' => [],
             'cacheMetadata' => true,
             'log' => false,
