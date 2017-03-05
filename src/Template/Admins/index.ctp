@@ -5,18 +5,17 @@
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Admin'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('新規管理者'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('ユーザー一覧'), ['controller' => 'users', 'action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="admins index large-9 medium-8 columns content">
-    <h3><?= __('Admins') ?></h3>
+    <h3><?= __('管理者一覧') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('deleted') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -26,13 +25,13 @@
             <?php foreach ($admins as $admin): ?>
             <tr>
                 <td><?= $this->Number->format($admin->id) ?></td>
-                <td><?= h($admin->deleted) ?></td>
+                <td><?= h($admin->name) ?></td>
                 <td><?= h($admin->created) ?></td>
                 <td><?= h($admin->modified) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $admin->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $admin->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $admin->id], ['confirm' => __('Are you sure you want to delete # {0}?', $admin->id)]) ?>
+                    <?= $this->Html->link(__('詳細'), ['action' => 'view', $admin->id]) ?>
+                    <?= $this->Html->link(__('編集'), ['action' => 'edit', $admin->id]) ?>
+                    <?= $this->Form->postLink(__('削除'), ['action' => 'delete', $admin->id], ['confirm' => __('本当に削除してよろしいですか　# {0}?', $admin->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -40,12 +39,12 @@
     </table>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->first('<< ' . __('初め')) ?>
+            <?= $this->Paginator->prev('< ' . __('前')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->next(__('次') . ' >') ?>
+            <?= $this->Paginator->last(__('最後') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+        <p><?= $this->Paginator->counter(['format' => __('{{page}}/{{pages}} ページ目,　{{count}}　件中 {{current}} 件表示')]) ?></p>
     </div>
 </div>

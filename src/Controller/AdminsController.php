@@ -52,11 +52,11 @@ class AdminsController extends AppController
         if ($this->request->is('post')) {
             $admin = $this->Admins->patchEntity($admin, $this->request->data);
             if ($this->Admins->save($admin)) {
-                $this->Flash->success(__('The admin has been saved.'));
+                $this->Flash->success(__('管理者を新規登録しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The admin could not be saved. Please, try again.'));
+            $this->Flash->error(__('登録できませんでした。もう一度登録してみてください。'));
         }
         $this->set(compact('admin'));
         $this->set('_serialize', ['admin']);

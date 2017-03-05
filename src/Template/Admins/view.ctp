@@ -5,11 +5,10 @@
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Admin'), ['action' => 'edit', $admin->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Admin'), ['action' => 'delete', $admin->id], ['confirm' => __('Are you sure you want to delete # {0}?', $admin->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Admins'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Admin'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('編集する'), ['action' => 'edit', $admin->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('削除する'), ['action' => 'delete', $admin->id], ['confirm' => __('本当に削除してよろしいですか # {0}?', $admin->id)]) ?> </li>
+        <li><?= $this->Html->link(__('管理者一覧'), ['action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('新規管理者'), ['action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="admins view large-9 medium-8 columns content">
@@ -20,24 +19,20 @@
             <td><?= $this->Number->format($admin->id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Deleted') ?></th>
-            <td><?= h($admin->deleted) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Created') ?></th>
+            <th scope="row"><?= __('作成日') ?></th>
             <td><?= h($admin->created) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Modified') ?></th>
+            <th scope="row"><?= __('更新日') ?></th>
             <td><?= h($admin->modified) ?></td>
         </tr>
     </table>
     <div class="row">
-        <h4><?= __('Name') ?></h4>
+        <h4><?= __('管理者名') ?></h4>
         <?= $this->Text->autoParagraph(h($admin->name)); ?>
     </div>
     <div class="row">
-        <h4><?= __('Password') ?></h4>
+        <h4><?= __('パスワード') ?></h4>
         <?= $this->Text->autoParagraph(h($admin->password)); ?>
     </div>
 </div>

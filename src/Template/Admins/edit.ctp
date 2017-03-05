@@ -5,25 +5,24 @@
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
-                __('Delete'),
+                __('削除する'),
                 ['action' => 'delete', $admin->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $admin->id)]
+                ['confirm' => __('本当に削除してよろしいですか # {0}?', $admin->id)]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Admins'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('管理者一覧'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="admins form large-9 medium-8 columns content">
     <?= $this->Form->create($admin) ?>
     <fieldset>
-        <legend><?= __('Edit Admin') ?></legend>
+        <legend><?= __('管理者編集') ?></legend>
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('password');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('更新する')) ?>
     <?= $this->Form->end() ?>
 </div>

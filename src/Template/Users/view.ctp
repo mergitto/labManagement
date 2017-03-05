@@ -5,20 +5,19 @@
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit User'), ['action' => 'edit', $user->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Admins'), ['controller' => 'Admins', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Admin'), ['controller' => 'Admins', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('ユーザー編集'), ['action' => 'edit', $user->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('ユーザー削除'), ['action' => 'delete', $user->id], [__('本当に削除してよろしいですか # {0}?', $user->id)]) ?> </li>
+        <li><?= $this->Html->link(__('ユーザー一覧'), ['action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('新規ユーザー'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('管理者一覧'), ['controller' => 'Admins', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('新規管理者'), ['controller' => 'Admins', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="users view large-9 medium-8 columns content">
     <h3><?= h($user->name) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Admin') ?></th>
+            <th scope="row"><?= __('管理者名') ?></th>
             <td><?= $user->has('admin') ? $this->Html->link($user->admin->name, ['controller' => 'Admins', 'action' => 'view', $user->admin->id]) : '' ?></td>
         </tr>
         <tr>
@@ -26,24 +25,20 @@
             <td><?= $this->Number->format($user->id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Deleted') ?></th>
-            <td><?= h($user->deleted) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Created') ?></th>
+            <th scope="row"><?= __('作成日') ?></th>
             <td><?= h($user->created) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Modified') ?></th>
+            <th scope="row"><?= __('更新日') ?></th>
             <td><?= h($user->modified) ?></td>
         </tr>
     </table>
     <div class="row">
-        <h4><?= __('Name') ?></h4>
+        <h4><?= __('ユーザー名') ?></h4>
         <?= $this->Text->autoParagraph(h($user->name)); ?>
     </div>
     <div class="row">
-        <h4><?= __('Password') ?></h4>
+        <h4><?= __('パスワード') ?></h4>
         <?= $this->Text->autoParagraph(h($user->password)); ?>
     </div>
 </div>

@@ -10,7 +10,17 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
+    public $paginate = [
+        'limit' => 5,
+        'order' => [
+            'Users.name' => 'asc'
+        ]
+    ];
 
+    public function initialize(){
+        parent::initialize();
+        $this->loadComponent('Paginator');
+    }
     /**
      * Index method
      *
@@ -55,11 +65,11 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('新規ユーザーが登録されました。'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('新規ユーザー登録できませんでした。もう一度お試しください。'));
         }
         $admins = $this->Users->Admins->find('list', ['limit' => 200]);
         $this->set(compact('user', 'admins'));
@@ -81,11 +91,11 @@ class UsersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('ユーザー情報を更新しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('更新できませんでした。もう一度お試しください。'));
         }
         $admins = $this->Users->Admins->find('list', ['limit' => 200]);
         $this->set(compact('user', 'admins'));
@@ -104,9 +114,9 @@ class UsersController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->Flash->success(__('ユーザーを削除しました。'));
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->Flash->error(__('削除できませんでした。もう一度お試しください。'));
         }
 
         return $this->redirect(['action' => 'index']);
