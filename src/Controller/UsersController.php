@@ -48,28 +48,6 @@ class UsersController extends AppController
     }
 
     /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $user = $this->Users->newEntity();
-        if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->data);
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('新規ユーザーが登録されました。'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('新規ユーザー登録できませんでした。もう一度お試しください。'));
-        }
-        $admins = $this->Users->Admins->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'admins'));
-        $this->set('_serialize', ['user']);
-    }
-
-    /**
      * Edit method
      *
      * @param string|null $id User id.

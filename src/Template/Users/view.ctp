@@ -8,9 +8,7 @@
         <li><?= $this->Html->link(__('ユーザー編集'), ['action' => 'edit', $user->id]) ?> </li>
         <li><?= $this->Form->postLink(__('ユーザー削除'), ['action' => 'delete', $user->id], [__('本当に削除してよろしいですか # {0}?', $user->id)]) ?> </li>
         <li><?= $this->Html->link(__('ユーザー一覧'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('新規ユーザー'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('管理者一覧'), ['controller' => 'Admins', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('新規管理者'), ['controller' => 'Admins', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="users view large-9 medium-8 columns content">
