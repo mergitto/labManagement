@@ -12,15 +12,7 @@ class UsersController extends AppController
 {
     public $paginate = [
         'limit' => 5,
-        'order' => [
-            'Users.name' => 'asc'
-        ]
     ];
-
-    public function initialize(){
-        parent::initialize();
-        $this->loadComponent('Paginator');
-    }
     /**
      * Index method
      *
@@ -28,12 +20,13 @@ class UsersController extends AppController
      */
     public function index()
     {
+        $loginUser = $this->Auth->user();
         $this->paginate = [
             'contain' => ['Admins']
         ];
         $users = $this->paginate($this->Users);
 
-        $this->set(compact('users'));
+        $this->set(compact('users','loginUser'));
         $this->set('_serialize', ['users']);
     }
 
@@ -120,5 +113,27 @@ class UsersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function login(){
+        if ($this->request->is('post')) {
+            //ユーザー認証成功時:trueが返される
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);    // データをセットしてログイン
+                return $this->redirect(['controller' => 'users','action' => 'index']);
+            } else {
+                $this->Flash->error(
+                    __("ログインできませんでした。/ You couldn't login."),
+                    'default',
+                    [],
+                    'auth'
+                );
+            }
+        }
+    }
+
+    public function logout(){
+        return $this->redirect($this->Auth->logout());
     }
 }
