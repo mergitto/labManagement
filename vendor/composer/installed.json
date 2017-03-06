@@ -2036,5 +2036,57 @@
             "interactive",
             "shell"
         ]
+    },
+    {
+        "name": "friendsofcake/bootstrap-ui",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/FriendsOfCake/bootstrap-ui.git",
+            "reference": "4bb3fc38550e1679257fb4147db9502ba0d33474"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/FriendsOfCake/bootstrap-ui/zipball/4bb3fc38550e1679257fb4147db9502ba0d33474",
+            "reference": "4bb3fc38550e1679257fb4147db9502ba0d33474",
+            "shasum": ""
+        },
+        "require": {
+            "cakephp/cakephp": "~3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "<6.0"
+        },
+        "time": "2017-02-25T20:30:01+00:00",
+        "type": "cakephp-plugin",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "BootstrapUI\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jad Bitar",
+                "homepage": "http://jadb.io",
+                "role": "Author"
+            },
+            {
+                "name": "Others",
+                "homepage": "https://github.com/friendsofcake/bootstrap-ui/graphs/contributors"
+            }
+        ],
+        "description": "Twitter Bootstrap 3 support for CakePHP 3",
+        "homepage": "http://github.com/friendsofcake/bootstrap-ui",
+        "keywords": [
+            "bootstrap",
+            "cakephp",
+            "twitter"
+        ]
     }
 ]
