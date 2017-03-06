@@ -15,9 +15,7 @@
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('admins_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -25,13 +23,19 @@
             <?php foreach ($users as $user): ?>
             <tr>
                 <td><?= $this->Number->format($user->id) ?></td>
-                <td><?= $user->has('admin') ? $this->Html->link($user->admin->name, ['controller' => 'Admins', 'action' => 'view', $user->admin->id]) : '' ?></td>
-                <td><?= h($user->created) ?></td>
-                <td><?= h($user->modified) ?></td>
+                <td>
+                <?php if($loginUser['id'] === $user['id'] ): ?>
+                    <?= $user->has('admin') ? $this->Html->link($user->name, ['action' => 'view', $user->id]) : '' ?>
+                <?php else: ?>
+                    <?= __($user->name) ?>
+                <?php endif ?>
+                </td>
                 <td class="actions">
+                <?php if($loginUser['id'] === $user['id'] ): ?>
                     <?= $this->Html->link(__('詳細'), ['action' => 'view', $user->id]) ?>
                     <?= $this->Html->link(__('編集'), ['action' => 'edit', $user->id]) ?>
                     <?= $this->Form->postLink(__('削除'), ['action' => 'delete', $user->id], ['confirm' => __('本当に削除してよろしいですか # {0}?', $user->id)]) ?>
+                <?php endif ?>
                 </td>
             </tr>
             <?php endforeach; ?>
