@@ -36,6 +36,8 @@ class AdminsTable extends Table
         $this->displayField('name');
         $this->primaryKey('id');
 
+        $this->hasMany('Users');
+
         $this->addBehavior('Timestamp');
     }
 

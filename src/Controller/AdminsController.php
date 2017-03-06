@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * Admins Controller
@@ -62,6 +63,23 @@ class AdminsController extends AppController
         $this->set('_serialize', ['admin']);
     }
 
+    //管理者のみがユーザーを追加できるようにする
+    public function userAdd()
+    {
+        $user = $this->Admins->Users->newEntity();
+        if ($this->request->is('post')) {
+            $user = $this->Admins->Users->patchEntity($user, $this->request->data);
+            if ($this->Admins->Users->save($user)) {
+                $this->Flash->success(__('新規ユーザーが登録されました。'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('新規ユーザー登録できませんでした。もう一度お試しください。'));
+        }
+        $admins = $this->Admins->find('list', ['limit' => 200]);
+        $this->set(compact('user', 'admins'));
+        $this->set('_serialize', ['user']);
+    }
     /**
      * Edit method
      *
