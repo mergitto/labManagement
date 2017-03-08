@@ -11,7 +11,7 @@
                 <div class="col-xs-4">
                     <button type="button" class="btn btn-default">
                         <i class="glyphicon glyphicon-plus"></i>
-                        <?= $this->Html->link(__('ユーザー新規作成'),['controller' => 'admins' ,'action' => 'add']) ?> 
+                        <?= $this->Html->link(__('ユーザー新規作成'),['controller' => 'admins' ,'action' => 'user_add']) ?> 
                     </button>
                 </div>
                 <div class="col-xs-8">
@@ -52,3 +52,15 @@
     </div>
 </div>
 <!-- / .fu-frame-main -->
+<div class="users index large-9 medium-8 columns content">
+    <div class="paginator">
+        <ul class="pagination">
+            <?= $this->Paginator->first('<< ' . __('初め')) ?>
+            <?= $this->Paginator->prev('< ' . __('前')) ?>
+            <?= $this->Paginator->numbers() ?>
+            <?= $this->Paginator->next(__('次') . ' >') ?>
+            <?= $this->Paginator->last(__('最後') . ' >>') ?>
+        </ul>
+        <p><?= $this->Paginator->counter(['format' => __('{{page}}/{{pages}} ページ目,　{{count}}　人中 {{current}} 人表示')]) ?></p>
+    </div>
+</div>

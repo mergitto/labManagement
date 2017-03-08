@@ -7,6 +7,7 @@
     <ul class="side-nav">
         <li><?= $this->Html->link(__('新規管理者'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('ユーザー一覧'), ['controller' => 'users', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('ユーザー新規登録'), ['action' => 'user_add'] ) ?></li>
     </ul>
 </nav>
 <div class="admins index large-9 medium-8 columns content">
@@ -45,6 +46,6 @@
             <?= $this->Paginator->next(__('次') . ' >') ?>
             <?= $this->Paginator->last(__('最後') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(['format' => __('{{page}}/{{pages}} ページ目,　{{count}}　件中 {{current}} 件表示')]) ?></p>
+        <p><?= $this->Paginator->counter(['format' => __('{{page}}/{{pages}} ページ目,　{{count}}　人中 {{current}} 人表示')]) ?></p>
     </div>
 </div>

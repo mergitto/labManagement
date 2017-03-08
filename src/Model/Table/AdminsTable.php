@@ -21,7 +21,6 @@ use Cake\Validation\Validator;
  */
 class AdminsTable extends Table
 {
-
     /**
      * Initialize method
      *

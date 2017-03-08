@@ -10,9 +10,12 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
-    public $paginate = [
-        'limit' => 5,
-    ];
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Paginator');
+    }
+
     /**
      * Index method
      *

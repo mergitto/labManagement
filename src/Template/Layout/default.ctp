@@ -38,9 +38,9 @@ $title = 'Labolatory Management System';
 </head>
 <body>
     <head></head>
-    <?= $this->Flash->render() ?>
     <div class="container clearfix">
         <?= $this->element('header'); ?>
+        <?= $this->Flash->render() ?>
         <?= $this->fetch('content') ?>
     </div>
     <footer>
