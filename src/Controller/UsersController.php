@@ -117,6 +117,19 @@ class UsersController extends AppController
 
     public function isAuthorized($user)
     {
-        return true;
+        $action = $this->request->params['action'];
+        // index, login, logoutページは誰でも見れる
+        if (in_array($action, ['index', 'login', 'logout'])) {
+            return true;
+        }
+        // リクエストされたページのUser idと
+        // ログイン中のUseridが一致する場合はその他のアクションも許可する
+        $id = $this->request->params['pass'][0];
+        $current_user = $this->Users->get($id);
+        if ($current_user->id == $user['id']) {
+            return true;
+        }
+
+        return false;
     }
 }

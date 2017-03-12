@@ -41,8 +41,10 @@
                         <?= h($user['password']); ?>
                     </td>
                     <td class="tc">
+                        <?php if($loginUser['id'] === $user->id): ?>
                         <?= $this->Html->link(__('編集'), ['action' =>'edit',$user['id']]); ?>
                         <?= $this->Form->postLink(__('削除'), ['action' => 'delete', $user->id], ['confirm' => __('本当に削除してよろしいですか　# {0}?', $user->name)]) ?>
+                        <?php endif ?>
                     </td>
                 </tr>
                 <?php endforeach ?>
