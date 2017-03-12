@@ -4,7 +4,6 @@
 <div class="fu-frame-main">
     <div class="container">
         <hr class="mb0">
-        <?= $this->Session->flash(); ?>
         <?= $this->Form->create("User") ?>
         <div class="tools">
             <div class="row">
@@ -43,7 +42,7 @@
                     </td>
                     <td class="tc">
                         <?= $this->Html->link(__('編集'), ['action' =>'edit',$user['id']]); ?>
-                        <?= $this->Html->link(__('削除'), ['action' =>'delete',$user['id']], ['title'=>'削除'], __('削除します。よろしいですか？')); ?>
+                        <?= $this->Form->postLink(__('削除'), ['action' => 'delete', $user->id], ['confirm' => __('本当に削除してよろしいですか　# {0}?', $user->name)]) ?>
                     </td>
                 </tr>
                 <?php endforeach ?>
