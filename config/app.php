@@ -342,5 +342,9 @@ return [
      */
     'Session' => [
         'defaults' => 'php',
+        'ini' => [
+            // サイト上のページに訪問せず 30 分経つとクッキーを無効にします。
+            'session.cookie_lifetime' => 1800
+        ]
     ],
 ];
