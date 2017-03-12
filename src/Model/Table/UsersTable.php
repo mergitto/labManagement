@@ -60,11 +60,11 @@ class UsersTable extends Table
 
         $validator
             ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->notEmpty('name', 'ログインIDが入力されていません');
 
         $validator
             ->requirePresence('password', 'create')
-            ->notEmpty('password');
+            ->notEmpty('password', 'パスワードが入力されていません');
 
         $validator
             ->dateTime('deleted')

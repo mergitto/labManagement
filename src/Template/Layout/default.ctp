@@ -26,8 +26,8 @@ $title = 'Labolatory Management System';
     </title>
     <?= $this->Html->meta('icon') ?>
     <?= $this->Html->css('bootstrap.css') ?>
+    <?= $this->Html->css('laboratory.css') ?>
     <?= $this->Html->css('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css') ?>
-    <?= $this->Html->css('//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css') ?>
     <?= $this->Html->script('//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js') ?>
     <?= $this->Html->script('bootstrap.min.js') ?>
     
@@ -37,9 +37,10 @@ $title = 'Labolatory Management System';
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <head></head>
-    <div class="container clearfix">
+    <head>
         <?= $this->element('header'); ?>
+    </head>
+    <div class="container clearfix">
         <?= $this->Flash->render() ?>
         <?= $this->fetch('content') ?>
     </div>
