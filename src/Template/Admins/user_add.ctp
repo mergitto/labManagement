@@ -20,6 +20,12 @@
             <?= $this->Form->input('password',['type'=>'password', 'label'=> 'パスワード', 'class' => "form-control login-form"]); ?>
         </div>
         <div class="form-group">
+            <?= $this->Form->input('email',['type'=>'email', 'label'=> 'メールアドレス', 'class' => "form-control login-form"]); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->Form->input('phone',['type'=>'text', 'label'=> '携帯電話番号', 'class' => "form-control login-form", 'maxlength' => 11]); ?>
+        </div>
+        <div class="form-group">
             <?= $this->Form->input('role',['type'=>'hidden','value' => 'user' ,'class' => "form-control login-form"]); ?>
         </div>
         <div class="login-button text-right">

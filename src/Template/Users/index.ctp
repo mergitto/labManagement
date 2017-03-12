@@ -23,9 +23,10 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('name', __('氏名')); ?></th>
+                    <th><?= $this->Paginator->sort('name', __('ユーザー名')); ?></th>
                     <th><?= $this->Paginator->sort('role', __('ユーザーレベル')); ?></th>
-                    <th><?= $this->Paginator->sort('password', __('パスワード')); ?></th>
+                    <th><?= $this->Paginator->sort('password', __('email')); ?></th>
+                    <th><?= $this->Paginator->sort('password', __('phone')); ?></th>
                     <th class="b_w150">　</th>
                 </tr>
                 </thead>
@@ -38,7 +39,10 @@
                         <?= h($user['role']); ?>
                     </td>
                     <td>
-                        <?= h($user['password']); ?>
+                        <?= h($user['email']); ?>
+                    </td>
+                    <td>
+                        <?= h($user['phone']); ?>
                     </td>
                     <td class="tc">
                         <?php if($loginUser['id'] === $user->id): ?>

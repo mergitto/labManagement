@@ -5,6 +5,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Localized\Validation\FrValidation;
 
 /**
  * Users Model
@@ -61,6 +62,19 @@ class UsersTable extends Table
         $validator
             ->requirePresence('name', 'create')
             ->notEmpty('name', 'ログインIDが入力されていません');
+        
+        $validator
+            ->requirePresence('email')
+            ->allowEmpty('email', 'create');
+
+        $validator
+            ->integer('phone')
+            ->allowEmpty('phone', 'create');
+        $validator->provider('fr', FrValidation::class);
+        $validator->add('phoneField', 'myCustomRuleNameForPhone', [
+            'rule' => 'phone',
+            'provider' => 'fr'
+        ]);
 
         $validator
             ->requirePresence('password', 'create')

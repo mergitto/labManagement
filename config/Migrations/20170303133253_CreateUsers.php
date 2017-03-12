@@ -21,6 +21,14 @@ class CreateUsers extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
+        $table->addColumn('email', 'text', [
+            'default' => null,
+            'null' => true,
+        ]);
+        $table->addColumn('phone', 'text', [
+            'default' => null,
+            'null' => true,
+        ]);
         $table->addColumn('role', 'text', [
             'default' => null,
             'null' => false,

@@ -69,6 +69,7 @@ class ComposerStaticInit43966d24484a71a819babc9fc317a814
             'Composer\\CaBundle\\' => 18,
             'Composer\\' => 9,
             'Cake\\Test\\' => 10,
+            'Cake\\Localized\\' => 15,
             'Cake\\Composer\\' => 14,
             'Cake\\Chronos\\' => 13,
             'Cake\\' => 5,
@@ -198,6 +199,10 @@ class ComposerStaticInit43966d24484a71a819babc9fc317a814
         'Cake\\Test\\' => 
         array (
             0 => __DIR__ . '/..' . '/cakephp/cakephp/tests',
+        ),
+        'Cake\\Localized\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cakephp/localized/src',
         ),
         'Cake\\Composer\\' => 
         array (
