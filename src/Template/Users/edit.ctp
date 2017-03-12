@@ -28,8 +28,8 @@
             <?= $this->Form->input('password',['type'=>'password', 'label'=> '新しいパスワード','value' => "" , 'class' => "form-control login-form"]); ?>
         </div>
     </fieldset>
-    <div class="login-button">
-    <?= $this->Form->button(__('更新する'),['class' => 'btn btn-raised btn-primary']) ?>
+    <div class="login-button text-right">
+    <?= $this->Form->button(__('更新する'),['class' => 'btn btn-raised btn-success']) ?>
     </div>
     <?= $this->Form->end() ?>
 </div>
