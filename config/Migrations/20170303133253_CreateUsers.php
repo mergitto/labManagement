@@ -21,9 +21,8 @@ class CreateUsers extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
-        $table->addColumn('admins_id', 'integer', [
+        $table->addColumn('role', 'text', [
             'default' => null,
-            'limit' => 11,
             'null' => false,
         ]);
         $table->addColumn('deleted', 'timestamp', [
