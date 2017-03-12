@@ -17,7 +17,6 @@
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('password');
-            echo $this->Form->input('admins_id',['value' => $loginAdmin['id'], 'type' => 'hidden']);
             echo $this->Form->input('role',['type' => 'hidden', 'value' => 'user'])
         ?>
     </fieldset>

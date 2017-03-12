@@ -23,7 +23,6 @@
         <?php
             echo $this->Form->input('name');
             echo $this->Form->input('password');
-            echo $this->Form->input('admins_id', ['options' => $admins]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('更新する')) ?>

@@ -24,7 +24,7 @@
                 <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('name', __('氏名')); ?></th>
-                    <th><?= $this->Paginator->sort('admins_id', __('管理者ID')); ?></th>
+                    <th><?= $this->Paginator->sort('role', __('ユーザーレベル')); ?></th>
                     <th><?= $this->Paginator->sort('password', __('パスワード')); ?></th>
                     <th class="b_w150">　</th>
                 </tr>
@@ -35,7 +35,7 @@
                         <?= h($user['name']); ?>
                     </td>
                     <td>
-                        <?= h($user['admins_id']); ?>
+                        <?= h($user['role']); ?>
                     </td>
                     <td>
                         <?= h($user['password']); ?>
