@@ -44,6 +44,7 @@ class AppController extends Controller
         $this->loadComponent('Flash');
         //Authコンポーネントの設定
         $this->loadComponent('Auth', [
+            'authorize' => 'Controller', //isAuthorizeめそっどを通るようにする
             'authenticate' => [
                 'Form' => [
                     'fields' => [
@@ -56,6 +57,10 @@ class AppController extends Controller
             'loginAction' => [
                 'controller' => 'Users',
                 'action' => 'login'
+            ],
+            'loginRedirect' => [
+                'controller' => 'Users',
+                'action' => 'index'
             ]
         ]);
     }

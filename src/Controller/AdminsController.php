@@ -132,4 +132,19 @@ class AdminsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function logout(){
+        return $this->redirect($this->Auth->logout());
+    }
+
+
+    public function isAuthorized($user)
+    {
+        // 管理者のみのアクセスを許す
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
+        // 管理者以外はアクセス拒否
+        return false;
+    }
 }
