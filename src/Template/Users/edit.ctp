@@ -12,19 +12,24 @@
             )
         ?></li>
         <li><?= $this->Html->link(__('ユーザー一覧'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('管理者一覧'), ['controller' => 'Admins', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('新規管理者'), ['controller' => 'Admins', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="users form large-9 medium-8 columns content">
     <?= $this->Form->create($user) ?>
     <fieldset>
         <legend><?= __('ユーザー編集') ?></legend>
-        <?php
-            echo $this->Form->input('name');
-            echo $this->Form->input('password');
-        ?>
+        <div class="form-group">
+            <?= $this->Form->input('name',['type'=>'text', 'label'=> 'ユーザー名', 'class' => "form-control login-form"]); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->Form->input('confirm_password',['type'=>'password', 'label'=> 'パスワード確認用', 'class' => "form-control login-form"]); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->Form->input('password',['type'=>'password', 'label'=> '新しいパスワード','value' => "" , 'class' => "form-control login-form"]); ?>
+        </div>
     </fieldset>
-    <?= $this->Form->button(__('更新する')) ?>
+    <div class="login-button">
+    <?= $this->Form->button(__('更新する'),['class' => 'btn btn-raised btn-primary']) ?>
+    </div>
     <?= $this->Form->end() ?>
 </div>

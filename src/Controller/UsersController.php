@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Auth\DefaultPasswordHasher;
 
 /**
  * Users Controller
@@ -56,10 +57,14 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
-        $user = $this->Users->get($id, [
-            'contain' => []
-        ]);
+        $user = $this->Users->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
+            $hasher = new DefaultPasswordHasher;
+            $passwordCheck = $hasher->check($this->request->data['confirm_password'],$user->password);
+            if(!$passwordCheck){
+                $this->Flash->error(__('確認用パスワードが間違ってます。'));
+                return $this->redirect(['action' => 'edit', $user->id]);
+            }
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('ユーザー情報を更新しました。'));
@@ -69,7 +74,7 @@ class UsersController extends AppController
             $this->Flash->error(__('更新できませんでした。もう一度お試しください。'));
         }
         $admins = $this->Users->Admins->find('list', ['limit' => 200]);
-        $this->set(compact('user', 'admins'));
+        $this->set(compact('user'));
         $this->set('_serialize', ['user']);
     }
 
