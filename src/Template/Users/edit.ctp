@@ -27,6 +27,12 @@
         <div class="form-group">
             <?= $this->Form->input('password',['type'=>'password', 'label'=> '新しいパスワード','value' => "" , 'class' => "form-control login-form"]); ?>
         </div>
+        <div class="form-group">
+            <?= $this->Form->input('email',['type'=>'email', 'label'=> 'メールアドレス' , 'class' => "form-control login-form"]); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->Form->input('phone',['type'=>'text', 'label'=> '電話番号' , 'class' => "form-control login-form"]); ?>
+        </div>
     </fieldset>
     <div class="login-button text-right">
     <?= $this->Form->button(__('更新する'),['class' => 'btn btn-raised btn-success']) ?>
