@@ -25,24 +25,24 @@
                 <tr>
                     <th><?= $this->Paginator->sort('name', __('ユーザー名')); ?></th>
                     <th><?= $this->Paginator->sort('role', __('ユーザーレベル')); ?></th>
-                    <th><?= $this->Paginator->sort('password', __('email')); ?></th>
-                    <th><?= $this->Paginator->sort('password', __('phone')); ?></th>
+                    <th><?= $this->Paginator->sort('email', __('E-mail')); ?></th>
+                    <th><?= $this->Paginator->sort('phone', __('電話番号')); ?></th>
                     <th class="b_w150">　</th>
                 </tr>
                 </thead>
                 <?php foreach ($users as $user): ?>
                 <tr>
                     <td>
-                        <?= h($user['name']); ?>
+                        <?= $user['name']; ?>
                     </td>
                     <td>
-                        <?= h($user['role']); ?>
+                        <?= $user['role']; ?>
                     </td>
                     <td>
-                        <?= h($user['email']); ?>
+                        <?= $user['email']; ?>
                     </td>
                     <td>
-                        <?= h($user['phone']); ?>
+                        <?= $user['phone']; ?>
                     </td>
                     <td class="tc">
                         <?php if($loginUser['id'] === $user->id): ?>

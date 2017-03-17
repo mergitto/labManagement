@@ -62,19 +62,27 @@ class UsersTable extends Table
         $validator
             ->requirePresence('name', 'create')
             ->notEmpty('name', 'ログインIDが入力されていません');
-        
+        $validator
+            ->add('name', 'custom', [
+                'rule' => function ($value, $context){
+                    return (bool) preg_match('/^[a-zA-Z0-9]+$/',$value);
+                },
+                'message' => '半角英数字で入力してください'
+            ]);
+
         $validator
             ->requirePresence('email')
             ->allowEmpty('email', 'create');
+        $validator
+            ->add('email', 'valudFormat',[
+                'rule' => 'email',
+                'message' => 'メールの形式で登録してください'
+            ]);
 
         $validator
             ->integer('phone')
             ->allowEmpty('phone', 'create');
         $validator->provider('fr', FrValidation::class);
-        $validator->add('phoneField', 'myCustomRuleNameForPhone', [
-            'rule' => 'phone',
-            'provider' => 'fr'
-        ]);
 
         $validator
             ->requirePresence('password', 'create')

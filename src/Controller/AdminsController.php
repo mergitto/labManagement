@@ -67,6 +67,7 @@ class AdminsController extends AppController
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
         }
+        $this->Flash->error(__('管理者のみの機能です'));
         // 管理者以外はアクセス拒否
         return false;
     }
