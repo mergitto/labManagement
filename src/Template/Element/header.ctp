@@ -12,7 +12,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li class="active">
-          <a href="#">掲示板へ<span class="sr-only">(current)</span></a>
+          <?= $this->Html->link(__('掲示板'), ['controller' => 'Threads', 'action' => 'index']) ?>
         </li>
         <li>
           <?= $this->Form->postLink(__('ログアウト'),['action' => 'logout']) ?>
