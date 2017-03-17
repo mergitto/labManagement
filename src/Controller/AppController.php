@@ -42,6 +42,8 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        //h()を書かなくてすむコンポーネント
+        $this->loadComponent('Altair.Altair');
         //Authコンポーネントの設定
         $this->loadComponent('Auth', [
             'authorize' => 'Controller', //isAuthorizeめそっどを通るようにする

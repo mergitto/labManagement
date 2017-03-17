@@ -2044,12 +2044,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/FriendsOfCake/bootstrap-ui.git",
-            "reference": "4bb3fc38550e1679257fb4147db9502ba0d33474"
+            "reference": "46840ae2cf829f91a2b1ddb52c968fe4cdd3bef0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/FriendsOfCake/bootstrap-ui/zipball/4bb3fc38550e1679257fb4147db9502ba0d33474",
-            "reference": "4bb3fc38550e1679257fb4147db9502ba0d33474",
+            "url": "https://api.github.com/repos/FriendsOfCake/bootstrap-ui/zipball/46840ae2cf829f91a2b1ddb52c968fe4cdd3bef0",
+            "reference": "46840ae2cf829f91a2b1ddb52c968fe4cdd3bef0",
             "shasum": ""
         },
         "require": {
@@ -2058,7 +2058,7 @@
         "require-dev": {
             "phpunit/phpunit": "<6.0"
         },
-        "time": "2017-02-25T20:30:01+00:00",
+        "time": "2017-03-15T20:33:21+00:00",
         "type": "cakephp-plugin",
         "installation-source": "source",
         "autoload": {
@@ -2138,5 +2138,86 @@
             "l10n",
             "localized"
         ]
+    },
+    {
+        "name": "kozo/partial",
+        "version": "v3.0.2",
+        "version_normalized": "3.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/kozo/Partial.git",
+            "reference": "f28a43c04c2c641ef1297cf79f0314843f0394ee"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/kozo/Partial/zipball/f28a43c04c2c641ef1297cf79f0314843f0394ee",
+            "reference": "f28a43c04c2c641ef1297cf79f0314843f0394ee",
+            "shasum": ""
+        },
+        "require": {
+            "cakephp/cakephp": "~3.0",
+            "cakephp/plugin-installer": "*"
+        },
+        "time": "2017-02-28T05:22:24+00:00",
+        "type": "cakephp-plugin",
+        "extra": {
+            "installer-name": "Partial"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Partial\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "saku",
+                "homepage": "https://github.com/kozo",
+                "role": "Author"
+            }
+        ],
+        "description": "Partial plugin for CakePHP",
+        "homepage": "https://github.com/kozo/Partial",
+        "keywords": [
+            "cakephp",
+            "template"
+        ]
+    },
+    {
+        "name": "tutida/altair",
+        "version": "0.8.1",
+        "version_normalized": "0.8.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/tutida/Altair.git",
+            "reference": "72a87bbd0bf1df712c1c68d63643e91fec2727d3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/tutida/Altair/zipball/72a87bbd0bf1df712c1c68d63643e91fec2727d3",
+            "reference": "72a87bbd0bf1df712c1c68d63643e91fec2727d3",
+            "shasum": ""
+        },
+        "require": {
+            "cakephp/cakephp": "~3.0",
+            "php": ">=5.4.16"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "*"
+        },
+        "time": "2016-08-18T11:05:34+00:00",
+        "type": "cakephp-plugin",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Altair\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "description": "Auto converting special characters of variables to HTML entities"
     }
 ]

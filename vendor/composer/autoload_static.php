@@ -48,6 +48,7 @@ class ComposerStaticInit43966d24484a71a819babc9fc317a814
             'Psr\\Http\\Message\\' => 17,
             'PhpParser\\' => 10,
             'Phinx\\' => 6,
+            'Partial\\' => 8,
         ),
         'M' => 
         array (
@@ -84,6 +85,7 @@ class ComposerStaticInit43966d24484a71a819babc9fc317a814
             'Aura\\Intl\\_Config\\' => 18,
             'App\\Test\\' => 9,
             'App\\' => 4,
+            'Altair\\' => 7,
         ),
     );
 
@@ -164,6 +166,10 @@ class ComposerStaticInit43966d24484a71a819babc9fc317a814
         array (
             0 => __DIR__ . '/..' . '/robmorgan/phinx/src/Phinx',
         ),
+        'Partial\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kozo/partial/src',
+        ),
         'Migrations\\' => 
         array (
             0 => __DIR__ . '/..' . '/cakephp/migrations/src',
@@ -235,6 +241,10 @@ class ComposerStaticInit43966d24484a71a819babc9fc317a814
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'Altair\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tutida/altair/src',
         ),
     );
 

@@ -11,7 +11,9 @@
         "cakephp/migrations": "~1.0",
         "cakephp/plugin-installer": "*",
         "friendsofcake/bootstrap-ui": "dev-master",
-        "cakephp/localized": "^3.2"
+        "cakephp/localized": "^3.2",
+        "kozo/partial": "~3.0",
+        "tutida/altair": "~0.8.1"
     },
     "require-dev": {
         "psy/psysh": "@stable",
