@@ -38,8 +38,10 @@
                         <?= $thread['modified']; ?>
                     </td>
                     <td class="tc">
+                    <?php if($thread->user_id === $user['id']): ?>
                         <?= $this->Html->link(__('編集'), ['action' =>'edit',$thread->id]); ?>
                         <?= $this->Form->postLink(__('削除'), ['action' => 'delete', $thread->id], ['confirm' => __('本当に削除してよろしいですか　# {0}?', $thread['title'])]) ?>                    </td>
+                    <?php endif ?>
                 </tr>
                 <?php endforeach ?>
             </table>

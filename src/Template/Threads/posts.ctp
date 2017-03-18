@@ -4,11 +4,12 @@
     </ul>
 </nav>
 <div class="posts form large-9 medium-8 columns content">
-    <?= $this->Form->create($post) ?>
+    <?= $this->Form->create($post, ['url' => [
+    'action' => 'posts', $thread->id]]) ?>
     <fieldset>
         <legend><?= __('新規コメント') ?></legend>
         <div class="form-group">
-            <?= $this->Form->input('comment',['type'=>'text', 'label'=> 'コメント', 'class' => "form-control login-form"]); ?>
+            <?= $this->Form->textarea('comment',['type'=>'text', 'label'=> 'コメント', 'class' => "form-control login-form"]); ?>
             <?= $this->Form->input('user_id', ['type' => 
             'hidden' ,'value' => $user['id'], 'label' => 'タイトル名']); ?>
             <?= $this->Form->input('thread_id', ['type' => 
@@ -35,17 +36,16 @@
             <td>
                 <?= $post->id; ?>
             </td>
-            <td>
-                <?= $post->comment; ?>
+            <td style="max-width: 400px;">
+                <?= nl2br($post->comment) ?>
             </td>
             <td>
-                <?= $post->modified; ?>
+                <?= date('Y-m-d H:i',strtotime($post->modified)); ?>
             </td>
             <td class="tc">
                 <?php if($post->user_id === $user['id']): ?>
-                  <?= $this->Html->link(__('編集'), ['action' =>'edit',$user['id']]); ?>
-                <?php elseif($post->user_id === $user['id'] || $user['role'] === 'admin'): ?>
-                    <?= $this->Form->postLink(__('削除'), ['action' => 'delete', $user['id']], ['confirm' => __('本当に削除してよろしいですか　# {0}?', $post->id)]) ?>
+                    <?= $this->Html->link(__('修正'), ['action' =>'postEdit',$post->id]); ?>
+                    <?= $this->Form->postLink(__('削除'), ['action' => 'postDelete', $post->id], ['confirm' => __('本当に削除してよろしいですか　# {0}?', $post->id)]) ?>
                 <?php endif ?>
               
             </td>
