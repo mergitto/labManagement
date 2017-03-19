@@ -19,7 +19,7 @@
     <fieldset>
         <legend><?= __('コメント修正') ?></legend>
         <div class="form-group">
-            <?= $this->Form->input('comment',['type'=>'text', 'label'=> 'コメント', 'class' => "form-control login-form"]); ?>
+            <?= $this->Form->textarea('comment',['type'=>'text', 'label'=> 'コメント', 'class' => "form-control login-form"]); ?>
         </div>
     </fieldset>
     <div class="login-button text-right">

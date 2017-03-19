@@ -19,7 +19,7 @@ class ThreadsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users']
+            'contain' => ['Users','Posts']
         ];
         $threads = $this->paginate($this->Threads);
 

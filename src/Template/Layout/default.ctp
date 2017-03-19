@@ -28,7 +28,7 @@ $title = 'Labolatory Management System';
     <?= $this->Html->css('bootstrap.css') ?>
     <?= $this->Html->css('laboratory.css') ?>
     <?= $this->Html->css('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css') ?>
-    <?= $this->Html->script('//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js') ?>
+    <?= $this->Html->script('jquery.min.js') ?>
     <?= $this->Html->script('bootstrap.min.js') ?>
     
 
