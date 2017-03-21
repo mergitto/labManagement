@@ -12,6 +12,9 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li class="active">
+          <?= $this->Html->link(__('ゼミ予定一覧'), ['controller' => 'Events', 'action' => 'index']) ?>
+        </li>
+        <li class="active">
           <?= $this->Html->link(__('掲示板'), ['controller' => 'Threads', 'action' => 'index']) ?>
         </li>
         <li>

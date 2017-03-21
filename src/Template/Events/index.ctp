@@ -61,6 +61,11 @@
 <script>
 $(document).ready(function() {
     $('#calendar').fullCalendar({
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay'
+        },
         weekends: false,
         editable: true,
         locale: 'ja',
@@ -72,6 +77,11 @@ $(document).ready(function() {
        {
             title: '沖縄旅行',
             start: new Date(2017, 2, 15, 6, 0),
+        },
+        {
+          title: 'Click for Google',
+          url: 'http://google.com/',
+          start: '2017-03-28'
         }
     ]
     })
