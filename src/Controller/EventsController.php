@@ -33,6 +33,7 @@ class EventsController extends FullCalendarAppController
     {
         $events = $this->Events->find('all');
         if ($this->request->is('requested')) {
+            dump();
             $this->paginate = [
                 'limit'   => 2,
                 'order'   => ['Events.start' => 'desc']
@@ -76,10 +77,10 @@ class EventsController extends FullCalendarAppController
             $this->request->data['start'] = date('Y-m-d H:i:s' ,strtotime($this->request->data['start']));
             $event = $this->Events->patchEntity($event, $this->request->data);
             if ($this->Events->save($event)) {
-                $this->Flash->success(__('The event has been saved.'));
+                $this->Flash->success(__('予定を追加しました。'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The event could not be saved. Please, try again.'));
+                $this->Flash->error(__('追加できませんでした。'));
             }
         }
         $this->set(compact('event','users'));
@@ -100,10 +101,10 @@ class EventsController extends FullCalendarAppController
             $this->request->data['start'] = date('Y-m-d H:i:s' ,strtotime($this->request->data['start']));
             $event = $this->Events->patchEntity($event, $this->request->data);
             if ($event_id = $this->Events->save($event)) {
-                $this->Flash->success(__('The event has been saved.'));
+                $this->Flash->success(__('予定を修正しました。'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The event could not be saved. Please, try again.'));
+                $this->Flash->error(__('修正できませんでした。'));
             }
         }
         $this->set(compact('event'));
@@ -122,9 +123,9 @@ class EventsController extends FullCalendarAppController
         $this->request->allowMethod(['post', 'delete']);
         $event = $this->Events->get($id);
         if ($this->Events->delete($event)) {
-            $this->Flash->success(__('The event has been deleted.'));
+            $this->Flash->success(__('予定を削除しました。'));
         } else {
-            $this->Flash->error(__('The event could not be deleted. Please, try again.'));
+            $this->Flash->error(__('削除できませんでした。'));
         }
         return $this->redirect(['action' => 'index']);
     }

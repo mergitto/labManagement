@@ -12,24 +12,22 @@
 ?>
 
 <div class="small-12 columns">
-	<h1 class="inline-block"><?= __('Event'); ?> - </h1>
+	<h1 class="inline-block"><?= __('ゼミ予定詳細'); ?></h1>
 	<ul class="inline-list">
-		<li><?= $this->Html->link(__('Edit Event', true), ['action' => 'edit', $event->id]); ?> </li>
-		<li><?= $this->Html->link(__('Manage Events', true), ['action' => 'index']); ?> </li>
-		<li><?= $this->Html->link(__('Add an Event', true), ['action' => 'add']); ?></li>
+		<li><?= $this->Html->link(__('ゼミ予定編集', true), ['action' => 'edit', $event->id]); ?> </li>
+		<li><?= $this->Html->link(__('ゼミ予定一覧', true), ['action' => 'index']); ?> </li>
+		<li><?= $this->Html->link(__('ゼミ予定追加', true), ['action' => 'add']); ?></li>
 	</ul>
 	<h2><?= $event->title; ?></h2>
 	<h3><?= $event->start; ?></h3>
 	<p>
-		<span><?= __('EVENT DETAILS: '); ?></span>
-	</p>
-	<p>
+		<span><?= __('詳細: '); ?></span>
 		<?= $event->details; ?>
 	</p>
 	<p>
-		<span><?= __('DATE: '); ?></span>
+		<span><?= __('日付: '); ?></span>
 		<?php if($event->all_day != 1): ?>
-			<?= date('Y-m-d H:i:s', strtotime($event->start)) ?>
+			<?= date('Y-m-d', strtotime($event->start)) ?>
 		<?php else: ?>
 			<?= "N/A"; ?>
 		<?php endif; ?> 
