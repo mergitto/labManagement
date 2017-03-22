@@ -49,7 +49,7 @@
     <p><?= $this->Paginator->counter() ?></p>
 </div>
 <script>
-$(document).ready(function() {
+$(function() {
     $('#calendar').fullCalendar({
       header: {
         left: 'prev,next today',
