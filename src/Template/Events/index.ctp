@@ -3,18 +3,9 @@
     width: 500px;
   }
 </style>
-<?php
-/*
- * Template/Events/index.ctp
- * CakePHP Full Calendar Plugin
- *
- * Copyright (c) 2010 Silas Montgomery
- * http://silasmontgomery.com
- *
- * Licensed under MIT
- * http://www.opensource.org/licenses/mit-license.php
- */
-?>
+<!-- カレンダー表示 -->
+<div id="calendar"></div>
+<!-- end カレンダー表示 -->
 
 <div class="events small-12 medium-8 large-12 columns">
   <h2 class="inline-block"><?= __('Events');?></h2>
@@ -57,33 +48,18 @@
     </ul>
     <p><?= $this->Paginator->counter() ?></p>
 </div>
-<div id="calendar"></div>
 <script>
 $(document).ready(function() {
     $('#calendar').fullCalendar({
-        header: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'month,agendaWeek,agendaDay'
-        },
-        weekends: false,
-        editable: true,
-        locale: 'ja',
-        events: [
-        {
-            title: '来客',
-            start: new Date(2017, 2, 10)
-        },
-       {
-            title: '沖縄旅行',
-            start: new Date(2017, 2, 15, 6, 0),
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2017-03-28'
-        }
-    ]
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+      },
+      weekends: false,
+      editable: true,
+      locale: 'ja',
+      events: <?= htmlspecialchars_decode($json, ENT_QUOTES )?>
     })
 });
 </script>

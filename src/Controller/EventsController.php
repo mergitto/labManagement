@@ -33,7 +33,6 @@ class EventsController extends FullCalendarAppController
     {
         $events = $this->Events->find('all');
         if ($this->request->is('requested')) {
-            dump();
             $this->paginate = [
                 'limit'   => 2,
                 'order'   => ['Events.start' => 'desc']
@@ -43,8 +42,27 @@ class EventsController extends FullCalendarAppController
         } else {
             $this->paginate = [
                 'limit'   => 12,
-                'order'   => ['Events.start' => 'desc']
+                'order'   => ['Events.start' => 'asc']
             ];
+
+            foreach($events as $event) {
+                if($event->all_day === 1) {
+                    $allday = true;
+                    $end = $event->start;
+                }
+                $json[] = [
+                        'id' => $event->id,
+                        'title'=> $event->title,
+                        'allday' => $event->allday,
+                        'url' => Router::url(['action' => 'view', $event->id]),
+                        'start'=> date('Y-m-d',strtotime($event->start)),
+                        'end' => date('Y-m-d',strtotime($event->start)),
+                        'details' => $event->details,
+                        'user_id' => $event->user_id,
+                ];
+            }
+            $this->set('json', h(json_encode($json,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)));
+
             $this->set('events', $this->paginate($events));
             $this->set('_serialize', ['events']);            
         }
@@ -108,7 +126,7 @@ class EventsController extends FullCalendarAppController
             }
         }
         $this->set(compact('event'));
-        $this->set('_serialize', ['event', 'eventTypes']);
+        $this->set('_serialize', ['event']);
     }
 
     /**
@@ -128,31 +146,6 @@ class EventsController extends FullCalendarAppController
             $this->Flash->error(__('削除できませんでした。'));
         }
         return $this->redirect(['action' => 'index']);
-    }
-
-    // The feed action is called from "webroot/js/ready.js" to get the list of events (JSON)
-    public function feed($id=null) {
-        $this->viewBuilder()->layout('ajax');
-        $vars = $this->request->query([]);
-        $conditions = ['UNIX_TIMESTAMP(start) >=' => $vars['start'], 'UNIX_TIMESTAMP(start) <='];
-        $events = $this->Events->find('all', $conditions)->contain(['EventTypes']);
-        foreach($events as $event) {
-            if($event->all_day === 1) {
-                $allday = true;
-                $end = $event->start;
-            }
-            $json[] = [
-                    'id' => $event->id,
-                    'title'=> $event->title,
-                    'start'=> $event->start,
-                    'allDay' => $allday,
-                    'url' => Router::url(['action' => 'view', $event->id]),
-                    'details' => $event->details,
-                    'className' => $event->event_type->color
-            ];
-        }
-        $this->set(compact('json'));
-        $this->set('_serialize', 'json');
     }
 
     // The update action is called from "webroot/js/ready.js" to update date/time when an event is dragged or resized
@@ -177,7 +170,6 @@ class EventsController extends FullCalendarAppController
     public function isAuthorized($user)
     {
         $action = $this->request->params['action'];
-        // index, login, logoutページは誰でも見れる
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
         }
