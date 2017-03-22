@@ -32,40 +32,31 @@ class EventsController extends FullCalendarAppController
     public function index()
     {
         $events = $this->Events->find('all');
-        if ($this->request->is('requested')) {
-            $this->paginate = [
-                'limit'   => 2,
-                'order'   => ['Events.start' => 'desc']
-            ];
-            $this->response->body(json_encode($this->paginate($events)));
-            return $this->response;
-        } else {
-            $this->paginate = [
-                'limit'   => 12,
-                'order'   => ['Events.start' => 'asc']
-            ];
+        $this->paginate = [
+            'limit'   => 12,
+            'order'   => ['Events.start' => 'asc']
+        ];
 
-            foreach($events as $event) {
-                if($event->all_day === 1) {
-                    $allday = true;
-                    $end = $event->start;
-                }
-                $json[] = [
-                        'id' => $event->id,
-                        'title'=> $event->title,
-                        'allday' => $event->allday,
-                        'url' => Router::url(['action' => 'view', $event->id]),
-                        'start'=> date('Y-m-d',strtotime($event->start)),
-                        'end' => date('Y-m-d',strtotime($event->start)),
-                        'details' => $event->details,
-                        'user_id' => $event->user_id,
-                ];
+        foreach($events as $event) {
+            if($event->all_day === 1) {
+                $allday = true;
+                $end = $event->start;
             }
-            $this->set('json', h(json_encode($json,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)));
-
-            $this->set('events', $this->paginate($events));
-            $this->set('_serialize', ['events']);            
+            $json[] = [
+                    'id' => $event->id,
+                    'title'=> $event->title,
+                    'allday' => $event->allday,
+                    'url' => Router::url(['action' => 'view', $event->id]),
+                    'start'=> date('Y-m-d',strtotime($event->start)),
+                    'end' => date('Y-m-d',strtotime($event->start)),
+                    'details' => $event->details,
+                    'user_id' => $event->user_id,
+            ];
         }
+        $this->set('json', h(json_encode($json,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)));
+
+        $this->set('events', $this->paginate($events));
+        $this->set('_serialize', ['events']);
     }
 
     /**

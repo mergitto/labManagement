@@ -12,49 +12,63 @@
   <ul class="no-bullet inline-list inline-block">
     <li><?= $this->Html->link(__('予定追加', true), ['action' => 'add']); ?></li>
   </ul>
-  <table cellpadding="0" cellspacing="0" class="small-12 columns">
-    <tr>
-        <th><?= $this->Paginator->sort('title');?></th>
-        <th><?= $this->Paginator->sort('status');?></th>
-        <th><?= $this->Paginator->sort('start');?></th>
-        <th class="actions"></th>
-    </tr>
-    <?php
-      $i = 0;
-      foreach ($events as $event):
-        $class = null;
-        if ($i++ % 2 == 0) {
-          $class = ' class="altrow"';
-        }
-    ?>
-      <tr<?= $class;?>>
-        <td><?= $event->title ?></td>
-        <td><?= $event->status ?></td>
-        <td><?= $event->start ?></td>
-        <td class="actions">
-          <?= $this->Html->link(__('View'), ['action' => 'view', $event->id]); ?>
-          <?= $this->Html->link(__('Edit'), ['action' => 'edit', $event->id]); ?>
-          <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $event->id], ['confirm' => 'Are you sure?']); ?>
-        </td>
-      </tr>
-    <?php endforeach; ?>
-  </table>
 </div>
-<div class="paginator small-12 small-centered medium-8 medium-centered large-6 large-centered columns text-center">
-    <ul class="pagination">
-        <?= $this->Paginator->prev('< ' . __('previous')) ?>
-        <?= $this->Paginator->numbers() ?>
-        <?= $this->Paginator->next(__('next') . ' >') ?>
-    </ul>
-    <p><?= $this->Paginator->counter() ?></p>
+<div class="fu-frame-main">
+    <div class="container">
+        <hr class="mb0">
+
+        <div class="fu-list">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th><?= $this->Paginator->sort('title', __('ゼミタイトル')); ?></th>
+                    <th><?= $this->Paginator->sort('status', __('状況')); ?></th>
+                    <th><?= $this->Paginator->sort('start', __('ゼミ予定日')); ?></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <?php foreach ($events as $event): ?>
+                <tr>
+                    <td>
+                        <?= $event['title']; ?>
+                    </td>
+                    <td>
+                        <?= $event['status']; ?>
+                    </td>
+                    <td>
+                        <?= $event['start'] ?>
+                    </td>
+                    <td class="tc">
+                        <?= $this->Html->link(__('詳細'), ['action' => 'view', $event->id]); ?>
+                        <?= $this->Html->link(__('編集'), ['action' =>'edit',$event['id']]); ?>
+                    </td>
+                </tr>
+                <?php endforeach ?>
+            </table>
+        </div>
+    </div>
 </div>
+<!-- / .fu-frame-main -->
+<div class="users index large-9 medium-8 columns content">
+    <div class="paginator">
+        <ul class="pagination">
+            <?= $this->Paginator->first('<< ' . __('初め')) ?>
+            <?= $this->Paginator->prev('< ' . __('前')) ?>
+            <?= $this->Paginator->numbers() ?>
+            <?= $this->Paginator->next(__('次') . ' >') ?>
+            <?= $this->Paginator->last(__('最後') . ' >>') ?>
+        </ul>
+        <p><?= $this->Paginator->counter(['format' => __('{{page}}/{{pages}} ページ目,　{{count}}　件中 {{current}} 件表示')]) ?></p>
+    </div>
+</div>
+
 <script>
 $(function() {
     $('#calendar').fullCalendar({
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,agendaWeek,agendaDay'
+        right: false
       },
       weekends: false,
       editable: true,
