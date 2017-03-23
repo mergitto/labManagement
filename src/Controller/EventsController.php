@@ -23,7 +23,6 @@ use Cake\Routing\Router;
 class EventsController extends FullCalendarAppController
 {
     public $name = 'Events';
-    public $paginate = ['limit' => 15];
     /**
      * Index method
      *
@@ -31,13 +30,16 @@ class EventsController extends FullCalendarAppController
      */
     public function index()
     {
-        $events = $this->Events->find('all');
+        //カレンダー表示用
+        $allEvent = $this->Events->find('all');
+        //今日を含む今日以降の予定のみの検索
+        $events = $this->Events->find('all')->where(['start >=' => date('Y-m-d')]);
         $this->paginate = [
-            'limit'   => 12,
+            'limit'   => 4,
             'order'   => ['Events.start' => 'asc']
         ];
 
-        foreach($events as $event) {
+        foreach($allEvent as $event) {
             if($event->all_day === 1) {
                 $allday = true;
                 $end = $event->start;
@@ -55,6 +57,7 @@ class EventsController extends FullCalendarAppController
         }
         $this->set('json', h(json_encode($json,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)));
 
+        $this->set(compact('allEvent'));
         $this->set('events', $this->paginate($events));
         $this->set('_serialize', ['events']);
     }

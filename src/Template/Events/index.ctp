@@ -8,7 +8,7 @@
 <!-- end カレンダー表示 -->
 
 <div class="events small-12 medium-8 large-12 columns">
-  <h2 class="inline-block"><?= __('Events');?></h2>
+  <h2 class="inline-block"><?= __('ゼミ予定日');?></h2>
   <ul class="no-bullet inline-list inline-block">
     <li><?= $this->Html->link(__('予定追加', true), ['action' => 'add']); ?></li>
   </ul>
@@ -36,7 +36,7 @@
                         <?= $event['status']; ?>
                     </td>
                     <td>
-                        <?= $event['start'] ?>
+                        <?= date(__('Y-m-d l'),strtotime($event->start)) ?>
                     </td>
                     <td class="tc">
                         <?= $this->Html->link(__('詳細'), ['action' => 'view', $event->id]); ?>
