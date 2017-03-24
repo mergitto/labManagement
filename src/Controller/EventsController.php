@@ -157,19 +157,20 @@ class EventsController extends FullCalendarAppController
         }
     }
 
-    public function logout(){
-        return $this->redirect($this->Auth->logout());
-    }
-
     public function isAuthorized($user)
     {
         $action = $this->request->params['action'];
-        // index, login, logoutページは誰でも見れる
-        if (in_array($action, ['index','view' ,'logout'])) {
+        // index, view, logoutページは誰でも見れる
+        if (in_array($action, ['index','view','logout'])) {
             return true;
         }
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
+        }
+        // addページは一般ユーザーには使用できないようにする
+        if (in_array($action, ['add'])) {
+            $this->Flash->error(__('管理者の機能です'));
+            return false;
         }
         // リクエストされたページのUser idと
         // ログイン中のUseridが一致する場合はその他のアクションも許可する
@@ -178,7 +179,7 @@ class EventsController extends FullCalendarAppController
         if ($current_user->id == $user['id']) {
             return true;
         }
-
+        $this->Flash->error(__('管理者の機能です'));
         return false;
     }
 }

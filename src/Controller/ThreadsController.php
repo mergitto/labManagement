@@ -123,10 +123,6 @@ class ThreadsController extends AppController
         $this->set('_serialize', ['thread']);
     }
 
-    public function logout(){
-        return $this->redirect($this->Auth->logout());
-    }
-
     /**
      * Delete method
      *

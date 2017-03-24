@@ -51,11 +51,6 @@ class AdminsController extends AppController
         $this->set('_serialize', ['user']);
     }
 
-
-    public function logout(){
-        return $this->redirect($this->Auth->logout());
-    }
-
     /**
      * is Authorized method
      * 管理者(role=admin)のみがアクセスできるようにする

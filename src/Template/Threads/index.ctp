@@ -32,7 +32,7 @@
             <thead>
             <tr>
                 <th><?= $this->Paginator->sort('id', __('ID')); ?></th>
-                <th><?= $this->Paginator->sort('user_id', __('ユーザー')); ?></th>
+                <th><?= $this->Paginator->sort('user_id', __('管理ユーザー')); ?></th>
                 <th><?= $this->Paginator->sort('title', __('タイトル')); ?></th>
                 <th><?= $this->Paginator->sort('modified', __('更新日')); ?></th>
                 <th class="b_w150">　</th>

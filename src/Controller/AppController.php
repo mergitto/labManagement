@@ -87,4 +87,9 @@ class AppController extends Controller
       $user = $this->Auth->user();
       $this->set(compact('user'));
     }
+
+    public function logout(){
+        return $this->redirect($this->Auth->logout());
+    }
+
 }
