@@ -164,6 +164,10 @@ class EventsController extends FullCalendarAppController
     public function isAuthorized($user)
     {
         $action = $this->request->params['action'];
+        // index, login, logoutページは誰でも見れる
+        if (in_array($action, ['index','view' ,'logout'])) {
+            return true;
+        }
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
         }

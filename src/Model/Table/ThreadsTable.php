@@ -5,6 +5,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Search\Manager;
 
 /**
  * Threads Model
@@ -40,6 +41,7 @@ class ThreadsTable extends Table
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Search.Search');
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
@@ -81,5 +83,15 @@ class ThreadsTable extends Table
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
+    }
+
+    public function searchConfiguration(){
+        $search = new Manager($this);
+        $search->like('title',[
+            'field' => $this->aliasField('title'),
+            'before' => true,
+            'after' => true,
+        ]);
+        return $search;
     }
 }

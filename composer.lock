@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "93dff871a166c3b25c2e1cbc5e2f436a",
+    "content-hash": "02f25d78f9800bee8bdbaab2884ab42b",
     "packages": [
         {
             "name": "aura/installer-default",
@@ -440,7 +440,55 @@
                 "cakephp",
                 "twitter"
             ],
-            "time": "2017-03-15T20:33:21+00:00"
+            "time": "2017-03-15 20:33:21"
+        },
+        {
+            "name": "friendsofcake/search",
+            "version": "2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfCake/search.git",
+                "reference": "7eb3725f75870bea6025eef727bd335411dfb9db"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfCake/search/zipball/7eb3725f75870bea6025eef727bd335411dfb9db",
+                "reference": "7eb3725f75870bea6025eef727bd335411dfb9db",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "~3.0"
+            },
+            "require-dev": {
+                "cakephp/cakephp-codesniffer": "dev-master",
+                "friendsofcake/cakephp-test-utilities": "dev-master"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Search\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Winther",
+                    "homepage": "http://cakephp.nu/",
+                    "role": "Author"
+                }
+            ],
+            "description": "CakePHP Search plugin using PRG pattern",
+            "homepage": "https://github.com/FriendsOfCake/search",
+            "keywords": [
+                "cake3",
+                "cakephp",
+                "cakephp3",
+                "search"
+            ],
+            "time": "2017-03-11T07:43:32+00:00"
         },
         {
             "name": "kozo/partial",

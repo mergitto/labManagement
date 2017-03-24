@@ -224,3 +224,4 @@ if (Configure::read('debug')) {
 }
 
 Plugin::load('Cake/Localized');
+Plugin::load('Search');

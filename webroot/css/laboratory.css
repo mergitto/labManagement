@@ -4,3 +4,10 @@
 .navbar{
   border-radius: 0;
 }
+.row-eq-height {
+    display: flex;
+    flex-wrap: wrap;
+}
+.pad-25{
+  padding: 25px;
+}

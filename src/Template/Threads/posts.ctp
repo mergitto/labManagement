@@ -26,15 +26,25 @@
         <thead>
         <tr>
             <th><?= $this->Paginator->sort('id', __('ID')); ?></th>
+            <th><?= $this->Paginator->sort('name', __('ユーザー名')); ?></th>
             <th><?= $this->Paginator->sort('comment', __('コメント')); ?></th>
             <th><?= $this->Paginator->sort('modified', __('投稿時間')); ?></th>
             <th><?= __(""); ?></th>
         </tr>
         </thead>
-        <?php foreach ($thread->posts as $post): ?>
+        <?php foreach ($posts as $post): ?>
         <tr>
             <td>
                 <?= $post->id; ?>
+            </td>
+            <td>
+                <?php
+                  foreach ($users as $targetUser) {
+                    if ($targetUser->id === $post->user_id) {
+                      echo $targetUser->name;
+                    }
+                  }
+                ?>
             </td>
             <td style="max-width: 400px;">
                 <?= nl2br($post->comment) ?>

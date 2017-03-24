@@ -11,6 +11,12 @@ use App\Controller\AppController;
 class ThreadsController extends AppController
 {
 
+    public function initialize(){
+        parent::initialize();
+        $this->loadComponent('Search.Prg', [
+            'actions' => ['index']
+        ]);
+    }
     /**
      * Index method
      *
@@ -21,8 +27,7 @@ class ThreadsController extends AppController
         $this->paginate = [
             'contain' => ['Users','Posts']
         ];
-        $threads = $this->paginate($this->Threads);
-
+        $threads = $this->paginate($this->Threads->find('search', ['search' => $this->request->query]));
         $this->set(compact('threads'));
         $this->set('_serialize', ['threads']);
     }
@@ -55,9 +60,9 @@ class ThreadsController extends AppController
      */
     public function posts($id = null)
     {
-        $thread = $this->Threads->get($id,[
-            'contain' => 'Posts'
-        ]);
+        $thread = $this->Threads->get($id);
+        $posts = $this->paginate($this->Threads->Posts->find()->where(['thread_id' => $id])->order(['Posts.modified' => 'DESC']));
+        $users = $this->paginate($this->Threads->Users->find());
         $post = $this->Threads->Posts->newEntity();
         if ($this->request->is('post')) {
             $post = $this->Threads->Posts->patchEntity($post, $this->request->data);
@@ -68,7 +73,7 @@ class ThreadsController extends AppController
             }
             $this->Flash->error(__('コメントが正しく登録されませんでした。'));
         }
-        $this->set(compact('thread','post'));
+        $this->set(compact('thread','post','posts','users'));
     }
 
     /**

@@ -8,6 +8,7 @@ return [
         'Cake/Localized' => $baseDir . '/vendor/cakephp/localized/',
         'DebugKit' => $baseDir . '/vendor/cakephp/debug_kit/',
         'Migrations' => $baseDir . '/vendor/cakephp/migrations/',
-        'Partial' => $baseDir . '/vendor/kozo/partial/'
+        'Partial' => $baseDir . '/vendor/kozo/partial/',
+        'Search' => $baseDir . '/vendor/friendsofcake/search/'
     ]
 ];

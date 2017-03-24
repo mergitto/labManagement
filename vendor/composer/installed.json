@@ -2219,5 +2219,55 @@
         },
         "notification-url": "https://packagist.org/downloads/",
         "description": "Auto converting special characters of variables to HTML entities"
+    },
+    {
+        "name": "friendsofcake/search",
+        "version": "2.4.0",
+        "version_normalized": "2.4.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/FriendsOfCake/search.git",
+            "reference": "7eb3725f75870bea6025eef727bd335411dfb9db"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/FriendsOfCake/search/zipball/7eb3725f75870bea6025eef727bd335411dfb9db",
+            "reference": "7eb3725f75870bea6025eef727bd335411dfb9db",
+            "shasum": ""
+        },
+        "require": {
+            "cakephp/cakephp": "~3.0"
+        },
+        "require-dev": {
+            "cakephp/cakephp-codesniffer": "dev-master",
+            "friendsofcake/cakephp-test-utilities": "dev-master"
+        },
+        "time": "2017-03-11T07:43:32+00:00",
+        "type": "cakephp-plugin",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Search\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Christian Winther",
+                "homepage": "http://cakephp.nu/",
+                "role": "Author"
+            }
+        ],
+        "description": "CakePHP Search plugin using PRG pattern",
+        "homepage": "https://github.com/FriendsOfCake/search",
+        "keywords": [
+            "cake3",
+            "cakephp",
+            "cakephp3",
+            "search"
+        ]
     }
 ]

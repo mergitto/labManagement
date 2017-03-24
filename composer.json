@@ -13,7 +13,8 @@
         "friendsofcake/bootstrap-ui": "dev-master",
         "cakephp/localized": "^3.2",
         "kozo/partial": "~3.0",
-        "tutida/altair": "~0.8.1"
+        "tutida/altair": "~0.8.1",
+        "friendsofcake/search": "^2.4"
     },
     "require-dev": {
         "psy/psysh": "@stable",

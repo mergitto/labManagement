@@ -8,8 +8,25 @@
         <li><?= $this->Html->link(__('新規スレッド'), ['action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="threads index large-9 medium-8 columns content">
-    <h3><?= __('タイトル') ?></h3>
+<div class="threads index large-9 medium-8 columns content container">
+    <div class="row row-eq-height">
+        <div class="col-xs-3">
+            <h3><?= __('掲示板') ?></h3>
+        </div>
+        <div class="col-xs-6">
+            <?= $this->Form->create() ?>
+            <fieldset>
+                <div class="form-group">
+                    <?= $this->Form->input('title',['type'=>'text', 'label'=> __('タイトル検索'), 'class' => "form-control login-form"]); ?>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-xs-3 pad-25">
+            <?= $this->Form->button(__('検索'),['class' => 'btn btn-raised btn-success']) ?>
+            <?= $this->Form->end() ?>
+        </div>
+    </div>
+    
     <div class="fu-list">
         <table class="table table-hover">
             <thead>
