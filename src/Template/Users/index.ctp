@@ -1,6 +1,5 @@
 <?php $this->assign('menu_title', __('管理者一覧')); ?>
 <?php $this->assign('bodyId', 'fuPageEvaluateViewList'); ?>
-
 <div class="fu-frame-main">
     <div class="container">
         <hr class="mb0">
@@ -32,6 +31,13 @@
                 </thead>
                 <?php foreach ($users as $user): ?>
                 <tr>
+                    <td>
+                    <?php if($user['photo']): ?>
+                        <?= $this->Html->image('/files/Users/photo/'.$user['photo'],['alt' => '写真を設定してください','class' => 'img-100']) ?>
+                    <?php else: ?>
+                        <?= $this->Html->image('pika.jpg',['class' => 'img-100']) ?>
+                    <?php endif?>
+                    </td>
                     <td>
                         <?= $user['name']; ?>
                     </td>

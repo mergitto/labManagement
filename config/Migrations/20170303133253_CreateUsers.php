@@ -33,6 +33,14 @@ class CreateUsers extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
+        $table->addColumn('photo', 'text', [
+            'default' => null,
+            'null' => true,
+        ]);
+        $table->addColumn('photo_dir', 'text', [
+            'default' => null,
+            'null' => true,
+        ]);
         $table->addColumn('deleted', 'timestamp', [
             'default' => null,
             'null' => true,

@@ -7,6 +7,7 @@ return [
         'BootstrapUI' => $baseDir . '/vendor/friendsofcake/bootstrap-ui/',
         'Cake/Localized' => $baseDir . '/vendor/cakephp/localized/',
         'DebugKit' => $baseDir . '/vendor/cakephp/debug_kit/',
+        'Josegonzalez/Upload' => $baseDir . '/vendor/josegonzalez/cakephp-upload/',
         'Migrations' => $baseDir . '/vendor/cakephp/migrations/',
         'Partial' => $baseDir . '/vendor/kozo/partial/',
         'Search' => $baseDir . '/vendor/friendsofcake/search/'

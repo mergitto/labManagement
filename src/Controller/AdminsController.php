@@ -39,9 +39,9 @@ class AdminsController extends AppController
         $user = $this->Admins->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Admins->Users->patchEntity($user, $this->request->data);
+            
             if ($this->Admins->Users->save($user)) {
                 $this->Flash->success(__('新規ユーザーが登録されました。'));
-
                 return $this->redirect(['controller' => 'users' ,'action' => 'index']);
             }
             $this->Flash->error(__('新規ユーザー登録できませんでした。もう一度お試しください。'));

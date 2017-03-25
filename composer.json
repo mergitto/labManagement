@@ -14,7 +14,8 @@
         "cakephp/localized": "^3.2",
         "kozo/partial": "~3.0",
         "tutida/altair": "~0.8.1",
-        "friendsofcake/search": "^2.4"
+        "friendsofcake/search": "^2.4",
+        "josegonzalez/cakephp-upload": "^3.6"
     },
     "require-dev": {
         "psy/psysh": "@stable",

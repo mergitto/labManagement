@@ -15,7 +15,7 @@
     </ul>
 </nav>
 <div class="users form large-9 medium-8 columns content">
-    <?= $this->Form->create($user) ?>
+    <?= $this->Form->create($user,['type' => 'file']) ?>
     <fieldset>
         <legend><?= __('ユーザー編集') ?></legend>
         <div class="form-group">
@@ -32,6 +32,12 @@
         </div>
         <div class="form-group">
             <?= $this->Form->input('phone',['type'=>'text', 'label'=> '電話番号' , 'class' => "form-control login-form"]); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->Form->input('photo',['type'=>'file', 'label'=> 'サムネイル']); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->Form->input('photo_dir',['type'=>'hidden','value' => 'webroot/files/Users/photo/' ]); ?>
         </div>
     </fieldset>
     <div class="login-button text-right">

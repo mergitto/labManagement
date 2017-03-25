@@ -41,6 +41,16 @@ class UsersTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+            'photo' => [
+                'fields' => [
+                    'dir' => 'photo_dir', 
+                    'size' => 'photo_size',
+                    'type' => 'photo_type',
+                ],
+            ],
+        ]);
+
         $this->belongsTo('Admins', [
             'foreignKey' => 'admins_id',
             'joinType' => 'INNER'
@@ -78,6 +88,14 @@ class UsersTable extends Table
                 'rule' => 'email',
                 'message' => 'メールの形式で登録してください'
             ]);
+
+        $validator
+            ->requirePresence('photo')
+            ->allowEmpty('photo', 'create');
+
+        $validator
+            ->requirePresence('photo_dir')
+            ->allowEmpty('photo_dir', 'create');
 
         $validator
             ->integer('phone')

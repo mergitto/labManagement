@@ -37,15 +37,20 @@
             <td>
                 <?= $post->id; ?>
             </td>
-            <td>
-                <?php
-                  foreach ($users as $targetUser) {
-                    if ($targetUser->id === $post->user_id) {
-                      echo $targetUser->name;
-                    }
-                  }
-                ?>
-            </td>
+            <?php foreach($users as $targetUser): ?>
+                <?php if($targetUser->id === $post->user_id): ?>
+                    <?php if($targetUser['photo']): ?>
+                        <td>
+                            <?= $this->Html->image('/files/Users/photo/'.$targetUser['photo'],['alt' => '写真を設定してください','class' => 'img-100']) ?>
+                        </td>
+                    <?php else: ?>
+                        <td>
+                            <?= $this->Html->image('pika.jpg',['class' => 'img-100']) ?>
+                        </td>
+                    <?php endif ?>
+                    <td><?= $targetUser->name ?></td>
+                <?php endif ?>
+            <?php endforeach ?>
             <td style="max-width: 400px;">
                 <?= nl2br($post->comment) ?>
             </td>

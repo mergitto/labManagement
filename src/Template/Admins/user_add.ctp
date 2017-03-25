@@ -10,7 +10,7 @@
     </ul>
 </nav>
 <div class="container">
-    <?= $this->Form->create($user); ?>
+    <?= $this->Form->create($user,['type' => 'file']); ?>
     <div class="login-table">
         <legend><?= __('ユーザーを追加する') ?></legend>
         <div class="form-group">
@@ -24,6 +24,12 @@
         </div>
         <div class="form-group">
             <?= $this->Form->input('phone',['type'=>'text', 'label'=> '携帯電話番号', 'class' => "form-control login-form", 'maxlength' => 11]); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->Form->input('photo',['type'=>'file', 'label'=> 'サムネイル', 'class' => "form-control login-form"]); ?>
+        </div>
+        <div class="form-group">
+            <?= $this->Form->input('photo_dir',['type'=>'hidden']); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->input('role',['type'=>'hidden','value' => 'user' ,'class' => "form-control login-form"]); ?>
