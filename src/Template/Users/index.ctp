@@ -33,9 +33,9 @@
                 <tr>
                     <td>
                     <?php if($user['photo']): ?>
-                        <?= $this->Html->image('/files/Users/photo/'.$user['photo'],['alt' => '写真を設定してください','class' => 'img-100']) ?>
+                        <?= $this->Html->image('/files/Users/photo/'.$user['photo'],['alt' => '写真を設定してください','class' => 'img-50']) ?>
                     <?php else: ?>
-                        <?= $this->Html->image('pika.jpg',['class' => 'img-100']) ?>
+                        <?= $this->Html->image('noimage.png',['class' => 'img-50']) ?>
                     <?php endif?>
                     </td>
                     <td>

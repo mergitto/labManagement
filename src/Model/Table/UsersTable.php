@@ -90,12 +90,11 @@ class UsersTable extends Table
             ]);
 
         $validator
-            ->requirePresence('photo')
-            ->allowEmpty('photo', 'create');
+            ->allowEmpty('photo', ['create','update']);
 
         $validator
-            ->requirePresence('photo_dir')
-            ->allowEmpty('photo_dir', 'create');
+            ->requirePresence('photo_dir','false')
+            ->allowEmpty('photo_dir', 'false');
 
         $validator
             ->integer('phone')

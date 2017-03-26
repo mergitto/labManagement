@@ -25,7 +25,7 @@ class UsersController extends AppController
     public function index()
     {
         $loginUser = $this->Auth->user();
-        $users = $this->paginate($this->Users->find());
+        $users = $this->paginate($this->Users->find()->order(['id' => 'asc']));
 
         $this->set(compact('users','loginUser'));
         $this->set('_serialize', ['users']);
