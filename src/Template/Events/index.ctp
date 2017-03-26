@@ -71,7 +71,7 @@ $(function() {
         right: false
       },
       weekends: false,
-      editable: true,
+      editable: false,
       locale: 'ja',
       events: <?= htmlspecialchars_decode($json, ENT_QUOTES )?>
     })

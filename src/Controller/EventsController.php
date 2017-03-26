@@ -72,7 +72,9 @@ class EventsController extends FullCalendarAppController
     public function view($id = null)
     {
         $event = $this->Events->get($id);
+        $attachments = $this->Events->Attachments->find()->where(['event_id' => $id]);
         $this->set('event', $event);
+        $this->set('attachments', $attachments);
         $this->set('_serialize', ['event']);
     }
 

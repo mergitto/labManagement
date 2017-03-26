@@ -32,4 +32,29 @@
 			<?= "N/A"; ?>
 		<?php endif; ?> 
 	</p>
+	<p>
+		<?php foreach($attachments as $attachment): ?>
+			<?= $attachment->title ?>
+		<?php endforeach ?>
+	</p>
+</div>
+<div class="float-none form small-12 medium-8 large-9 columns">
+	<?= $this->Form->create('Attachment', [
+				'type' => 'file',
+				'type' => 'post',
+				'url' => ['controller' => 'Attachments', 'action' => 'add']
+			]);
+	?>
+		<fieldset>
+	 		<legend><?= __('ファイル追加'); ?></legend>
+			<?= $this->Form->input('title'); ?>
+			<?= $this->Form->input('filename',['type' => 'file','label' => 'ファイル']) ?>
+			<?= $this->Form->input('url'); ?>
+			<?= $this->Form->input('type'); ?>
+			<?= $this->Form->input('contents'); ?>
+			<?= $this->Form->input('user_id', ['type' => 'hidden' ,'value' => $user['id'] ]); ?>
+			<?= $this->Form->input('event_id',['type' => 'hidden','value' =>  $event->id ]); ?>
+		</fieldset>
+	<?= $this->Form->button(__('アップロード')); ?>
+	<?= $this->Form->end(); ?>
 </div>
