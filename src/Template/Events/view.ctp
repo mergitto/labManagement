@@ -26,29 +26,53 @@ $w = date('w', strtotime($event->start));
 		<span><?= __('詳細: '); ?></span>
 		<?= $event->details; ?>
 	</p>
-	<p>
-		<?php foreach($attachments as $attachment): ?>
-			<?= $attachment->title ?>
-		<?php endforeach ?>
-	</p>
-</div>
-<div class="float-none form small-12 medium-8 large-9 columns">
-	<?= $this->Form->create('Attachment', [
-				'type' => 'file',
-				'type' => 'post',
-				'url' => ['controller' => 'Attachments', 'action' => 'add']
-			]);
-	?>
-		<fieldset>
-	 		<legend><?= __('ファイル追加'); ?></legend>
-			<?= $this->Form->input('title'); ?>
-			<?= $this->Form->input('filename',['type' => 'file','label' => 'ファイル']) ?>
-			<?= $this->Form->input('url'); ?>
-			<?= $this->Form->input('type'); ?>
-			<?= $this->Form->input('contents'); ?>
-			<?= $this->Form->input('user_id', ['type' => 'hidden' ,'value' => $user['id'] ]); ?>
-			<?= $this->Form->input('event_id',['type' => 'hidden','value' =>  $event->id ]); ?>
-		</fieldset>
-	<?= $this->Form->button(__('アップロード')); ?>
-	<?= $this->Form->end(); ?>
+	<?= $this->Html->link(__('ファイルを登録する'),['controller' => 'Attachments', 'action' => 'add', $event->id]) ?>
+	<div class="fu-frame-main">
+	    <div class="container">
+	        <hr class="mb0">
+
+	        <div class="fu-list">
+	            <table class="table table-hover">
+	                <thead>
+	                <tr>
+	                		<th><?= __('ユーザー名'); ?></th>
+	                    <th><?= $this->Paginator->sort('title', __('ゼミ資料タイトル')); ?></th>
+	                    <th><?= $this->Paginator->sort('file', __('資料名')); ?></th>
+	                    <th class="b_w150">　</th>
+	                </tr>
+	                </thead>
+	                <?php foreach ($attachments as $attachment): ?>
+	                <tr>
+	                		<td>
+	                			  <?= $attachment->user->name ?>
+	                		</td>
+	                    <td>
+	                        <?= $attachment->title; ?>
+	                    </td>
+	                    <td>
+	                    	  <?= $attachment->file ?>
+	                    </td>
+	                    <td class="tc">
+	                        <?= $this->Html->link(__('編集'), ['controller' => 'Attachments' ,'action' =>'edit',$attachment->id]); ?>
+	                        <?= $this->Form->postLink(__('削除'), ['controller' => 'Attachments' ,'action' => 'delete', $attachment->id ], ['confirm' => __('本当に削除してよろしいですか　# {0}?', $attachment->file)]) ?>
+	                    </td>
+	                </tr>
+	                <?php endforeach ?>
+	            </table>
+	        </div>
+	    </div>
+	</div>
+	<!-- / .fu-frame-main -->
+	<div class="users index large-9 medium-8 columns content">
+	    <div class="paginator">
+	        <ul class="pagination">
+	            <?= $this->Paginator->first('<< ' . __('初め')) ?>
+	            <?= $this->Paginator->prev('< ' . __('前')) ?>
+	            <?= $this->Paginator->numbers() ?>
+	            <?= $this->Paginator->next(__('次') . ' >') ?>
+	            <?= $this->Paginator->last(__('最後') . ' >>') ?>
+	        </ul>
+	        <p><?= $this->Paginator->counter(['format' => __('{{page}}/{{pages}} ページ目,　{{count}}　人中 {{current}} 人表示')]) ?></p>
+	    </div>
+	</div>
 </div>

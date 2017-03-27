@@ -15,22 +15,20 @@ class AttachmentsController extends AppController
      *
      * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id = null)
     {
         $attachment = $this->Attachments->newEntity();
         if ($this->request->is('post')) {
             $attachment = $this->Attachments->patchEntity($attachment, $this->request->data);
-            dump($attachment);
             if ($this->Attachments->save($attachment)) {
-                $this->Flash->success(__('The attachment has been saved.'));
+                $this->Flash->success(__('登録しました'));
 
-                return $this->redirect(['controller' => 'Events','action' => 'index']);
-            }exit;
-            $this->Flash->error(__('The attachment could not be saved. Please, try again.'));
+                return $this->redirect(['controller' => 'Events','action' => 'view',$attachment->event_id]);
+            }
+            $this->Flash->error(__('登録できませんでした'));
         }
-        $users = $this->Attachments->Users->find('list', ['limit' => 200]);
-        $events = $this->Attachments->Events->find('list', ['limit' => 200]);
-        $this->set(compact('attachment', 'users', 'events'));
+        $event = $this->Attachments->Events->get($id);
+        $this->set(compact('attachment', 'event'));
         $this->set('_serialize', ['attachment']);
     }
 
@@ -49,11 +47,10 @@ class AttachmentsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $attachment = $this->Attachments->patchEntity($attachment, $this->request->data);
             if ($this->Attachments->save($attachment)) {
-                $this->Flash->success(__('The attachment has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->success(__('修正しました'));
+                return $this->redirect(['controller' => 'Events' ,'action' => 'view', $attachment->event_id]);
             }
-            $this->Flash->error(__('The attachment could not be saved. Please, try again.'));
+            $this->Flash->error(__('修正できませんでした。'));
         }
         $users = $this->Attachments->Users->find('list', ['limit' => 200]);
         $events = $this->Attachments->Events->find('list', ['limit' => 200]);
@@ -73,12 +70,12 @@ class AttachmentsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $attachment = $this->Attachments->get($id);
         if ($this->Attachments->delete($attachment)) {
-            $this->Flash->success(__('The attachment has been deleted.'));
+            $this->Flash->success(__('削除しました'));
         } else {
-            $this->Flash->error(__('The attachment could not be deleted. Please, try again.'));
+            $this->Flash->error(__('削除できませんでした'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['controller' => 'Events' ,'action' => 'view', $attachment->event_id]);
     }
 
         public function isAuthorized($user)
@@ -94,9 +91,12 @@ class AttachmentsController extends AppController
         // リクエストされたページのUser idと
         // ログイン中のUseridが一致する場合はその他のアクションも許可する
         $id = $this->request->params['pass'][0];
-        $current_user = $this->Events->get($id);
-        if ($current_user->id == $user['id']) {
+        $current_user = $this->Attachments->get($id);
+        if ($current_user->user_id == $user['id']) {
             return true;
+        }else{
+            $this->Flash->error(__('他のユーザーのファイルは操作できません'));
+            return false;
         }
         $this->Flash->error(__('管理者の機能です'));
         return false;

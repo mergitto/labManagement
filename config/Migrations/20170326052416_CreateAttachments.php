@@ -13,19 +13,15 @@ class CreateAttachments extends AbstractMigration
     public function change()
     {
         $table = $this->table('attachments');
-        $table->addColumn('filename', 'text', [
-            'default' => null,
-            'null' => true,
-        ]);
         $table->addColumn('title', 'text', [
             'default' => null,
             'null' => true,
         ]);
-        $table->addColumn('type', 'text', [
+        $table->addColumn('file', 'text', [
             'default' => null,
             'null' => true,
         ]);
-        $table->addColumn('contents', 'text', [
+        $table->addColumn('file_dir', 'text', [
             'default' => null,
             'null' => true,
         ]);
@@ -36,12 +32,12 @@ class CreateAttachments extends AbstractMigration
         $table->addColumn('user_id', 'integer', [
             'default' => null,
             'limit' => 11,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('event_id', 'integer', [
             'default' => null,
             'limit' => 11,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('created', 'timestamp', [
             'default' => null,

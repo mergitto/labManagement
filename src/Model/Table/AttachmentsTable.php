@@ -41,6 +41,16 @@ class AttachmentsTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+            'file' => [
+                'fields' => [
+                    'dir' => 'file_dir', 
+                    'size' => 'file_size',
+                    'type' => 'file_type',
+                ],
+            ],
+        ]);
+
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
@@ -64,18 +74,11 @@ class AttachmentsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('filename');
+            ->requirePresence('file')
+            ->notEmpty('file');
 
         $validator
             ->allowEmpty('title');
-
-        $validator
-            ->requirePresence('type', 'create')
-            ->allowEmpty('type');
-
-        $validator
-            ->requirePresence('contents', 'create')
-            ->allowEmpty('contents');
 
         $validator
             ->allowEmpty('url');
