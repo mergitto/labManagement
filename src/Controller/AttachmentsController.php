@@ -2,7 +2,6 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
 /**
  * Attachments Controller
  *
@@ -59,6 +58,21 @@ class AttachmentsController extends AppController
     }
 
     /**
+     * Download method
+     * ファイルをダウンロードする
+     */
+    public function download($file_name = null)
+    {
+        $this->autoRender = false; // オートレンダーをOFFに
+        $path = WWW_ROOT.'files/Attachments/file/'.$file_name;
+        $this->response->file($path, [
+            'download' => true,
+            'name' => $file_name,
+        ]);
+        return $this->response;
+    }
+
+    /**
      * Delete method
      *
      * @param string|null $id Attachment id.
@@ -82,7 +96,7 @@ class AttachmentsController extends AppController
     {
         $action = $this->request->params['action'];
         // index, view, logoutページは誰でも見れる
-        if (in_array($action, ['add','view','logout'])) {
+        if (in_array($action, ['add','view','logout','download'])) {
             return true;
         }
         if (isset($user['role']) && $user['role'] === 'admin') {

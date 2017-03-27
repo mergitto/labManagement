@@ -50,7 +50,7 @@ $w = date('w', strtotime($event->start));
 	                        <?= $attachment->title; ?>
 	                    </td>
 	                    <td>
-	                    	  <?= $attachment->file ?>
+	                    		<?= $this->Html->link(__($attachment->file),['controller' => 'Attachments', 'action' => 'download',$attachment->file]) ?>
 	                    </td>
 	                    <td class="tc">
 	                        <?= $this->Html->link(__('編集'), ['controller' => 'Attachments' ,'action' =>'edit',$attachment->id]); ?>
