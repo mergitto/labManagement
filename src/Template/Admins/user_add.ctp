@@ -17,16 +17,18 @@
             <?= $this->Form->input('name',['type'=>'text', 'label'=> 'ユーザー名', 'class' => "form-control login-form"]); ?>
         </div>
         <div class="form-group">
-            <?= $this->Form->input('password',['type'=>'password', 'label'=> 'パスワード', 'class' => "form-control login-form"]); ?>
+            <?= $this->Form->input('password',['type'=>'password', 'label'=> 'パスワード','placeholder' => '半角英数字で記入して下さい' ,'class' => "form-control login-form"]); ?>
         </div>
         <div class="form-group">
-            <?= $this->Form->input('email',['type'=>'email', 'label'=> 'メールアドレス', 'class' => "form-control login-form"]); ?>
+            <?= $this->Form->input('email',['type'=>'email', 'label'=> 'メールアドレス','placeholder' => 'hoge@gmail.com' ,'class' => "form-control login-form"]); ?>
         </div>
         <div class="form-group">
-            <?= $this->Form->input('phone',['type'=>'text', 'label'=> '携帯電話番号', 'class' => "form-control login-form", 'maxlength' => 11]); ?>
+            <?= $this->Form->input('phone',['type'=>'text', 'label'=> '携帯電話番号','placeholder' => '例:000-0000-0000' ,'class' => "form-control login-form", 'maxlength' => 13]); ?>
         </div>
-        <div class="form-group">
-            <?= $this->Form->input('photo',['type'=>'file', 'label'=> 'サムネイル', 'class' => "form-control login-form"]); ?>
+        <input id="lefile" name="photo" type="file" style="display:none">
+        <div class="input-group">
+            <span class="input-group-btn"><button type="button" class="btn btn-info" onclick="$('input[id=lefile]').click();">Browse</button></span>
+            <input type="text" id="photoCover" class="form-control" placeholder="select file...">
         </div>
         <div class="form-group">
             <?= $this->Form->input('photo_dir',['type'=>'hidden']); ?>
@@ -40,3 +42,4 @@
     </div>
     <?= $this->Form->end() ?>
 </div>
+<?= $this->Html->script('fileselect.js') ?>

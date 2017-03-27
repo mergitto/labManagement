@@ -97,9 +97,15 @@ class UsersTable extends Table
             ->allowEmpty('photo_dir', 'false');
 
         $validator
-            ->integer('phone')
+            ->requirePresence('phone')
             ->allowEmpty('phone', 'create');
-        $validator->provider('fr', FrValidation::class);
+        $validator
+            ->add('phone', 'custom', [
+                'rule' => function ($value, $context){
+                    return (bool) preg_match('/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/',$value);
+                },
+                'message' => 'ハイフン付きで入力してください'
+            ]);
 
         $validator
             ->requirePresence('password', 'create')

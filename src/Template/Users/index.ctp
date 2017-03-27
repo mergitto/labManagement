@@ -22,7 +22,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('name', __('ユーザー名')); ?></th>
+                    <th colspan="2"><?= $this->Paginator->sort('name', __('ユーザー名')); ?></th>
                     <th><?= $this->Paginator->sort('role', __('ユーザーレベル')); ?></th>
                     <th><?= $this->Paginator->sort('email', __('E-mail')); ?></th>
                     <th><?= $this->Paginator->sort('phone', __('電話番号')); ?></th>
@@ -31,7 +31,7 @@
                 </thead>
                 <?php foreach ($users as $user): ?>
                 <tr>
-                    <td>
+                    <td class="img-50">
                     <?php if($user['photo']): ?>
                         <?= $this->Html->image('/files/Users/photo/'.$user['photo'],['alt' => '写真を設定してください','class' => 'img-50']) ?>
                     <?php else: ?>

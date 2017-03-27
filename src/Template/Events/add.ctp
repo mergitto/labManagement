@@ -28,9 +28,9 @@
 		echo $this->Form->input('start',['type' => 'text', 'id' => 'dp1']);
 		echo $this->Form->input('all_day',['type' => 'hidden']);
 		echo $this->Form->input('user_id',['value' => $user['id'], 'type' => 'hidden']);
-		echo $this->Form->input('status', ['options' => [
-					'Scheduled' => __('Scheduled'),'Confirmed' => __('Confirmed'),'In Progress' => __('In Progress'),
-					'Rescheduled' => __('Rescheduled'),'Completed' => __('Completed')
+		echo $this->Form->input('status', [
+			'options' => [
+				'Scheduled' => __('予定'),
 				]
 			]
 		);

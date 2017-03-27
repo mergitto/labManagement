@@ -43,15 +43,13 @@
             </td>
             <?php foreach($users as $targetUser): ?>
                 <?php if($targetUser->id === $post->user_id): ?>
+                    <td class="img-50">
                     <?php if($targetUser['photo']): ?>
-                        <td class="img-50">
                             <?= $this->Html->image('/files/Users/photo/'.$targetUser['photo'],['alt' => '写真を設定してください','class' => 'img-50']) ?>
-                        </td>
                     <?php else: ?>
-                        <td class="img-50">
                             <?= $this->Html->image('noimage.png',['class' => 'img-50']) ?>
-                        </td>
                     <?php endif ?>
+                    </td>
                     <td><?= $targetUser->name ?></td>
                 <?php endif ?>
             <?php endforeach ?>
