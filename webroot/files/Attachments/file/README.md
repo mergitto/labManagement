@@ -1,2 +1,0 @@
-# sparqlSearch
-javascriptを使ってSPARQL
