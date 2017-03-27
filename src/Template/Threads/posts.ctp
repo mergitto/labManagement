@@ -26,7 +26,7 @@
         <thead>
         <tr>
             <th><?= $this->Paginator->sort('id', __('ID')); ?></th>
-            <th><?= $this->Paginator->sort('name', __('ユーザー名')); ?></th>
+            <th colspan="2"><?= $this->Paginator->sort('name', __('ユーザー名')); ?></th>
             <th><?= $this->Paginator->sort('comment', __('コメント')); ?></th>
             <th><?= $this->Paginator->sort('modified', __('投稿時間')); ?></th>
             <th><?= __(""); ?></th>
@@ -40,12 +40,12 @@
             <?php foreach($users as $targetUser): ?>
                 <?php if($targetUser->id === $post->user_id): ?>
                     <?php if($targetUser['photo']): ?>
-                        <td>
+                        <td class="img-50">
                             <?= $this->Html->image('/files/Users/photo/'.$targetUser['photo'],['alt' => '写真を設定してください','class' => 'img-50']) ?>
                         </td>
                     <?php else: ?>
-                        <td>
-                            <?= $this->Html->image('pika.jpg',['class' => 'img-50']) ?>
+                        <td class="img-50">
+                            <?= $this->Html->image('noimage.png',['class' => 'img-50']) ?>
                         </td>
                     <?php endif ?>
                     <td><?= $targetUser->name ?></td>
