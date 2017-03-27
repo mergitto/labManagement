@@ -35,7 +35,7 @@ $w = date('w', strtotime($event->start));
 	            <table class="table table-hover">
 	                <thead>
 	                <tr>
-	                		<th><?= __('ユーザー名'); ?></th>
+	                		<th colspan="2"><?= __('ユーザー名'); ?></th>
 	                    <th><?= $this->Paginator->sort('title', __('ゼミ資料タイトル')); ?></th>
 	                    <th><?= $this->Paginator->sort('file', __('資料名')); ?></th>
 	                    <th class="b_w150">　</th>
@@ -43,6 +43,13 @@ $w = date('w', strtotime($event->start));
 	                </thead>
 	                <?php foreach ($attachments as $attachment): ?>
 	                <tr>
+		                	<td class="img-50">
+	                    <?php if($attachment->user->photo): ?>
+	                            <?= $this->Html->image('/files/Users/photo/'.$attachment->user->photo,['alt' => '写真を設定してください','class' => 'img-50']) ?>
+	                    <?php else: ?>
+	                            <?= $this->Html->image('noimage.png',['class' => 'img-50']) ?>
+	                    <?php endif ?>
+	                    </td>
 	                		<td>
 	                			  <?= $attachment->user->name ?>
 	                		</td>
