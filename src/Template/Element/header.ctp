@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse bg-inverse">
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -10,15 +10,12 @@
       <?= $this->Html->link(__("ゼミ管理システム"), ['controller' => 'Users', 'action' => 'index'], ['class' => 'navbar-brand'] ) ?>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav">
         <li class="active">
           <?= $this->Html->link(__('ゼミ予定一覧'), ['controller' => 'Events', 'action' => 'index']) ?>
         </li>
         <li class="active">
           <?= $this->Html->link(__('掲示板'), ['controller' => 'Threads', 'action' => 'index']) ?>
-        </li>
-        <li>
-          <?= $this->Form->postLink(__('ログアウト'),['action' => 'logout']) ?>
         </li>
         <!--後々使うことになる可能性あるため残している
         <li class="dropdown">
@@ -32,6 +29,10 @@
           </ul>
         </li>
         -->
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="navbar-text"><?= __('ユーザー:') ?><?= $user['name'] ?></li>
+        <li><?= $this->Form->postLink(__('ログアウト'),['action' => 'logout']) ?></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

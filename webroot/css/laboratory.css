@@ -4,9 +4,21 @@
 .navbar{
   border-radius: 0;
 }
+.navbar-toggle{
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+.icon-bar{
+  background-color: #000;
+}
 .row-eq-height {
     display: flex;
     flex-wrap: wrap;
+}
+
+
+.pad-10p{
+  padding: 10%;
 }
 .pad-25{
   padding: 25px;

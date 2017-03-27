@@ -38,7 +38,11 @@ $title = 'Labolatory Management System';
 </head>
 <body>
     <head>
+    <?php if($this->request->controller === 'Users' && $this->request->action === 'login'): ?>
+        <?= $this->element('login_header'); ?>
+    <?php else: ?>
         <?= $this->element('header'); ?>
+    <?php endif ?>
     </head>
     <div class="container clearfix">
         <?= $this->Flash->render() ?>
