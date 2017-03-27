@@ -81,6 +81,8 @@ try {
     exit($e->getMessage() . "\n");
 }
 
+//定数ファイルを読み込む
+Configure::load("const",'default');
 /*
  * Load an environment local configuration file.
  * You can use a file like app_local.php to provide local overrides to your

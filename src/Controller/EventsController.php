@@ -14,7 +14,7 @@ namespace App\Controller;
 
 use App\Controller\FullCalendarAppController;
 use Cake\Routing\Router;
-
+use Cake\Core\Configure;
 /**
  * Events Controller
  *

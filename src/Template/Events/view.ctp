@@ -9,6 +9,8 @@
  * Licensed under MIT
  * http://www.opensource.org/licenses/mit-license.php
  */
+// 曜日を日本語で
+$w = date('w', strtotime($event->start));
 ?>
 
 <div class="small-12 columns">
@@ -19,7 +21,7 @@
 		<li><?= $this->Html->link(__('ゼミ予定追加', true), ['action' => 'add']); ?></li>
 	</ul>
 	<h2><?= $event->title; ?></h2>
-	<h3><?= __('日付: '); ?><?= date('Y-m-d l', strtotime($event->start)) ?></h3>
+	<h3><?= __('日付: '); ?><?= date('Y-m-d', strtotime($event->start)) ?><?= $week[$w]; ?></h3>
 	<p>
 		<span><?= __('詳細: '); ?></span>
 		<?= $event->details; ?>

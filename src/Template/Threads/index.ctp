@@ -39,6 +39,10 @@
             </tr>
             </thead>
             <?php foreach ($threads as $thread): ?>
+            <?php
+            // 曜日を日本語で
+            $w = date('w', strtotime($thread['modified']));
+            ?>
             <tr>
                 <td>
                     <?= $thread['id']; ?>
@@ -53,7 +57,7 @@
                     <span class="text-muted">(<?= count($thread->posts); ?>)</span>
                 </td>
                 <td>
-                    <?= $thread['modified']; ?>
+                    <?= date('Y-m-d', strtotime($thread['modified'])) ?><?= $week[$w]; ?>
                 </td>
                 <td class="tc">
                 <?php if($thread->user_id === $user['id']): ?>

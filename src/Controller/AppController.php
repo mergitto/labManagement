@@ -16,6 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\Core\Configure;
 
 /**
  * Application Controller
@@ -85,7 +86,8 @@ class AppController extends Controller
     public function beforeFilter(Event $event){
       parent::beforeFilter($event);
       $user = $this->Auth->user();
-      $this->set(compact('user'));
+      $week = Configure::read("week");
+      $this->set(compact('user','week'));
     }
 
     public function logout(){

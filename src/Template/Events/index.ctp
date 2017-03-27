@@ -28,6 +28,10 @@
                 </tr>
                 </thead>
                 <?php foreach ($events as $event): ?>
+                  <?php
+                  // 曜日を日本語で
+                  $w = date('w', strtotime($event->start));
+                  ?>
                 <tr>
                     <td>
                         <?= $event['title']; ?>
@@ -36,7 +40,7 @@
                         <?= $event['status']; ?>
                     </td>
                     <td>
-                        <?= date(__('Y-m-d l'),strtotime($event->start)) ?>
+                        <?= date(__('Y-m-d'),strtotime($event->start)) ?><?=$week[$w]?>
                     </td>
                     <td class="tc">
                         <?= $this->Html->link(__('詳細'), ['action' => 'view', $event->id]); ?>

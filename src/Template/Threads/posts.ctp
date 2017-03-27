@@ -33,6 +33,10 @@
         </tr>
         </thead>
         <?php foreach ($posts as $post): ?>
+        <?php
+        // 曜日を日本語で
+        $w = date('w', strtotime($post['modified']));
+        ?>
         <tr>
             <td>
                 <?= $post->id; ?>
@@ -55,7 +59,7 @@
                 <?= nl2br($post->comment) ?>
             </td>
             <td>
-                <?= date('Y-m-d H:i',strtotime($post->modified)); ?>
+                <?= date('Y-m-d',strtotime($post->modified)); ?><?= $week[$w]; ?>
             </td>
             <td class="tc">
                 <?php if($post->user_id === $user['id']): ?>
