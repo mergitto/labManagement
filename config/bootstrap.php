@@ -222,6 +222,8 @@ Type::build('timestamp')
 if (Configure::read('debug')) {
     Plugin::load('DebugKit', ['bootstrap' => true]);
 }
+//日本語への翻訳
+Configure::write('Config.language', 'ja');
 
 Plugin::load('Cake/Localized');
 Plugin::load('Search');

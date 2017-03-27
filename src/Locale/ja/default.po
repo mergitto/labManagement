@@ -1,0 +1,554 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2017-03-27 09:13+0900\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/AdminsController.php:44
+msgid "新規ユーザーが登録されました。"
+msgstr ""
+
+#: Controller/AdminsController.php:47
+msgid "新規ユーザー登録できませんでした。もう一度お試しください。"
+msgstr ""
+
+#: Controller/AdminsController.php:65
+msgid "管理者のみの機能です"
+msgstr ""
+
+#: Controller/AttachmentsController.php:25;52
+msgid "The attachment has been saved."
+msgstr "ファイルを保存しました"
+
+#: Controller/AttachmentsController.php:29;56
+msgid "The attachment could not be saved. Please, try again."
+msgstr "保存できませんでした"
+
+#: Controller/AttachmentsController.php:76
+msgid "The attachment has been deleted."
+msgstr "削除しました"
+
+#: Controller/AttachmentsController.php:78
+msgid "The attachment could not be deleted. Please, try again."
+msgstr "削除できませんでした"
+
+#: Controller/AttachmentsController.php:101
+#: Controller/EventsController.php:174;184
+msgid "管理者の機能です"
+msgstr ""
+
+#: Controller/EventsController.php:94
+msgid "予定を追加しました。"
+msgstr ""
+
+#: Controller/EventsController.php:97
+msgid "追加できませんでした。"
+msgstr ""
+
+#: Controller/EventsController.php:118
+msgid "予定を修正しました。"
+msgstr ""
+
+#: Controller/EventsController.php:121
+msgid "修正できませんでした。"
+msgstr ""
+
+#: Controller/EventsController.php:140
+msgid "予定を削除しました。"
+msgstr ""
+
+#: Controller/EventsController.php:142
+#: Controller/ThreadsController.php:140;157
+msgid "削除できませんでした。"
+msgstr ""
+
+#: Controller/ThreadsController.php:47
+msgid "タイトルを新規作成しました。"
+msgstr ""
+
+#: Controller/ThreadsController.php:51
+msgid "登録できませんでした。"
+msgstr ""
+
+#: Controller/ThreadsController.php:70
+msgid "コメントが新しく登録されました。"
+msgstr ""
+
+#: Controller/ThreadsController.php:74
+msgid "コメントが正しく登録されませんでした。"
+msgstr ""
+
+#: Controller/ThreadsController.php:94
+msgid "タイトル情報の変更を行いました"
+msgstr ""
+
+#: Controller/ThreadsController.php:98;119
+msgid "情報の変更を行えませんでした。"
+msgstr ""
+
+#: Controller/ThreadsController.php:115
+msgid "コメントの修正を行いました"
+msgstr ""
+
+#: Controller/ThreadsController.php:138
+msgid "タイトルを削除しました。"
+msgstr ""
+
+#: Controller/ThreadsController.php:155
+msgid "コメントを削除しました。"
+msgstr ""
+
+#: Controller/ThreadsController.php:188
+msgid "同一ユーザーではありません"
+msgstr ""
+
+#: Controller/UsersController.php:65
+msgid "確認用パスワードが間違ってます。"
+msgstr ""
+
+#: Controller/UsersController.php:70
+msgid "ユーザー情報を更新しました。"
+msgstr ""
+
+#: Controller/UsersController.php:74
+msgid "更新できませんでした。もう一度お試しください。"
+msgstr ""
+
+#: Controller/UsersController.php:93
+msgid "ユーザーを削除しました。"
+msgstr ""
+
+#: Controller/UsersController.php:95
+msgid "削除できませんでした。もう一度お試しください。"
+msgstr ""
+
+#: Controller/UsersController.php:110
+msgid "ログインできませんでした。/ You couldn't login."
+msgstr ""
+
+#: Template/Admins/index.ctp:8
+#: Template/Admins/user_add.ctp:9
+#: Template/Users/edit.ctp:14
+#: Template/Users/view.ctp:10
+msgid "ユーザー一覧"
+msgstr ""
+
+#: Template/Admins/index.ctp:9
+msgid "ユーザー新規登録"
+msgstr ""
+
+#: Template/Admins/index.ctp:22
+#: Template/Events/index.ctp:42
+msgid "詳細"
+msgstr ""
+
+#: Template/Admins/index.ctp:23
+#: Template/Events/index.ctp:43
+#: Template/Threads/index.ctp:60
+#: Template/Users/index.ctp:55
+msgid "編集"
+msgstr ""
+
+#: Template/Admins/index.ctp:24
+#: Template/Threads/index.ctp:61
+#: Template/Threads/post_edit.ctp:9
+#: Template/Threads/posts.ctp:63
+#: Template/Users/edit.ctp:9
+#: Template/Users/index.ctp:56
+msgid "削除"
+msgstr ""
+
+#: Template/Admins/index.ctp:24
+#: Template/Threads/index.ctp:61
+#: Template/Threads/posts.ctp:63
+#: Template/Users/index.ctp:56
+msgid "本当に削除してよろしいですか　# {0}?"
+msgstr ""
+
+#: Template/Admins/user_add.ctp:8
+msgid "管理者トップページ"
+msgstr ""
+
+#: Template/Admins/user_add.ctp:15
+msgid "ユーザーを追加する"
+msgstr ""
+
+#: Template/Element/header.ctp:10
+msgid "ゼミ管理システム"
+msgstr ""
+
+#: Template/Element/header.ctp:15
+#: Template/Events/view.ctp:18
+msgid "ゼミ予定一覧"
+msgstr ""
+
+#: Template/Element/header.ctp:18
+#: Template/Threads/index.ctp:14
+msgid "掲示板"
+msgstr ""
+
+#: Template/Element/header.ctp:21
+msgid "ログアウト"
+msgstr ""
+
+#: Template/Events/add.ctp:18
+msgid "予定一覧"
+msgstr ""
+
+#: Template/Events/add.ctp:24
+msgid "Add Event"
+msgstr "ゼミ予定追加"
+
+#: Template/Events/add.ctp:39
+#: Template/Events/edit.ctp:42
+msgid "Submit"
+msgstr "登録"
+
+#: Template/Events/edit.ctp:18
+msgid "View Event"
+msgstr ""
+
+#: Template/Events/edit.ctp:19
+msgid "Manage Events"
+msgstr ""
+
+#: Template/Events/edit.ctp:20
+msgid "Add an Event"
+msgstr ""
+
+#: Template/Events/edit.ctp:26
+msgid "Edit Event"
+msgstr ""
+
+#: Template/Events/index.ctp:11;26
+msgid "ゼミ予定日"
+msgstr ""
+
+#: Template/Events/index.ctp:13
+msgid "予定追加"
+msgstr ""
+
+#: Template/Events/index.ctp:24
+msgid "ゼミタイトル"
+msgstr ""
+
+#: Template/Events/index.ctp:25
+msgid "状況"
+msgstr ""
+
+#: Template/Events/index.ctp:39
+msgid "Y-m-d l"
+msgstr ""
+
+#: Template/Events/index.ctp:55
+#: Template/Threads/index.ctp:70
+#: Template/Users/index.ctp:69
+msgid "初め"
+msgstr ""
+
+#: Template/Events/index.ctp:56
+#: Template/Threads/index.ctp:71
+#: Template/Users/index.ctp:70
+msgid "前"
+msgstr ""
+
+#: Template/Events/index.ctp:58
+#: Template/Threads/index.ctp:73
+#: Template/Users/index.ctp:72
+msgid "次"
+msgstr ""
+
+#: Template/Events/index.ctp:59
+#: Template/Threads/index.ctp:74
+#: Template/Users/index.ctp:73
+msgid "最後"
+msgstr ""
+
+#: Template/Events/index.ctp:61
+#: Template/Threads/index.ctp:76
+msgid "{{page}}/{{pages}} ページ目,　{{count}}　件中 {{current}} 件表示"
+msgstr ""
+
+#: Template/Events/view.ctp:15
+msgid "ゼミ予定詳細"
+msgstr ""
+
+#: Template/Events/view.ctp:17
+msgid "ゼミ予定編集"
+msgstr ""
+
+#: Template/Events/view.ctp:19
+msgid "ゼミ予定追加"
+msgstr ""
+
+#: Template/Events/view.ctp:24
+msgid "詳細: "
+msgstr ""
+
+#: Template/Events/view.ctp:28
+msgid "日付: "
+msgstr ""
+
+#: Template/Events/view.ctp:49
+msgid "ファイル追加"
+msgstr ""
+
+#: Template/Events/view.ctp:58
+msgid "アップロード"
+msgstr ""
+
+#: Template/Layout/error.ctp:35
+msgid "Error"
+msgstr "エラー"
+
+#: Template/Layout/error.ctp:43
+msgid "Back"
+msgstr "戻る"
+
+#: Template/Threads/add.ctp:8
+#: Template/Threads/edit.ctp:14
+#: Template/Threads/posts.ctp:3
+msgid "スレッド一覧"
+msgstr ""
+
+#: Template/Threads/add.ctp:14
+#: Template/Threads/edit.ctp:20
+msgid "タイトル追加"
+msgstr ""
+
+#: Template/Threads/add.ctp:22
+#: Template/Threads/edit.ctp:28
+#: Template/Threads/posts.ctp:20
+msgid "新規登録"
+msgstr ""
+
+#: Template/Threads/edit.ctp:9
+#: Template/Threads/view.ctp:69
+msgid "Delete"
+msgstr "削除"
+
+#: Template/Threads/edit.ctp:11
+#: Template/Threads/view.ctp:10;69
+msgid "Are you sure you want to delete # {0}?"
+msgstr "削除してよろしいですか# {0}?"
+
+#: Template/Threads/index.ctp:8
+msgid "新規スレッド"
+msgstr ""
+
+#: Template/Threads/index.ctp:20
+msgid "タイトル検索"
+msgstr ""
+
+#: Template/Threads/index.ctp:25
+msgid "検索"
+msgstr ""
+
+#: Template/Threads/index.ctp:34
+#: Template/Threads/posts.ctp:28
+msgid "ID"
+msgstr ""
+
+#: Template/Threads/index.ctp:35
+msgid "管理ユーザー"
+msgstr ""
+
+#: Template/Threads/index.ctp:36
+msgid "タイトル"
+msgstr ""
+
+#: Template/Threads/index.ctp:37
+#: Template/Users/view.ctp:30
+msgid "更新日"
+msgstr ""
+
+#: Template/Threads/post_edit.ctp:11
+#: Template/Users/edit.ctp:11
+#: Template/Users/view.ctp:9
+msgid "本当に削除してよろしいですか # {0}?"
+msgstr ""
+
+#: Template/Threads/post_edit.ctp:14
+msgid "コメント一覧"
+msgstr ""
+
+#: Template/Threads/post_edit.ctp:20
+msgid "コメント修正"
+msgstr ""
+
+#: Template/Threads/post_edit.ctp:26
+#: Template/Users/edit.ctp:60
+msgid "更新する"
+msgstr ""
+
+#: Template/Threads/posts.ctp:10
+msgid "新規コメント"
+msgstr ""
+
+#: Template/Threads/posts.ctp:29
+#: Template/Users/index.ctp:25
+#: Template/Users/view.ctp:35
+msgid "ユーザー名"
+msgstr ""
+
+#: Template/Threads/posts.ctp:30
+msgid "コメント"
+msgstr ""
+
+#: Template/Threads/posts.ctp:31
+msgid "投稿時間"
+msgstr ""
+
+#: Template/Threads/posts.ctp:32
+msgid ""
+msgstr ""
+
+#: Template/Threads/posts.ctp:62
+msgid "修正"
+msgstr ""
+
+#: Template/Threads/view.ctp:8;55
+msgid "Actions"
+msgstr ""
+
+#: Template/Threads/view.ctp:9
+msgid "Edit Thread"
+msgstr "編集"
+
+#: Template/Threads/view.ctp:10
+msgid "Delete Thread"
+msgstr "削除"
+
+#: Template/Threads/view.ctp:11
+msgid "List Threads"
+msgstr "一覧"
+
+#: Template/Threads/view.ctp:12
+msgid "New Thread"
+msgstr "新規"
+
+#: Template/Threads/view.ctp:13
+msgid "List Users"
+msgstr "一覧"
+
+#: Template/Threads/view.ctp:14
+msgid "New User"
+msgstr "新規"
+
+#: Template/Threads/view.ctp:15
+msgid "List Posts"
+msgstr "一覧"
+
+#: Template/Threads/view.ctp:16
+msgid "New Post"
+msgstr "新規"
+
+#: Template/Threads/view.ctp:23
+msgid "User"
+msgstr "ユーザー"
+
+#: Template/Threads/view.ctp:27;48
+#: Template/Users/view.ctp:22
+msgid "Id"
+msgstr ""
+
+#: Template/Threads/view.ctp:31;53
+msgid "Created"
+msgstr "作成"
+
+#: Template/Threads/view.ctp:35;54
+msgid "Modified"
+msgstr "更新"
+
+#: Template/Threads/view.ctp:40
+msgid "Title"
+msgstr "タイトル"
+
+#: Template/Threads/view.ctp:44
+msgid "Related Posts"
+msgstr ""
+
+#: Template/Threads/view.ctp:49
+msgid "Comment"
+msgstr ""
+
+#: Template/Threads/view.ctp:50
+msgid "Url"
+msgstr ""
+
+#: Template/Threads/view.ctp:51
+msgid "User Id"
+msgstr ""
+
+#: Template/Threads/view.ctp:52
+msgid "Thread Id"
+msgstr ""
+
+#: Template/Threads/view.ctp:67
+msgid "View"
+msgstr ""
+
+#: Template/Threads/view.ctp:68
+msgid "Edit"
+msgstr ""
+
+#: Template/Users/edit.ctp:20
+#: Template/Users/view.ctp:8
+msgid "ユーザー編集"
+msgstr ""
+
+#: Template/Users/edit.ctp:23
+msgid "現在の画像"
+msgstr ""
+
+#: Template/Users/index.ctp:1
+#: Template/Users/view.ctp:11
+msgid "管理者一覧"
+msgstr ""
+
+#: Template/Users/index.ctp:12
+msgid "ユーザー新規作成"
+msgstr ""
+
+#: Template/Users/index.ctp:26
+msgid "ユーザーレベル"
+msgstr ""
+
+#: Template/Users/index.ctp:27
+msgid "E-mail"
+msgstr ""
+
+#: Template/Users/index.ctp:28
+msgid "電話番号"
+msgstr ""
+
+#: Template/Users/index.ctp:75
+msgid "{{page}}/{{pages}} ページ目,　{{count}}　人中 {{current}} 人表示"
+msgstr ""
+
+#: Template/Users/view.ctp:9
+msgid "ユーザー削除"
+msgstr ""
+
+#: Template/Users/view.ctp:18
+msgid "管理者名"
+msgstr ""
+
+#: Template/Users/view.ctp:26
+msgid "作成日"
+msgstr ""
+
+#: Template/Users/view.ctp:39
+msgid "パスワード"
+msgstr ""
+

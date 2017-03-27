@@ -19,18 +19,10 @@
 		<li><?= $this->Html->link(__('ゼミ予定追加', true), ['action' => 'add']); ?></li>
 	</ul>
 	<h2><?= $event->title; ?></h2>
-	<h3><?= $event->start; ?></h3>
+	<h3><?= __('日付: '); ?><?= date('Y-m-d l', strtotime($event->start)) ?></h3>
 	<p>
 		<span><?= __('詳細: '); ?></span>
 		<?= $event->details; ?>
-	</p>
-	<p>
-		<span><?= __('日付: '); ?></span>
-		<?php if($event->all_day != 1): ?>
-			<?= date('Y-m-d', strtotime($event->start)) ?>
-		<?php else: ?>
-			<?= "N/A"; ?>
-		<?php endif; ?> 
 	</p>
 	<p>
 		<?php foreach($attachments as $attachment): ?>
