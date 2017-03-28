@@ -107,7 +107,7 @@ class UsersController extends AppController
                 return $this->redirect(['controller' => 'users','action' => 'index']);
             } else {
                 $this->Flash->error(
-                    __("ログインできませんでした。/ You couldn't login."),
+                    __("ログインできませんでした。"),
                     'default',
                     [],
                     'auth'

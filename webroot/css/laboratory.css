@@ -1,22 +1,62 @@
 /**
 *Bootstrap上書き
 */
+
+/****ヘッダー部分のデザイン*****/
 .navbar{
   border-radius: 0;
+  background-color: #13C1AA;
 }
 .navbar-toggle{
   background-color: #fff;
   border: 1px solid #ccc;
 }
-.icon-bar{
-  background-color: #000;
+.navbar-nav > li > a {
+  color: #ffffff;
 }
+.navbar-nav > li {
+  color: #ffffff;
+}
+.nav > li > a:visited,
+.nav > li > a:hover,
+.nav > li > a:active {
+  color: #fff;
+  background-color: #2DDBC4;
+}
+.navbar-header > a{
+  color: #fff;
+}
+
+.icon-bar{
+  background-color: #13C1AA;
+}
+.navbar-toggle:hover{
+  background-color: #13C1AA;
+  border: 1px solid #fff;
+}
+.navbar-toggle:hover > .icon-bar{
+  background-color: #fff;
+}
+/****end ヘッダー部分のデザイン*****/
+/****ログインパネル部分のデザイン*****/
+.panel-default {
+    border-color: #13C1AA;
+}
+.panel-default > .panel-heading {
+    color: #fff;
+    background-color: #13C1AA;
+    border-color: #13C1AA;
+}
+.btn-default:hover {
+    color: #fff;
+    background-color: #13C1AA;
+    border-color: #13C1AA;
+}
+/****end ログインパネル部分のデザイン*****/
 .row-eq-height {
     display: flex;
     flex-wrap: wrap;
 }
-
-
 .pad-10p{
   padding: 10%;
 }
