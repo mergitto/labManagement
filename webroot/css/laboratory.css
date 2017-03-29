@@ -1,11 +1,16 @@
+h3{
+  color: #333;
+}
+table > thead > tr > th {
+  color: #999;
+}
 /**
 *Bootstrap上書き
 */
-
 /****ヘッダー部分のデザイン*****/
 .navbar{
   border-radius: 0;
-  background-color: #13C1AA;
+  background-color: #5cb85c;
 }
 .navbar-toggle{
   background-color: #fff;
@@ -21,41 +26,59 @@
 .nav > li > a:hover,
 .nav > li > a:active {
   color: #fff;
-  background-color: #2DDBC4;
+  background-color: #76D276;
 }
 .navbar-header > a{
   color: #fff;
 }
-
 .icon-bar{
-  background-color: #13C1AA;
+  background-color: #fff;
 }
-.navbar-toggle:hover{
-  background-color: #13C1AA;
+.navbar-toggle{
+  background-color: #5cb85c;
   border: 1px solid #fff;
 }
-.navbar-toggle:hover > .icon-bar{
-  background-color: #fff;
+.navbar-toggle:hover{
+  background-color: #76D276;
 }
 /****end ヘッダー部分のデザイン*****/
 /****ログインパネル部分のデザイン*****/
 .panel-default {
-    border-color: #13C1AA;
+  border-color: #5cb85c;
 }
 .panel-default > .panel-heading {
-    color: #fff;
-    background-color: #13C1AA;
-    border-color: #13C1AA;
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #5cb85c;
 }
-.btn-default:hover {
-    color: #fff;
-    background-color: #13C1AA;
-    border-color: #13C1AA;
+.btn-default:hover,
+.btn-default:active:focus {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #5cb85c;
 }
 /****end ログインパネル部分のデザイン*****/
+/****ユーザー画面部分のデザイン*****/
+.btn-default {
+  color: white;
+  border-color: #5cb85c;
+  background-color: #5cb85c;
+}
+.btn-default:hover {
+  background-color: #76D276;
+}
+.btn-default a{
+  color: #fff;
+}
+.btn-default a:hover{
+  text-decoration: none;
+}
+.color-wh{
+  color: #fff;
+}
 .row-eq-height {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 .pad-10p{
   padding: 10%;
@@ -71,3 +94,5 @@
   width: 100px;
   height: 100px;
 }
+/****end ユーザー画面部分のデザイン*****/
+

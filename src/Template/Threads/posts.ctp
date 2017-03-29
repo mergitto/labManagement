@@ -10,6 +10,7 @@
         <legend><?= __('新規コメント') ?></legend>
         <div class="form-group">
             <?= $this->Form->textarea('comment',['type'=>'text', 'label'=> 'コメント', 'class' => "form-control login-form"]); ?>
+            <?= $this->Form->input('url', ['type' => 'text', 'label' => '参考url','class' => 'form-control login-form','placeholder' => '参考にしたURLを貼ってみてください。なくても登録できます。']); ?>
             <?= $this->Form->input('user_id', ['type' => 
             'hidden' ,'value' => $user['id'], 'label' => 'タイトル名']); ?>
             <?= $this->Form->input('thread_id', ['type' => 
@@ -25,9 +26,9 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th><?= $this->Paginator->sort('id', __('ID')); ?></th>
-            <th colspan="2"><?= $this->Paginator->sort('name', __('ユーザー名')); ?></th>
-            <th><?= $this->Paginator->sort('comment', __('コメント')); ?></th>
+            <th><?= __('ID'); ?></th>
+            <th colspan="2"><?= __('ユーザー名'); ?></th>
+            <th><?= __('コメント'); ?></th>
             <th><?= $this->Paginator->sort('modified', __('投稿時間')); ?></th>
             <th><?= __(""); ?></th>
         </tr>
@@ -54,7 +55,12 @@
                 <?php endif ?>
             <?php endforeach ?>
             <td style="max-width: 400px;">
-                <?= nl2br($post->comment) ?>
+                <ul style="list-style: none; padding-left: 0px;">
+                    <li><?= nl2br($post->comment) ?></li>
+                    <?php if(!is_null($post->url)): ?>
+                        <li><?= $this->Html->link($post->url) ?></li>
+                    <?php endif ?>
+                </ul>
             </td>
             <td>
                 <?= date('Y-m-d',strtotime($post->modified)); ?><?= $week[$w]; ?>

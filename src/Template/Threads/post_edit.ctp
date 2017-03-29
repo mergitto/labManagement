@@ -11,7 +11,7 @@
                 ['confirm' => __('本当に削除してよろしいですか # {0}?', $post->user_id)]
             )
         ?></li>
-        <li><?= $this->Html->link(__('コメント一覧'), ['action' => 'posts']) ?></li>
+        <li><?= $this->Html->link(__('コメント一覧'), ['action' => 'posts',$post->thread_id]) ?></li>
     </ul>
 </nav>
 <div class="users form large-9 medium-8 columns content">

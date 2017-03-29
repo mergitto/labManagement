@@ -12,32 +12,34 @@
 ?>
 <?= $this->Html->css('classic.css') ?>
 <?= $this->Html->css('classic.date.css') ?>
-<div class="actions small-12 medium-4 large-3 columns">
-	<h4>Actions</h4>
-	<ul class="no-bullet">
-		<li><?= $this->Html->link(__('予定一覧', true), ['action' => 'index']);?></li>
-	</ul>
-</div>
-<div class="float-none form small-12 medium-8 large-9 columns">
-<?= $this->Form->create($event);?>
-	<fieldset>
- 		<legend><?= __('Add Event'); ?></legend>
-	<?php
-		echo $this->Form->input('title');
-		echo $this->Form->input('details');
-		echo $this->Form->input('start',['type' => 'text', 'id' => 'dp1']);
-		echo $this->Form->input('all_day',['type' => 'hidden']);
-		echo $this->Form->input('user_id',['value' => $user['id'], 'type' => 'hidden']);
-		echo $this->Form->input('status', [
-			'options' => [
-				'Scheduled' => __('予定'),
-				]
-			]
-		);
-	?>
-	</fieldset>
-<?= $this->Form->button(__('Submit', true));?>
-<?= $this->Form->end(); ?>
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
+    <ul class="side-nav">
+        <li><?= $this->Html->link(__('予定一覧'), ['action' => 'index']) ?></li>
+    </ul>
+</nav>
+<div class="threads form large-9 medium-8 columns content　container">
+    <?= $this->Form->create($event) ?>
+    <fieldset>
+        <legend><?= __('ゼミ予定追加') ?></legend>
+        <div class="form-group">
+            <?= $this->Form->input('title',['type'=>'text', 'label'=> 'タイトル', 'class' => "form-control login-form"]); ?>
+            <?= $this->Form->input('details',['type'=>'textarea', 'label'=> 'ゼミ詳細', 'class' => "form-control login-form"]); ?>
+            <div class="row">
+            	<div class="col-md-6">
+            		<?= $this->Form->input('start',['type'=>'text', 'label'=> 'ゼミ予定日','id' => 'dp1' ,'class' => "form-control login-form"]); ?>
+            	</div>
+            	<div class="col-md-6">
+            		<?= $this->Form->input('status',['options' => ['Scheduled' => __('進行中')], 'label'=> '状態', 'class' => "form-control login-form"]); ?>
+            	</div>
+            </div>
+            <?= $this->Form->input('user_id', ['type' => 'hidden' ,'value' => $user['id']]); ?>
+            <?= $this->Form->input('all_day',['type' => 'hidden']); ?>
+        </div>
+    </fieldset>
+    <div class="login-button text-right">
+    <?= $this->Form->button(__('新規登録'),['class' => 'btn btn-raised btn-success']) ?>
+    </div>
+    <?= $this->Form->end() ?>
 </div>
 <?= $this->Html->script('picker.js') ?>
 <?= $this->Html->script('picker.date.js') ?>

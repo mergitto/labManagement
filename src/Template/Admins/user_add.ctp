@@ -30,6 +30,12 @@
             <span class="input-group-btn"><button type="button" class="btn btn-info" onclick="$('input[id=lefile]').click();">Browse</button></span>
             <input type="text" id="photoCover" class="form-control" placeholder="select file...">
         </div>
+        <div class="file-comment">
+            <ul style="list-style: none; padding-left: 0px;">
+                <li><?= __('※ファイルのサイズは2000KBまでにしてください') ?></li>
+                <li><?= __('※ファイルは後から追加することもできます') ?></li>
+            </ul>
+        </div>
         <div class="form-group">
             <?= $this->Form->input('photo_dir',['type'=>'hidden']); ?>
         </div>

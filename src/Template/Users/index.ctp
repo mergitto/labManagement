@@ -2,13 +2,14 @@
 <?php $this->assign('bodyId', 'fuPageEvaluateViewList'); ?>
 <div class="fu-frame-main">
     <div class="container">
+        <h3><?= __("ユーザー") ?></h3>
         <hr class="mb0">
         <?= $this->Form->create("User") ?>
         <div class="tools">
             <div class="row">
                 <div class="col-xs-4">
                     <button type="button" class="btn btn-default">
-                        <i class="glyphicon glyphicon-plus"></i>
+                        <i class="fa fa-plus-square-o fa-lg" aria-hidden="true"></i>
                         <?= $this->Html->link(__('ユーザー新規作成'),['controller' => 'admins' ,'action' => 'user_add']) ?> 
                     </button>
                 </div>
@@ -22,10 +23,10 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th colspan="2"><?= $this->Paginator->sort('name', __('ユーザー名')); ?></th>
-                    <th><?= $this->Paginator->sort('role', __('ユーザーレベル')); ?></th>
-                    <th><?= $this->Paginator->sort('email', __('E-mail')); ?></th>
-                    <th><?= $this->Paginator->sort('phone', __('電話番号')); ?></th>
+                    <th colspan="2"><?= __('ユーザー名'); ?></th>
+                    <th><?= __('ユーザーレベル'); ?></th>
+                    <th><?= __('E-mail'); ?></th>
+                    <th><?= __('電話番号'); ?></th>
                     <th class="b_w150">　</th>
                 </tr>
                 </thead>

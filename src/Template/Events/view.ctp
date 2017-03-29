@@ -16,9 +16,7 @@ $w = date('w', strtotime($event->start));
 <div class="small-12 columns">
 	<h1 class="inline-block"><?= __('ゼミ予定詳細'); ?></h1>
 	<ul class="inline-list">
-		<li><?= $this->Html->link(__('ゼミ予定編集', true), ['action' => 'edit', $event->id]); ?> </li>
 		<li><?= $this->Html->link(__('ゼミ予定一覧', true), ['action' => 'index']); ?> </li>
-		<li><?= $this->Html->link(__('ゼミ予定追加', true), ['action' => 'add']); ?></li>
 	</ul>
 	<h2><?= $event->title; ?></h2>
 	<h3><?= __('日付: '); ?><?= date('Y-m-d', strtotime($event->start)) ?><?= $week[$w]; ?></h3>
@@ -58,6 +56,7 @@ $w = date('w', strtotime($event->start));
 	                    </td>
 	                    <td>
 	                    		<?= $this->Html->link(__($attachment->file),['controller' => 'Attachments', 'action' => 'download',$attachment->file]) ?>
+	                    		<i class="fa fa-download" aria-hidden="true"></i>
 	                    </td>
 	                    <td class="tc">
 	                        <?= $this->Html->link(__('編集'), ['controller' => 'Attachments' ,'action' =>'edit',$attachment->id]); ?>

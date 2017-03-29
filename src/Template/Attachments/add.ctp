@@ -7,6 +7,7 @@
       <legend><?= __('ファイル追加'); ?></legend>
       <?= $this->Form->input('title'); ?>
       <?= $this->Form->input('file',['type' => 'file','label' => 'ファイル']) ?>
+      <?= __('※ファイルのサイズは2000KBまでにしてください') ?>
       <div class="form-group">
             <?= $this->Form->input('file_dir',['type'=>'hidden']); ?>
       </div>
