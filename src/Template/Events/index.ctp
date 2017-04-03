@@ -35,7 +35,7 @@
                 ?>
               <tr>
                   <td>
-                      <?= $this->Html->link(__($event['title']), ['action' => 'view', $event->id]); ?>
+                      <?= $this->Html->link(__($event['title'].'('.count($event->attachments).')'), ['action' => 'view', $event->id]); ?>
                   </td>
                   <td>
                       <?= $event['status']; ?>

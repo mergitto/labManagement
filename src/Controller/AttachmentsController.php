@@ -41,7 +41,7 @@ class AttachmentsController extends AppController
     public function edit($id = null)
     {
         $attachment = $this->Attachments->get($id, [
-            'contain' => []
+            'contain' => ['Events']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $attachment = $this->Attachments->patchEntity($attachment, $this->request->data);

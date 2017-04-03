@@ -33,7 +33,7 @@ class EventsController extends FullCalendarAppController
         //カレンダー表示用
         $allEvent = $this->Events->find('all');
         //今日を含む今日以降の予定のみの検索
-        $events = $this->Events->find('all')->where(['start >=' => date('Y-m-d')]);
+        $events = $this->Events->find('all')->contain(['Attachments'])->where(['start >=' => date('Y-m-d')]);
         $this->paginate = [
             'limit'   => 8,
             'order'   => ['Events.start' => 'asc']
