@@ -45,6 +45,7 @@
                     <span class="input-group-btn"><button type="button" class="btn btn-info" onclick="$('input[id=lefile]').click();">Browse</button></span>
                     <input type="text" id="photoCover" class="form-control" placeholder="select file...">
                 </div>
+                <?= __('※画像の形式はjpg,png,gifにしてください') ?>
             </div>
             <div class="form-group col-xs-8">
                 <?= $this->Form->input('password',['type'=>'password', 'label'=> '新しいパスワード(パスワードを変えない場合も入力してください)','value' => "" , 'class' => "form-control login-form"]); ?>

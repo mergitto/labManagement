@@ -34,6 +34,7 @@
             <ul style="list-style: none; padding-left: 0px;">
                 <li><?= __('※ファイルのサイズは2000KBまでにしてください') ?></li>
                 <li><?= __('※ファイルは後から追加することもできます') ?></li>
+                <li><?= __('※画像の形式はjpg,png,gifにしてください') ?></li>
             </ul>
         </div>
         <div class="form-group">

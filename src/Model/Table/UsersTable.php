@@ -91,6 +91,22 @@ class UsersTable extends Table
 
         $validator
             ->allowEmpty('photo', ['create','update']);
+        $validator
+            ->add('photo', [
+                'uploadedFile' => [
+                    'rule' => [
+                        'uploadedFile', [
+                            'types' => [
+                                'image/jpeg',
+                                'image/png',
+                                'image/gif'
+                            ],
+                            'maxSize' => '5MB'
+                        ],
+                    ],
+                'message' => '画像の形式はjpg,png,gifのいずれかにしてください'
+                ],
+            ]);
 
         $validator
             ->requirePresence('photo_dir','false')

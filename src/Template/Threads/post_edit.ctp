@@ -21,6 +21,9 @@
         <div class="form-group">
             <?= $this->Form->textarea('comment',['type'=>'text', 'label'=> 'コメント', 'class' => "form-control login-form"]); ?>
         </div>
+        <div class="form-group">
+            <?= $this->Form->input('url',['type'=>'text', 'label'=> 'コメント', 'class' => "form-control login-form"]); ?>
+        </div>
     </fieldset>
     <div class="login-button text-right">
     <?= $this->Form->button(__('更新する'),['class' => 'btn btn-raised btn-success']) ?>
