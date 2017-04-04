@@ -263,10 +263,10 @@ return [
         /**
          * The test connection is used during the test suite.
          */
-/**
+
         'test' => [
             'className' => 'Cake\Database\Connection',
-            'driver' => 'Cake\Database\Driver\Mysql',
+            'driver' => 'Cake\Database\Driver\Postgres',
             'persistent' => false,
             'host' => 'localhost',
             //'port' => 'non_standard_port_number',
@@ -281,7 +281,6 @@ return [
             //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
             'url' => env('DATABASE_TEST_URL', null),
         ],
-**/
     ],
 
     /**
