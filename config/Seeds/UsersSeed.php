@@ -23,7 +23,7 @@ class UsersSeed extends AbstractSeed
                 'name' => 'admin',
                 'password' => '$2y$10$cIq0SA4hZvaAXY4h1UN1E.JYuXOw7qLNJWpUp4aGt8qGtSkHe9VxC', //初期パスワード:「admin」
                 'email' => 'example@gmail.com',
-                'phone' => '0000000000',
+                'phone' => '000-0000-0000',
                 'role' => 'admin',
                 'modified' => date('Y-m-d H:i:s'),
                 'created' => date('Y-m-d H:i:s')
