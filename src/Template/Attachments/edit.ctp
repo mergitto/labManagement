@@ -4,7 +4,7 @@
     </ul>
 </nav>
 <div class="threads form large-9 medium-8 columns content　container">
-  <?= $this->Form->create('Attachment', [
+  <?= $this->Form->create($attachment , [
         'type' => 'file',
       ]);
   ?>
@@ -26,7 +26,7 @@
         <?= $this->Form->input('user_id', ['type' => 'hidden' ,'value' => $user['id'] ]); ?>
     </fieldset>
     <div class="login-button text-right">
-    <?= $this->Form->button(__('新規登録'),['class' => 'btn btn-raised btn-success']) ?>
+    <?= $this->Form->button(__('更新'),['class' => 'btn btn-raised btn-success']) ?>
     </div>
     <?= $this->Form->end() ?>
 </div>

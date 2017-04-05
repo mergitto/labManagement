@@ -57,7 +57,7 @@
             <td style="max-width: 400px;">
                 <ul style="list-style: none; padding-left: 0px;">
                     <li><?= nl2br($post->comment) ?></li>
-                    <?php if(!is_null($post->url)): ?>
+                    <?php if($post->url !== ''): ?>
                         <li><?= $this->Html->link($post->url) ?></li>
                     <?php endif ?>
                 </ul>

@@ -35,29 +35,35 @@ $w = date('w', strtotime($event->start));
 	                <tr>
 	                		<th colspan="2"><?= __('ユーザー名'); ?></th>
 	                    <th><?= $this->Paginator->sort('title', __('ゼミ資料タイトル')); ?></th>
-	                    <th><?= $this->Paginator->sort('file', __('資料名')); ?></th>
+                        <th><?= $this->Paginator->sort('file', __('資料名')); ?></th>
+                        <th><?= $this->Paginator->sort('url', __('URL')); ?></th>
 	                    <th class="b_w150">　</th>
 	                </tr>
 	                </thead>
 	                <?php foreach ($attachments as $attachment): ?>
 	                <tr>
-		                	<td class="img-50">
+		                <td class="img-50">
 	                    <?php if($attachment->user->photo): ?>
 	                            <?= $this->Html->image('/files/Users/photo/'.$attachment->user->photo,['alt' => '写真を設定してください','class' => 'img-50']) ?>
 	                    <?php else: ?>
 	                            <?= $this->Html->image('noimage.png',['class' => 'img-50']) ?>
 	                    <?php endif ?>
 	                    </td>
-	                		<td>
-	                			  <?= $attachment->user->name ?>
-	                		</td>
+                        <td>
+                            <?= $attachment->user->name ?>
+                        </td>
 	                    <td>
 	                        <?= $attachment->title; ?>
-	                    </td>
+                        </td>
 	                    <td>
-	                    		<?= $this->Html->link(__($attachment->file),['controller' => 'Attachments', 'action' => 'download',$attachment->file]) ?>
-	                    		<i class="fa fa-download" aria-hidden="true"></i>
-	                    </td>
+                            <?= $this->Html->link(__($attachment->file),['controller' => 'Attachments', 'action' => 'download',$attachment->file]) ?>
+                            <i class="fa fa-download" aria-hidden="true"></i>
+                        </td>
+                        <td>
+                        <?php if($attachment->url !== ''): ?>
+                            <?= $this->Html->link($attachment->url) ?>
+                        <?php endif ?>
+                        </td>
 	                    <td class="tc">
 	                        <?= $this->Html->link(__('編集'), ['controller' => 'Attachments' ,'action' =>'edit',$attachment->id]); ?>
 	                        <?= $this->Form->postLink(__('削除'), ['controller' => 'Attachments' ,'action' => 'delete', $attachment->id ], ['confirm' => __('本当に削除してよろしいですか　# {0}?', $attachment->file)]) ?>
