@@ -191,6 +191,22 @@ return [
         ],
     ],
 
+/*
+    'EmailTransport' => [
+     ┆   'default' => [
+     ┆   ┆   'className' => 'Smtp',
+     ┆   ┆   // The following keys are used in SMTP transports
+     ┆   ┆   'host' => 'ssl://smtp.gmail.com',
+     ┆   ┆   'port' => 465,
+     ┆   ┆   'timeout' => 30,
+     ┆   ┆   'username' => 'xu.lab.fitc6@gmail.com',
+     ┆   ┆   'password' => 'okzmiso350',
+     ┆   ┆   'client' => null,
+     ┆   ┆   'tls' => null,
+     ┆   ┆   'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
+     ┆   ],
+     ],
+ */
     /**
      * Email delivery profiles
      *
