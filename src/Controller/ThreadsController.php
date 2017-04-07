@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\Mailer\Email;
 /**
  * Threads Controller
  *
@@ -45,7 +45,6 @@ class ThreadsController extends AppController
             $thread = $this->Threads->patchEntity($thread, $this->request->data);
             if ($this->Threads->save($thread)) {
                 $this->Flash->success(__('タイトルを新規作成しました。'));
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('登録できませんでした。'));
@@ -60,6 +59,7 @@ class ThreadsController extends AppController
      */
     public function posts($id = null)
     {
+        $user = $this->Auth->user();
         $thread = $this->Threads->get($id);
         $posts = $this->paginate($this->Threads->Posts->find()->where(['thread_id' => $id])->order(['Posts.modified' => 'DESC']));
         $users = $this->paginate($this->Threads->Users->find());
@@ -68,7 +68,19 @@ class ThreadsController extends AppController
             $post = $this->Threads->Posts->patchEntity($post, $this->request->data);
             if ($this->Threads->Posts->save($post)) {
                 $this->Flash->success(__('コメントが新しく登録されました。'));
-
+/* 管理者がコメントしたらゼミ管理システムに登録している人にメールを送るようにしている
+                if($user['role'] === 'admin'){
+                    $email = new Email('default');
+                    foreach($users as $user){
+                        $email
+                            ->template('default')
+                            ->from(['xu.lab.fitc6@gmail.com' => 'ゼミ管理システム'])
+                            ->to($user['email'])
+                            ->subject('ゼミ管理システムにコメントされました')
+                            ->send($post->comment);
+                    }
+                }
+*/
                 return $this->redirect(['action' => 'posts', $thread->id]);
             }
             $this->Flash->error(__('コメントが正しく登録されませんでした。'));
@@ -92,12 +104,10 @@ class ThreadsController extends AppController
             $thread = $this->Threads->patchEntity($thread, $this->request->data);
             if ($this->Threads->save($thread)) {
                 $this->Flash->success(__('タイトル情報の変更を行いました'));
-
                 return $this->redirect(['action' => 'index', $thread->id]);
             }
             $this->Flash->error(__('情報の変更を行えませんでした。'));
         }
-        
         $this->set(compact('thread'));
         $this->set('_serialize', ['thread']);
     }
@@ -118,7 +128,6 @@ class ThreadsController extends AppController
             }
             $this->Flash->error(__('情報の変更を行えませんでした。'));
         }
-        
         $this->set(compact('thread','post'));
         $this->set('_serialize', ['thread']);
     }
@@ -139,7 +148,6 @@ class ThreadsController extends AppController
         } else {
             $this->Flash->error(__('削除できませんでした。'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
 
@@ -184,7 +192,6 @@ class ThreadsController extends AppController
                 return true;
             }
         }
-        
         $this->Flash->error(__('同一ユーザーではありません'));
         return false;
     }
