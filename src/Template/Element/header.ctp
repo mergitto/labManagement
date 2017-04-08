@@ -9,7 +9,7 @@
       </button>
       <?= $this->Html->link(__("ゼミ管理システム"), ['controller' => 'Users', 'action' => 'index'], ['class' => 'navbar-brand'] ) ?>
     </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li>
           <?= $this->Html->link(__('ゼミ予定一覧'), ['controller' => 'Events', 'action' => 'index']) ?>

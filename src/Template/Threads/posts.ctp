@@ -11,9 +11,9 @@
         <div class="form-group">
             <?= $this->Form->textarea('comment',['type'=>'text', 'label'=> 'コメント', 'class' => "form-control login-form"]); ?>
             <?= $this->Form->input('url', ['type' => 'text', 'label' => '参考url','class' => 'form-control login-form','placeholder' => '参考にしたURLを貼ってみてください。なくても登録できます。']); ?>
-            <?= $this->Form->input('user_id', ['type' => 
+            <?= $this->Form->input('user_id', ['type' =>
             'hidden' ,'value' => $user['id'], 'label' => 'タイトル名']); ?>
-            <?= $this->Form->input('thread_id', ['type' => 
+            <?= $this->Form->input('thread_id', ['type' =>
             'hidden' ,'value' => $thread->id, 'label' => 'タイトル名']); ?>
         </div>
     </fieldset>
@@ -26,7 +26,6 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th><?= __('ID'); ?></th>
             <th colspan="2"><?= __('ユーザー名'); ?></th>
             <th><?= __('コメント'); ?></th>
             <th><?= $this->Paginator->sort('modified', __('投稿時間')); ?></th>
@@ -39,9 +38,6 @@
         $w = date('w', strtotime($post['modified']));
         ?>
         <tr>
-            <td>
-                <?= $post->id; ?>
-            </td>
             <?php foreach($users as $targetUser): ?>
                 <?php if($targetUser->id === $post->user_id): ?>
                     <td class="img-50">
@@ -70,7 +66,7 @@
                     <?= $this->Html->link(__('修正'), ['action' =>'postEdit',$post->id]); ?>
                     <?= $this->Form->postLink(__('削除'), ['action' => 'postDelete', $post->id], ['confirm' => __('本当に削除してよろしいですか　# {0}?', $post->id)]) ?>
                 <?php endif ?>
-              
+
             </td>
         </tr>
         <?php endforeach ?>

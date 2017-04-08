@@ -37,12 +37,11 @@
         </div>
         <div class="col-md-2"></div>
     </div>
-    
+
     <div class="fu-list">
         <table class="table table-hover">
             <thead>
             <tr>
-                <th><?= $this->Paginator->sort('id', __('ID')); ?></th>
                 <th><?= $this->Paginator->sort('user_id', __('管理ユーザー')); ?></th>
                 <th><?= $this->Paginator->sort('title', __('タイトル')); ?></th>
                 <th><?= $this->Paginator->sort('modified', __('更新日')); ?></th>
@@ -55,9 +54,6 @@
             $w = date('w', strtotime($thread['modified']));
             ?>
             <tr>
-                <td>
-                    <?= $thread['id']; ?>
-                </td>
                 <td>
                     <?= $thread->user['name']; ?>
                 </td>
@@ -93,4 +89,3 @@
         </div>
     </div>
 </div>
-
