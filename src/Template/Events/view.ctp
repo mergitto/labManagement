@@ -14,15 +14,16 @@ $w = date('w', strtotime($event->start));
 ?>
 
 <div class="small-12 columns">
-	<h1 class="inline-block"><?= __('ゼミ予定詳細'); ?></h1>
 	<ul class="inline-list">
 		<li><?= $this->Html->link(__('ゼミ予定一覧', true), ['action' => 'index']); ?> </li>
 	</ul>
-	<h2><?= $event->title; ?></h2>
+	<blockquote class="blockquote text-left">
+		<h3><?= $event->title; ?></h3>
+	</blockquote>
 	<h3><?= __('日付: '); ?><?= date('Y-m-d', strtotime($event->start)) ?><?= $week[$w]; ?></h3>
 	<p>
 		<span><?= __('詳細: '); ?></span>
-		<?= $event->details; ?>
+		<?= nl2br($event->details); ?>
 	</p>
 	<?= $this->Html->link(__('ファイルを登録する'),['controller' => 'Attachments', 'action' => 'add', $event->id]) ?>
 	<div class="fu-frame-main">
