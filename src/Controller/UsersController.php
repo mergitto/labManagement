@@ -3,7 +3,6 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Auth\DefaultPasswordHasher;
-
 /**
  * Users Controller
  *
@@ -104,7 +103,7 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);    // データをセットしてログイン
-                return $this->redirect(['controller' => 'users','action' => 'index']);
+                return $this->redirect(['controller' => 'Events','action' => 'index']);
             } else {
                 $this->Flash->error(
                     __("ログインできませんでした。"),
