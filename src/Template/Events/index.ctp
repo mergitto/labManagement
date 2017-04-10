@@ -33,15 +33,26 @@
                   <td>
                       <?= $this->Html->link(__($event['title'].'('.count($event->attachments).')'), ['action' => 'view', $event->id]); ?>
                   </td>
-                  <td>
+                  <td rowspan="2" style="vertical-align:middle;">
                       <?= date(__('Y-m-d'),strtotime($event->start)) ?><?=$week[$w]?>
                   </td>
                   <td class="tc">
                       <?php if($user['role'] === 'admin'): ?>
                         <?= $this->Html->link(__('編集'), ['action' =>'edit',$event['id']]); ?>
-                        <?= $this->Form->postLink(__('削除'), ['action' =>'delete',$event->id], ['confirm' => __('本当に削除してもいいですか # {0}?' , $event['title'])]); ?>
                       <?php endif ?>
                   </td>
+              </tr>
+              <tr>
+                 <td style="border-top:none; max-width:150px;">
+                   <?php foreach ($event->users as $eventUser): ?>
+                       <?= $eventUser['name']; ?>
+                   <?php endforeach ?>
+                 </td>
+                 <td>
+                   <?php if($user['role'] === 'admin'): ?>
+                   <?= $this->Form->postLink(__('削除'), ['action' =>'delete',$event->id], ['confirm' => __('本当に削除してもいいですか # {0}?' , $event['title'])]); ?>
+                 <?php endif ?>
+               </td>
               </tr>
               <?php endforeach ?>
           </table>

@@ -12,7 +12,6 @@
 // 曜日を日本語で
 $w = date('w', strtotime($event->start));
 ?>
-
 <div class="small-12 columns">
 	<ul class="inline-list">
 		<li><?= $this->Html->link(__('ゼミ予定一覧', true), ['action' => 'index']); ?> </li>
@@ -21,10 +20,16 @@ $w = date('w', strtotime($event->start));
 		<h3><?= $event->title; ?></h3>
 	</blockquote>
 	<h3><?= __('日付: '); ?><?= date('Y-m-d', strtotime($event->start)) ?><?= $week[$w]; ?></h3>
-	<p>
+	<p class="text-muted">
 		<span><?= __('詳細: '); ?></span>
 		<?= nl2br($event->details); ?>
 	</p>
+	<h3><?=  __("ゼミ担当") ?></h3>
+	<h4 class="text-muted">
+	<?php foreach($event->users as $eventUsers): ?>
+		<?= $eventUsers->name.__('/') ?>
+	<?php endforeach ?>
+	</h4>
 	<?= $this->Html->link(__('ファイルを登録する'),['controller' => 'Attachments', 'action' => 'add', $event->id]) ?>
 	<div class="fu-frame-main">
 	    <div class="container">
@@ -50,21 +55,21 @@ $w = date('w', strtotime($event->start));
 	                            <?= $this->Html->image('noimage.png',['class' => 'img-50']) ?>
 	                    <?php endif ?>
 	                    </td>
-                        <td>
-                            <?= $attachment->user->name ?>
-                        </td>
-	                    <td>
+                      <td>
+                          <?= $attachment->user->name ?>
+                      </td>
+	                    <td class="text-muted">
 	                        <?= $attachment->title; ?>
-                        </td>
+                      </td>
 	                    <td>
-                            <?= $this->Html->link(__($attachment->file),['controller' => 'Attachments', 'action' => 'download',$attachment->file]) ?>
-                            <i class="fa fa-download" aria-hidden="true"></i>
-                        </td>
-                        <td>
-                        <?php if($attachment->url !== ''): ?>
-                            <?= $this->Html->link($attachment->url) ?>
-                        <?php endif ?>
-                        </td>
+                          <?= $this->Html->link(__($attachment->file),['controller' => 'Attachments', 'action' => 'download',$attachment->file]) ?>
+                          <i class="fa fa-download" aria-hidden="true"></i>
+                      </td>
+                      <td>
+                      <?php if($attachment->url !== ''): ?>
+                          <?= $this->Html->link($attachment->url) ?>
+                      <?php endif ?>
+                      </td>
 	                    <td class="tc">
 	                        <?= $this->Html->link(__('編集'), ['controller' => 'Attachments' ,'action' =>'edit',$attachment->id]); ?>
 	                        <?= $this->Form->postLink(__('削除'), ['controller' => 'Attachments' ,'action' => 'delete', $attachment->id ], ['confirm' => __('本当に削除してよろしいですか　# {0}?', $attachment->file)]) ?>

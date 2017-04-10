@@ -15,6 +15,7 @@ namespace App\Controller;
 use App\Controller\FullCalendarAppController;
 use Cake\Routing\Router;
 use Cake\Core\Configure;
+use Cake\ORM\TableRegistry;
 /**
  * Events Controller
  *
@@ -33,7 +34,7 @@ class EventsController extends FullCalendarAppController
         //カレンダー表示用
         $allEvent = $this->Events->find('all');
         //今日を含む今日以降の予定のみの検索
-        $events = $this->Events->find('all')->contain(['Attachments'])->where(['start >=' => date('Y-m-d')]);
+        $events = $this->Events->find('all')->contain(['Attachments','Users'])->where(['start >=' => date('Y-m-d')]);
         $this->paginate = [
             'limit'   => 8,
             'order'   => ['Events.start' => 'asc']
@@ -71,7 +72,9 @@ class EventsController extends FullCalendarAppController
      */
     public function view($id = null)
     {
-        $event = $this->Events->get($id);
+        $event = $this->Events->get($id,[
+          'contain' => ['Users']
+        ]);
         $attachments = $this->paginate($this->Events->Attachments->find()->contain(['Users'])->where(['event_id' => $id]));
         $this->set('event', $event);
         $this->set('attachments', $attachments);
@@ -86,7 +89,6 @@ class EventsController extends FullCalendarAppController
     public function add()
     {
         $event = $this->Events->newEntity();
-        $users = $this->Events->Users->find('list');
         if ($this->request->is('post')) {
             $this->request->data['start'] = date('Y-m-d H:i:s' ,strtotime($this->request->data['start']));
             $event = $this->Events->patchEntity($event, $this->request->data);
@@ -97,6 +99,7 @@ class EventsController extends FullCalendarAppController
                 $this->Flash->error(__('追加できませんでした。'));
             }
         }
+        $users = $this->Events->Users->find('list');
         $this->set(compact('event','users'));
         $this->set('_serialize', ['event']);
     }
@@ -121,7 +124,8 @@ class EventsController extends FullCalendarAppController
                 $this->Flash->error(__('修正できませんでした。'));
             }
         }
-        $this->set(compact('event'));
+        $users = $this->Events->Users->find('list');
+        $this->set(compact('event','users'));
         $this->set('_serialize', ['event']);
     }
 
