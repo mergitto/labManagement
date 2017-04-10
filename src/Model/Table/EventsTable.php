@@ -37,8 +37,10 @@ class EventsTable extends Table
         $this->primaryKey('id');
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id'
+        $this->belongsToMany('Users', [
+            'foreignKey' => 'event_id',
+            'targetForeignKey' => 'user_id',
+            'joinTable' => 'events_users'
         ]);
 
         $this->hasMany('Attachments');

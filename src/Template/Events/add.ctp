@@ -28,10 +28,15 @@
             	<div class="col-md-6">
             		<?= $this->Form->input('start',['type'=>'text', 'label'=> 'ゼミ予定日','id' => 'dp1' ,'class' => "form-control login-form"]); ?>
             	</div>
-            	<div class="col-md-6">
-            		<?= $this->Form->input('status',['options' => ['Scheduled' => __('進行中')], 'label'=> '状態', 'class' => "form-control login-form"]); ?>
-            	</div>
             </div>
+            <?= $this->Form->input('users._ids',[
+              'label' => __('ゼミ担当割り当て'),
+              'option' => $users,
+              'multiple' => 'checkbox',
+              'templates' => [
+                'nestingLabel' => "<div class='col-md-4'>{{hidden}}<label{{attrs}} >{{input}}{{text}}</label></div>",
+              ]
+            ]) ?>
             <?= $this->Form->input('user_id', ['type' => 'hidden' ,'value' => $user['id']]); ?>
             <?= $this->Form->input('all_day',['type' => 'hidden']); ?>
         </div>
