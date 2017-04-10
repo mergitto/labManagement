@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * Admins Controller
@@ -10,7 +11,11 @@ use App\Controller\AppController;
  */
 class AdminsController extends AppController
 {
-
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Paginator');
+    }
     /**
      * Index method
      *
@@ -25,85 +30,40 @@ class AdminsController extends AppController
     }
 
     /**
-     * View method
-     *
-     * @param string|null $id Admin id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * User add method
+     * 管理者のみがユーザーを追加できるようにする
+     * 
      */
-    public function view($id = null)
+    public function userAdd()
     {
-        $admin = $this->Admins->get($id, [
-            'contain' => []
-        ]);
-
-        $this->set('admin', $admin);
-        $this->set('_serialize', ['admin']);
-    }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $admin = $this->Admins->newEntity();
+        $user = $this->Admins->Users->newEntity();
         if ($this->request->is('post')) {
-            $admin = $this->Admins->patchEntity($admin, $this->request->data);
-            if ($this->Admins->save($admin)) {
-                $this->Flash->success(__('The admin has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+            $user = $this->Admins->Users->patchEntity($user, $this->request->data);
+            
+            if ($this->Admins->Users->save($user)) {
+                $this->Flash->success(__('新規ユーザーが登録されました。'));
+                return $this->redirect(['controller' => 'users' ,'action' => 'index']);
             }
-            $this->Flash->error(__('The admin could not be saved. Please, try again.'));
+            $this->Flash->error(__('新規ユーザー登録できませんでした。もう一度お試しください。'));
         }
-        $this->set(compact('admin'));
-        $this->set('_serialize', ['admin']);
+        $admins = $this->Admins->find('list');
+        $this->set(compact('user', 'admins'));
+        $this->set('_serialize', ['user']);
     }
 
     /**
-     * Edit method
-     *
-     * @param string|null $id Admin id.
-     * @return \Cake\Network\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * is Authorized method
+     * 管理者(role=admin)のみがアクセスできるようにする
+     * 
      */
-    public function edit($id = null)
+    public function isAuthorized($user)
     {
-        $admin = $this->Admins->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $admin = $this->Admins->patchEntity($admin, $this->request->data);
-            if ($this->Admins->save($admin)) {
-                $this->Flash->success(__('The admin has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The admin could not be saved. Please, try again.'));
+        // 管理者のみのアクセスを許す
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
         }
-        $this->set(compact('admin'));
-        $this->set('_serialize', ['admin']);
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Admin id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $admin = $this->Admins->get($id);
-        if ($this->Admins->delete($admin)) {
-            $this->Flash->success(__('The admin has been deleted.'));
-        } else {
-            $this->Flash->error(__('The admin could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
+        $this->Flash->error(__('管理者のみの機能です'));
+        // 管理者以外はアクセス拒否
+        return false;
     }
 }

@@ -1,53 +1,74 @@
-<?php
-/**
-  * @var \App\View\AppView $this
-  */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Admins'), ['controller' => 'Admins', 'action' => 'index']) ?></li>
-    </ul>
-</nav>
+<?php $this->assign('menu_title', __('管理者一覧')); ?>
+<?php $this->assign('bodyId', 'fuPageEvaluateViewList'); ?>
+<div class="fu-frame-main">
+    <div class="container">
+        <h3><?= __("ユーザー情報") ?></h3>
+        <hr class="mb0">
+        <?= $this->Form->create("User") ?>
+        <div class="tools">
+            <div class="row">
+                <div class="col-xs-4">
+                    <button type="button" class="btn btn-default">
+                        <i class="fa fa-plus-square-o fa-lg" aria-hidden="true"></i>
+                        <?= $this->Html->link(__('ユーザー新規作成'),['controller' => 'admins' ,'action' => 'user_add']) ?>
+                    </button>
+                </div>
+                <div class="col-xs-8">
+                </div>
+            </div>
+        </div>
+        <?= $this->Form->end(); ?>
+
+        <div class="fu-list">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th colspan="2"><?= __('ユーザー名'); ?></th>
+                    <th><?= __('E-mail'); ?></th>
+                    <th><?= __('電話番号'); ?></th>
+                    <th class="b_w150">　</th>
+                </tr>
+                </thead>
+                <?php foreach ($users as $user): ?>
+                <tr>
+                    <td class="img-50">
+                    <?php if($user['photo']): ?>
+                        <?= $this->Html->image('/files/Users/photo/'.$user['photo'],['alt' => '写真を設定してください','class' => 'img-50']) ?>
+                    <?php else: ?>
+                        <?= $this->Html->image('noimage.png',['class' => 'img-50']) ?>
+                    <?php endif?>
+                    </td>
+                    <td>
+                        <?= $user['name']; ?>
+                    </td>
+                    <td>
+                        <?= $user['email']; ?>
+                    </td>
+                    <td>
+                        <?= $user['phone']; ?>
+                    </td>
+                    <td class="tc">
+                        <?php if($loginUser['id'] === $user->id): ?>
+                        <?= $this->Html->link(__('編集'), ['action' =>'edit',$user['id']]); ?>
+                        <?= $this->Form->postLink(__('削除'), ['action' => 'delete', $user->id], ['confirm' => __('本当に削除してよろしいですか　# {0}?', $user->name)]) ?>
+                        <?php endif ?>
+                    </td>
+                </tr>
+                <?php endforeach ?>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- / .fu-frame-main -->
 <div class="users index large-9 medium-8 columns content">
-    <h3><?= __('Users') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('admins_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('deleted') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($users as $user): ?>
-            <tr>
-                <td><?= $this->Number->format($user->id) ?></td>
-                <td><?= $user->has('admin') ? $this->Html->link($user->admin->name, ['controller' => 'Admins', 'action' => 'view', $user->admin->id]) : '' ?></td>
-                <td><?= h($user->deleted) ?></td>
-                <td><?= h($user->created) ?></td>
-                <td><?= h($user->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->first('<< ' . __('初め')) ?>
+            <?= $this->Paginator->prev('< ' . __('前')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->next(__('次') . ' >') ?>
+            <?= $this->Paginator->last(__('最後') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+        <p><?= $this->Paginator->counter(['format' => __('{{page}}/{{pages}} ページ目,　{{count}}　人中 {{current}} 人表示')]) ?></p>
     </div>
 </div>

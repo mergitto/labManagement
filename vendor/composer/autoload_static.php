@@ -40,6 +40,7 @@ class ComposerStaticInit43966d24484a71a819babc9fc317a814
             'Seld\\PharUtils\\' => 15,
             'Seld\\JsonLint\\' => 14,
             'Seld\\CliPrompt\\' => 15,
+            'Search\\' => 7,
         ),
         'P' => 
         array (
@@ -48,14 +49,21 @@ class ComposerStaticInit43966d24484a71a819babc9fc317a814
             'Psr\\Http\\Message\\' => 17,
             'PhpParser\\' => 10,
             'Phinx\\' => 6,
+            'Partial\\' => 8,
         ),
         'M' => 
         array (
             'Migrations\\' => 11,
         ),
+        'L' => 
+        array (
+            'League\\Flysystem\\' => 17,
+        ),
         'J' => 
         array (
             'JsonSchema\\' => 11,
+            'Josegonzalez\\Upload\\Test\\Fixture\\' => 33,
+            'Josegonzalez\\Upload\\' => 20,
         ),
         'D' => 
         array (
@@ -69,12 +77,14 @@ class ComposerStaticInit43966d24484a71a819babc9fc317a814
             'Composer\\CaBundle\\' => 18,
             'Composer\\' => 9,
             'Cake\\Test\\' => 10,
+            'Cake\\Localized\\' => 15,
             'Cake\\Composer\\' => 14,
             'Cake\\Chronos\\' => 13,
             'Cake\\' => 5,
         ),
         'B' => 
         array (
+            'BootstrapUI\\' => 12,
             'Bake\\' => 5,
         ),
         'A' => 
@@ -82,6 +92,7 @@ class ComposerStaticInit43966d24484a71a819babc9fc317a814
             'Aura\\Intl\\_Config\\' => 18,
             'App\\Test\\' => 9,
             'App\\' => 4,
+            'Altair\\' => 7,
         ),
     );
 
@@ -142,6 +153,10 @@ class ComposerStaticInit43966d24484a71a819babc9fc317a814
         array (
             0 => __DIR__ . '/..' . '/seld/cli-prompt/src',
         ),
+        'Search\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/friendsofcake/search/src',
+        ),
         'Psy\\' => 
         array (
             0 => __DIR__ . '/..' . '/psy/psysh/src/Psy',
@@ -162,13 +177,29 @@ class ComposerStaticInit43966d24484a71a819babc9fc317a814
         array (
             0 => __DIR__ . '/..' . '/robmorgan/phinx/src/Phinx',
         ),
+        'Partial\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kozo/partial/src',
+        ),
         'Migrations\\' => 
         array (
             0 => __DIR__ . '/..' . '/cakephp/migrations/src',
         ),
+        'League\\Flysystem\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/flysystem/src',
+        ),
         'JsonSchema\\' => 
         array (
             0 => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema',
+        ),
+        'Josegonzalez\\Upload\\Test\\Fixture\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/josegonzalez/cakephp-upload/tests/Fixture',
+        ),
+        'Josegonzalez\\Upload\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/josegonzalez/cakephp-upload/src',
         ),
         'DebugKit\\Test\\Fixture\\' => 
         array (
@@ -198,6 +229,10 @@ class ComposerStaticInit43966d24484a71a819babc9fc317a814
         array (
             0 => __DIR__ . '/..' . '/cakephp/cakephp/tests',
         ),
+        'Cake\\Localized\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cakephp/localized/src',
+        ),
         'Cake\\Composer\\' => 
         array (
             0 => __DIR__ . '/..' . '/cakephp/plugin-installer/src',
@@ -209,6 +244,10 @@ class ComposerStaticInit43966d24484a71a819babc9fc317a814
         'Cake\\' => 
         array (
             0 => __DIR__ . '/..' . '/cakephp/cakephp/src',
+        ),
+        'BootstrapUI\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/friendsofcake/bootstrap-ui/src',
         ),
         'Bake\\' => 
         array (
@@ -225,6 +264,10 @@ class ComposerStaticInit43966d24484a71a819babc9fc317a814
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'Altair\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tutida/altair/src',
         ),
     );
 

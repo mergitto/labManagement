@@ -21,7 +21,6 @@ use Cake\Validation\Validator;
  */
 class AdminsTable extends Table
 {
-
     /**
      * Initialize method
      *
@@ -35,6 +34,8 @@ class AdminsTable extends Table
         $this->table('admins');
         $this->displayField('name');
         $this->primaryKey('id');
+
+        $this->hasMany('Users');
 
         $this->addBehavior('Timestamp');
     }

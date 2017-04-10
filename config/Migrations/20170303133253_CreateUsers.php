@@ -21,10 +21,25 @@ class CreateUsers extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
-        $table->addColumn('admins_id', 'integer', [
+        $table->addColumn('email', 'text', [
             'default' => null,
-            'limit' => 11,
+            'null' => true,
+        ]);
+        $table->addColumn('phone', 'text', [
+            'default' => null,
+            'null' => true,
+        ]);
+        $table->addColumn('role', 'text', [
+            'default' => null,
             'null' => false,
+        ]);
+        $table->addColumn('photo', 'text', [
+            'default' => null,
+            'null' => true,
+        ]);
+        $table->addColumn('photo_dir', 'text', [
+            'default' => null,
+            'null' => true,
         ]);
         $table->addColumn('deleted', 'timestamp', [
             'default' => null,

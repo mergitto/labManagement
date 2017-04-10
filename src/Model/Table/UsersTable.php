@@ -5,6 +5,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Localized\Validation\FrValidation;
 
 /**
  * Users Model
@@ -40,6 +41,16 @@ class UsersTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+            'photo' => [
+                'fields' => [
+                    'dir' => 'photo_dir', 
+                    'size' => 'photo_size',
+                    'type' => 'photo_type',
+                ],
+            ],
+        ]);
+
         $this->belongsTo('Admins', [
             'foreignKey' => 'admins_id',
             'joinType' => 'INNER'
@@ -60,11 +71,61 @@ class UsersTable extends Table
 
         $validator
             ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->notEmpty('name', 'ログインIDが入力されていません');
+        $validator
+            ->add('name', 'custom', [
+                'rule' => function ($value, $context){
+                    return (bool) preg_match('/^[a-zA-Z0-9]+$/',$value);
+                },
+                'message' => '半角英数字で入力してください'
+            ]);
+
+        $validator
+            ->requirePresence('email')
+            ->allowEmpty('email', 'create');
+        $validator
+            ->add('email', 'valudFormat',[
+                'rule' => 'email',
+                'message' => 'メールの形式で登録してください'
+            ]);
+
+        $validator
+            ->allowEmpty('photo', ['create','update']);
+        $validator
+            ->add('photo', [
+                'uploadedFile' => [
+                    'rule' => [
+                        'uploadedFile', [
+                            'types' => [
+                                'image/jpeg',
+                                'image/png',
+                                'image/gif'
+                            ],
+                            'maxSize' => '5MB'
+                        ],
+                    ],
+                'message' => '画像の形式はjpg,png,gifのいずれかにしてください'
+                ],
+            ]);
+
+        $validator
+            ->requirePresence('photo_dir','false')
+            ->allowEmpty('photo_dir', 'false');
+
+        $validator
+            ->requirePresence('phone')
+            ->allowEmpty('phone', 'create');
+        $validator
+            ->add('phone', 'custom', [
+                'rule' => function ($value, $context){
+                    return (bool) preg_match('/^[0-9]{2,4}-[0-9]{2,4}-[0-9]{3,4}$/',$value);
+                },
+                'message' => 'ハイフン付きで入力してください'
+            ]);
 
         $validator
             ->requirePresence('password', 'create')
-            ->notEmpty('password');
+            ->notEmpty('password', 'パスワードが入力されていません');
 
         $validator
             ->dateTime('deleted')

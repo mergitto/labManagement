@@ -81,6 +81,8 @@ try {
     exit($e->getMessage() . "\n");
 }
 
+//定数ファイルを読み込む
+Configure::load("const",'default');
 /*
  * Load an environment local configuration file.
  * You can use a file like app_local.php to provide local overrides to your
@@ -101,7 +103,7 @@ if (Configure::read('debug')) {
  * Set server timezone to UTC. You can change it to another timezone of your
  * choice but using UTC makes time calculations / conversions easier.
  */
-date_default_timezone_set('UTC');
+date_default_timezone_set('Asia/Tokyo');
 
 /*
  * Configure the mbstring extension to use the correct encoding.
@@ -222,3 +224,9 @@ Type::build('timestamp')
 if (Configure::read('debug')) {
     Plugin::load('DebugKit', ['bootstrap' => true]);
 }
+//日本語への翻訳
+Configure::write('Config.language', 'ja');
+
+Plugin::load('Cake/Localized');
+Plugin::load('Search');
+Plugin::load('Josegonzalez/Upload');

@@ -16,6 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\Core\Configure;
 
 /**
  * Application Controller
@@ -27,7 +28,6 @@ use Cake\Event\Event;
  */
 class AppController extends Controller
 {
-
     /**
      * Initialization hook method.
      *
@@ -43,13 +43,25 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-
-        /*
-         * Enable the following components for recommended CakePHP security settings.
-         * see http://book.cakephp.org/3.0/en/controllers/components/security.html
-         */
-        //$this->loadComponent('Security');
-        //$this->loadComponent('Csrf');
+        //h()を書かなくてすむコンポーネント
+        $this->loadComponent('Altair.Altair');
+        //Authコンポーネントの設定
+        $this->loadComponent('Auth', [
+            'authorize' => 'Controller', //isAuthorizeめそっどを通るようにする
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'name',
+                        'password' => 'password'
+                    ],
+                    'userModel' => 'Users',
+                ]
+            ],
+            'loginAction' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ],
+        ]);
     }
 
     /**
@@ -66,4 +78,16 @@ class AppController extends Controller
             $this->set('_serialize', true);
         }
     }
+
+    public function beforeFilter(Event $event){
+      parent::beforeFilter($event);
+      $user = $this->Auth->user();
+      $week = Configure::read("week");
+      $this->set(compact('user','week'));
+    }
+
+    public function logout(){
+        return $this->redirect($this->Auth->logout());
+    }
+
 }
