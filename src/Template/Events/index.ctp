@@ -1,6 +1,3 @@
-<style>
-</style>
-
 <div class="fu-frame-main">
   <div class="container">
     <h3><?= __('ゼミ予定日');?></h3>
@@ -23,7 +20,6 @@
               <thead>
               <tr>
                   <th><?= __('ゼミタイトル'); ?></th>
-                  <th><?= __('状況'); ?></th>
                   <th><?= __('ゼミ予定日'); ?></th>
                   <th></th>
               </tr>
@@ -36,9 +32,6 @@
               <tr>
                   <td>
                       <?= $this->Html->link(__($event['title'].'('.count($event->attachments).')'), ['action' => 'view', $event->id]); ?>
-                  </td>
-                  <td>
-                      <?= $event['status']; ?>
                   </td>
                   <td>
                       <?= date(__('Y-m-d'),strtotime($event->start)) ?><?=$week[$w]?>

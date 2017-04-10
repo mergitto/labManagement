@@ -9,6 +9,8 @@
  * Licensed under MIT
  * http://www.opensource.org/licenses/mit-license.php
  */
+ // 曜日を日本語で
+ $w = date('w', strtotime($event->start));
 ?>
 <?= $this->Html->css('classic.css') ?>
 <?= $this->Html->css('classic.date.css') ?>
@@ -26,19 +28,16 @@
             <?= $this->Form->input('details',['type'=>'textarea', 'label'=> 'ゼミ詳細', 'class' => "form-control login-form"]); ?>
             <div class="row">
             	<div class="col-md-6">
-            		<?= $this->Form->input('start',['type'=>'text', 'label'=> 'ゼミ予定日','id' => 'dp1' ,'class' => "form-control login-form"]); ?>
-            	</div>
-            	<div class="col-md-6">
-            		<?= $this->Form->input('status',['options' => ['Scheduled' => __('進行中')], 'label'=> '状態', 'class' => "form-control login-form"]); ?>
+            <?= $this->Form->input('start',['type'=>'text', 'label'=> 'ゼミ予定日','id' => 'dp1' ,'class' => "form-control login-form",'value' =>  date(__('Y-m-d'),strtotime($event->start))]); ?>
             	</div>
             </div>
-            <?= $this->Form->input('user_id', ['type' => 
+            <?= $this->Form->input('user_id', ['type' =>
             'hidden' ,'value' => $user['id']]); ?>
             <?= $this->Form->input('all_day',['type' => 'hidden']); ?>
         </div>
     </fieldset>
     <div class="login-button text-right">
-    <?= $this->Form->button(__('新規登録'),['class' => 'btn btn-raised btn-success']) ?>
+    <?= $this->Form->button(__('更新'),['class' => 'btn btn-raised btn-success']) ?>
     </div>
     <?= $this->Form->end() ?>
 </div>
