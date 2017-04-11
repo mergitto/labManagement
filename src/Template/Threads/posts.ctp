@@ -18,7 +18,7 @@
         </div>
     </fieldset>
     <div class="login-button text-right">
-    <?= $this->Form->button(__('新規登録'),['class' => 'btn btn-raised btn-success']) ?>
+      <?= $this->Form->button(__('新規登録'),['class' => 'btn btn-raised btn-success glyphicon glyphicon-plus']) ?>
     </div>
     <?= $this->Form->end() ?>
 </div>

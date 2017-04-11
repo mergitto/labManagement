@@ -11,7 +11,7 @@
       <div class="col-md-5">
         <div class="events small-12 medium-8 large-12 columns">
           <button type="button" class="btn btn-default">
-              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <i class="glyphicon glyphicon-calendar" aria-hidden="true"></i>
               <?= $this->Html->link(__('予定追加'), ['action' => 'add']); ?>
           </button>
         </div>
@@ -36,11 +36,11 @@
                   <td rowspan="2" style="vertical-align:middle;">
                       <?= date(__('Y-m-d'),strtotime($event->start)) ?><?=$week[$w]?>
                   </td>
+                  <?php if($user['role'] === 'admin'): ?>
                   <td class="tc">
-                      <?php if($user['role'] === 'admin'): ?>
                         <?= $this->Html->link(__('編集'), ['action' =>'edit',$event['id']]); ?>
-                      <?php endif ?>
                   </td>
+                  <?php endif ?>
               </tr>
               <tr>
                  <td style="border-top:none; max-width:150px;">
@@ -48,11 +48,11 @@
                        <?= $eventUser['name']; ?>
                    <?php endforeach ?>
                  </td>
+                 <?php if($user['role'] === 'admin'): ?>
                  <td>
-                   <?php if($user['role'] === 'admin'): ?>
                    <?= $this->Form->postLink(__('削除'), ['action' =>'delete',$event->id], ['confirm' => __('本当に削除してもいいですか # {0}?' , $event['title'])]); ?>
-                 <?php endif ?>
                </td>
+               <?php endif ?>
               </tr>
               <?php endforeach ?>
           </table>

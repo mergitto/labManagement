@@ -44,7 +44,7 @@ class AttachmentsTable extends Table
         $this->addBehavior('Josegonzalez/Upload.Upload', [
             'file' => [
                 'fields' => [
-                    'dir' => 'file_dir', 
+                    'dir' => 'file_dir',
                     'size' => 'file_size',
                     'type' => 'file_type',
                 ],
@@ -74,11 +74,12 @@ class AttachmentsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('file')
-            ->notEmpty('file');
+            ->requirePresence('title')
+            ->notEmpty('title');
 
         $validator
-            ->allowEmpty('title');
+            ->requirePresence('file')
+            ->notEmpty('file');
 
         $validator
             ->allowEmpty('url');

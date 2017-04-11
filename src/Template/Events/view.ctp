@@ -42,7 +42,7 @@ $w = date('w', strtotime($event->start));
 	                		<th colspan="2"><?= __('ユーザー名'); ?></th>
 	                    <th><?= $this->Paginator->sort('title', __('ゼミ資料タイトル')); ?></th>
                         <th><?= $this->Paginator->sort('file', __('資料名')); ?></th>
-                        <th><?= $this->Paginator->sort('url', __('URL')); ?></th>
+                        <th><?= $this->Paginator->sort('url', __('参考URL')); ?></th>
 	                    <th class="b_w150">　</th>
 	                </tr>
 	                </thead>
@@ -63,7 +63,7 @@ $w = date('w', strtotime($event->start));
                       </td>
 	                    <td>
                           <?= $this->Html->link(__($attachment->file),['controller' => 'Attachments', 'action' => 'download',$attachment->file]) ?>
-                          <i class="fa fa-download" aria-hidden="true"></i>
+                          <i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i>
                       </td>
                       <td>
                       <?php if($attachment->url !== ''): ?>

@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-md-3">
             <button type="button" class="btn btn-default">
-                <i class="fa fa-plus-square-o fa-lg" aria-hidden="true"></i>
+                <i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
                 <?= $this->Html->link(__('新規タイトル'),['action' => 'add']) ?>
             </button>
         </div>
@@ -32,7 +32,7 @@
             </fieldset>
         </div>
         <div class="col-md-1 text-right pad-25">
-            <?= $this->Form->button(__('検索'),['class' => 'btn btn-raised btn-success']) ?>
+            <?= $this->Form->button(__('検索'),['class' => 'glyphicon glyphicon-search btn btn-raised btn-success']) ?>
             <?= $this->Form->end() ?>
         </div>
         <div class="col-md-2"></div>

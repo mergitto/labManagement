@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-xs-4">
                     <button type="button" class="btn btn-default">
-                        <i class="fa fa-plus-square-o fa-lg" aria-hidden="true"></i>
+                        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
                         <?= $this->Html->link(__('ユーザー新規作成'),['controller' => 'admins' ,'action' => 'user_add']) ?>
                     </button>
                 </div>
@@ -42,9 +42,11 @@
                         <?= $user['name']; ?>
                     </td>
                     <td>
+                        <span class="glyphicon glyphicon-envelope"></span>
                         <?= $user['email']; ?>
                     </td>
                     <td>
+                        <span class="glyphicon glyphicon-phone"></span>
                         <?= $user['phone']; ?>
                     </td>
                     <td class="tc">

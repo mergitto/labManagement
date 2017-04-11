@@ -13,7 +13,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$title = 'Labolatory Management System';
+$title = 'ゼミ管理システム';
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,9 +25,9 @@ $title = 'Labolatory Management System';
         <?= $this->fetch('title') ?>
     </title>
     <?= $this->Html->meta('icon') ?>
+    <?= $this->Html->css("//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css") ?>
     <?= $this->Html->css('bootstrap.css') ?>
     <?= $this->Html->css('laboratory.css') ?>
-    <?= $this->Html->css('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css') ?>
     <?= $this->Html->script('jquery.min.js') ?>
     <?= $this->Html->script('bootstrap.min.js') ?>
     <?= $this->fetch('meta') ?>
