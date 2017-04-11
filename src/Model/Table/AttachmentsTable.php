@@ -59,6 +59,11 @@ class AttachmentsTable extends Table
             'foreignKey' => 'event_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsToMany('Tags',[
+          'foreignKey' => 'attachment_id',
+          'targetForeignKey' => 'tag_id',
+          'joinTable' => 'attachments_tags'
+        ]);
     }
 
     /**
