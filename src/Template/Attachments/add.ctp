@@ -19,7 +19,7 @@
                 <span class="input-group-btn"><button type="button" class="btn btn-info" onclick="$('input[id=lefile]').click();">Browse</button></span>
                 <input type="text" id="photoCover" class="form-control" placeholder="select file...">
             </div>
-            <?= __('※ファイルのサイズは2000KBまでにしてください') ?>
+            <?= __('※ファイルのサイズは５Mまでにしてください') ?>
         </div>
         <div class="form-group">
             <?= $this->Form->input('url',['type'=>'text', 'label'=> 'url', 'class' => "form-control login-form",'placeholder' => '参考にしたURLを貼ってください']); ?>
