@@ -39,7 +39,7 @@
     </div>
 
     <div class="fu-list">
-        <table class="table table-hover">
+        <table class="table table-hover table-striped">
             <thead>
             <tr>
                 <th><?= $this->Paginator->sort('user_id', __('管理ユーザー')); ?></th>

@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <?= $this->Html->link(__("ゼミ管理システム"), ['controller' => 'Users', 'action' => 'index'], ['class' => 'navbar-brand'] ) ?>
+      <a href="#" class="navbar-brand"><?= __("ゼミ管理システム") ?></a>
     </div>
   </div><!-- /.container-fluid -->
 </nav>

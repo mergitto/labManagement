@@ -20,7 +20,7 @@
         <?= $this->Form->end(); ?>
 
         <div class="fu-list">
-            <table class="table table-hover">
+            <table class="table table-hover table-striped">
                 <thead>
                 <tr>
                     <th colspan="2"><?= __('ユーザー名'); ?></th>
