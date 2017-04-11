@@ -27,7 +27,8 @@ class AttachmentsController extends AppController
             $this->Flash->error(__('登録できませんでした'));
         }
         $event = $this->Attachments->Events->get($id);
-        $this->set(compact('attachment', 'event'));
+        $tags = $this->Attachments->Tags->find('list',['keyField' => 'id','valueField' => 'category']);
+        $this->set(compact('attachment', 'event','tags'));
         $this->set('_serialize', ['attachment']);
     }
 
@@ -41,7 +42,7 @@ class AttachmentsController extends AppController
     public function edit($id = null)
     {
         $attachment = $this->Attachments->get($id, [
-            'contain' => ['Events']
+            'contain' => ['Events','Tags']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $attachment = $this->Attachments->patchEntity($attachment, $this->request->data);
@@ -53,7 +54,8 @@ class AttachmentsController extends AppController
         }
         $users = $this->Attachments->Users->find('list', ['limit' => 200]);
         $events = $this->Attachments->Events->find('list', ['limit' => 200]);
-        $this->set(compact('attachment', 'users', 'events'));
+        $tags = $this->Attachments->Tags->find('list',['keyField' => 'id','valueField' => 'category']);
+        $this->set(compact('attachment', 'users', 'events','tags'));
         $this->set('_serialize', ['attachment']);
     }
 

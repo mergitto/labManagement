@@ -22,7 +22,17 @@
             <?= __('※ファイルのサイズは５Mまでにしてください') ?>
         </div>
         <div class="form-group">
-            <?= $this->Form->input('url',['type'=>'text', 'label'=> 'url', 'class' => "form-control login-form",'placeholder' => '参考にしたURLを貼ってください']); ?>
+            <?= $this->Form->input('url',['type'=>'text', 'label'=> 'URL', 'class' => "form-control login-form",'placeholder' => '参考にしたURLを貼ってください']); ?>
+        </div>
+        <div class="form-group">
+          <?= $this->Form->input('tags._ids',[
+            'option' => $tags,
+            'multiple' => 'checkbox',
+            'label' => 'タグ',
+            'templates' => [
+              'nestingLabel' => "<div class='col-md-4'>{{hidden}}<label{{attrs}} >{{input}}{{text}}</label></div>",
+            ]
+          ]) ?>
         </div>
         <?= $this->Form->input('user_id', ['type' => 'hidden' ,'value' => $user['id'] ]); ?>
         <?= $this->Form->input('event_id',['type' => 'hidden','value' =>  $event->id ]); ?>

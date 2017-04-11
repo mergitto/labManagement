@@ -36,7 +36,7 @@ $w = date('w', strtotime($event->start));
 	        <hr class="mb0">
 
 	        <div class="fu-list">
-	            <table class="table table-hover">
+	            <table class="table table-hover table-striped">
 	                <thead>
 	                <tr>
 	                		<th colspan="2"><?= __('ユーザー名'); ?></th>
@@ -64,6 +64,11 @@ $w = date('w', strtotime($event->start));
 	                    <td>
                           <?= $this->Html->link(__($attachment->file),['controller' => 'Attachments', 'action' => 'download',$attachment->file]) ?>
                           <i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i>
+													<ul class="list-inline" style="list-style: none;">
+														<?php foreach($attachment->tags as $tag): ?>
+														<li><span class="label label-success"><?= $tag['category'] ?><span class="badge"><?= $tagCount[$tag['category']] ?></span></span></li>
+														<?php endforeach?>
+													</ul>
                       </td>
                       <td>
                       <?php if($attachment->url !== ''): ?>

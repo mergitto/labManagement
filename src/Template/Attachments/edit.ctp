@@ -24,6 +24,16 @@
         <div class="form-group">
             <?= $this->Form->input('url',['type'=>'text', 'label'=> 'url', 'class' => "form-control login-form",'placeholder' => '参考にしたURLや作成したシステムへのURLを書くようにしましょう']); ?>
         </div>
+        <div class="form-group">
+          <?= $this->Form->input('tags._ids',[
+            'option' => $tags,
+            'multiple' => 'checkbox',
+            'label' => 'タグ',
+            'templates' => [
+              'nestingLabel' => "<div class='col-md-4'>{{hidden}}<label{{attrs}} >{{input}}{{text}}</label></div>",
+            ]
+          ]) ?>
+        </div>
         <?= $this->Form->input('user_id', ['type' => 'hidden' ,'value' => $user['id'] ]); ?>
     </fieldset>
     <div class="login-button text-right">

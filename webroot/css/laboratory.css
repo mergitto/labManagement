@@ -95,4 +95,12 @@ table > thead > tr > th {
   height: 100px;
 }
 /****end ユーザー画面部分のデザイン*****/
-
+/****タグのデザイン*****/
+.badge{
+  padding: 1px 4px;
+  font-weight: normal;
+  color: #5cb85c;
+  background-color: #fff;
+  margin-left: 3px;
+}
+/****end タグのデザイン*****/

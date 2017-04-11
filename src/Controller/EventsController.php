@@ -75,9 +75,17 @@ class EventsController extends FullCalendarAppController
         $event = $this->Events->get($id,[
           'contain' => ['Users']
         ]);
-        $attachments = $this->paginate($this->Events->Attachments->find()->contain(['Users'])->where(['event_id' => $id]));
-        $this->set('event', $event);
-        $this->set('attachments', $attachments);
+        $attachments = $this->paginate($this->Events->Attachments->find()->contain(['Users','Tags'])->where(['event_id' => $id]));
+        $tags = $this->Events->Attachments->find()->contain(['Tags']);
+        //タグをカウントする
+        $tagCount = [];
+        foreach ($tags as $at) {
+          foreach ($at->tags as $tags) {
+            $tagCount[] = $tags['category'];
+          }
+        }
+        $tagCount = array_count_values($tagCount);
+        $this->set(compact('event','attachments','tags','tagCount'));
         $this->set('_serialize', ['event']);
     }
 
