@@ -25,6 +25,7 @@ class AttachmentsController extends AppController
                 return $this->redirect(['controller' => 'Events','action' => 'view',$attachment->event_id]);
             }
             $this->Flash->error(__('登録できませんでした'));
+            $this->Flash->error(__('ファイルのサイズが5Mを超えている可能性があります'));
         }
         $event = $this->Attachments->Events->get($id);
         $tags = $this->Attachments->Tags->find('list',['keyField' => 'id','valueField' => 'category']);
@@ -51,6 +52,7 @@ class AttachmentsController extends AppController
                 return $this->redirect(['controller' => 'Events' ,'action' => 'view', $attachment->event_id]);
             }
             $this->Flash->error(__('修正できませんでした。'));
+            $this->Flash->error(__('ファイルのサイズが5Mを超えている可能性があります'));
         }
         $users = $this->Attachments->Users->find('list', ['limit' => 200]);
         $events = $this->Attachments->Events->find('list', ['limit' => 200]);
