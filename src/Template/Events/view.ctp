@@ -25,9 +25,13 @@ $w = date('w', strtotime($event->start));
 		<?= nl2br($event->details); ?>
 	</p>
 	<h3><?=  __("ゼミ担当") ?></h3>
-	<h4 class="text-muted">
+	<h4>
 	<?php foreach($event->users as $eventUsers): ?>
-		<?= $eventUsers->name.__('/') ?>
+		<?php if(array_search($eventUsers->name, $checkUsers) === FALSE): ?>
+			<span class="text-muted"><?= $eventUsers->name.__('/') ?></span>
+		<?php else: ?>
+			<span class="text-primary font-b"><?= $eventUsers->name.__('/') ?></span>
+		<?php endif?>
 	<?php endforeach ?>
 	</h4>
 	<?= $this->Html->link(__('ファイルを登録する'),['controller' => 'Attachments', 'action' => 'add', $event->id]) ?>

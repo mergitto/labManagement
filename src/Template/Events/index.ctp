@@ -42,10 +42,23 @@
                   </td>
                   <?php endif ?>
               </tr>
+              <?php
+                //その日のゼミにファイルを登録しているかをチェックする
+                $checkUsers = [];
+                foreach ($event->attachments as $at) {
+                  if(!is_null($at->file)){
+                    $checkUsers[] = $at->user_id;
+                  }
+                }
+              ?>
               <tr>
                  <td style="border-top:none; max-width:150px;">
                    <?php foreach ($event->users as $eventUser): ?>
-                       <?= $eventUser['name']; ?>
+                     <?php if(array_search($eventUser->id, $checkUsers) === FALSE): ?>
+                      <span class="text-muted"><?= $eventUser['name']; ?></span>
+                     <?php else: ?>
+                      <span class="text-primary font-b"><?= $eventUser['name']; ?></span>
+                     <?php endif ?>
                    <?php endforeach ?>
                  </td>
                  <?php if($user['role'] === 'admin'): ?>

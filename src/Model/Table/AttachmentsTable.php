@@ -84,7 +84,14 @@ class AttachmentsTable extends Table
 
         $validator
             ->requirePresence('file')
-            ->notEmpty('file');
+            ->notEmpty('file')
+            ->add('file',[
+              'uploadedFile' => [
+                'rule' => ['uploadedFile',['maxSize' => '5MB']],
+                'last' => true,
+                'message' => '5Mを超えるファイルは登録できません'
+              ]
+            ]);
 
         $validator
             ->allowEmpty('url');

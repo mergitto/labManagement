@@ -94,6 +94,9 @@ table > thead > tr > th {
   width: 100px;
   height: 100px;
 }
+.font-b{
+  font-weight: bold;
+}
 /****end ユーザー画面部分のデザイン*****/
 /****タグのデザイン*****/
 .badge{

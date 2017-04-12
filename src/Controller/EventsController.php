@@ -73,7 +73,7 @@ class EventsController extends FullCalendarAppController
     public function view($id = null)
     {
         $event = $this->Events->get($id,[
-          'contain' => ['Users']
+          'contain' => ['Users','Attachments']
         ]);
         $attachments = $this->paginate($this->Events->Attachments->find()->contain(['Users','Tags'])->where(['event_id' => $id]));
         $tags = $this->Events->Attachments->find()->contain(['Tags']);
@@ -84,8 +84,16 @@ class EventsController extends FullCalendarAppController
             $tagCount[] = $tags['category'];
           }
         }
+        //ファイルを提出しているユーザーの配列を作成する
+        $checkUsers = [];
+        foreach ($attachments as $check) {
+          if(!is_null($check->file)){
+            $checkUsers[] = $check->user['name'];
+          }
+        }
+
         $tagCount = array_count_values($tagCount);
-        $this->set(compact('event','attachments','tags','tagCount'));
+        $this->set(compact('event','attachments','tags','tagCount','checkUsers'));
         $this->set('_serialize', ['event']);
     }
 
