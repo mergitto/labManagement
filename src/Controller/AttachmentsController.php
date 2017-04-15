@@ -9,6 +9,42 @@ use App\Controller\AppController;
  */
 class AttachmentsController extends AppController
 {
+  /**
+   * View method
+   *
+   * @return \Cake\Network\Response|null Redirects on successful view, renders view otherwise.
+   */
+   public function view()
+   {
+     $attachments = $this->Attachments->find()->contain(['Tags']);
+     $tags = $this->Attachments->Tags->find('list',['keyField' => 'id', 'valueField' => 'category']);
+     $tagWhere = []; //postされたチェックボックスの状態をOR句として格納するための配列
+     if($this->request->is('post')){
+       //選択されたタグの条件を渡すための前処理
+       for ($i=0; $i < count($this->request->data['Tags']['_ids']); $i++) {
+         $tagWhere['OR'][] = [
+           'Tags.id' => (int)$this->request->data['Tags']['_ids'][$i]
+         ];
+       }
+       //チェックボックスに選択されたタグでOR検索をおこないファイル名でdistinctする
+       $attachments = $this->Attachments->find()
+         ->matching('Tags',function ($q) use($tagWhere){
+           return $q->where($tagWhere);
+         })->distinct(['Attachments.id']);
+       //チェックボックスに選択されているもののタグを取り出す用
+       $checkedTag = $this->Attachments->find()
+         ->matching('Tags',function ($q) use($tagWhere){
+           return $q->where($tagWhere);
+         });
+       //全てのタグを取り出す用
+       $allTag = $this->Attachments->find()->contain(['Tags']);
+     }
+     //チェックボックス用のリスト確認
+     $tagList = $this->Attachments->Tags->find();
+     $checkedList = $tagList->where($tagWhere)->all();
+     $this->set('attachments',$this->paginate($attachments));
+     $this->set(compact('tags','checkedList','checkAttach','checkedTag','allTag'));
+   }
     /**
      * Add method
      *
@@ -118,5 +154,23 @@ class AttachmentsController extends AppController
         }
         $this->Flash->error(__('管理者の機能です'));
         return false;
+    }
+
+    /**
+    * Get Unique Array Method
+    * 多次元配列から一致するものだけに置き換える関数
+    * いつか使うかもしれないから残す
+    */
+    public static function getUniqueArray($array, $column)
+    {
+       $tmp = [];
+       $uniqueArray = [];
+       foreach ($array as $value){
+          if (!in_array($value[$column], $tmp)) {
+             $tmp[] = $value[$column];
+             $uniqueArray[] = $value;
+          }
+       }
+       return $uniqueArray;
     }
 }

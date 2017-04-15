@@ -20,6 +20,9 @@
         <li>
           <?= $this->Html->link(__('ユーザー一覧'),['controller' => 'Users', 'action' => 'index']) ?>
         </li>
+        <li>
+          <?= $this->Html->link(__('ゼミ資料検索'),['controller' => 'Attachments', 'action' => 'view']) ?>
+        </li>
         <!--後々使うことになる可能性あるため残している
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
