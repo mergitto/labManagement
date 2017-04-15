@@ -107,7 +107,7 @@ class UsersTable extends Table
                                 'image/png',
                                 'image/gif'
                             ],
-                            'maxSize' => '5MB'
+                            'maxSize' => '0.2MB'
                         ],
                     ],
                 'message' => '画像の形式はjpg,png,gifのいずれかにしてください'

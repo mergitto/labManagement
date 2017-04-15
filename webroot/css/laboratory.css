@@ -97,6 +97,15 @@ table > thead > tr > th {
 .font-b{
   font-weight: bold;
 }
+.font-24{
+  font-size: 24px;
+}
+.min-w-120{
+  min-width: 120px;
+}
+.min-w-50{
+  min-width: 50px;
+}
 /****end ユーザー画面部分のデザイン*****/
 /****タグのデザイン*****/
 .badge{

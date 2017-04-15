@@ -19,9 +19,11 @@
           <table class="table table-hover">
               <thead>
               <tr>
-                  <th><?= __('ゼミタイトル'); ?></th>
-                  <th><?= __('ゼミ予定日'); ?></th>
-                  <th></th>
+                  <th><?= __('ゼミタイトル・担当'); ?></th>
+                  <th class="min-w-120"><?= __('ゼミ予定日'); ?></th>
+                  <?php if($user['role'] === 'admin'): ?>
+                  <th class="min-w-50"></th>
+                  <?php endif ?>
               </tr>
               </thead>
               <?php foreach ($events as $event): ?>
@@ -31,7 +33,8 @@
                 ?>
               <tr>
                   <td>
-                      <?= $this->Html->link(__($event['title'].'('.count($event->attachments).')'), ['action' => 'view', $event->id]); ?>
+                      <?= $this->Html->link(__($event['title']), ['action' => 'view', $event->id],['class' => 'font-24']); ?>
+                      <?= '('.count($event->attachments).')' ?>
                   </td>
                   <td rowspan="2" style="vertical-align:middle;">
                       <?= date(__('Y-m-d'),strtotime($event->start)) ?><?=$week[$w]?>
@@ -57,7 +60,7 @@
                      <?php if(array_search($eventUser->id, $checkUsers) === FALSE): ?>
                       <span class="text-muted"><?= $eventUser['name']; ?></span>
                      <?php else: ?>
-                      <span class="text-primary font-b"><?= $eventUser['name']; ?></span>
+                      <span class="text-default font-b"><?= $eventUser['name']; ?></span>
                      <?php endif ?>
                    <?php endforeach ?>
                  </td>

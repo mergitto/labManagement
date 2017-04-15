@@ -24,6 +24,7 @@ use Cake\ORM\TableRegistry;
 class EventsController extends FullCalendarAppController
 {
     public $name = 'Events';
+
     /**
      * Index method
      *
@@ -36,7 +37,7 @@ class EventsController extends FullCalendarAppController
         //今日を含む今日以降の予定のみの検索
         $events = $this->Events->find('all')->contain(['Attachments','Users'])->where(['start >=' => date('Y-m-d')]);
         $this->paginate = [
-            'limit'   => 8,
+            'limit'   => 4,
             'order'   => ['Events.start' => 'asc']
         ];
 
