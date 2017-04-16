@@ -42,7 +42,6 @@
         <table class="table table-hover table-striped">
             <thead>
             <tr>
-                <th><?= $this->Paginator->sort('user_id', __('管理ユーザー')); ?></th>
                 <th><?= $this->Paginator->sort('title', __('タイトル')); ?></th>
                 <th><?= $this->Paginator->sort('modified', __('更新日')); ?></th>
                 <th class="b_w150">　</th>
@@ -54,9 +53,6 @@
             $w = date('w', strtotime($thread['modified']));
             ?>
             <tr>
-                <td>
-                    <?= $thread->user['name']; ?>
-                </td>
                 <td>
                     <?= $this->Html->link($thread->title,[
                         'action' => 'posts', $thread->id
