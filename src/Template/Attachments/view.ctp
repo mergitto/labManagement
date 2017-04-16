@@ -33,6 +33,7 @@
         <table class="table table-hover table-striped">
             <thead>
             <tr>
+                <th><?=  __('ユーザー') ?></th>
                 <th><?= __('タイトル') ?></th>
                 <th><?= __('ファイル名') ?></th>
                 <th><?= __('更新日') ?></th>
@@ -44,6 +45,9 @@
               $w = date('w', strtotime($attachment['modified']));
               ?>
               <tr>
+                  <td>
+                      <?= $attachment->user['name'] ?>
+                  </td>
                   <td>
                       <?= $attachment['title']; ?>
                   </td>

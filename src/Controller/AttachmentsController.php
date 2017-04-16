@@ -16,7 +16,7 @@ class AttachmentsController extends AppController
    */
    public function view()
    {
-     $attachments = $this->Attachments->find()->contain(['Tags']);
+     $attachments = $this->Attachments->find()->contain(['Tags','Users']);
      $tags = $this->Attachments->Tags->find('list',['keyField' => 'id', 'valueField' => 'category']);
      $tagWhere = []; //postされたチェックボックスの状態をOR句として格納するための配列
      if($this->request->is('post')){
@@ -31,6 +31,7 @@ class AttachmentsController extends AppController
          ->matching('Tags',function ($q) use($tagWhere){
            return $q->where($tagWhere);
          })->distinct(['Attachments.id']);
+       $attachments = $attachments->contain(['Users']);
        //チェックボックスに選択されているもののタグを取り出す用
        $checkedTag = $this->Attachments->find()
          ->matching('Tags',function ($q) use($tagWhere){
