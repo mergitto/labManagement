@@ -11,7 +11,7 @@
     <fieldset>
         <legend><?= __('ファイル追加') ?></legend>
         <div class="form-group">
-            <?= $this->Form->input('title',['type'=>'text', 'label'=> 'タイトル', 'class' => "form-control login-form",'placeholder' => '発表についての見出しを記入してください']); ?>
+            <?= $this->Form->input('title',['type'=>'text', 'label'=> 'タイトル', 'class' => "form-control login-form",'placeholder' => '発表についての見出しを記入してください','required' => true]); ?>
         </div>
         <div class="form-group">
           <input id="lefile" name="file" type="file" style="display:none">
@@ -22,8 +22,9 @@
             <?= __('※ファイルのサイズは５Mまでにしてください') ?>
         </div>
         <div class="form-group">
-            <?= $this->Form->input('url',['type'=>'text', 'label'=> 'URL', 'class' => "form-control login-form",'placeholder' => '参考にしたURLを貼ってください']); ?>
+            <?= $this->Form->input('url',['type'=>'text', 'label'=> 'url', 'class' => "form-control login-form",'placeholder' => '参考にしたURLや作成したシステムへのURLを書くようにしましょう','required' => true]); ?>
         </div>
+
         <div class="form-group">
           <?= $this->Form->input('tags._ids',[
             'option' => $tags,
