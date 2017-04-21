@@ -16,7 +16,7 @@
           </button>
         </div>
         <div class="fu-list">
-          <table class="table table-hover">
+          <table class="table">
               <thead>
               <tr>
                   <th><?= __('ゼミタイトル・担当'); ?></th>
@@ -26,15 +26,27 @@
                   <?php endif ?>
               </tr>
               </thead>
-              <?php foreach ($events as $event): ?>
+              <?php foreach ($events as $key => $event): ?>
                 <?php
                 // 曜日を日本語で
                 $w = date('w', strtotime($event->start));
                 ?>
-              <tr>
+              <?php if($key % 2 === 0): ?>
+                <tr class="active">
+              <?php else: ?>
+                <tr>
+              <?php endif ?>
                   <td>
                       <?= $this->Html->link(__($event['title']), ['action' => 'view', $event->id],['class' => 'font-24']); ?>
                       <?= '('.count($event->attachments).')' ?>
+
+                      <div class="progress progress-striped active">
+                        <?php if(isset($submittedUsers[$event->id])): ?>
+                          <div class="progress-bar progress-bar-success" style="width: <?= (int)count($submittedUsers[$event->id]) / (int)$countUsers[$event->id] * 100; ?>%"></div>
+                        <?php else: ?>
+                          <div class="progress-bar" style="width: 0%"></div>
+                        <?php endif ?>
+                      </div>
                   </td>
                   <td rowspan="2" style="vertical-align:middle;">
                       <?= date(__('Y-m-d'),strtotime($event->start)) ?><?=$week[$w]?>
@@ -45,19 +57,14 @@
                   </td>
                   <?php endif ?>
               </tr>
-              <?php
-                //その日のゼミにファイルを登録しているかをチェックする
-                $checkUsers = [];
-                foreach ($event->attachments as $at) {
-                  if(!is_null($at->file)){
-                    $checkUsers[] = $at->user_id;
-                  }
-                }
-              ?>
-              <tr>
+              <?php if($key % 2 === 0): ?>
+                <tr class="active">
+              <?php else: ?>
+                <tr>
+              <?php endif ?>
                  <td style="border-top:none; max-width:150px;">
                    <?php foreach ($event->users as $eventUser): ?>
-                     <?php if(array_search($eventUser->id, $checkUsers) === FALSE): ?>
+                     <?php if(array_search($eventUser->id, $checkUsers[$event->id]) === FALSE): ?>
                       <span class="text-muted"><?= $eventUser['name']; ?></span>
                      <?php else: ?>
                       <span class="text-default font-b"><?= $eventUser['name']; ?></span>

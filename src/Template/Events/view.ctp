@@ -10,6 +10,9 @@
  * http://www.opensource.org/licenses/mit-license.php
  */
 // 曜日を日本語で
+echo $this->Html->css('star-rating.css');
+echo $this->Html->css('theme.css');
+
 $w = date('w', strtotime($event->start));
 ?>
 <div class="small-12 columns">
@@ -18,12 +21,8 @@ $w = date('w', strtotime($event->start));
 	</ul>
 	<blockquote class="blockquote text-left">
 		<h3><?= $event->title; ?></h3>
+		<p class="font-14 text-muted"><i class="glyphicon glyphicon-menu-right"></i><?= date('Y-m-d', strtotime($event->start)) ?><?= $week[$w]; ?></p>
 	</blockquote>
-	<h3><?= __('日付: '); ?><?= date('Y-m-d', strtotime($event->start)) ?><?= $week[$w]; ?></h3>
-	<p class="text-muted">
-		<span><?= __('詳細: '); ?></span>
-		<?= nl2br($event->details); ?>
-	</p>
 	<h3><?=  __("ゼミ担当") ?></h3>
 	<h4>
 	<?php foreach($event->users as $eventUsers): ?>
@@ -35,6 +34,10 @@ $w = date('w', strtotime($event->start));
 	<?php endforeach ?>
 	</h4>
 	<?= $this->Html->link(__('ファイルを登録する'),['controller' => 'Attachments', 'action' => 'add', $event->id]) ?>
+	<p>
+		<h3><?= __('詳細') ?></h3>
+		<span class="text-muted"><?= nl2br($event->details); ?></span>
+	</p>
 	<div class="fu-frame-main">
 	    <div class="container">
 	        <hr class="mb0">
@@ -45,8 +48,8 @@ $w = date('w', strtotime($event->start));
 	                <tr>
 	                		<th colspan="2"><?= __('ユーザー名'); ?></th>
 	                    <th><?= $this->Paginator->sort('title', __('ゼミ資料タイトル')); ?></th>
-                        <th><?= $this->Paginator->sort('file', __('資料名')); ?></th>
-                        <th><?= $this->Paginator->sort('url', __('参考URL')); ?></th>
+                      <th><?= $this->Paginator->sort('file', __('資料名')); ?></th>
+                      <th><?= $this->Paginator->sort('url', __('参考URL')); ?></th>
 	                    <th class="b_w150">　</th>
 	                </tr>
 	                </thead>
@@ -64,13 +67,35 @@ $w = date('w', strtotime($event->start));
                       </td>
 	                    <td class="text-muted">
 	                        <?= $attachment->title; ?>
+													<div class="font-24">
+														<?php if(array_search($user['id'],$favUser[$attachment->id])): ?>
+															<span class="favChecked">
+																<i class="glyphicon glyphicon-thumbs-up ajaxFav mar-le-10" data-favoId="<?= $favId[$user['id']][$attachment->id][0]?>" data-userId='<?= $user['id'] ?>' data-attachmentId='<?= $attachment->id ?>'></i>
+														<?php else: ?>
+															<span>
+																<i class="glyphicon glyphicon-thumbs-up ajaxFav mar-le-10" data-userId='<?= $user['id'] ?>' data-attachmentId='<?= $attachment->id ?>'></i>
+														<?php endif ?>
+														</span>
+													</div>
                       </td>
 	                    <td>
                           <?= $this->Html->link(__($attachment->file),['controller' => 'Attachments', 'action' => 'download',$attachment->file]) ?>
                           <i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i>
+													<div class="scoreChecked">
+														<?php $checkScore = 0; ?>
+														<?php foreach($attachment->scores as $score): ?>
+															<?php if($score->user_id == $user['id'] && $score->attachment_id == $attachment->id):?>
+																<input id="score" name="score"  class="ajaxScore rating rating-loading" value='<?= $score->score ?>' data-min="0" data-max="5" data-step="1" data-size="xs" data-userId="<?= $user['id'] ?>" data-scoreId="<?= $score->id?>" data-attachmentId="<?= $attachment->id ?>" data-score-selected="true">
+																<?php $checkScore = 1;?>
+															<?php endif ?>
+													<?php endforeach ?>
+													<?php if($checkScore != 1): ?>
+														<input id="score" name="score"  class="ajaxScore rating rating-loading" value='0' data-min="0" data-max="5" data-step="1" data-size="xs" data-userId="<?= $user['id'] ?>" data-attachmentId="<?= $attachment->id ?>" data-score-selected="false">
+													<?php endif ?>
+													</div>
 													<ul class="list-inline" style="list-style: none;">
 														<?php foreach($attachment->tags as $tag): ?>
-														<li><span class="label label-success"><?= $tag['category'] ?><span class="badge"><?= $tagCount[$tag['category']] ?></span></span></li>
+															<li><span class="label label-success"><?= $tag['category'] ?><span class="badge"><?= $tagCount[$tag['category']] ?></span></span></li>
 														<?php endforeach?>
 													</ul>
                       </td>
@@ -103,3 +128,61 @@ $w = date('w', strtotime($event->start));
 	    </div>
 	</div>
 </div>
+<?= $this->Html->script('star-rating.js'); ?>
+<?= $this->Html->script('theme.js'); ?>
+<script>
+$(function(){
+	$('.ajaxFav').click(function(){
+		$.ajax({
+				url: "/labManagement/favorites/favAjax",
+				type: "POST",
+				data: {
+					user_id: $(this).attr('data-userId'),
+					attachment_id: $(this).attr('data-attachmentId'),
+					favorite_id: $(this).attr('data-favoId'),
+					favStatus: $(this).parent().hasClass('favChecked')
+				},
+				context: this,
+				dataType: "json",
+		}).done(function(data,context){
+			var $favCh = $(this).parent();
+			if($favCh.hasClass('favChecked')){
+				$favCh.removeClass('favChecked');
+				$(this).removeData(['favoId']);
+			}else{
+				$favCh.addClass('favChecked');
+				$(this).attr('data-favoId',data);
+			}
+		}).fail(function(){
+			console.log("failed");
+		});
+	});
+
+	//評価を行う
+	$('.glyphicon-star').click(function(){
+		$checked = $(this).closest('.scoreChecked');
+		var captionText = $checked.find('.caption').text();
+		var score = parseFloat(captionText.replace(/[^-^0-9^\.]/g,""));
+		$.ajax({
+				url: "/labManagement/Scores/scoreAjax",
+				type: "POST",
+				data: {
+					user_id: $checked.find('.ajaxScore').attr('data-userId'),
+					attachment_id: $checked.find('.ajaxScore').attr('data-attachmentId'),
+					score: score,
+					score_id: $checked.find('.ajaxScore').attr('data-scoreId'),
+					scoreFlag: $checked.find('.ajaxScore').attr('data-score-selected'),
+				},
+				context: this,
+				dataType: "json",
+		}).done(function(data,context){
+			if(data['scoreFlag'] == 'false'){
+				$(this).closest('.scoreChecked').find('.ajaxScore').attr('data-score-selected','true');
+				$(this).closest('.scoreChecked').find('.ajaxScore').attr('data-scoreId',data['score_id']);
+			}
+		}).fail(function(){
+			console.log("failed");
+		});
+	});
+});
+</script>
