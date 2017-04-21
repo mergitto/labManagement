@@ -61,7 +61,7 @@ class UsersController extends AppController
             $hasher = new DefaultPasswordHasher;
             $passwordCheck = $hasher->check($this->request->data['confirm_password'],$user->password);
             if(!$passwordCheck){
-                $this->Flash->error(__('確認用パスワードが間違ってます。'));
+                $this->Flash->error(__('パスワードが間違ってます。'));
                 return $this->redirect(['action' => 'edit', $user->id]);
             }
             $user = $this->Users->patchEntity($user, $this->request->data);

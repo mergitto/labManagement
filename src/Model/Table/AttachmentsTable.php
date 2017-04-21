@@ -5,7 +5,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-
+use Cake\ORM\Rule\IsUnique;
 /**
  * Attachments Model
  *
@@ -59,6 +59,14 @@ class AttachmentsTable extends Table
             'foreignKey' => 'event_id',
             'joinType' => 'INNER'
         ]);
+        $this->hasMany('Favorites',[
+            'foreignKey' => 'attachment_id',
+            'targetForeignKey' => 'favorite_id'
+        ]);
+        $this->hasMany('Scores',[
+            'foreignKey' => 'attachment_id',
+            'targetForeignKey' => 'score_id'
+        ]);
         $this->belongsToMany('Tags',[
           'foreignKey' => 'attachment_id',
           'targetForeignKey' => 'tag_id',
@@ -94,7 +102,8 @@ class AttachmentsTable extends Table
             ]);
 
         $validator
-            ->allowEmpty('url');
+            ->notEmpty('url')
+            ->add('url', 'valid-url', ['rule' => 'url','message' => 'URLの形式で記入してください']);
 
         return $validator;
     }
@@ -110,6 +119,7 @@ class AttachmentsTable extends Table
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['event_id'], 'Events'));
+        //$rules->add(new IsUnique(['file']), 'uniqueFile');
 
         return $rules;
     }

@@ -58,11 +58,9 @@ class AttachmentsController extends AppController
             $attachment = $this->Attachments->patchEntity($attachment, $this->request->data);
             if ($this->Attachments->save($attachment)) {
                 $this->Flash->success(__('登録しました'));
-
                 return $this->redirect(['controller' => 'Events','action' => 'view',$attachment->event_id]);
             }
             $this->Flash->error(__('登録できませんでした'));
-            $this->Flash->error(__('ファイルのサイズが5Mを超えている可能性があります'));
         }
         $event = $this->Attachments->Events->get($id);
         $tags = $this->Attachments->Tags->find('list',['keyField' => 'id','valueField' => 'category']);
@@ -89,7 +87,6 @@ class AttachmentsController extends AppController
                 return $this->redirect(['controller' => 'Events' ,'action' => 'view', $attachment->event_id]);
             }
             $this->Flash->error(__('修正できませんでした。'));
-            $this->Flash->error(__('ファイルのサイズが5Mを超えている可能性があります'));
         }
         $users = $this->Attachments->Users->find('list', ['limit' => 200]);
         $events = $this->Attachments->Events->find('list', ['limit' => 200]);
@@ -155,23 +152,5 @@ class AttachmentsController extends AppController
         }
         $this->Flash->error(__('管理者の機能です'));
         return false;
-    }
-
-    /**
-    * Get Unique Array Method
-    * 多次元配列から一致するものだけに置き換える関数
-    * いつか使うかもしれないから残す
-    */
-    public static function getUniqueArray($array, $column)
-    {
-       $tmp = [];
-       $uniqueArray = [];
-       foreach ($array as $value){
-          if (!in_array($value[$column], $tmp)) {
-             $tmp[] = $value[$column];
-             $uniqueArray[] = $value;
-          }
-       }
-       return $uniqueArray;
     }
 }
