@@ -61,82 +61,12 @@ class FavoritesController extends AppController
      */
     public function view($id = null)
     {
-        $favorite = $this->Favorites->get($id, [
-            'contain' => ['Users', 'Attachments']
-        ]);
+        $favoriteFiles = $this->Favorites->find()->where(['Favorites.user_id' => $id])->contain(['Users','Attachments']);
 
-        $this->set('favorite', $favorite);
+        $attachments = $this->Favorites->Attachments->find()->contain(['Tags'])->all();
+
+        $this->set(compact('favoriteFiles','attachments'));
         $this->set('_serialize', ['favorite']);
-    }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $favorite = $this->Favorites->newEntity();
-        if ($this->request->is('post')) {
-            $favorite = $this->Favorites->patchEntity($favorite, $this->request->data);
-            if ($this->Favorites->save($favorite)) {
-                $this->Flash->success(__('The favorite has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The favorite could not be saved. Please, try again.'));
-        }
-        $users = $this->Favorites->Users->find('list', ['limit' => 200]);
-        $attachments = $this->Favorites->Attachments->find('list', ['limit' => 200]);
-        $this->set(compact('favorite', 'users', 'attachments'));
-        $this->set('_serialize', ['favorite']);
-    }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Favorite id.
-     * @return \Cake\Network\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $favorite = $this->Favorites->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $favorite = $this->Favorites->patchEntity($favorite, $this->request->data);
-            if ($this->Favorites->save($favorite)) {
-                $this->Flash->success(__('The favorite has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The favorite could not be saved. Please, try again.'));
-        }
-        $users = $this->Favorites->Users->find('list', ['limit' => 200]);
-        $attachments = $this->Favorites->Attachments->find('list', ['limit' => 200]);
-        $this->set(compact('favorite', 'users', 'attachments'));
-        $this->set('_serialize', ['favorite']);
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Favorite id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $favorite = $this->Favorites->get($id);
-        if ($this->Favorites->delete($favorite)) {
-            $this->Flash->success(__('The favorite has been deleted.'));
-        } else {
-            $this->Flash->error(__('The favorite could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
     }
 
     public function isAuthorized($user)
