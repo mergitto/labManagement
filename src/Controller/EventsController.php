@@ -41,6 +41,20 @@ class EventsController extends FullCalendarAppController
             'order'   => ['Events.start' => 'asc']
         ];
 
+        $rankTags = []; //タグの順位を作成するための配列
+        $attachments = $this->Events->Attachments->find()->contain(['Tags','Favorites']);
+        foreach ($attachments as $key => $attachment) {
+          if(array_key_exists(0,$attachment->favorites)){
+            foreach ($attachment->tags as $key => $tag) {
+              $rankTags[] = $tag->category;
+            }
+          }
+        }
+        $rankTags = array_count_values($rankTags); //配列に格納されている同じ項目のカウント
+        $result = arsort($rankTags);
+        array_splice($rankTags, 3); //上位3つまでの配列にする
+        dump($rankTags);
+
         foreach($allEvent as $event) {
             if($event->all_day === 1) {
                 $allday = true;
@@ -49,12 +63,8 @@ class EventsController extends FullCalendarAppController
             $json[] = [
                     'id' => $event->id,
                     'title'=> $event->title,
-                    'allday' => $event->allday,
                     'url' => Router::url(['action' => 'view', $event->id]),
                     'start'=> date('Y-m-d',strtotime($event->start)),
-                    'end' => date('Y-m-d',strtotime($event->start)),
-                    'details' => $event->details,
-                    'user_id' => $event->user_id,
             ];
         }
 
