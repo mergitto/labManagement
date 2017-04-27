@@ -822,7 +822,6 @@ a.fc-more:hover {
 	   might want to set the 'color' property instead
 	   making day-numbers bold also fixes the problem */
 }
-
 /* AgendaView all-day area
 --------------------------------------------------------------------------------------------------*/
 
@@ -1069,3 +1068,13 @@ be a descendant of the grid when it is being dragged.
 .fc-time-grid-event .fc-resizer:after {
 	content: "=";
 }
+
+/****カレンダーのデザイン上書き*****/
+.fc-other-month{
+  background-color: #eee;
+}
+.fc-month{
+	background-color: #fff;
+	border-color: #ddd;
+}
+/****カレンダーのデザイン*****/

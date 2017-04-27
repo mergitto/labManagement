@@ -44,6 +44,30 @@ table > thead > tr > th {
 .progress {
     box-shadow: inset 0 5px 32px rgba(0, 0, 0, .1);
 }
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
+  background-color: #76D276;
+}
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover{
+  background-color: #76D276;
+}
+.nav > li > a:hover, .nav > li > a:focus{
+  background-color: #76D276;
+}
+.nav>li>a:focus, .nav>li>a:hover {
+  background-color: #76D276;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus,
+.dropdown-menu:hover{
+  background-color: #76D276;
+}
+.dropdown-menu{
+  background-color: #78B319;
+}
+.dropdown-menu > li > a,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:active{
+  color: #fff;
+}
 /****end ヘッダー部分のデザイン*****/
 /****ログインパネル部分のデザイン*****/
 .panel-default {
@@ -106,6 +130,9 @@ table > thead > tr > th {
 .font-24{
   font-size: 24px;
 }
+.font-20{
+  font-size: 20px;
+}
 .font-14{
   font-size: 14px;
 }
@@ -117,6 +144,10 @@ table > thead > tr > th {
 }
 .ajaxFav{
   cursor: pointer;
+}
+.header-hover-style{
+  background-color: #78B319;
+  color: #fff;
 }
 /****end ユーザー画面部分のデザイン*****/
 /****タグのデザイン*****/
