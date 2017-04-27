@@ -64,10 +64,14 @@
               <?php endif ?>
                  <td style="border-top:none; max-width:150px;">
                    <?php foreach ($event->users as $eventUser): ?>
-                     <?php if(array_search($eventUser->id, $checkUsers[$event->id]) === FALSE): ?>
-                      <span class="text-muted"><?= $eventUser['name']; ?></span>
+                     <?php if(array_key_exists($event->id, $checkUsers)): ?>
+                       <?php if(array_search($eventUser->id, $checkUsers[$event->id]) === FALSE): ?>
+                        <span class="text-muted"><?= $eventUser['name']; ?></span>
+                       <?php else: ?>
+                        <span class="text-default font-b"><?= $eventUser['name']; ?></span>
+                       <?php endif ?>
                      <?php else: ?>
-                      <span class="text-default font-b"><?= $eventUser['name']; ?></span>
+                       <span class="text-muted"><?= $eventUser['name']; ?></span>
                      <?php endif ?>
                    <?php endforeach ?>
                  </td>
@@ -97,8 +101,6 @@
   </div>
 </div>
 <!-- / .fu-frame-main -->
-
-
 <script>
 $(function() {
     $('#calendar').fullCalendar({

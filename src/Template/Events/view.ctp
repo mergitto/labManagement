@@ -130,59 +130,33 @@ $w = date('w', strtotime($event->start));
 </div>
 <?= $this->Html->script('star-rating.js'); ?>
 <?= $this->Html->script('theme.js'); ?>
+<?= $this->Html->script('favChecked.js'); ?>
 <script>
-$(function(){
-	$('.ajaxFav').click(function(){
-		$.ajax({
-				url: "/labManagement/favorites/favAjax",
-				type: "POST",
-				data: {
-					user_id: $(this).attr('data-userId'),
-					attachment_id: $(this).attr('data-attachmentId'),
-					favorite_id: $(this).attr('data-favoId'),
-					favStatus: $(this).parent().hasClass('favChecked')
-				},
-				context: this,
-				dataType: "json",
-		}).done(function(data,context){
-			var $favCh = $(this).parent();
-			if($favCh.hasClass('favChecked')){
-				$favCh.removeClass('favChecked');
-				$(this).removeData(['favoId']);
-			}else{
-				$favCh.addClass('favChecked');
-				$(this).attr('data-favoId',data);
-			}
-		}).fail(function(){
-			console.log("failed");
+	$(function(){
+		$('.glyphicon-star').click(function(){
+		  var $checked = $(this).closest('.scoreChecked');
+		  var captionText = $checked.find('.caption').text();
+		  var score = parseFloat(captionText.replace(/[^-^0-9^\.]/g,""));
+		  $.ajax({
+		      url: "/labManagement/Scores/scoreAjax",
+		      type: "POST",
+		      data: {
+		        user_id: $checked.find('.ajaxScore').attr('data-userId'),
+		        attachment_id: $checked.find('.ajaxScore').attr('data-attachmentId'),
+		        score: score,
+		        score_id: $checked.find('.ajaxScore').attr('data-scoreId'),
+		        scoreFlag: $checked.find('.ajaxScore').attr('data-score-selected'),
+		      },
+		      context: this,
+		      dataType: "json",
+		  }).done(function(data,context){
+		    if(data['scoreFlag'] == 'false'){
+		      $(this).closest('.scoreChecked').find('.ajaxScore').attr('data-score-selected','true');
+		      $(this).closest('.scoreChecked').find('.ajaxScore').attr('data-scoreId',data['score_id']);
+		    }
+		  }).fail(function(){
+		    console.log("failed");
+		  });
 		});
 	});
-
-	//評価を行う
-	$('.glyphicon-star').click(function(){
-		$checked = $(this).closest('.scoreChecked');
-		var captionText = $checked.find('.caption').text();
-		var score = parseFloat(captionText.replace(/[^-^0-9^\.]/g,""));
-		$.ajax({
-				url: "/labManagement/Scores/scoreAjax",
-				type: "POST",
-				data: {
-					user_id: $checked.find('.ajaxScore').attr('data-userId'),
-					attachment_id: $checked.find('.ajaxScore').attr('data-attachmentId'),
-					score: score,
-					score_id: $checked.find('.ajaxScore').attr('data-scoreId'),
-					scoreFlag: $checked.find('.ajaxScore').attr('data-score-selected'),
-				},
-				context: this,
-				dataType: "json",
-		}).done(function(data,context){
-			if(data['scoreFlag'] == 'false'){
-				$(this).closest('.scoreChecked').find('.ajaxScore').attr('data-score-selected','true');
-				$(this).closest('.scoreChecked').find('.ajaxScore').attr('data-scoreId',data['score_id']);
-			}
-		}).fail(function(){
-			console.log("failed");
-		});
-	});
-});
 </script>
