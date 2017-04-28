@@ -4,11 +4,8 @@
     <hr class="mb0">
     <div class="row">
       <div class="col-md-7">
-        <!-- カレンダー表示 -->
-        <div id="calendar"></div>
-        <!-- end カレンダー表示 -->
-        <?php $rCount = 1;?>
         <div class="row">
+          <?php $rCount = 1;?>
           <?php foreach($rankTags as $key => $rankTag): ?>
             <div class="col-md-4 ranking-list">
               <div class="row">
@@ -28,6 +25,9 @@
           <?php $rCount++; ?>
           <?php endforeach ?>
         </div>
+        <!-- カレンダー表示 -->
+        <div id="calendar"></div>
+        <!-- end カレンダー表示 -->
       </div>
       <div class="col-md-5">
         <div class="events small-12 medium-8 large-12 columns">
