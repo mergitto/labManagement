@@ -24,7 +24,7 @@
               ?>
               <tr>
                   <td>
-                      <?= $this->Html->link(__($file->attachment->file),['controller' => 'Attachments', 'action' => 'download',$file->attachment->file],['class' => 'font-20']) ?>
+                      <?= $this->Html->link(__($file->attachment->tmp_file_name),['controller' => 'Attachments', 'action' => 'download',$file->attachment->file],['class' => 'font-20']) ?>
                       <i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i>
                       <ul class="list-inline" style="list-style: none;">
                         <!--このページにアクセスした時-->

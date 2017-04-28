@@ -79,7 +79,7 @@ $w = date('w', strtotime($event->start));
 													</div>
                       </td>
 	                    <td>
-                          <?= $this->Html->link(__($attachment->file),['controller' => 'Attachments', 'action' => 'download',$attachment->file]) ?>
+                          <?= $this->Html->link(__($attachment->tmp_file_name),['controller' => 'Attachments', 'action' => 'download',$attachment->file]) ?>
                           <i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i>
 													<div class="scoreChecked">
 														<?php $checkScore = 0; ?>
@@ -106,7 +106,7 @@ $w = date('w', strtotime($event->start));
                       </td>
 	                    <td class="tc">
 	                        <?= $this->Html->link(__('編集'), ['controller' => 'Attachments' ,'action' =>'edit',$attachment->id]); ?>
-	                        <?= $this->Form->postLink(__('削除'), ['controller' => 'Attachments' ,'action' => 'delete', $attachment->id ], ['confirm' => __('本当に削除してよろしいですか　# {0}?', $attachment->file)]) ?>
+	                        <?= $this->Form->postLink(__('削除'), ['controller' => 'Attachments' ,'action' => 'delete', $attachment->id ], ['confirm' => __('本当に削除してよろしいですか　# {0}?', $attachment->tmp_file_name)]) ?>
 	                    </td>
 	                </tr>
 	                <?php endforeach ?>

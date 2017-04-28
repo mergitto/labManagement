@@ -52,7 +52,7 @@
                       <?= $attachment['title']; ?>
                   </td>
                   <td>
-                      <?= $this->Html->link(__($attachment->file),['controller' => 'Attachments', 'action' => 'download',$attachment->file]) ?>
+                      <?= $this->Html->link(__($attachment->tmp_file_name),['controller' => 'Attachments', 'action' => 'download',$attachment->file]) ?>
                       <i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i>
                       <ul class="list-inline" style="list-style: none;">
                         <!--このページにアクセスした時-->
