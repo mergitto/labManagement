@@ -13,11 +13,6 @@ class CreateFavorites extends AbstractMigration
     public function change()
     {
         $table = $this->table('favorites');
-        $table->addColumn('favo', 'integer', [
-            'default' => null,
-            'limit' => 11,
-            'null' => true,
-        ]);
         $table->addColumn('user_id', 'integer', [
             'default' => null,
             'limit' => 11,
