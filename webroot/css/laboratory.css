@@ -169,3 +169,73 @@ table > thead > tr > th {
   color: #ff0000;
 }
 /****end エラーメッセージのデザイン*****/
+/****ランキングのデザイン*****/
+.ranking-list{
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px dotted #ccc;
+}
+ul.rank-right{
+  list-style: none;
+  margin-left: 10px;
+}
+.rank-tag{
+  position: relative;
+  height: 100px;
+}
+.rank-tag ul{
+  float: right;
+  padding-left: 10px;
+  padding-top: 30px;
+}
+.rank-1{
+  background-image: url(../img/rank-01.svg);
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+}
+.rank-2{
+  background-image: url(../img/rank-02.svg);
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+}
+.rank-3{
+  background-image: url(../img/rank-03.svg);
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+}
+.rankCount{
+  color: #9ab;
+  margin: 0 10px;
+}
+.w-100{
+  height: 50px;
+  padding: 10px;
+}
+.label-color-1{
+  background-color: #ffd51a;
+  font-size: 16px;
+}
+.label-color-2{
+  background-color: #aaa;
+  font-size: 12px;
+}
+.label-color-3{
+  background-color: #816D46;
+  font-size: 10px;
+}
+.gly-color-1{
+  color: #ffd51a;
+  font-size: 22px;
+}
+.gly-color-2{
+  color: #aaa;
+  font-size: 20px;
+}
+.gly-color-3{
+  color: #816D46;
+  font-size: 16px;
+}
+/****end ランキングのデザイン*****/
