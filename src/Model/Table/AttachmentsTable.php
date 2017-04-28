@@ -103,7 +103,12 @@ class AttachmentsTable extends Table
 
         $validator
             ->notEmpty('url')
-            ->add('url', 'valid-url', ['rule' => 'url','message' => 'URLの形式で記入してください']);
+            ->add('url', 'custom', [
+                'rule' => function ($value, $context){
+                    return (bool) preg_match('/^(https?|ftp)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)$/',$value);
+                },
+                'message' => 'URLの形式で入力してください'
+            ]);
 
         return $validator;
     }
