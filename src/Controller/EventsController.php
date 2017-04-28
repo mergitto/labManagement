@@ -79,7 +79,7 @@ class EventsController extends FullCalendarAppController
           //ゼミに登録されているユーザの数
           $countUsers[$event->id] = count($event->users);
           foreach ($event->users as $key => $eventUser) {
-            if(array_search($eventUser->id, $checkUsers[$event->id])){
+            if(array_search($eventUser->id, $checkUsers[$event->id]) !== FALSE){
               //ゼミに登録されているユーザの内ファイルを提出したユーザ
               $submittedUsers[$event->id][] = 'SUBMITTED';
             }
