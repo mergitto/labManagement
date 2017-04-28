@@ -53,7 +53,6 @@ class EventsController extends FullCalendarAppController
         $rankTags = array_count_values($rankTags); //配列に格納されている同じ項目のカウント
         $result = arsort($rankTags);
         array_splice($rankTags, 3); //上位3つまでの配列にする
-        dump($rankTags);
 
         foreach($allEvent as $event) {
             if($event->all_day === 1) {
@@ -88,7 +87,7 @@ class EventsController extends FullCalendarAppController
         }
         $this->set('json', h(json_encode($json,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)));
 
-        $this->set(compact('allEvent','checkUsers','countUsers','submittedUsers'));
+        $this->set(compact('allEvent','checkUsers','countUsers','submittedUsers','rankTags'));
         $this->set('events', $this->paginate($events));
         $this->set('_serialize', ['events']);
     }

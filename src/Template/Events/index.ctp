@@ -7,6 +7,27 @@
         <!-- カレンダー表示 -->
         <div id="calendar"></div>
         <!-- end カレンダー表示 -->
+        <?php $rCount = 1;?>
+        <div class="row">
+          <?php foreach($rankTags as $key => $rankTag): ?>
+            <div class="col-md-4 ranking-list">
+              <div class="row">
+                <div class="col-xs-6">
+                  <div class="rank-<?= $rCount; ?>"></div>
+                </div>
+                <div class="col-xs-6">
+                  <div class="w-100">
+                    <span class="label label-default label-color-<?= $rCount; ?>"><?= $key ?></span>
+                  </div>
+                  <div class="w-100">
+                    <i class="glyphicon glyphicon-thumbs-up mar-le-10 gly-color-<?= $rCount; ?>"></i><?= __(':').$rankTag ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <?php $rCount++; ?>
+          <?php endforeach ?>
+        </div>
       </div>
       <div class="col-md-5">
         <div class="events small-12 medium-8 large-12 columns">
