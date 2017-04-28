@@ -124,7 +124,6 @@ class AttachmentsTable extends Table
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['event_id'], 'Events'));
-        //$rules->add(new IsUnique(['file']), 'uniqueFile');
 
         return $rules;
     }
