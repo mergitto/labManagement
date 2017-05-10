@@ -5,8 +5,9 @@
     <div class="row">
       <div class="col-md-7">
         <div class="row">
+          <!-- お気に入り登録数ランキング -->
           <?php $rCount = 1;?>
-          <?php foreach($rankTags as $key => $rankTag): ?>
+          <?php foreach($allTags as $key => $rankTag): ?>
             <div class="col-md-4 ranking-list">
               <div class="row">
                 <div class="col-xs-6">

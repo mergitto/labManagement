@@ -41,18 +41,19 @@ class EventsController extends FullCalendarAppController
             'order'   => ['Events.start' => 'asc']
         ];
 
-        $rankTags = []; //タグの順位を作成するための配列
         $attachments = $this->Events->Attachments->find()->contain(['Tags','Favorites']);
-        foreach ($attachments as $key => $attachment) {
-          if(array_key_exists(0,$attachment->favorites)){
-            foreach ($attachment->tags as $key => $tag) {
-              $rankTags[] = $tag->category;
-            }
+        $allRankTags = []; //カウントされたタグ全てをカウントするもの
+        // お気に入り登録されたファイルのタグ配列をいじりやすいように変更
+        $allTags = []; // 全てのタグ
+        $allRankTags = $this->tagCreate($attachments); // お気に入り登録されたタグを集める
+        foreach($allRankTags as $key => $tags) {
+          foreach($tags as $tag) {
+            $allTags[] = $tag;
           }
         }
-        $rankTags = array_count_values($rankTags); //配列に格納されている同じ項目のカウント
-        $result = arsort($rankTags);
-        array_splice($rankTags, 3); //上位3つまでの配列にする
+        $allTags = array_count_values($allTags); //配列に格納されている同じ項目のカウント
+        $result = arsort($allTags);
+        array_splice($allTags, 3); //上位3つまでの配列にする
 
         foreach($allEvent as $event) {
             if($event->all_day === 1) {
@@ -87,7 +88,7 @@ class EventsController extends FullCalendarAppController
         }
         $this->set('json', h(json_encode($json,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)));
 
-        $this->set(compact('allEvent','checkUsers','countUsers','submittedUsers','rankTags'));
+        $this->set(compact('allEvent','checkUsers','countUsers','submittedUsers','allTags'));
         $this->set('events', $this->paginate($events));
         $this->set('_serialize', ['events']);
     }
@@ -253,6 +254,35 @@ class EventsController extends FullCalendarAppController
         }
         $this->Flash->error(__('管理者の機能です'));
         return false;
+    }
+
+    /**
+    * Tag Create 関数
+    * AttachmentにFavoriteとTagsをcontainして引数に渡す
+    * お気に入り登録されているTagのみを取り出し配列として返す
+    * @return array
+     */
+    public function tagCreate($attachments)
+    {
+        foreach ($attachments as $key => $attachment) {
+          $rankTags = []; //タグの順位を作成するための配列
+          $favos = []; //お気に入りされたファイル(同じファイルを含む)
+          if(array_key_exists(0,$attachment->favorites)){
+            // $favos:お気に入り登録されたファイルを登録する
+            foreach ($attachment->favorites as $favFiles) {
+              $favos[] = $favFiles->attachment_id;
+            }
+            // $rankTags:提出されたファイルに付いているタグ格納
+            foreach ($attachment->tags as $key => $tag) {
+              $rankTags[] = $tag->category;
+            }
+            // $allRankTags:お気に入り登録されたファイルのタグを格納
+            foreach ($favos as $key => $value) {
+              $allRankTags[] = $rankTags;
+            }
+          }
+        }
+      return $allRankTags;
     }
 
     /**
