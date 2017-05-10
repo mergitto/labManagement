@@ -117,13 +117,14 @@ class TagsController extends AppController
     public function isAuthorized($user)
     {
         $action = $this->request->params['action'];
-        // index, view, logoutページは誰でも見れる
-        if (in_array($action, ['index','view','logout','edit','delete'])) {
+        // indexページは誰でも見れる
+        if (in_array($action, ['index','logout'])) {
             return true;
         }
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
         }
+        $this->Flash->error('管理者の機能です');
         return false;
     }
 }

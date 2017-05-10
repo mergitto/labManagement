@@ -226,6 +226,11 @@ ul.rank-right{
   background-color: #816D46;
   font-size: 10px;
 }
+.glyphicon-tags +  a ,
+.glyphicon-tags + a:hover ,
+.glyphicon-tags + a:active {
+  color: #fff;
+}
 .gly-color-1{
   color: #ffd51a;
   font-size: 22px;

@@ -31,12 +31,16 @@
         <!-- end カレンダー表示 -->
       </div>
       <div class="col-md-5">
-        <div class="events small-12 medium-8 large-12 columns">
           <button type="button" class="btn btn-default">
               <i class="glyphicon glyphicon-calendar" aria-hidden="true"></i>
               <?= $this->Html->link(__('予定追加'), ['action' => 'add']); ?>
           </button>
-        </div>
+          <?php if($user['role'] == "admin"): ?>
+          <button type="button" class="btn btn-secondary">
+              <i class="glyphicon glyphicon-tags" aria-hidden="true"></i>
+              <?= $this->Html->link(__('タグ一覧へ(管理者のみ)'), ['controller' => 'Tags','action' => 'index']); ?>
+          </button>
+          <?php endif ?>
         <div class="fu-list">
           <table class="table">
               <thead>
