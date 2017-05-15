@@ -10,6 +10,12 @@
             <hr class="md10">
         </div>
     </div>
+    <div class="row">
+        <div class="col-xs-12">
+          <!-- お気に入り登録数ランキング -->
+          <?= $this->element('rankCreate') ?>
+        </div>
+    </div>
     <div class="fu-list">
         <table class="table table-hover table-striped">
             <thead>

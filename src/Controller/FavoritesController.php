@@ -37,22 +37,6 @@ class FavoritesController extends AppController
      }
 
     /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
-    public function index()
-    {
-        $this->paginate = [
-            'contain' => ['Users', 'Attachments']
-        ];
-        $favorites = $this->paginate($this->Favorites);
-
-        $this->set(compact('favorites'));
-        $this->set('_serialize', ['favorites']);
-    }
-
-    /**
      * View method
      *
      * @param string|null $id Favorite id.
@@ -63,9 +47,26 @@ class FavoritesController extends AppController
     {
         $favoriteFiles = $this->Favorites->find()->where(['Favorites.user_id' => $id])->contain(['Users','Attachments']);
 
-        $attachments = $this->Favorites->Attachments->find()->contain(['Tags'])->all();
+        $attachments = $this->Favorites->Attachments->find()->contain(['Tags','Favorites'])->all();
+        $favoUser = $this->Auth->user();
+        $persionalRankTags = []; //個人用のランキング
+        $favoAttachments = $this->Favorites->find()->contain(['Attachments','Attachments.Tags'])->where(['Favorites.user_id' => $favoUser['id']]);
+        foreach ($favoAttachments as $favorite) {
+          foreach ($favorite->attachment->tags as $tag) {
+            $persionalRankTags[] = $tag['category'];
+          }
+        }
+        $allRankTags = []; //カウントされたタグ全てをカウントするもの
+        // お気に入り登録されたファイルのタグ配列をいじりやすいように変更
+        $allTags = []; // 全てのタグ
+        foreach($persionalRankTags as $key => $tag) {
+          $allTags[] = $tag;
+        }
+        $allTags = array_count_values($allTags); //配列に格納されている同じ項目のカウント
+        $result = arsort($allTags);
+        array_splice($allTags, 3); //上位3つまでの配列にする
 
-        $this->set(compact('favoriteFiles','attachments'));
+        $this->set(compact('favoriteFiles','attachments','allTags'));
         $this->set('_serialize', ['favorite']);
     }
 
