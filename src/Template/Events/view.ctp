@@ -48,8 +48,8 @@ $w = date('w', strtotime($event->start));
 	                <tr>
 	                		<th colspan="2"><?= __('ユーザー名'); ?></th>
 	                    <th><?= $this->Paginator->sort('title', __('ゼミ資料タイトル')); ?></th>
-                      <th class="mi-w-400"><?= $this->Paginator->sort('file', __('資料名')); ?></th>
-                      <th><?= $this->Paginator->sort('url', __('参考URL')); ?></th>
+                      <th class="mi-w-340"><?= $this->Paginator->sort('file', __('資料名')); ?></th>
+                      <th class="w-500"><?= $this->Paginator->sort('url', __('参考URL')); ?></th>
 	                    <th class="b_w150">　</th>
 	                </tr>
 	                </thead>

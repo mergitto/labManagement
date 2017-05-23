@@ -214,8 +214,12 @@ ul.rank-right{
   height: 50px;
   padding: 10px;
 }
-.mi-w-400 {
+.w-500 {
   width: 400px;
+  max-width: 500px;
+}
+.mi-w-340 {
+  width: 340px;
 }
 .label-color-1{
   background-color: #ffd51a;
