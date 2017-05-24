@@ -12,10 +12,7 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <button type="button" class="btn btn-default">
-                <i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
-                <?= $this->Html->link(__('新規タイトル'),['action' => 'add']) ?>
-            </button>
+          <?= $this->Html->link(__('新規タイトル'),['action' => 'add'], ['class' => 'glyphicon glyphicon-list-alt btn btn-default']) ?>
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-4">

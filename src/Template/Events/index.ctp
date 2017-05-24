@@ -13,15 +13,9 @@
         <!-- end カレンダー表示 -->
       </div>
       <div class="col-md-5">
-          <button type="button" class="btn btn-default">
-              <i class="glyphicon glyphicon-calendar" aria-hidden="true"></i>
-              <?= $this->Html->link(__('予定追加'), ['action' => 'add']); ?>
-          </button>
+          <?= $this->Html->link(__('予定追加'), ['action' => 'add'], ['class' => 'glyphicon glyphicon-calendar btn btn-default']); ?>
           <?php if($user['role'] == "admin"): ?>
-          <button type="button" class="btn btn-secondary">
-              <i class="glyphicon glyphicon-tags" aria-hidden="true"></i>
-              <?= $this->Html->link(__('タグ一覧へ(管理者のみ)'), ['controller' => 'Tags','action' => 'index']); ?>
-          </button>
+            <?= $this->Html->link(__('タグ一覧へ(管理者のみ)'), ['controller' => 'Tags','action' => 'index'], ['class' => 'glyphicon glyphicon-tags btn btn-primary']); ?>
           <?php endif ?>
         <div class="fu-list">
           <table class="table">
