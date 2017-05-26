@@ -79,7 +79,8 @@ table > thead > tr > th {
   border-color: #5cb85c;
 }
 .btn-default:hover,
-.btn-default:active:focus {
+.btn-default:active:focus,
+.btn-default:focus {
   color: #fff;
   background-color: #5cb85c;
   border-color: #5cb85c;
