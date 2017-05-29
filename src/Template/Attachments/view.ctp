@@ -17,13 +17,16 @@
             'option' => $tags,
             'multiple' => 'checkbox',
             'label' => 'タグ検索',
-            'class' => 'checkbox',
+            'class' => 'checkbox checkState',
             'templates' => [
               'nestingLabel' => "<div class='col-xs-4'>{{hidden}}<label{{attrs}} >{{input}}{{text}}</label></div>",
             ]
           ]) ?>
-          <div class="col-md-4">
-            <?= $this->Form->button(__('検索'),['class' => 'glyphicon glyphicon-search btn btn-raised btn-success']) ?>
+          <div class="col-xs-4">
+            <label for='allCheck'><input type='checkbox' id='allCheck'>全選択・解除</label>
+          </div>
+          <div class="col-md-2 pull-right">
+            <?= $this->Form->button(__('検索'),['class' => 'glyphicon glyphicon-search btn btn-raised btn-success', 'id' => 'atSerach']) ?>
           </div>
         <?= $this->Form->end(); ?>
       </div>
@@ -127,8 +130,9 @@ foreach ($checkedList as $key => $checkId){
 ?>
 <script>
   var checkTag = <?php echo json_encode($value); ?>;
-  console.log(checkTag);
+  //console.log(checkTag);
   $(function(){
     $('.checkbox').val(checkTag);
   });
 </script>
+<?= $this->Html->script('tagSelect.js') ?>
