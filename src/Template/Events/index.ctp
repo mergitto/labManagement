@@ -21,7 +21,7 @@
           <table class="table">
               <thead>
               <tr>
-                  <th><?= __('ゼミタイトル・担当'); ?></th>
+                  <th><?= __('ゼミタイトル'); ?></th>
                   <th class="min-w-120"><?= __('ゼミ予定日'); ?></th>
                   <?php if($user['role'] === 'admin'): ?>
                   <th class="min-w-50"></th>
