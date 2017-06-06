@@ -9,8 +9,8 @@
     <fieldset>
         <legend><?= __('新規コメント') ?></legend>
         <div class="form-group">
-            <?= $this->Form->textarea('comment',['type'=>'text', 'label'=> 'コメント', 'class' => "form-control login-form"]); ?>
-            <?= $this->Form->input('url', ['type' => 'text', 'label' => '参考url','class' => 'form-control login-form','placeholder' => '参考にしたURLを貼ってみてください。なくても登録できます。']); ?>
+            <?= $this->Form->textarea('comment',['type'=>'text', 'label'=> 'コメント', 'class' => "form-control login-form", 'placeholder' => 'コメントを書いて投稿しましょう。参考にしたURLを貼ってみてください。']); ?>
+            <?= $this->Form->input('url', ['type' => 'hidden', 'label' => '参考url','class' => 'form-control login-form','placeholder' => '参考にしたURLを貼ってみてください。なくても登録できます。']); ?>
             <?= $this->Form->input('user_id', ['type' =>
             'hidden' ,'value' => $user['id'], 'label' => 'タイトル名']); ?>
             <?= $this->Form->input('thread_id', ['type' =>
@@ -52,9 +52,9 @@
             <?php endforeach ?>
             <td style="max-width: 400px;">
                 <ul style="list-style: none; padding-left: 0px;">
-                    <li><?= nl2br($post->comment) ?></li>
+                    <li class="urlComment"><?= nl2br($post->comment) ?></li>
                     <?php if($post->url !== ''): ?>
-                        <li><?= $this->Html->link($post->url) ?></li>
+                      <li><a href="<?= $post->url?>" target="_blank"><?= $post->url ?></a></li>
                     <?php endif ?>
                 </ul>
             </td>
@@ -72,3 +72,4 @@
         <?php endforeach ?>
     </table>
 </div>
+<?= $this->Html->script('url2link.js') ?>

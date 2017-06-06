@@ -16,7 +16,7 @@
             <?= $this->Form->textarea('comment',['type'=>'text', 'label'=> 'コメント', 'class' => "form-control login-form"]); ?>
         </div>
         <div class="form-group">
-            <?= $this->Form->input('url',['type'=>'text', 'label'=> 'コメント', 'class' => "form-control login-form"]); ?>
+            <?= $this->Form->input('url',['type'=>'hidden', 'label'=> 'コメント', 'class' => "form-control login-form"]); ?>
         </div>
     </fieldset>
     <div class="login-button text-right">
