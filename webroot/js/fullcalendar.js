@@ -3519,7 +3519,9 @@ var Grid = FC.Grid = Class.extend({
 			date.month() != view.intervalStart.month()
 		) {
 			classes.push('fc-other-month');
-		}
+        } else {
+            classes.push('fc-month');
+        }
 
 		if (date.isSame(today, 'day')) {
 			classes.push(

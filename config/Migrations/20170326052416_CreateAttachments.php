@@ -21,6 +21,10 @@ class CreateAttachments extends AbstractMigration
             'default' => null,
             'null' => true,
         ]);
+        $table->addColumn('tmp_file_name', 'text', [
+            'default' => null,
+            'null' => true,
+        ]);
         $table->addColumn('file_dir', 'text', [
             'default' => null,
             'null' => true,

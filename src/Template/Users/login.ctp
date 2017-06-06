@@ -6,7 +6,7 @@
         </div>
         <div class="panel-body">
         <div class="form-group">
-            <?= $this->Form->input('name',['type'=>'text', 'label'=> 'ユーザー名', 'class' => "form-control login-form"]); ?>
+            <?= $this->Form->input('name',['type'=>'text', 'label'=> 'ユーザー名', 'class' => "form-control login-form first-input"]); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->input('password',['type'=>'password', 'label'=> 'パスワード', 'class' => "form-control login-form"]); ?>
@@ -18,3 +18,8 @@
     </div>
     <?= $this->Form->end() ?>
 </div>
+<script>
+  $(function(){
+    $('.first-input').focus();
+  });
+</script>

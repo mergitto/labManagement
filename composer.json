@@ -15,7 +15,8 @@
         "kozo/partial": "~3.0",
         "tutida/altair": "~0.8.1",
         "friendsofcake/search": "^2.4",
-        "josegonzalez/cakephp-upload": "^3.6"
+        "josegonzalez/cakephp-upload": "^3.6",
+        "kartik-v/bootstrap-star-rating": "@dev"
     },
     "require-dev": {
         "psy/psysh": "@stable",

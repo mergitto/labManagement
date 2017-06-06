@@ -20,6 +20,9 @@
         <li>
           <?= $this->Html->link(__('ユーザー一覧'),['controller' => 'Users', 'action' => 'index']) ?>
         </li>
+        <li>
+          <?= $this->Html->link(__('ゼミ資料検索'),['controller' => 'Attachments', 'action' => 'view']) ?>
+        </li>
         <!--後々使うことになる可能性あるため残している
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -34,7 +37,12 @@
         -->
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="navbar-text"><?= __('ユーザー:') ?><?= $user['name'] ?></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= __('ユーザー:') ?><?= $user['name'] ?><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><?= $this->Html->link(__('いいね資料'), ['controller' => 'Favorites', 'action' => 'view',$user['id']],['class' => 'text-center header-hover-style']) ?></li>
+          </ul>
+        </li>
         <li><?= $this->Form->postLink(__('ログアウト'),['action' => 'logout']) ?></li>
       </ul>
     </div><!-- /.navbar-collapse -->

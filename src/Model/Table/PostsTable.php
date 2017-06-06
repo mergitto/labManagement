@@ -68,7 +68,13 @@ class PostsTable extends Table
             ->notEmpty('comment');
 
         $validator
-            ->allowEmpty('url');
+            ->allowEmpty('url')
+            ->add('url', 'custom', [
+                'rule' => function ($value, $context){
+                    return (bool) preg_match('/^(https?|ftp)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)$/',$value);
+                },
+                'message' => 'URLの形式で入力してください'
+            ]);
 
         return $validator;
     }

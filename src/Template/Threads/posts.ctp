@@ -18,12 +18,12 @@
         </div>
     </fieldset>
     <div class="login-button text-right">
-    <?= $this->Form->button(__('新規登録'),['class' => 'btn btn-raised btn-success']) ?>
+      <?= $this->Form->button(__('新規登録'),['class' => 'btn btn-raised btn-success glyphicon glyphicon-plus']) ?>
     </div>
     <?= $this->Form->end() ?>
 </div>
 <div class="fu-list">
-    <table class="table table-hover">
+    <table class="table table-hover table-striped">
         <thead>
         <tr>
             <th colspan="2"><?= __('ユーザー名'); ?></th>

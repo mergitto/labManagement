@@ -44,11 +44,17 @@ class UsersTable extends Table
         $this->addBehavior('Josegonzalez/Upload.Upload', [
             'photo' => [
                 'fields' => [
-                    'dir' => 'photo_dir', 
+                    'dir' => 'photo_dir',
                     'size' => 'photo_size',
                     'type' => 'photo_type',
                 ],
             ],
+        ]);
+
+        $this->belongsToMany('Events',[
+          'foreignKey' => 'user_id',
+          'targetForeignKey' => 'event_id',
+          'joinTable' => 'events_users'
         ]);
 
         $this->belongsTo('Admins', [
@@ -101,7 +107,7 @@ class UsersTable extends Table
                                 'image/png',
                                 'image/gif'
                             ],
-                            'maxSize' => '5MB'
+                            'maxSize' => '0.5MB'
                         ],
                     ],
                 'message' => '画像の形式はjpg,png,gifのいずれかにしてください'

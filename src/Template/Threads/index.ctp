@@ -12,10 +12,7 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <button type="button" class="btn btn-default">
-                <i class="fa fa-plus-square-o fa-lg" aria-hidden="true"></i>
-                <?= $this->Html->link(__('新規タイトル'),['action' => 'add']) ?>
-            </button>
+          <?= $this->Html->link(__('新規タイトル'),['action' => 'add'], ['class' => 'glyphicon glyphicon-list-alt btn btn-default']) ?>
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-4">
@@ -32,17 +29,16 @@
             </fieldset>
         </div>
         <div class="col-md-1 text-right pad-25">
-            <?= $this->Form->button(__('検索'),['class' => 'btn btn-raised btn-success']) ?>
+            <?= $this->Form->button(__('検索'),['class' => 'glyphicon glyphicon-search btn btn-raised btn-success']) ?>
             <?= $this->Form->end() ?>
         </div>
         <div class="col-md-2"></div>
     </div>
 
     <div class="fu-list">
-        <table class="table table-hover">
+        <table class="table table-hover table-striped">
             <thead>
             <tr>
-                <th><?= $this->Paginator->sort('user_id', __('管理ユーザー')); ?></th>
                 <th><?= $this->Paginator->sort('title', __('タイトル')); ?></th>
                 <th><?= $this->Paginator->sort('modified', __('更新日')); ?></th>
                 <th class="b_w150">　</th>
@@ -54,9 +50,6 @@
             $w = date('w', strtotime($thread['modified']));
             ?>
             <tr>
-                <td>
-                    <?= $thread->user['name']; ?>
-                </td>
                 <td>
                     <?= $this->Html->link($thread->title,[
                         'action' => 'posts', $thread->id

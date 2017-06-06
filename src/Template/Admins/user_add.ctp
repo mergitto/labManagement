@@ -5,7 +5,6 @@
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li><?= $this->Html->link(__('管理者トップページ'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('ユーザー一覧'), ['controller' => 'Users' ,'action' => 'index']) ?></li>
     </ul>
 </nav>
@@ -32,8 +31,8 @@
         </div>
         <div class="file-comment">
             <ul style="list-style: none; padding-left: 0px;">
-                <li><?= __('※ファイルのサイズは2000KBまでにしてください') ?></li>
-                <li><?= __('※ファイルは後から追加することもできます') ?></li>
+                <li><?= __('※画像のサイズは500KBまでにしてください') ?></li>
+                <li><?= __('※画像は後から追加することもできます') ?></li>
                 <li><?= __('※画像の形式はjpg,png,gifにしてください') ?></li>
             </ul>
         </div>

@@ -41,6 +41,33 @@ table > thead > tr > th {
 .navbar-toggle:hover{
   background-color: #76D276;
 }
+.progress {
+    box-shadow: inset 0 5px 32px rgba(0, 0, 0, .1);
+}
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
+  background-color: #76D276;
+}
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover{
+  background-color: #76D276;
+}
+.nav > li > a:hover, .nav > li > a:focus{
+  background-color: #76D276;
+}
+.nav>li>a:focus, .nav>li>a:hover {
+  background-color: #76D276;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus,
+.dropdown-menu:hover{
+  background-color: #76D276;
+}
+.dropdown-menu{
+  background-color: #78B319;
+}
+.dropdown-menu > li > a,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:active{
+  color: #fff;
+}
 /****end ヘッダー部分のデザイン*****/
 /****ログインパネル部分のデザイン*****/
 .panel-default {
@@ -52,7 +79,8 @@ table > thead > tr > th {
   border-color: #5cb85c;
 }
 .btn-default:hover,
-.btn-default:active:focus {
+.btn-default:active:focus,
+.btn-default:focus {
   color: #fff;
   background-color: #5cb85c;
   border-color: #5cb85c;
@@ -73,6 +101,17 @@ table > thead > tr > th {
 .btn-default a:hover{
   text-decoration: none;
 }
+.btn-primary {
+  color: #fff;
+  border-color: #a0a0a0;
+  background-color: #a0a0a0;
+}
+.btn-primary:hover,
+.btn-primary:active:focus,
+.btn-primary:focus {
+  background-color: #BABABA;
+  border-color: #bababa;
+}
 .color-wh{
   color: #fff;
 }
@@ -86,6 +125,9 @@ table > thead > tr > th {
 .pad-25{
   padding: 25px;
 }
+.mar-le-10{
+  margin-left: 10px;
+}
 .img-50{
   width: 50px;
   height: 50px;
@@ -94,5 +136,133 @@ table > thead > tr > th {
   width: 100px;
   height: 100px;
 }
+.font-b{
+  font-weight: bold;
+}
+.font-24{
+  font-size: 24px;
+}
+.font-20{
+  font-size: 20px;
+}
+.font-14{
+  font-size: 14px;
+}
+.min-w-120{
+  min-width: 120px;
+}
+.min-w-50{
+  min-width: 50px;
+}
+.ajaxFav{
+  cursor: pointer;
+}
+.header-hover-style{
+  background-color: #78B319;
+  color: #fff;
+}
 /****end ユーザー画面部分のデザイン*****/
-
+/****タグのデザイン*****/
+.badge{
+  padding: 1px 4px;
+  font-weight: normal;
+  color: #5cb85c;
+  background-color: #fff;
+  margin-left: 3px;
+}
+/****end タグのデザイン*****/
+/****いいね！のデザイン*****/
+.favChecked{
+  color: #ff2d55;
+}
+/****end いいねのデザイン*****/
+/****エラーメッセージのデザイン*****/
+.error-message{
+  color: #ff0000;
+}
+/****end エラーメッセージのデザイン*****/
+/****ランキングのデザイン*****/
+.ranking-list{
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px dotted #ccc;
+}
+ul.rank-right{
+  list-style: none;
+  margin-left: 10px;
+}
+.rank-tag{
+  position: relative;
+  height: 100px;
+}
+.rank-tag ul{
+  float: right;
+  padding-left: 10px;
+  padding-top: 30px;
+}
+.rank-1{
+  background-image: url(../img/rank-01.svg);
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+}
+.rank-2{
+  background-image: url(../img/rank-02.svg);
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+}
+.rank-3{
+  background-image: url(../img/rank-03.svg);
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+}
+.rankCount{
+  color: #9ab;
+  margin: 0 10px;
+}
+.w-100{
+  height: 50px;
+  padding: 10px;
+}
+.w-500 {
+  width: 400px;
+  max-width: 500px;
+}
+.mi-w-380 {
+  width: 380px;
+}
+.label-color-1{
+  background-color: #ffd51a;
+  font-size: 16px;
+}
+.label-color-2{
+  background-color: #aaa;
+  font-size: 12px;
+}
+.label-color-3{
+  background-color: #816D46;
+  font-size: 10px;
+}
+.glyphicon-tags +  a ,
+.glyphicon-tags + a:hover ,
+.glyphicon-tags + a:active {
+  color: #fff;
+}
+.gly-color-1{
+  color: #ffd51a;
+  font-size: 22px;
+}
+.gly-color-2{
+  color: #aaa;
+  font-size: 20px;
+}
+.gly-color-3{
+  color: #816D46;
+  font-size: 16px;
+}
+/****end ランキングのデザイン*****/
+#allCheck {
+  margin-right: 5px;
+}

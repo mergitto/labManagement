@@ -8,10 +8,7 @@
         <div class="tools">
             <div class="row">
                 <div class="col-xs-4">
-                    <button type="button" class="btn btn-default">
-                        <i class="fa fa-plus-square-o fa-lg" aria-hidden="true"></i>
-                        <?= $this->Html->link(__('ユーザー新規作成'),['controller' => 'admins' ,'action' => 'user_add']) ?>
-                    </button>
+                  <?= $this->Html->link(__('ユーザー新規作成'),['controller' => 'admins' ,'action' => 'user_add'], ['class' => 'glyphicon glyphicon-plus btn btn-default']) ?>
                 </div>
                 <div class="col-xs-8">
                 </div>
@@ -20,7 +17,7 @@
         <?= $this->Form->end(); ?>
 
         <div class="fu-list">
-            <table class="table table-hover">
+            <table class="table table-hover table-striped">
                 <thead>
                 <tr>
                     <th colspan="2"><?= __('ユーザー名'); ?></th>
@@ -42,9 +39,11 @@
                         <?= $user['name']; ?>
                     </td>
                     <td>
+                        <span class="glyphicon glyphicon-envelope"></span>
                         <?= $user['email']; ?>
                     </td>
                     <td>
+                        <span class="glyphicon glyphicon-phone"></span>
                         <?= $user['phone']; ?>
                     </td>
                     <td class="tc">

@@ -5,7 +5,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-
+use Cake\ORM\Rule\IsUnique;
 /**
  * Attachments Model
  *
@@ -44,7 +44,7 @@ class AttachmentsTable extends Table
         $this->addBehavior('Josegonzalez/Upload.Upload', [
             'file' => [
                 'fields' => [
-                    'dir' => 'file_dir', 
+                    'dir' => 'file_dir',
                     'size' => 'file_size',
                     'type' => 'file_type',
                 ],
@@ -58,6 +58,19 @@ class AttachmentsTable extends Table
         $this->belongsTo('Events', [
             'foreignKey' => 'event_id',
             'joinType' => 'INNER'
+        ]);
+        $this->hasMany('Favorites',[
+            'foreignKey' => 'attachment_id',
+            'targetForeignKey' => 'favorite_id'
+        ]);
+        $this->hasMany('Scores',[
+            'foreignKey' => 'attachment_id',
+            'targetForeignKey' => 'score_id'
+        ]);
+        $this->belongsToMany('Tags',[
+          'foreignKey' => 'attachment_id',
+          'targetForeignKey' => 'tag_id',
+          'joinTable' => 'attachments_tags'
         ]);
     }
 
@@ -74,14 +87,28 @@ class AttachmentsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
+            ->requirePresence('title')
+            ->notEmpty('title');
+
+        $validator
             ->requirePresence('file')
-            ->notEmpty('file');
+            ->notEmpty('file')
+            ->add('file',[
+              'uploadedFile' => [
+                'rule' => ['uploadedFile',['maxSize' => '5MB']],
+                'last' => true,
+                'message' => '5Mを超えるファイルは登録できません'
+              ]
+            ]);
 
         $validator
-            ->allowEmpty('title');
-
-        $validator
-            ->allowEmpty('url');
+            ->notEmpty('url')
+            ->add('url', 'custom', [
+                'rule' => function ($value, $context){
+                    return (bool) preg_match('/^(https?|ftp)(:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+)$/',$value);
+                },
+                'message' => 'URLの形式で入力してください'
+            ]);
 
         return $validator;
     }

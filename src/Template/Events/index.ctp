@@ -1,54 +1,87 @@
-<style>
-</style>
-
 <div class="fu-frame-main">
   <div class="container">
     <h3><?= __('ゼミ予定日');?></h3>
     <hr class="mb0">
     <div class="row">
       <div class="col-md-7">
+        <div class="row">
+          <!-- お気に入り登録数ランキング -->
+          <?= $this->element('rankCreate') ?>
+        </div>
         <!-- カレンダー表示 -->
         <div id="calendar"></div>
         <!-- end カレンダー表示 -->
       </div>
       <div class="col-md-5">
-        <div class="events small-12 medium-8 large-12 columns">
-          <button type="button" class="btn btn-default">
-              <i class="fa fa-calendar" aria-hidden="true"></i>
-              <?= $this->Html->link(__('予定追加'), ['action' => 'add']); ?>
-          </button>
-        </div>
+          <?= $this->Html->link(__('予定追加'), ['action' => 'add'], ['class' => 'glyphicon glyphicon-calendar btn btn-default']); ?>
+          <?php if($user['role'] == "admin"): ?>
+            <?= $this->Html->link(__('タグ一覧へ(管理者のみ)'), ['controller' => 'Tags','action' => 'index'], ['class' => 'glyphicon glyphicon-tags btn btn-primary']); ?>
+          <?php endif ?>
         <div class="fu-list">
-          <table class="table table-hover">
+          <table class="table">
               <thead>
               <tr>
-                  <th><?= __('ゼミタイトル'); ?></th>
-                  <th><?= __('状況'); ?></th>
-                  <th><?= __('ゼミ予定日'); ?></th>
-                  <th></th>
+                  <th><?= __('ゼミタイトル・担当'); ?></th>
+                  <th class="min-w-120"><?= __('ゼミ予定日'); ?></th>
+                  <?php if($user['role'] === 'admin'): ?>
+                  <th class="min-w-50"></th>
+                  <?php endif ?>
               </tr>
               </thead>
-              <?php foreach ($events as $event): ?>
+              <?php foreach ($events as $key => $event): ?>
                 <?php
                 // 曜日を日本語で
                 $w = date('w', strtotime($event->start));
                 ?>
-              <tr>
+              <?php if($key % 2 === 0): ?>
+                <tr class="active">
+              <?php else: ?>
+                <tr>
+              <?php endif ?>
                   <td>
-                      <?= $this->Html->link(__($event['title'].'('.count($event->attachments).')'), ['action' => 'view', $event->id]); ?>
+                      <?= $this->Html->link(__($event['title']), ['action' => 'view', $event->id],['class' => 'font-24']); ?>
+                      <?= '('.count($event->attachments).')' ?>
+
+                      <div class="progress progress-striped active">
+                        <?php if(isset($submittedUsers[$event->id])): ?>
+                          <div class="progress-bar progress-bar-success" style="width: <?= (int)count($submittedUsers[$event->id]) / (int)$countUsers[$event->id] * 100; ?>%"></div>
+                        <?php else: ?>
+                          <div class="progress-bar" style="width: 0%"></div>
+                        <?php endif ?>
+                      </div>
                   </td>
-                  <td>
-                      <?= $event['status']; ?>
-                  </td>
-                  <td>
+                  <td rowspan="2" style="vertical-align:middle;">
                       <?= date(__('Y-m-d'),strtotime($event->start)) ?><?=$week[$w]?>
                   </td>
+                  <?php if($user['role'] === 'admin'): ?>
                   <td class="tc">
-                      <?php if($user['role'] === 'admin'): ?>
                         <?= $this->Html->link(__('編集'), ['action' =>'edit',$event['id']]); ?>
-                        <?= $this->Form->postLink(__('削除'), ['action' =>'delete',$event->id], ['confirm' => __('本当に削除してもいいですか # {0}?' , $event['title'])]); ?>
-                      <?php endif ?>
                   </td>
+                  <?php endif ?>
+              </tr>
+              <?php if($key % 2 === 0): ?>
+                <tr class="active">
+              <?php else: ?>
+                <tr>
+              <?php endif ?>
+                 <td style="border-top:none; max-width:150px;">
+                   <?php foreach ($event->users as $eventUser): ?>
+                     <?php if(array_key_exists($event->id, $checkUsers)): ?>
+                       <?php if(array_search($eventUser->id, $checkUsers[$event->id]) === FALSE): ?>
+                        <span class="text-muted"><?= $eventUser['name']; ?></span>
+                       <?php else: ?>
+                        <span class="text-default font-b"><?= $eventUser['name']; ?></span>
+                       <?php endif ?>
+                     <?php else: ?>
+                       <span class="text-muted"><?= $eventUser['name']; ?></span>
+                     <?php endif ?>
+                   <?php endforeach ?>
+                 </td>
+                 <?php if($user['role'] === 'admin'): ?>
+                 <td>
+                   <?= $this->Form->postLink(__('削除'), ['action' =>'delete',$event->id], ['confirm' => __('本当に削除してもいいですか # {0}?' , $event['title'])]); ?>
+               </td>
+               <?php endif ?>
               </tr>
               <?php endforeach ?>
           </table>
@@ -70,8 +103,6 @@
   </div>
 </div>
 <!-- / .fu-frame-main -->
-
-
 <script>
 $(function() {
     $('#calendar').fullCalendar({
