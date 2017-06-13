@@ -47,7 +47,7 @@
                             <?= $this->Html->image('noimage.png',['class' => 'img-50']) ?>
                     <?php endif ?>
                     </td>
-                    <td><?= $targetUser->name ?></td>
+                    <td><?= $targetUser->nickname ?></td>
                 <?php endif ?>
             <?php endforeach ?>
             <td style="max-width: 400px;">

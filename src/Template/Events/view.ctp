@@ -27,9 +27,9 @@ $w = date('w', strtotime($event->start));
 	<h4>
 	<?php foreach($event->users as $eventUsers): ?>
 		<?php if(array_search($eventUsers->name, $checkUsers) === FALSE): ?>
-			<span class="text-muted"><?= $eventUsers->name.__('/') ?></span>
+			<span class="text-muted"><?= $eventUsers->nickname.__("(").$eventUsers->name.__(")").__('/') ?></span>
 		<?php else: ?>
-			<span class="text-primary font-b"><?= $eventUsers->name.__('/') ?></span>
+			<span class="text-primary font-b"><?= $eventUsers->nickname.__("(").$eventUsers->name.__(")").__('/') ?></span>
 		<?php endif?>
 	<?php endforeach ?>
 	</h4>
@@ -63,7 +63,7 @@ $w = date('w', strtotime($event->start));
 	                    <?php endif ?>
 	                    </td>
                       <td>
-                          <?= $attachment->user->name ?>
+                          <?= $attachment->user->nickname ?>
                       </td>
 	                    <td class="text-muted">
 	                        <?= $attachment->title; ?>
