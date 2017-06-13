@@ -36,7 +36,8 @@
                     <?php endif?>
                     </td>
                     <td>
-                        <?= $user['name']; ?>
+                        <p><?= $user['name']; ?></p>
+                        <p><?= __("表示名:").$user['nickname']; ?></p>
                     </td>
                     <td>
                         <span class="glyphicon glyphicon-envelope"></span>

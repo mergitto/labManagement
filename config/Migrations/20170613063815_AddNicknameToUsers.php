@@ -14,7 +14,7 @@ class AddNicknameToUsers extends AbstractMigration
     {
         $table = $this->table('users');
         $table->addColumn('nickname', 'text', [
-            'default' => "No nameさん",
+            'default' => "No name",
             'null' => false,
         ]);
         $table->update();

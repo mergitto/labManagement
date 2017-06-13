@@ -49,7 +49,7 @@
               ?>
               <tr>
                   <td>
-                      <?= $attachment->user['name'] ?>
+                      <?= $attachment->user['nickname'] ?>
                   </td>
                   <td>
                       <?= $attachment['title']; ?>

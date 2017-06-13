@@ -22,8 +22,11 @@
             <div class="form-group col-xs-4">
                 <h4><?= __('現在の画像') ?></h4>
             </div>
-            <div class="form-group col-xs-8">
+            <div class="form-group col-xs-4">
                 <?= $this->Form->input('name',['type'=>'text', 'label'=> 'ユーザー名', 'class' => "form-control login-form"]); ?>
+            </div>
+            <div class="form-group col-xs-4">
+                <?= $this->Form->input('nickname',['type'=>'text', 'label'=> 'ニックネーム', 'class' => "form-control login-form"]); ?>
             </div>
         </div>
         <div class="row">

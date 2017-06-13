@@ -16,6 +16,9 @@
             <?= $this->Form->input('name',['type'=>'text', 'label'=> 'ユーザー名', 'class' => "form-control login-form"]); ?>
         </div>
         <div class="form-group">
+            <?= $this->Form->input('nickname',['type'=>'text', 'label'=> 'ニックネーム', 'class' => "form-control login-form"]); ?>
+        </div>
+        <div class="form-group">
             <?= $this->Form->input('password',['type'=>'password', 'label'=> 'パスワード','placeholder' => '半角英数字で記入して下さい' ,'class' => "form-control login-form"]); ?>
         </div>
         <div class="form-group">

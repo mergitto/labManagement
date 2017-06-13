@@ -78,6 +78,11 @@ class UsersTable extends Table
         $validator
             ->requirePresence('name', 'create')
             ->notEmpty('name', 'ログインIDが入力されていません');
+
+        $validator
+            ->requirePresence('nickname', 'create')
+            ->notEmpty('nickname', 'ニックネームが入力されていません');
+
         $validator
             ->add('name', 'custom', [
                 'rule' => function ($value, $context){

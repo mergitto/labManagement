@@ -70,10 +70,10 @@
                        <?php if(array_search($eventUser->id, $checkUsers[$event->id]) === FALSE): ?>
                         <span class="text-muted"><?= $eventUser['name']; ?></span>
                        <?php else: ?>
-                        <span class="text-default font-b"><?= $eventUser['name']; ?></span>
+                        <span class="text-default font-b"><?= $eventUser['nickname'].__("(").$eventUser['name'].__(")"); ?></span>
                        <?php endif ?>
                      <?php else: ?>
-                       <span class="text-muted"><?= $eventUser['name']; ?></span>
+                       <span class="text-muted"><?= $eventUser['nickname'].__("(").$eventUser['name'].__(")"); ?></span>
                      <?php endif ?>
                    <?php endforeach ?>
                  </td>
