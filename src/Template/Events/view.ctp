@@ -81,18 +81,20 @@ $w = date('w', strtotime($event->start));
 	                    <td>
                           <?= $this->Html->link(__($attachment->tmp_file_name),['controller' => 'Attachments', 'action' => 'download',$attachment->file]) ?>
                           <i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i>
-													<div class="scoreChecked">
-														<?php $checkScore = 0; ?>
-														<?php foreach($attachment->scores as $score): ?>
-															<?php if($score->user_id == $user['id'] && $score->attachment_id == $attachment->id):?>
-																<input id="score" name="score"  class="ajaxScore rating rating-loading" value='<?= $score->score ?>' data-min="0" data-max="5" data-step="1" data-size="xs" data-userId="<?= $user['id'] ?>" data-scoreId="<?= $score->id?>" data-attachmentId="<?= $attachment->id ?>" data-score-selected="true">
-																<?php $checkScore = 1;?>
-															<?php endif ?>
-													<?php endforeach ?>
-													<?php if($checkScore != 1): ?>
-														<input id="score" name="score"  class="ajaxScore rating rating-loading" value='0' data-min="0" data-max="5" data-step="1" data-size="xs" data-userId="<?= $user['id'] ?>" data-attachmentId="<?= $attachment->id ?>" data-score-selected="false">
-													<?php endif ?>
-													</div>
+                          <?php if($attachment->user->name != $user['name']): //ログインユーザーとファイル登録ユーザーが同一人物の場合は評価をしない ?>
+                            <div class="scoreChecked">
+                              <?php $checkScore = 0; ?>
+                              <?php foreach($attachment->scores as $score): ?>
+                                <?php if($score->user_id == $user['id'] && $score->attachment_id == $attachment->id):?>
+                                  <input id="score" name="score"  class="ajaxScore rating rating-loading" value='<?= $score->score ?>' data-min="0" data-max="5" data-step="1" data-size="xs" data-userId="<?= $user['id'] ?>" data-scoreId="<?= $score->id?>" data-attachmentId="<?= $attachment->id ?>" data-score-selected="true">
+                                  <?php $checkScore = 1;?>
+                                <?php endif ?>
+                            <?php endforeach ?>
+                            <?php if($checkScore != 1): ?>
+                              <input id="score" name="score"  class="ajaxScore rating rating-loading" value='0' data-min="0" data-max="5" data-step="1" data-size="xs" data-userId="<?= $user['id'] ?>" data-attachmentId="<?= $attachment->id ?>" data-score-selected="false">
+                            <?php endif ?>
+                            </div>
+                          <?php endif ?>
 													<ul class="list-inline" style="list-style: none;">
 														<?php foreach($attachment->tags as $tag): ?>
 															<li><span class="label label-success"><?= $tag['category'] ?><span class="badge"><?= $tagCount[$tag['category']] ?></span></span></li>
@@ -124,7 +126,7 @@ $w = date('w', strtotime($event->start));
 	            <?= $this->Paginator->next(__('次') . ' >') ?>
 	            <?= $this->Paginator->last(__('最後') . ' >>') ?>
 	        </ul>
-	        <p><?= $this->Paginator->counter(['format' => __('{{page}}/{{pages}} ページ目,　{{count}}　人中 {{current}} 人表示')]) ?></p>
+	        <p><?= $this->Paginator->counter(['format' => __('{{page}}/{{pages}} ページ目,　{{count}}　件中 {{current}} 件表示')]) ?></p>
 	    </div>
 	</div>
 </div>
