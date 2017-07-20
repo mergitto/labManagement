@@ -124,7 +124,7 @@ $w = date('w', strtotime($event->start));
 	            <?= $this->Paginator->next(__('次') . ' >') ?>
 	            <?= $this->Paginator->last(__('最後') . ' >>') ?>
 	        </ul>
-	        <p><?= $this->Paginator->counter(['format' => __('{{page}}/{{pages}} ページ目,　{{count}}　人中 {{current}} 人表示')]) ?></p>
+	        <p><?= $this->Paginator->counter(['format' => __('{{page}}/{{pages}} ページ目,　{{count}}　件中 {{current}} 件表示')]) ?></p>
 	    </div>
 	</div>
 </div>
