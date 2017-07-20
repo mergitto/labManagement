@@ -81,7 +81,7 @@ $w = date('w', strtotime($event->start));
 	                    <td>
                           <?= $this->Html->link(__($attachment->tmp_file_name),['controller' => 'Attachments', 'action' => 'download',$attachment->file]) ?>
                           <i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i>
-                          <?php if($attachment->user->name != $user['name']): //ログインユーザーとファイル登録ユーザーが同一人物の場合は評価をしない ?>
+                          <?php if($attachment->user->name != $user['name'] && $attachment->user->role != 'admin'): //ログインユーザーとファイル登録ユーザーが同一人物の場合は評価をしない ?>
                             <div class="scoreChecked">
                               <?php $checkScore = 0; ?>
                               <?php foreach($attachment->scores as $score): ?>
