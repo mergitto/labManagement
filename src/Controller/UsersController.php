@@ -78,6 +78,21 @@ class UsersController extends AppController
     }
 
     /**
+     * Evaluation method
+     *
+     * @param string|null $id User id
+     */
+    public function evaluation($id = null)
+    {
+      $user = $this->Users->get($id,[
+        'contain' => ['Events']
+      ]);
+      $scores = $this->Users->Events->Attachments->find()->where(['Attachments.user_id' => $id])->contain('Scores');
+      $this->set(compact('user', 'scores'));
+    }
+
+
+    /**
      * Delete method
      *
      * @param string|null $id User id.
