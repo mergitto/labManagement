@@ -7,7 +7,7 @@
     <?= $this->Form->create($post, ['url' => [
     'action' => 'posts', $thread->id]]) ?>
     <fieldset>
-        <legend><?= __('新規コメント') ?></legend>
+        <legend><?= $thread->title ?></legend>
         <div class="form-group">
             <?= $this->Form->textarea('comment',['type'=>'text', 'label'=> 'コメント', 'class' => "form-control login-form", 'placeholder' => 'コメントを書いて投稿しましょう。参考にしたURLを貼ってみてください。']); ?>
             <?= $this->Form->input('url', ['type' => 'hidden', 'label' => '参考url','class' => 'form-control login-form','placeholder' => '参考にしたURLを貼ってみてください。なくても登録できます。']); ?>
