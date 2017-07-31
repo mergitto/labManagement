@@ -29,6 +29,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= __('ユーザー:') ?><?= $user['nickname'] ?><span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><?= $this->Html->link(__('いいね資料'), ['controller' => 'Favorites', 'action' => 'view',$user['id']],['class' => 'text-center header-hover-style']) ?></li>
+            <li><?= $this->Html->link(__('マイページ'), ['controller' => 'Users', 'action' => 'evaluation',$user['id']],['class' => 'text-center header-hover-style']) ?></li>
           </ul>
         </li>
         <li><?= $this->Form->postLink(__('ログアウト'),['action' => 'logout']) ?></li>
