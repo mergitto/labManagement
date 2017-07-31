@@ -56,9 +56,11 @@ table > thead > tr > th {
 .nav>li>a:focus, .nav>li>a:hover {
   background-color: #76D276;
 }
-.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus,
-.dropdown-menu:hover{
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{
   background-color: #76D276;
+}
+.dropdown-menu:hover{
+  background-color: #78B319;
 }
 .dropdown-menu{
   background-color: #78B319;
@@ -119,6 +121,14 @@ table > thead > tr > th {
   display: flex;
   flex-wrap: wrap;
 }
+.flexiblebox {
+ display: -webkit-flex;
+  display: flex;
+ -webkit-align-items: center; /* 縦方向中央揃え（Safari用） */
+  align-items: center; /* 縦方向中央揃え */
+ -webkit-justify-content: center; /* 横方向中央揃え（Safari用） */
+  justify-content: center; /* 横方向中央揃え */
+}
 .pad-10p{
   padding: 10%;
 }
@@ -131,6 +141,17 @@ table > thead > tr > th {
 .img-50{
   width: 50px;
   height: 50px;
+}
+.img-350{
+  width: 350px;
+  height: 350px;
+}
+.cover {
+  object-fit: cover;
+  width: 350px;
+  height: 350px;
+  background-color: #ccc;
+  border: 1px solid #ccc;
 }
 .img-100{
   width: 100px;
@@ -148,6 +169,15 @@ table > thead > tr > th {
 .font-14{
   font-size: 14px;
 }
+.font-70{
+  font-size: 70px;
+}
+.font-100{
+  font-size: 100px;
+}
+.font-150{
+  font-size: 150px;
+}
 .min-w-120{
   min-width: 120px;
 }
@@ -160,6 +190,27 @@ table > thead > tr > th {
 .header-hover-style{
   background-color: #78B319;
   color: #fff;
+}
+.sub-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 18px;
+}
+.mypage-title {
+  color: #5CB85C;
+}
+.average-font {
+  font-size: 24px;
+  margin-bottom: 14px;
+}
+.score-font {
+  position: absolute;
+  font-size: 34px;
+  margin-bottom: 14px;
+}
+.change-user-info {
+  text-align: right;
 }
 /****end ユーザー画面部分のデザイン*****/
 /****タグのデザイン*****/
