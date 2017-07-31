@@ -340,10 +340,6 @@ return [
      * To use database sessions, load the SQL file located at config/Schema/sessions.sql
      */
     'Session' => [
-        'defaults' => 'php',
-        'ini' => [
-          // サイト上のページに訪問せず 4時間経つとクッキーを無効にします。
-          'session.cookie_lifetime' => 14400
-        ],
+      'timeout' => 28800, // 8時間ログインを持続させる
     ],
 ];
