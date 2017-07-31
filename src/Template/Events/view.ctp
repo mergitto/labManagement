@@ -86,12 +86,12 @@ $w = date('w', strtotime($event->start));
                               <?php $checkScore = 0; ?>
                               <?php foreach($attachment->scores as $score): ?>
                                 <?php if($score->user_id == $user['id'] && $score->attachment_id == $attachment->id):?>
-                                  <input id="score" name="score"  class="ajaxScore rating rating-loading" value='<?= $score->score ?>' data-min="0" data-max="5" data-step="1" data-size="xs" data-userId="<?= $user['id'] ?>" data-scoreId="<?= $score->id?>" data-attachmentId="<?= $attachment->id ?>" data-score-selected="true">
+                                  <input id="score" name="score"  class="ajaxScore rating rating-loading" value='<?= $score->score ?>' data-min="0" data-max=<?= MAXSCORE ?> data-step="1" data-size="xs" data-userId="<?= $user['id'] ?>" data-scoreId="<?= $score->id?>" data-attachmentId="<?= $attachment->id ?>" data-score-selected="true">
                                   <?php $checkScore = 1;?>
                                 <?php endif ?>
                             <?php endforeach ?>
                             <?php if($checkScore != 1): ?>
-                              <input id="score" name="score"  class="ajaxScore rating rating-loading" value='0' data-min="0" data-max="5" data-step="1" data-size="xs" data-userId="<?= $user['id'] ?>" data-attachmentId="<?= $attachment->id ?>" data-score-selected="false">
+                              <input id="score" name="score"  class="ajaxScore rating rating-loading" value='0' data-min="0" data-max=<?= MAXSCORE ?> data-step="1" data-size="xs" data-userId="<?= $user['id'] ?>" data-attachmentId="<?= $attachment->id ?>" data-score-selected="false">
                             <?php endif ?>
                             </div>
                           <?php endif ?>
