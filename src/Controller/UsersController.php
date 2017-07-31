@@ -87,8 +87,12 @@ class UsersController extends AppController
       $user = $this->Users->get($id,[
         'contain' => ['Events']
       ]);
-      $scores = $this->Users->Events->Attachments->find()->where(['Attachments.user_id' => $id])->contain('Scores');
-      $this->set(compact('user', 'scores'));
+      $attachments = $this->Users->Events->Attachments->find()->where(['Attachments.user_id' => $id])->contain(['Scores', 'Favorites']);
+      $iineEval = $this->iineEvalCount($attachments, $user);
+      $today = getdate(); // 現在の時刻を取得
+      $todayHour = $today['hours'];
+      if($todayHour == 0){ $todayHour = 24; }
+      $this->set(compact('user', 'attachments', 'iineEval', 'todayHour'));
     }
 
 
@@ -146,5 +150,38 @@ class UsersController extends AppController
         }
 
         return false;
+    }
+
+    /**
+     * method iineEvalCount
+     * @param array Attachments
+     * @return array iineEvaluationCount
+     */
+    public function iineEvalCount($attachments, $user)
+    {
+      $evaluationSum = 0; // 評価点数の合計
+      $countEval = 0; // 評価している人のカウンタ
+      $countIine = 0; // いいねしている人のカウンタ
+      $scoreRange = []; // 得点ごとにカウント 例: 1点をつけた人の数、2点をつけた人の数
+      foreach ($attachments as $attachment) {
+        foreach ($attachment->scores as $score) {
+          if($score->user_id != $user['id']){
+            $evaluationSum += $score->score;
+            $countEval++;
+            $scoreKey = $score->score.'点';
+            if(array_key_exists($scoreKey, $scoreRange)) { //得点ごとにカウント
+              $scoreRange[$scoreKey] += 1;
+            } else {
+              $scoreRange[$scoreKey] = 1;
+            }
+          }
+        }
+        foreach ($attachment->favorites as $favorite) {
+          $countIine++;
+        }
+      }
+      ksort($scoreRange); //キーの値で昇順にソート
+      $average = round($evaluationSum / $countEval, 1); // 小数点第一位まで四捨五入
+      return array('evalAverage' => $average, 'iine' => $countIine, 'scoreRange' => $scoreRange);
     }
 }
