@@ -180,6 +180,13 @@ class UsersController extends AppController
           $countIine++;
         }
       }
+      for($i = 1; $i <= MAXSCORE; $i++){
+        $key = $i.'点';
+        if(array_key_exists($key, $scoreRange)){ //１、２点のような得点しなそうなパターンにも対応する
+        } else {
+          $scoreRange[$key] = 0;
+        }
+      }
       ksort($scoreRange); //キーの値で昇順にソート
       $average = round($evaluationSum / $countEval, 1); // 小数点第一位まで四捨五入
       return array('evalAverage' => $average, 'iine' => $countIine, 'scoreRange' => $scoreRange);
