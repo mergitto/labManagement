@@ -1,0 +1,38 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+html {
+  display: table;
+}
+body {
+  display: table-cell;
+  vertical-align: middle;
+  font-family: "graphik-lt", "PingFangTC-Light", "Noto Sans Light";
+}
+body {
+  background: linear-gradient(to bottom right, #40CD41, #47CF3F, #6DDFE2)
+}
+h3, h4 {
+  margin: 15px;
+  margin-bottom: 35px;
+  text-align: center;
+}
+h3 {
+  color: #999999;
+}
+.form-group {
+  margin: 15px;
+  margin-bottom: 35px;
+}
+.panel-body {
+  padding-left: 35px;
+  padding-right: 35px;
+}
+.login-button {
+  margin-bottom: 25px;
+}
+
+
