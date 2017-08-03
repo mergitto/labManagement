@@ -37,4 +37,7 @@ h2, h3 {
 .text-gray {
   color: #999;
 }
+.panel-default {
+  border-color: #fff;
+}
 
