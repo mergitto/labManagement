@@ -28,6 +28,9 @@ $title = 'ゼミ管理システム';
     <?= $this->Html->css("//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css") ?>
     <?= $this->Html->css('bootstrap.css') ?>
     <?= $this->Html->css('laboratory.css') ?>
+    <?php if($this->request->controller === 'Users' && $this->request->action === 'login'): ?>
+      <?= $this->Html->css('login.css') ?>
+    <?php endif ?>
     <?= $this->Html->script('jquery.min.js') ?>
     <?= $this->Html->script('bootstrap.min.js') ?>
     <?= $this->fetch('meta') ?>
@@ -37,7 +40,7 @@ $title = 'ゼミ管理システム';
 <body>
     <head>
     <?php if($this->request->controller === 'Users' && $this->request->action === 'login'): ?>
-        <?= $this->element('login_header'); ?>
+        <?php //echo $this->element('login_header'); ?>
     <?php else: ?>
         <?= $this->element('header'); ?>
     <?php endif ?>
