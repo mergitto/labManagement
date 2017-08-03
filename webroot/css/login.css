@@ -13,15 +13,12 @@ body {
   font-family: "graphik-lt", "PingFangTC-Light", "Noto Sans Light";
 }
 body {
-  background: linear-gradient(to bottom right, #40CD41, #47CF3F, #6DDFE2)
+  background: linear-gradient(to bottom right, #91FE87, #47CF3F, #6DDFE2)
 }
-h3, h4 {
+h2, h3 {
   margin: 15px;
   margin-bottom: 35px;
   text-align: center;
-}
-h3 {
-  color: #999999;
 }
 .form-group {
   margin: 15px;
@@ -31,8 +28,13 @@ h3 {
   padding-left: 35px;
   padding-right: 35px;
 }
+.login-title {
+  color: #58BE89;
+}
 .login-button {
   margin-bottom: 25px;
 }
-
+.text-gray {
+  color: #999;
+}
 
