@@ -32,14 +32,24 @@ class AdminsController extends AppController
     /**
      * User add method
      * 管理者のみがユーザーを追加できるようにする
-     * 
+     *
      */
     public function userAdd()
     {
         $user = $this->Admins->Users->newEntity();
         if ($this->request->is('post')) {
+            //Userssテーブルの(最後のID + 1)を取得する
+            $lastId = $this->Admins->Users->find()->order(['Users.id' => 'DESC'])->first();
+            //ファイルを提出したユーザー名を取得する
+            $userName = $this->Auth->user();
+            //ファイルの拡張を取得する
+            $filePath = pathinfo($this->request->data['photo']['name']);
+            //ユーザーが提出したファイル名を避難させる(画面に表示するカラムとなる)
+            $this->request->data['tmp_file_name'] = $this->request->data['photo']['name'];
+            //ファイル名(例):10-admin-2017.docx(id-userName-year.拡張子)
+            $this->request->data['photo']['name'] = 1+$lastId['id'].'-user-'.date('Y').'.'.$filePath['extension'];
             $user = $this->Admins->Users->patchEntity($user, $this->request->data);
-            
+
             if ($this->Admins->Users->save($user)) {
                 $this->Flash->success(__('新規ユーザーが登録されました。'));
                 return $this->redirect(['controller' => 'users' ,'action' => 'index']);
@@ -54,7 +64,7 @@ class AdminsController extends AppController
     /**
      * is Authorized method
      * 管理者(role=admin)のみがアクセスできるようにする
-     * 
+     *
      */
     public function isAuthorized($user)
     {
