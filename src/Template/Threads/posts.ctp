@@ -23,13 +23,14 @@
     <?= $this->Form->end() ?>
 </div>
 <div class="fu-list">
+  <div class="alt-table-responsive">
     <table class="table table-hover table-striped">
         <thead>
         <tr>
-            <th colspan="2"><?= __('ユーザー名'); ?></th>
-            <th><?= __('コメント'); ?></th>
-            <th><?= $this->Paginator->sort('modified', __('投稿時間')); ?></th>
-            <th><?= __(""); ?></th>
+            <th class="col-xs-1"><?= __('名前'); ?></th>
+            <th class="col-xs-8"><?= __('コメント'); ?></th>
+            <th class="col-xs-2"><?= $this->Paginator->sort('modified', __('投稿時間')); ?></th>
+            <th class="col-xs-1"><?= __(""); ?></th>
         </tr>
         </thead>
         <?php foreach ($posts as $post): ?>
@@ -41,16 +42,16 @@
             <?php foreach($users as $targetUser): ?>
                 <?php if($targetUser->id === $post->user_id): ?>
                     <td class="img-50">
+                    <p class="post-nickname"><?= $targetUser->nickname ?></p>
                     <?php if($targetUser['photo']): ?>
                             <?= $this->Html->image('/files/Users/photo/'.$targetUser['photo'],['alt' => '写真を設定してください','class' => 'img-50']) ?>
                     <?php else: ?>
                             <?= $this->Html->image('noimage.png',['class' => 'img-50']) ?>
                     <?php endif ?>
                     </td>
-                    <td><?= $targetUser->nickname ?></td>
                 <?php endif ?>
             <?php endforeach ?>
-            <td style="max-width: 400px;">
+            <td>
                 <ul style="list-style: none; padding-left: 0px;">
                     <li class="urlComment"><?= nl2br($post->comment) ?></li>
                     <?php if($post->url !== ''): ?>
@@ -71,5 +72,6 @@
         </tr>
         <?php endforeach ?>
     </table>
+  </div>
 </div>
 <?= $this->Html->script('url2link.js') ?>
