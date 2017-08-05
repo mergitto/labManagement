@@ -34,13 +34,12 @@
         </div>
         <div class="col-md-2"></div>
     </div>
-
     <div class="fu-list">
         <table class="table table-hover table-striped">
             <thead>
             <tr>
                 <th><?= $this->Paginator->sort('title', __('タイトル')); ?></th>
-                <th><?= $this->Paginator->sort('modified', __('更新日')); ?></th>
+                <th><?= __('最終更新日'); ?></th>
                 <th class="b_w150">　</th>
             </tr>
             </thead>
@@ -57,7 +56,7 @@
                     <span class="text-muted">(<?= count($thread->posts); ?>)</span>
                 </td>
                 <td>
-                    <?= date('Y-m-d', strtotime($thread['modified'])) ?><?= $week[$w]; ?>
+                    <?= date('Y-m-d', strtotime($thread->posts[0]['modified'])) ?><?= $week[$w]; ?>
                 </td>
                 <td class="tc">
                 <?php if($thread->user_id === $user['id']): ?>
