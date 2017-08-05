@@ -42,18 +42,8 @@ class EventsController extends FullCalendarAppController
         ];
 
         $attachments = $this->Events->Attachments->find()->contain(['Tags','Favorites']);
-        $allRankTags = []; //カウントされたタグ全てをカウントするもの
         // お気に入り登録されたファイルのタグ配列をいじりやすいように変更
-        $allTags = []; // 全てのタグ
-        $allRankTags = $this->tagCreate($attachments); // お気に入り登録されたタグを集める
-        foreach($allRankTags as $key => $tags) {
-          foreach($tags as $tag) {
-            $allTags[] = $tag;
-          }
-        }
-        $allTags = array_count_values($allTags); //配列に格納されている同じ項目のカウント
-        $result = arsort($allTags);
-        array_splice($allTags, 3); //上位3つまでの配列にする
+        $threeTag = $this->tagCreate($attachments); // お気に入り登録されたタグを集める
 
         foreach($allEvent as $event) {
             if($event->all_day === 1) {
@@ -91,7 +81,7 @@ class EventsController extends FullCalendarAppController
         }
         $this->set('json', h(json_encode($json,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)));
 
-        $this->set(compact('allEvent','checkUsers','countUsers','submittedUsers','allTags'));
+        $this->set(compact('allEvent','checkUsers','countUsers','submittedUsers','threeTag'));
         $this->set('events', $this->paginate($events));
         $this->set('_serialize', ['events']);
     }
@@ -285,7 +275,29 @@ class EventsController extends FullCalendarAppController
             }
           }
         }
-      return $allRankTags;
+
+        $allTags = []; // 全てのタグ
+        foreach($allRankTags as $key => $tags) {
+          foreach($tags as $tag) {
+            $allTags[] = $tag;
+          }
+        }
+        $allTags = array_count_values($allTags); //配列に格納されている同じ項目のカウント
+        $result = arsort($allTags);
+        array_splice($allTags, 3); //上位3つまでの配列にする
+        $ranking = 1;
+        $tmpCount = null;
+        foreach($allTags as $key => $value) {
+          if($value == $tmpCount || is_null($tmpCount)) {
+            $rankArray = ['count' => $value, 'rank' => $ranking];
+          } else {
+            $ranking++;
+            $rankArray = ['count' => $value, 'rank' => $ranking];
+          }
+          $allTags[$key] = $rankArray;
+          $tmpCount = $value;
+        }
+      return $allTags;
     }
 
     /**
