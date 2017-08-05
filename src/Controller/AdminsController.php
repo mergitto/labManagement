@@ -44,8 +44,6 @@ class AdminsController extends AppController
             $userName = $this->Auth->user();
             //ファイルの拡張を取得する
             $filePath = pathinfo($this->request->data['photo']['name']);
-            //ユーザーが提出したファイル名を避難させる(画面に表示するカラムとなる)
-            $this->request->data['tmp_file_name'] = $this->request->data['photo']['name'];
             //ファイル名(例):10-admin-2017.docx(id-userName-year.拡張子)
             $this->request->data['photo']['name'] = 1+$lastId['id'].'-user-'.date('Y').'.'.$filePath['extension'];
             $user = $this->Admins->Users->patchEntity($user, $this->request->data);
