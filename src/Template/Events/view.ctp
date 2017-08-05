@@ -43,28 +43,27 @@ $w = date('w', strtotime($event->start));
 	        <hr class="mb0">
 
 	        <div class="fu-list">
+            <div class="alt-table-responsive">
 	            <table class="table table-hover table-striped">
 	                <thead>
 	                <tr>
-	                		<th colspan="2"><?= __('ユーザー名'); ?></th>
-	                    <th><?= $this->Paginator->sort('title', __('ゼミ資料タイトル')); ?></th>
-                      <th class="mi-w-380"><?= $this->Paginator->sort('file', __('資料名')); ?></th>
-                      <th class="w-500"><?= $this->Paginator->sort('url', __('参考URL')); ?></th>
-	                    <th class="b_w150">　</th>
+                      <th class="col-xs-1"><?= __('名前'); ?></th>
+                      <th class="col-xs-2"><?= $this->Paginator->sort('title', __('資料名')); ?></th>
+                      <th class="col-xs-6"><?= $this->Paginator->sort('file', __('資料名')); ?></th>
+                      <th class="col-xs-2 hidden-xs"><?= $this->Paginator->sort('url', __('参考URL')); ?></th>
+                      <th class="col-xs-1">　</th>
 	                </tr>
 	                </thead>
 	                <?php foreach ($attachments as $attachment): ?>
 	                <tr>
 		                <td class="img-50">
+                      <p class="post-nickname"><?= $attachment->user->nickname ?></p>
 	                    <?php if($attachment->user->photo): ?>
 	                            <?= $this->Html->image('/files/Users/photo/'.$attachment->user->photo,['alt' => '写真を設定してください','class' => 'img-50']) ?>
 	                    <?php else: ?>
 	                            <?= $this->Html->image('noimage.png',['class' => 'img-50']) ?>
 	                    <?php endif ?>
 	                    </td>
-                      <td>
-                          <?= $attachment->user->nickname ?>
-                      </td>
 	                    <td class="text-muted">
 	                        <?= $attachment->title; ?>
 													<div class="font-24">
@@ -101,7 +100,7 @@ $w = date('w', strtotime($event->start));
 														<?php endforeach?>
 													</ul>
                       </td>
-                      <td>
+                      <td class="hidden-xs">
                       <?php if($attachment->url !== ''): ?>
                           <?= $this->Html->link($attachment->url) ?>
                       <?php endif ?>
@@ -112,7 +111,8 @@ $w = date('w', strtotime($event->start));
 	                    </td>
 	                </tr>
 	                <?php endforeach ?>
-	            </table>
+              </table>
+            </div>
 	        </div>
 	    </div>
 	</div>
