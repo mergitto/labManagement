@@ -64,6 +64,9 @@ class UsersController extends AppController
                 $this->Flash->error(__('パスワードが間違ってます。'));
                 return $this->redirect(['action' => 'edit', $user->id]);
             }
+            $userName = $this->Auth->user();
+            $filePath = pathinfo($this->request->data['photo']['name']);
+            $this->request->data['photo']['name'] = $user['id'].'-user-'.date('Y').'.'.$filePath['extension'];
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('ユーザー情報を更新しました。'));
