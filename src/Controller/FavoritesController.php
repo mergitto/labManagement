@@ -51,22 +51,9 @@ class FavoritesController extends AppController
         $favoUser = $this->Auth->user();
         $persionalRankTags = []; //個人用のランキング
         $favoAttachments = $this->Favorites->find()->contain(['Attachments','Attachments.Tags'])->where(['Favorites.user_id' => $favoUser['id']]);
-        foreach ($favoAttachments as $favorite) {
-          foreach ($favorite->attachment->tags as $tag) {
-            $persionalRankTags[] = $tag['category'];
-          }
-        }
-        $allRankTags = []; //カウントされたタグ全てをカウントするもの
-        // お気に入り登録されたファイルのタグ配列をいじりやすいように変更
-        $allTags = []; // 全てのタグ
-        foreach($persionalRankTags as $key => $tag) {
-          $allTags[] = $tag;
-        }
-        $allTags = array_count_values($allTags); //配列に格納されている同じ項目のカウント
-        $result = arsort($allTags);
-        array_splice($allTags, 3); //上位3つまでの配列にする
 
-        $this->set(compact('favoriteFiles','attachments','allTags'));
+        $threeTag = $this->tagCreate($favoAttachments); // お気に入り登録されたタグを集める
+        $this->set(compact('favoriteFiles','attachments','threeTag'));
         $this->set('_serialize', ['favorite']);
     }
 
@@ -81,5 +68,36 @@ class FavoritesController extends AppController
             return true;
         }
         return false;
+    }
+
+    /**
+    * Tag Create 関数(FavoritesController用)
+    * お気に入りしたTagsをcontainして引数に渡す
+    * @return array
+     */
+    public function tagCreate($attachments)
+    {
+        $allTags = []; // 全てのタグ
+        foreach($attachments as $myAttachment) {
+          foreach($myAttachment->attachment->tags as $tag) {
+            $allTags[] = $tag->category;
+          }
+        }
+        $allTags = array_count_values($allTags); //配列に格納されている同じ項目のカウント
+        $result = arsort($allTags);
+        array_splice($allTags, 3); //上位3つまでの配列にする
+        $ranking = 1;
+        $tmpCount = null;
+        foreach($allTags as $key => $value) {
+          if($value == $tmpCount || is_null($tmpCount)) {
+            $rankArray = ['count' => $value, 'rank' => $ranking];
+          } else {
+            $ranking++;
+            $rankArray = ['count' => $value, 'rank' => $ranking];
+          }
+          $allTags[$key] = $rankArray;
+          $tmpCount = $value;
+        }
+      return $allTags;
     }
 }
