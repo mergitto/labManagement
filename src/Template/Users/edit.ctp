@@ -5,12 +5,6 @@
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
-        <li><?= $this->Form->postLink(
-                __('削除'),
-                ['action' => 'delete', $user->id],
-                ['confirm' => __('本当に削除してよろしいですか # {0}?', $user->id)]
-            )
-        ?></li>
         <li><?= $this->Html->link(__('ユーザー一覧'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
