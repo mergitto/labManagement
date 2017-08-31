@@ -317,6 +317,11 @@ ul.rank-right{
 #allCheck {
   margin-right: 5px;
 }
+/*************マイページ用***************/
+.text-right {
+  text-align: right;
+}
+/****************************************/
 /*********掲示板レスポンシブ用***********/
 .alt-table-responsive {
     width: 100%;

@@ -19,13 +19,20 @@
   </div>
   <div class="row">
     <div class="col-sm-5">
+      <div class="row">
+        <div class="col-xs-12">
+          <h3><?= __($user['nickname'].'さんへの総いいね数') ?></h3>
+        </div>
+      </div>
       <div class="row flexiblebox">
-        <blockquote class="sub-title"><?= __('総いいね数') ?></blockquote>
-        <div class="col-xs-6">
+        <div class="col-xs-5 text-right">
           <span class="font-70"><?= $iineEval['iine'] ?></span>
         </div>
-        <div class="col-xs-6">
-          <span class="font-100"><i class="glyphicon glyphicon-thumbs-up ajaxFav mar-le-10"></i></span>
+        <div class="col-xs-2">
+          <span class="font-70"><?= __("×") ?></span>
+        </div>
+        <div class="col-xs-5">
+          <span class="font-100 favChecked"><i class="glyphicon glyphicon-thumbs-up ajaxFav mar-le-10"></i></span>
         </div>
       </div>
     </div>
