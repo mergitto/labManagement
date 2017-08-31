@@ -8,7 +8,7 @@
         <div class="tools">
             <div class="row">
                 <div class="col-xs-4">
-                  <?= $this->Html->link(__('ユーザー新規作成'),['controller' => 'admins' ,'action' => 'user_add'], ['class' => 'glyphicon glyphicon-plus btn btn-default']) ?>
+                  <?= $this->Html->link(__('ユーザー新規作成'),['controller' => 'admins' ,'action' => 'user_add'], ['class' => 'btn btn-default']) ?>
                 </div>
                 <div class="col-xs-8">
                 </div>

@@ -48,7 +48,7 @@ $w = date('w', strtotime($event->start));
 	                <thead>
 	                <tr>
                       <th class="col-xs-1"><?= __('名前'); ?></th>
-                      <th class="col-xs-2"><?= $this->Paginator->sort('title', __('資料名')); ?></th>
+                      <th class="col-xs-2"><?= $this->Paginator->sort('title', __('タイトル')); ?></th>
                       <th class="col-xs-6"><?= $this->Paginator->sort('file', __('資料名')); ?></th>
                       <th class="col-xs-2 hidden-xs"><?= $this->Paginator->sort('url', __('参考URL')); ?></th>
                       <th class="col-xs-1">　</th>
