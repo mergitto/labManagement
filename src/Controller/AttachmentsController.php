@@ -16,7 +16,7 @@ class AttachmentsController extends AppController
    */
    public function view()
    {
-     $attachments = $this->Attachments->find()->contain(['Tags','Users']);
+     $attachments = $this->Attachments->find()->contain(['Tags','Users'])->order(['Attachments.modified' => 'DESC']);
      $tags = $this->Attachments->Tags->find('list',['keyField' => 'id', 'valueField' => 'category']);
      $tagWhere = []; //postされたチェックボックスの状態をOR句として格納するための配列
      if($this->request->is('post')){
