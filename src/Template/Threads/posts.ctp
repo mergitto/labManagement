@@ -78,7 +78,7 @@
 <?php if($user['role'] == 'admin'): ?>
 <div id="loader-bg">
   <div id="loader">
-    <?= $this->Html->image('loading.svg', ['alt' => '送信中', 'class' => 'img-100']) ?>
+    <?= $this->Html->image('loading-circle.svg', ['alt' => '送信中', 'class' => 'img-100']) ?>
     <p><?= __('メール送信中...') ?></p>
   </div>
 </div>
