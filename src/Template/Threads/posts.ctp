@@ -1,4 +1,3 @@
-<?= $this->Html->css('load.css') ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li><?= $this->Html->link(__('スレッド一覧'), ['action' => 'index']) ?></li>
@@ -84,4 +83,3 @@
 </div>
 <?php endif ?>
 <?= $this->Html->script('url2link.js') ?>
-<?= $this->Html->script('load.js') ?>
