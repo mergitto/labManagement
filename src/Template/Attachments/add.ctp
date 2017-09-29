@@ -39,8 +39,14 @@
         <?= $this->Form->input('event_id',['type' => 'hidden','value' =>  $event->id ]); ?>
     </fieldset>
     <div class="login-button text-right">
-    <?= $this->Form->button(__('新規登録'),['class' => 'btn btn-raised btn-success']) ?>
+    <?= $this->Form->button(__('新規登録'),['class' => 'btn btn-raised btn-success loading']) ?>
     </div>
     <?= $this->Form->end() ?>
+</div>
+<div id="loader-bg">
+  <div id="loader">
+    <?= $this->Html->image('loading-circle.svg', ['alt' => '送信中', 'class' => 'img-100']) ?>
+    <p><?= __('ファイル登録中...') ?></p>
+  </div>
 </div>
 <?= $this->Html->script('fileselect.js') ?>

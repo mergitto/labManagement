@@ -1,4 +1,3 @@
-<?= $this->Html->css('load.css') ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li><?= $this->Html->link(__('スレッド一覧'), ['action' => 'index']) ?></li>
@@ -78,10 +77,9 @@
 <?php if($user['role'] == 'admin'): ?>
 <div id="loader-bg">
   <div id="loader">
-    <?= $this->Html->image('loading.svg', ['alt' => '送信中', 'class' => 'img-100']) ?>
+    <?= $this->Html->image('loading-circle.svg', ['alt' => '送信中', 'class' => 'img-100']) ?>
     <p><?= __('メール送信中...') ?></p>
   </div>
 </div>
 <?php endif ?>
 <?= $this->Html->script('url2link.js') ?>
-<?= $this->Html->script('load.js') ?>

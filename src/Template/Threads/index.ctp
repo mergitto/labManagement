@@ -56,7 +56,11 @@
                     <span class="text-muted">(<?= count($thread->posts); ?>)</span>
                 </td>
                 <td>
-                    <?= date('Y-m-d', strtotime($thread->posts[0]['modified'])) ?><?= $week[$w]; ?>
+                    <?php if(isset($thread->posts[0]['modified'])): ?>
+                      <?= date('Y-m-d', strtotime($thread->posts[0]['modified'])) ?><?= $week[date('Y-m-d', strtotime($thread->posts[0]['modified']))]; ?>
+                    <?php else: ?>
+                      <?= date('Y-m-d', strtotime($thread['modified'])) ?>
+                    <?php endif ?>
                 </td>
                 <td class="tc">
                 <?php if($thread->user_id === $user['id']): ?>
