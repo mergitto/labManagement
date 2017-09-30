@@ -71,6 +71,62 @@
     <div class="col-sm-1"></div>
   </div>
 </div>
+<?php if($attachmentFlag && $user['role'] != 'admin'): ?>
+  <h2><?= __('自分の発表資料') ?></h2>
+  <p><?= __('他の人からつけてもらった評価を見ながら、点数の高い資料と比較してみよう！') ?></p>
+  <hr>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="fu-list">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+                <th><?= __('ユーザー名'); ?></th>
+                <th><?= __('タイトル'); ?></th>
+                <th><?= __('ファイル名'); ?></th>
+                <th><?= __('評価点数') ?></th>
+                <th><?= __('平均点数') ?></th>
+            </tr>
+          </thead>
+            <?php foreach ($attachments as $attachment): ?>
+              <tr>
+                <td class="img-50">
+                <?php if($user['photo']): ?>
+                    <?= $this->Html->image('/files/Users/photo/'.$user['photo'],['alt' => '写真を設定してください','class' => 'img-50']) ?>
+                <?php else: ?>
+                    <?= $this->Html->image('noimage.png',['class' => 'img-50']) ?>
+                <?php endif?>
+                </td>
+                <td><?= $attachment['title'] ?></td>
+                <td>
+                  <?= $this->Html->link(__($attachment->tmp_file_name),['controller' => 'Attachments', 'action' => 'download',$attachment->file]) ?>
+                  <i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i>
+                </td>
+                <td>
+                  <?php foreach($attachment->scores as $score): ?>
+                    <?= $score['score'].__('点'); ?>
+                  <?php endforeach ?>
+                </td>
+                <td>
+                  <?php
+                    // ファイルについている点数を配列にする
+                    $scoreSum = array_map(function($row){
+                      return $row['score'];
+                    }, $attachment->scores);
+                    if(count($scoreSum) == 0){
+                      echo __('評価なし');
+                    } else {
+                      echo round(array_sum($scoreSum) / count($scoreSum), 1).__('点');
+                    }
+                  ?>
+                </td>
+              </tr>
+            <?php endforeach ?>
+        </table>
+      </div>
+    </div>
+  </div>
+<?php endif ?>
 <script type="text/javascript">
   //棒グラフ
   var ctx = document.getElementById('barChart');
@@ -98,4 +154,3 @@
     }
   });
 </script>
-

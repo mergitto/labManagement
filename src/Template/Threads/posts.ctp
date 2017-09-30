@@ -9,8 +9,8 @@
     <fieldset>
         <legend><?= $thread->title ?></legend>
         <div class="form-group">
-            <?= $this->Form->textarea('comment',['type'=>'text', 'label'=> 'コメント', 'class' => "form-control login-form", 'placeholder' => 'コメントを書いて投稿しましょう。参考にしたURLを貼ってみてください。']); ?>
-            <?= $this->Form->input('url', ['type' => 'hidden', 'label' => '参考url','class' => 'form-control login-form','placeholder' => '参考にしたURLを貼ってみてください。なくても登録できます。']); ?>
+            <?= $this->Form->textarea('comment',['type'=>'text', 'label'=> 'コメント', 'class' => "comment-area form-control login-form", 'placeholder' => 'コメントを書いて投稿しましょう。参考にしたURLを貼ってみてください。']); ?>
+            <?= $this->Form->input('url', ['type' => 'hidden', 'label' => '参考url','class' => 'form-control login-form']); ?>
             <?= $this->Form->input('user_id', ['type' =>
             'hidden' ,'value' => $user['id'], 'label' => 'タイトル名']); ?>
             <?= $this->Form->input('thread_id', ['type' =>
@@ -18,7 +18,7 @@
         </div>
     </fieldset>
     <div class="login-button text-right">
-      <?= $this->Form->button(__('コメントする'),['class' => 'btn btn-raised btn-success']) ?>
+      <?= $this->Form->button(__('コメントする'),['class' => 'btn btn-raised btn-success loading']) ?>
     </div>
     <?= $this->Form->end() ?>
 </div>
@@ -74,4 +74,12 @@
     </table>
   </div>
 </div>
+<?php if($user['role'] == 'admin'): ?>
+<div id="loader-bg">
+  <div id="loader">
+    <?= $this->Html->image('loading-circle.svg', ['alt' => '送信中', 'class' => 'img-100']) ?>
+    <p><?= __('メール送信中...') ?></p>
+  </div>
+</div>
+<?php endif ?>
 <?= $this->Html->script('url2link.js') ?>

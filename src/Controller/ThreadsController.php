@@ -67,19 +67,22 @@ class ThreadsController extends AppController
             $post = $this->Threads->Posts->patchEntity($post, $this->request->data);
             if ($this->Threads->Posts->save($post)) {
                 $this->Flash->success(__('コメントが新しく登録されました。'));
-/* 管理者がコメントしたらゼミ管理システムに登録している人にメールを送るようにしている
+                /* 管理者がコメントしたらゼミ管理システムに登録している人にメールを送るようにしている*/
                 if($user['role'] === 'admin'){
                     $email = new Email('default');
                     foreach($users as $user){
+                      if(isset($user['email'])){
                         $email
-                            ->template('default')
+                            ->template('zeminor', 'college')
+                            ->emailFormat('html')
                             ->from(['xu.lab.fitc6@gmail.com' => 'ゼミ管理システム'])
                             ->to($user['email'])
-                            ->subject('ゼミ管理システムにコメントされました')
-                            ->send($post->comment);
+                            ->subject('ゼミ管理システムにコメントされました!')
+                            ->send();
+                      }
                     }
                 }
-*/
+                /*管理者がコメントしたらメールを送る機能はここまでの部分*/
                 return $this->redirect(['action' => 'posts', $thread->id]);
             }
             $this->Flash->error(__('コメントが正しく登録されませんでした。'));

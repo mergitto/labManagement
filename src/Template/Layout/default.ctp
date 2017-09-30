@@ -28,6 +28,7 @@ $title = 'ゼミ管理システム';
     <?= $this->Html->css("//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css") ?>
     <?= $this->Html->css('bootstrap.css') ?>
     <?= $this->Html->css('laboratory.css') ?>
+    <?= $this->Html->css('load.css') ?>
     <?php if($this->request->controller === 'Users' && $this->request->action === 'login'): ?>
       <?= $this->Html->css('login.css') ?>
     <?php endif ?>
@@ -51,5 +52,6 @@ $title = 'ゼミ管理システム';
     </div>
     <footer>
     </footer>
+<?= $this->Html->script('load.js') ?>
 </body>
 </html>
