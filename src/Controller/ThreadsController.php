@@ -71,12 +71,15 @@ class ThreadsController extends AppController
                 if($user['role'] === 'admin'){
                     $email = new Email('default');
                     foreach($users as $user){
+                      if(isset($user['email'])){
                         $email
-                            ->template('default')
+                            ->template('zeminor', 'college')
+                            ->emailFormat('html')
                             ->from(['xu.lab.fitc6@gmail.com' => 'ゼミ管理システム'])
                             ->to($user['email'])
-                            ->subject('ゼミ管理システムにコメントされました')
-                            ->send(__("ゼミ管理システムからの通知です。掲示板に管理者からコメントがされたので確認してみてください。なお、このメールには返信できません。"));
+                            ->subject('ゼミ管理システムにコメントされました!')
+                            ->send();
+                      }
                     }
                 }
                 /*管理者がコメントしたらメールを送る機能はここまでの部分*/

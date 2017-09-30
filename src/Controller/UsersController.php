@@ -92,10 +92,11 @@ class UsersController extends AppController
       ]);
       $attachments = $this->Users->Events->Attachments->find()->where(['Attachments.user_id' => $id])->contain(['Scores', 'Favorites']);
       $iineEval = $this->iineEvalCount($attachments, $user);
+      $attachmentFlag = $this->atFlag($attachments);
       $today = getdate(); // 現在の時刻を取得
       $todayHour = $today['hours'];
       if($todayHour == 0){ $todayHour = 24; }
-      $this->set(compact('user', 'attachments', 'iineEval', 'todayHour'));
+      $this->set(compact('user', 'attachments', 'iineEval', 'todayHour', 'attachmentFlag'));
     }
 
 
@@ -191,7 +192,28 @@ class UsersController extends AppController
         }
       }
       ksort($scoreRange); //キーの値で昇順にソート
-      $average = round($evaluationSum / $countEval, 1); // 小数点第一位まで四捨五入
+      if($countEval == 0) {
+        $average = 0;
+      }else{
+        $average = round($evaluationSum / $countEval, 1); // 小数点第一位まで四捨五入
+      }
       return array('evalAverage' => $average, 'iine' => $countIine, 'scoreRange' => $scoreRange);
+    }
+
+    /**
+    * method atFlag
+    * @param array Attachments
+    * @return boolean
+    **/
+    public function atFlag($attachments)
+    {
+      $count = 0;
+      foreach ($attachments as $attachment) {
+        $count++;
+      };
+      if($count == 0) {
+        return false;
+      }
+      return true;
     }
 }
