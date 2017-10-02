@@ -17,6 +17,18 @@
             'hidden' ,'value' => $thread->id, 'label' => 'タイトル名']); ?>
         </div>
     </fieldset>
+        <?php if($user['role'] == 'admin'): ?>
+        <div class="form-group">
+            <?= $this->Form->input('users._ids',[
+              'label' => __('メール送信者(管理者用)'),
+              'option' => $users,
+              'multiple' => 'checkbox',
+              'templates' => [
+                'nestingLabel' => "<div class='col-md-4 sendEmail'>{{hidden}}<label{{attrs}} >{{input}}{{text}}</label></div>",
+              ]
+            ]) ?>
+        </div>
+        <?php endif ?>
     <div class="login-button text-right">
       <?= $this->Form->button(__('コメントする'),['class' => 'btn btn-raised btn-success loading']) ?>
     </div>
@@ -39,7 +51,7 @@
         $w = date('w', strtotime($post['modified']));
         ?>
         <tr>
-            <?php foreach($users as $targetUser): ?>
+            <?php foreach($usersList as $targetUser): ?>
                 <?php if($targetUser->id === $post->user_id): ?>
                     <td class="img-50">
                     <p class="post-nickname"><?= $targetUser->nickname ?></p>
@@ -82,4 +94,8 @@
   </div>
 </div>
 <?php endif ?>
+<script>
+    items = $('.sendEmail').find('input');
+    $(items).prop('checked', true);
+</script>
 <?= $this->Html->script('url2link.js') ?>

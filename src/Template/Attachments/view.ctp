@@ -130,7 +130,6 @@ foreach ($checkedList as $key => $checkId){
 ?>
 <script>
   var checkTag = <?php echo json_encode($value); ?>;
-  //console.log(checkTag);
   $(function(){
     $('.checkbox').val(checkTag);
   });
