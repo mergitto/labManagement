@@ -58,10 +58,11 @@ class ThreadsController extends AppController
      */
     public function posts($id = null)
     {
+        $users = $this->loadModel('Users');
         $user = $this->Auth->user();
         $thread = $this->Threads->get($id);
         $posts = $this->paginate($this->Threads->Posts->find()->where(['thread_id' => $id])->order(['Posts.modified' => 'DESC']));
-        $users = $this->paginate($this->Threads->Users->find());
+        $usersList = $this->paginate($this->Threads->Users->find());
         $post = $this->Threads->Posts->newEntity();
         if ($this->request->is('post')) {
             $post = $this->Threads->Posts->patchEntity($post, $this->request->data);
@@ -70,14 +71,15 @@ class ThreadsController extends AppController
                 /* 管理者がコメントしたらゼミ管理システムに登録している人にメールを送るようにしている*/
                 if($user['role'] === 'admin'){
                     $email = new Email('default');
-                    foreach($users as $user){
-                      if(isset($user['email'])){
+                    foreach($usersList as $user){
+                      if(isset($user['email']) && in_array($user['id'], $post->users['_ids'])){ // 管理者が選択したユーザーのみにメールを飛ばす
                         $email
                             ->template('zeminor', 'college')
                             ->emailFormat('html')
                             ->from(['xu.lab.fitc6@gmail.com' => 'ゼミ管理システム'])
                             ->to($user['email'])
                             ->subject('ゼミ管理システムにコメントされました!')
+                            ->viewVars(['value' => $post['comment']])
                             ->send();
                       }
                     }
@@ -87,7 +89,11 @@ class ThreadsController extends AppController
             }
             $this->Flash->error(__('コメントが正しく登録されませんでした。'));
         }
-        $this->set(compact('thread','post','posts','users'));
+        $users = $users->find('list', [
+          'keyField' => 'id',
+          'valueField' => 'name'
+        ]);
+        $this->set(compact('thread','post','posts','users','usersList'));
     }
 
     /**
