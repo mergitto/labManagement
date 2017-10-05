@@ -34,6 +34,13 @@ $title = 'ゼミ管理システム';
     <?php endif ?>
     <?= $this->Html->script('jquery.min.js') ?>
     <?= $this->Html->script('bootstrap.min.js') ?>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-66496075-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-66496075-2');
+    </script>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
