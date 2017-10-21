@@ -21,8 +21,8 @@ class CreateActivities extends AbstractMigration
             'default' => null,
             'null' => true,
         ]);
-        $table->addColumn('status', 'text', [
-            'default' => null,
+        $table->addColumn('status', 'integer', [
+            'default' => 0,
             'null' => true,
         ]);
         $table->addColumn('user_id', 'integer', [
