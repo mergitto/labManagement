@@ -11,6 +11,7 @@ use App\Controller\AppController;
 class ActivitiesController extends AppController
 {
 
+
     /**
      * Index method
      *
@@ -18,30 +19,15 @@ class ActivitiesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users']
-        ];
-        $activities = $this->paginate($this->Activities);
-
-        $this->set(compact('activities'));
-        $this->set('_serialize', ['activities']);
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Activity id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $activity = $this->Activities->get($id, [
-            'contain' => ['Users']
-        ]);
-
-        $this->set('activity', $activity);
-        $this->set('_serialize', ['activity']);
+        $user = $this->Auth->user();
+        $activity = $this->Activities->find()->where(['user_id' => $user['id']])->contain(['Users']);
+        if($activity->isEmpty()){ // 研究テーマを登録していない場合は登録画面へ遷移
+          return $this->redirect(['action' => 'add', $user['id']]);
+        } else {
+          $result = $activity->first();
+        }
+        $plans = $this->Activities->Plans->find()->where(['activity_id' => $result['id']])->order(['Plans.created' => 'ASC']);
+        $this->set(compact('result', 'plans'));
     }
 
     /**
@@ -115,8 +101,8 @@ class ActivitiesController extends AppController
     public function isAuthorized($user)
     {
         $action = $this->request->params['action'];
-        // indexページは誰でも見れる
-        if (in_array($action, ['index'])) {
+        // index, add, edit, deleteページは誰でも見れる
+        if (in_array($action, ['index','add','edit','delete','logout'])) {
             return true;
         }
         if (isset($user['role']) && $user['role'] === 'admin') {

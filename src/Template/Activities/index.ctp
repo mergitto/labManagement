@@ -3,10 +3,11 @@
     <div class="col-xs-12">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h2><?= __('赤木さんの研究テーマ') ?></h3>
-        </div>
+          <span class="font-24"><?= $user['nickname'].__('さんの研究テーマ') ?></span>
+          <span class="retheme"><?= $this->Html->link(__('研究テーマの修正'), ['action' => 'edit',$result['id']]); ?></span>
+          </div>
         <div class="panel-body">
-          <h3 class="theme"><strong><?= __('〇〇の試みと応用') ?></strong></h3>
+          <h3 class="theme"><strong><?= $result['theme']; ?></strong></h3>
         </div>
       </div>
     </div>
@@ -27,9 +28,12 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <h2><?= __('ToDo') ?></h2>
+          <?= $this->Html->link(__('ToDoの登録'), ['controller' => 'Plans', 'action' => 'add']); ?>
           <hr>
           <ul>
-            <li><h3><?= __('〇〇の試みと応用') ?></h3></li>
+            <?php foreach($plans as $plan): ?>
+              <li><span class="font-20"><?= $plan['todo'] ?></span><?= $this->Html->link(__('ToDoの修正'), ['controller' => 'Plans','action' => 'edit',$plan['id']]); ?></li>
+            <?php endforeach ?>
           </ul>
         </div>
       </div>
