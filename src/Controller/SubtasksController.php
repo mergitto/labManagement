@@ -113,4 +113,28 @@ class SubtasksController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function isAuthorized($user)
+    {
+        $action = $this->request->params['action'];
+        // indexページは誰でも見れる
+        if (in_array($action, ['index'])) {
+            return true;
+        }
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
+        // リクエストされたページのUser idと
+        // ログイン中のUseridが一致する場合はその他のアクションも許可する
+        $id = $this->request->params['pass'][0];
+        $current_user = $this->Subtasks->get($id);
+        if ($current_user->user_id == $user['id']) {
+            return true;
+        }else{
+            $this->Flash->error(__('他のユーザーのファイルは操作できません'));
+            return false;
+        }
+        $this->Flash->error(__('管理者の機能です'));
+        return false;
+    }
 }
