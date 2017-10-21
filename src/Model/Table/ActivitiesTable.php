@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * Activities Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
+ * @property \Cake\ORM\Association\HasMany $Plans
  *
  * @method \App\Model\Entity\Activity get($primaryKey, $options = [])
  * @method \App\Model\Entity\Activity newEntity($data = null, array $options = [])
@@ -43,6 +44,9 @@ class ActivitiesTable extends Table
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id'
         ]);
+        $this->hasMany('Plans', [
+            'foreignKey' => 'activity_id'
+        ]);
     }
 
     /**
@@ -60,16 +64,6 @@ class ActivitiesTable extends Table
         $validator
             ->requirePresence('theme', 'create')
             ->notEmpty('theme');
-
-        $validator
-            ->allowEmpty('todo');
-
-        $validator
-            ->allowEmpty('status');
-
-        $validator
-            ->integer('weight')
-            ->allowEmpty('weight');
 
         return $validator;
     }

@@ -8,10 +8,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $theme
- * @property string $todo
- * @property string $status
  * @property int $user_id
- * @property int $weight
  * @property \Cake\I18n\Time $modified
  * @property \Cake\I18n\Time $created
  *
