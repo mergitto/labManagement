@@ -18,7 +18,7 @@ class PlansController extends AppController
     public function add()
     {
         $user = $this->Auth->user();
-        $activity = $this->Plans->Activities->find('list')->where(['user_id' => $user['id']]);
+        $activity = $this->Plans->Activities->find()->where(['user_id' => $user['id']])->first();
         $plan = $this->Plans->newEntity();
         if ($this->request->is('post')) {
             $plan = $this->Plans->patchEntity($plan, $this->request->data);

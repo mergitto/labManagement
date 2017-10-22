@@ -19,6 +19,7 @@ class ActivitiesController extends AppController
      */
     public function index()
     {
+        $tasksModel = $this->loadModel('Tasks');
         $user = $this->Auth->user();
         $activity = $this->Activities->find()->where(['user_id' => $user['id']])->contain(['Users']);
         if($activity->isEmpty()){ // 研究テーマを登録していない場合は登録画面へ遷移
@@ -27,7 +28,8 @@ class ActivitiesController extends AppController
           $result = $activity->first();
         }
         $plans = $this->Activities->Plans->find()->where(['activity_id' => $result['id']])->order(['Plans.created' => 'ASC']);
-        $this->set(compact('result', 'plans'));
+        $tasks = $tasksModel->find()->where(['user_id' => $user['id']])->contain(['Subtasks']);
+        $this->set(compact('result', 'plans', 'tasks'));
     }
 
     /**

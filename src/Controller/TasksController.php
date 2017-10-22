@@ -10,40 +10,6 @@ use App\Controller\AppController;
  */
 class TasksController extends AppController
 {
-
-    /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
-    public function index()
-    {
-        $this->paginate = [
-            'contain' => ['Users']
-        ];
-        $tasks = $this->paginate($this->Tasks);
-
-        $this->set(compact('tasks'));
-        $this->set('_serialize', ['tasks']);
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Task id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $task = $this->Tasks->get($id, [
-            'contain' => ['Users', 'Subtasks']
-        ]);
-
-        $this->set('task', $task);
-        $this->set('_serialize', ['task']);
-    }
-
     /**
      * Add method
      *
@@ -57,11 +23,12 @@ class TasksController extends AppController
             if ($this->Tasks->save($task)) {
                 $this->Flash->success(__('The task has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
             }
             $this->Flash->error(__('The task could not be saved. Please, try again.'));
         }
-        $users = $this->Tasks->Users->find('list', ['limit' => 200]);
+        $user = $this->Auth->user();
+        $users = $this->Tasks->Users->find('list')->where(['id' => $user['id']]);
         $subtasks = $this->Tasks->Subtasks->find('list', ['limit' => 200]);
         $this->set(compact('task', 'users', 'subtasks'));
         $this->set('_serialize', ['task']);
@@ -84,10 +51,11 @@ class TasksController extends AppController
             if ($this->Tasks->save($task)) {
                 $this->Flash->success(__('The task has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
             }
             $this->Flash->error(__('The task could not be saved. Please, try again.'));
         }
+        $user = $this->Auth->user();
         $users = $this->Tasks->Users->find('list', ['limit' => 200]);
         $subtasks = $this->Tasks->Subtasks->find('list', ['limit' => 200]);
         $this->set(compact('task', 'users', 'subtasks'));
@@ -111,14 +79,14 @@ class TasksController extends AppController
             $this->Flash->error(__('The task could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
     }
 
     public function isAuthorized($user)
     {
         $action = $this->request->params['action'];
         // indexページは誰でも見れる
-        if (in_array($action, ['index'])) {
+        if (in_array($action, ['add','edit','logout'])) {
             return true;
         }
         if (isset($user['role']) && $user['role'] === 'admin') {
