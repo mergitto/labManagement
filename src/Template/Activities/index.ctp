@@ -31,9 +31,11 @@
           <?= $this->Html->link(__('ToDoの登録'), ['controller' => 'Plans', 'action' => 'add']); ?>
           <hr>
           <ul>
+            <div class="text-left">
             <?php foreach($plans as $plan): ?>
               <li><span class="font-20"><?= $plan['todo'] ?></span><?= $this->Html->link(__('ToDoの修正'), ['controller' => 'Plans','action' => 'edit',$plan['id']]); ?></li>
             <?php endforeach ?>
+            </div>
           </ul>
         </div>
       </div>
@@ -42,9 +44,14 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <h2><?= __('タスク') ?></h2>
+          <?= $this->Html->link(__('タスクの登録'), ['controller' => 'Tasks', 'action' => 'add']); ?>
           <hr>
           <ul>
-            <li><h3><?= __('〇〇の試みと応用') ?></h3></li>
+            <div class="text-left">
+            <?php foreach($tasks as $task): ?>
+              <li><span class="font-20"><?= $task['description'] ?></span><?= $this->Html->link(__('タスクの修正'), ['controller' => 'Tasks','action' => 'edit',$task['id']]); ?></li>
+            <?php endforeach ?>
+            </div>
           </ul>
         </div>
       </div>
@@ -53,9 +60,21 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <h2><?= __('サブタスク') ?></h2>
+          <?= $this->Html->link(__('サブタスクの登録'), ['controller' => 'Subtasks', 'action' => 'add']); ?>
           <hr>
           <ul>
-            <li><h3><?= __('〇〇の試みと応用') ?></h3></li>
+            <div class="text-left">
+            <?php foreach($tasks as $task): ?>
+              <?php if(count($task['subtasks']) !== 0): ?>
+                <li><span class="font-20"><?= $task['description'] ?></span></li>
+                <ul>
+                  <?php foreach($task['subtasks'] as $subtask): ?>
+                    <li><span class="font-14"><?= $subtask['subdescription'] ?></span><?= $this->Html->link(__('サブタスクの修正'), ['controller' => 'Subtasks','action' => 'edit',$subtask['id']]); ?></li>
+                  <?php endforeach ?>
+                </ul>
+              <?php endif ?>
+            <?php endforeach ?>
+            </div>
           </ul>
         </div>
       </div>
@@ -83,3 +102,4 @@
     </div>
   </div>
 </div>
+
