@@ -42,8 +42,7 @@ class SubtasksTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'user_id'
         ]);
         $this->belongsToMany('Tasks', [
             'foreignKey' => 'subtask_id',
@@ -65,27 +64,23 @@ class SubtasksTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('subdescription', 'create')
-            ->notEmpty('subdescription');
+            ->allowEmpty('subdescription');
 
         $validator
-            ->requirePresence('status', 'create')
-            ->notEmpty('status');
+            ->integer('status')
+            ->allowEmpty('status');
 
         $validator
-            ->dateTime('start')
-            ->requirePresence('start', 'create')
-            ->notEmpty('start');
+            ->dateTime('starttime')
+            ->allowEmpty('starttime');
 
         $validator
-            ->dateTime('end')
-            ->requirePresence('end', 'create')
-            ->notEmpty('end');
+            ->dateTime('endtime')
+            ->allowEmpty('endtime');
 
         $validator
             ->integer('weight')
-            ->requirePresence('weight', 'create')
-            ->notEmpty('weight');
+            ->allowEmpty('weight');
 
         return $validator;
     }

@@ -31,11 +31,11 @@ class CreateTasks extends AbstractMigration
             'limit' => 255,
             'null' => true,
         ]);
-        $table->addColumn('start', 'timestamp', [
+        $table->addColumn('startitme', 'timestamp', [
             'default' => null,
             'null' => true,
         ]);
-        $table->addColumn('end', 'timestamp', [
+        $table->addColumn('endtime', 'timestamp', [
             'default' => null,
             'null' => true,
         ]);
