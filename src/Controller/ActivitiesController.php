@@ -29,7 +29,13 @@ class ActivitiesController extends AppController
         }
         $plans = $this->Activities->Plans->find()->where(['activity_id' => $result['id']])->order(['Plans.created' => 'ASC']);
         $tasks = $tasksModel->find()->where(['user_id' => $user['id']])->contain(['Subtasks']);
-        $this->set(compact('result', 'plans', 'tasks'));
+        $todayTasks = $tasksModel->find()
+          ->where(['user_id' => $user['id']])
+          ->where(['starttime <=' => date('Y-m-d H:i:s')])
+          ->where(['endtime >=' => date("Y/m/d")])
+          ->contain(['Subtasks']);
+        $subList = $this->subTasksList($tasks);
+        $this->set(compact('result', 'plans', 'tasks', 'subList', 'todayTasks'));
     }
 
     /**
@@ -98,6 +104,23 @@ class ActivitiesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * subTasksList method
+     *
+     * @param array $tasks
+     */
+    public function subTasksList($tasks)
+    {
+      $subtasksList = [];
+      foreach ($tasks as $key => $task) {
+        $subtasksList[$key] = [];
+        foreach ($task['subtasks'] as $subtask) {
+          $subtasksList[$key][] = $subtask['status'];
+        }
+      }
+      return $subtasksList;
     }
 
     public function isAuthorized($user)
