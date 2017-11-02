@@ -32,8 +32,10 @@ class ActivitiesController extends AppController
         $todayTasks = $tasksModel->find()
           ->where(['user_id' => $user['id']])
           ->where(['starttime <=' => date('Y-m-d H:i:s')])
+          ->where(['status =' => PROCESS]) // status=処理中(PROCESS)という条件を付加
           ->contain(['Subtasks']);
         $subList = $this->subTasksList($tasks);
+        $taskRate = $this->taskProgressRate($tasks);
         $this->set(compact('result', 'plans', 'tasks', 'subList', 'todayTasks'));
     }
 
@@ -107,8 +109,8 @@ class ActivitiesController extends AppController
 
     /**
      * subTasksList method
-     *
      * @param array $tasks
+     * @return array subtasks list
      */
     public function subTasksList($tasks)
     {
@@ -122,21 +124,31 @@ class ActivitiesController extends AppController
       return $subtasksList;
     }
 
+    /**
+     * taskProgressRate method
+     * @param array $tasks
+     * @return array task progress rate
+     */
+    public function taskProgressRate($tasks)
+    {
+      //dump($tasks->all());
+    }
+
     public function isAuthorized($user)
     {
         $action = $this->request->params['action'];
-        // index, add, edit, deleteページは誰でも見れる
-        if (in_array($action, ['index','add','edit','delete','logout'])) {
+        // indexページは誰でも見れる
+        if (in_array($action, ['index', 'add', 'logout'])) {
             return true;
         }
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
         }
-        // リクエストされたページのUser idと
+        // リクエストされたページのActivitiesのuser_idと
         // ログイン中のUseridが一致する場合はその他のアクションも許可する
         $id = $this->request->params['pass'][0];
-        $current_user = $this->Activities->get($id);
-        if ($current_user->user_id == $user['id']) {
+        $activityUserId = $this->Activities->get($id);
+        if ($activityUserId['user_id'] == $user['id']) {
             return true;
         }else{
             $this->Flash->error(__('他のユーザーのファイルは操作できません'));
