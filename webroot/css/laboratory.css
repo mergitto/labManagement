@@ -170,6 +170,9 @@ table > thead > tr > th {
 .font-20{
   font-size: 20px;
 }
+.font-16{
+  font-size: 16px;
+}
 .font-18{
   font-size: 18px;
 }
@@ -344,8 +347,41 @@ ul.rank-right{
 /***************************************/
 /*********掲示板レスポンシブ用***********/
 .theme{
-  color: #5aae00;
-  text-decoration: underline;
+  color: #54B8D9;
+}
+h1.theme {
+  padding-bottom: .5em;
+  border-bottom: 1px solid #54B8D9;
+}
+h1.theme span {
+  margin-bottom: .2em;
+  color: #666;
+}
+.themeHead {
+  position: relative;
+  text-align: center;
+}
+.themeHead span {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  margin: 0 2.5em;
+  padding: 0 1em;
+  background-color: #fff;
+  text-align: left;
+}
+.themeHead::before {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #54B8D9;
+}
+.panel-success {
+  border: solid 3px #54B8D9;
 }
 .retheme a{
   color: #fff;
@@ -368,5 +404,35 @@ ul.rank-right{
 }
 .pad-20 ul {
   padding-left: 20px;
+}
+.box {
+  margin-bottom: 10px;
+}
+.box a {
+  color: #fff;
+}
+.box-todo{
+  padding: 0.5em 1em;
+  background: -moz-linear-gradient(#ffb03c, #ff708d);
+  background: -webkit-linear-gradient(#ffb03c, #ff708d);
+  background: linear-gradient(to right, #ffb03c, #ff708d);
+  color: #FFF;
+}
+.box-task{
+  padding: 0.5em 1em;
+  background: -moz-linear-gradient(#ff708d, #E8A2EE);
+  background: -webkit-linear-gradient(#ff708d, #E8A2EE);
+  background: linear-gradient(to right, #ff708d, #E8A2EE);
+  color: #FFF;
+}
+.box-subtask{
+  padding: 0.5em 1em;
+  background: -moz-linear-gradient(#E8A2EE, #8CA6DB);
+  background: -webkit-linear-gradient(#E8A2EE, #8CA6DB);
+  background: linear-gradient(to right, #E8A2EE, #8CA6DB);
+  color: #FFF;
+}
+hr.today-plan-hr {
+  border: solid 2px #54B8D9;
 }
 /***************************************/
