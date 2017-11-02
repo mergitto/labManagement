@@ -47,12 +47,27 @@ class PlansController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $plan = $this->Plans->patchEntity($plan, $this->request->data);
-            if ($this->Plans->save($plan)) {
-                $this->Flash->success(__('The plan has been saved.'));
+          $plan = $this->Plans->patchEntity($plan, $this->request->data);
+          if ($this->request->data['status'] == 1) {
+            $tasksModel = $this->loadModel('Tasks');
+            $user = $this->Auth->user();
+            // Tasksテーブルのための配列を作る
+            $taskList = ['description' => $this->request->data['todo'], 'user_id' => $user['id'],'status' => 0, 'weight' => $this->request->data['weight']];
+            $task = $tasksModel->newEntity();
+            $task = $tasksModel->patchEntity($task, $taskList);
+
+            if ($tasksModel->save($task) && $this->Plans->save($plan)) { // ToDoをタスクへと変更し、Plansのstatusを1へと更新する
+                $this->Flash->success(__('ToDoをタスクへ変更しました。ToDoの開始時間と締め切り時間を設定してください'));
                 return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
             }
-            $this->Flash->error(__('The plan could not be saved. Please, try again.'));
+            $this->Flash->error(__('ToDoをタスクへ変更できませんでした。'));
+          } else {
+            if ($this->Plans->save($plan)) {
+                $this->Flash->success(__('ToDoが登録されました'));
+                return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
+            }
+            $this->Flash->error(__('ToDoが登録できませんでした。もう一度試してみてください。'));
+          }
         }
         $activities = $this->Plans->Activities->find('list', ['limit' => 200]);
         $this->set(compact('plan', 'activities'));
