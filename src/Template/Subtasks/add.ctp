@@ -14,7 +14,7 @@
         <legend><?= __('サブタスクを登録する') ?></legend>
         <?php
             echo $this->Form->input('subdescription');
-            echo $this->Form->input('status');
+            echo $this->Form->input('status', ['min' => PROCESS, 'max' => CLOSE]);
             echo $this->Form->text('user_id', ['type' => 'hidden', 'value' => $user['id']]);
             echo $this->Form->input('starttime');
             echo $this->Form->input('endtime');
