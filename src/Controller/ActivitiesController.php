@@ -49,11 +49,11 @@ class ActivitiesController extends AppController
         if ($this->request->is('post')) {
             $activity = $this->Activities->patchEntity($activity, $this->request->data);
             if ($this->Activities->save($activity)) {
-                $this->Flash->success(__('The activity has been saved.'));
+                $this->Flash->success(__('テーマを追加しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The activity could not be saved. Please, try again.'));
+            $this->Flash->error(__('テーマを追加できませんでした。もう一度試してください。'));
         }
         $users = $this->Activities->Users->find('list', ['limit' => 200]);
         $this->set(compact('activity', 'users'));
@@ -75,11 +75,11 @@ class ActivitiesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $activity = $this->Activities->patchEntity($activity, $this->request->data);
             if ($this->Activities->save($activity)) {
-                $this->Flash->success(__('The activity has been saved.'));
+                $this->Flash->success(__('テーマの修正を行いました。'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The activity could not be saved. Please, try again.'));
+            $this->Flash->error(__('テーマを修正できませんでした。もう一度試してください。'));
         }
         $users = $this->Activities->Users->find('list', ['limit' => 200]);
         $this->set(compact('activity', 'users'));
@@ -98,9 +98,9 @@ class ActivitiesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $activity = $this->Activities->get($id);
         if ($this->Activities->delete($activity)) {
-            $this->Flash->success(__('The activity has been deleted.'));
+            $this->Flash->success(__('テーマを削除しました。'));
         } else {
-            $this->Flash->error(__('The activity could not be deleted. Please, try again.'));
+            $this->Flash->error(__('テーマを削除できませんでした。もう一度試してください。'));
         }
 
         return $this->redirect(['action' => 'index']);

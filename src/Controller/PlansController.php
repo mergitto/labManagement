@@ -23,11 +23,11 @@ class PlansController extends AppController
         if ($this->request->is('post')) {
             $plan = $this->Plans->patchEntity($plan, $this->request->data);
             if ($this->Plans->save($plan)) {
-                $this->Flash->success(__('The plan has been saved.'));
+                $this->Flash->success(__('ToDoを追加しました。'));
 
                 return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
             }
-            $this->Flash->error(__('The plan could not be saved. Please, try again.'));
+            $this->Flash->error(__('ToDoを追加できませんでした。もう一度試してください。'));
         }
         $activities = $this->Plans->Activities->find('list', ['limit' => 200]);
         $this->set(compact('plan', 'activities', 'activity'));
@@ -86,9 +86,9 @@ class PlansController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $plan = $this->Plans->get($id);
         if ($this->Plans->delete($plan)) {
-            $this->Flash->success(__('The plan has been deleted.'));
+            $this->Flash->success(__('ToDoを削除しました。'));
         } else {
-            $this->Flash->error(__('The plan could not be deleted. Please, try again.'));
+            $this->Flash->error(__('ToDoを削除できませんでした。もう一度試してください。'));
         }
 
         return $this->redirect(['action' => 'index']);

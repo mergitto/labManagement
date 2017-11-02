@@ -21,11 +21,11 @@ class SubtasksController extends AppController
         if ($this->request->is('post')) {
             $subtask = $this->Subtasks->patchEntity($subtask, $this->request->data);
             if ($this->Subtasks->save($subtask)) {
-                $this->Flash->success(__('The subtask has been saved.'));
+                $this->Flash->success(__('サブタスクを追加しました。'));
 
                 return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
             }
-            $this->Flash->error(__('The subtask could not be saved. Please, try again.'));
+            $this->Flash->error(__('サブタスクを追加できませんでした。もう一度試してください。'));
         }
         $user = $this->Auth->user();
         $users = $this->Subtasks->Users->find('list', ['limit' => 200]);
@@ -56,11 +56,11 @@ class SubtasksController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $subtask = $this->Subtasks->patchEntity($subtask, $this->request->data);
             if ($this->Subtasks->save($subtask)) {
-                $this->Flash->success(__('The subtask has been saved.'));
+                $this->Flash->success(__('サブタスクを修正しました。'));
 
                 return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
             }
-            $this->Flash->error(__('The subtask could not be saved. Please, try again.'));
+            $this->Flash->error(__('サブタスクを修正できませんでした。もう一度試してください。'));
         }
         $user = $this->Auth->user();
         $users = $this->Subtasks->Users->find('list', ['limit' => 200]);
@@ -84,9 +84,9 @@ class SubtasksController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $subtask = $this->Subtasks->get($id);
         if ($this->Subtasks->delete($subtask)) {
-            $this->Flash->success(__('The subtask has been deleted.'));
+            $this->Flash->success(__('サブタスクを削除しました。'));
         } else {
-            $this->Flash->error(__('The subtask could not be deleted. Please, try again.'));
+            $this->Flash->error(__('サブタスクを削除できませんでした。もう一度試してください。'));
         }
 
         return $this->redirect(['controller' => 'Activities', 'action' => 'index']);

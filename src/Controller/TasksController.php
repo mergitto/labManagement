@@ -21,11 +21,11 @@ class TasksController extends AppController
         if ($this->request->is('post')) {
             $task = $this->Tasks->patchEntity($task, $this->request->data);
             if ($this->Tasks->save($task)) {
-                $this->Flash->success(__('The task has been saved.'));
+                $this->Flash->success(__('タスクを追加しました。'));
 
                 return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
             }
-            $this->Flash->error(__('The task could not be saved. Please, try again.'));
+            $this->Flash->error(__('タスクを追加できませんでした。もう一度試してください。'));
         }
         $user = $this->Auth->user();
         $users = $this->Tasks->Users->find('list')->where(['id' => $user['id']]);
@@ -49,11 +49,11 @@ class TasksController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $task = $this->Tasks->patchEntity($task, $this->request->data);
             if ($this->Tasks->save($task)) {
-                $this->Flash->success(__('The task has been saved.'));
+                $this->Flash->success(__('タスクを修正しました。'));
 
                 return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
             }
-            $this->Flash->error(__('The task could not be saved. Please, try again.'));
+            $this->Flash->error(__('タスクを修正できませんでした。もう一度試してください。'));
         }
         $user = $this->Auth->user();
         $users = $this->Tasks->Users->find('list', ['limit' => 200]);
@@ -74,9 +74,9 @@ class TasksController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $task = $this->Tasks->get($id);
         if ($this->Tasks->delete($task)) {
-            $this->Flash->success(__('The task has been deleted.'));
+            $this->Flash->success(__('タスクを削除しました。'));
         } else {
-            $this->Flash->error(__('The task could not be deleted. Please, try again.'));
+            $this->Flash->error(__('タスクを削除できませんでした。もう一度試してください。'));
         }
 
         return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
