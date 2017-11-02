@@ -32,7 +32,6 @@ class ActivitiesController extends AppController
         $todayTasks = $tasksModel->find()
           ->where(['user_id' => $user['id']])
           ->where(['starttime <=' => date('Y-m-d H:i:s')])
-          ->where(['endtime >=' => date("Y/m/d")])
           ->contain(['Subtasks']);
         $subList = $this->subTasksList($tasks);
         $this->set(compact('result', 'plans', 'tasks', 'subList', 'todayTasks'));
