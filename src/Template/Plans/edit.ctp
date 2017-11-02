@@ -15,7 +15,7 @@
         <?php
             echo $this->Form->input('todo');
             echo $this->Form->input('activity_id', ['type' => 'hidden', 'options' => $activities]);
-            echo $this->Form->input('weight', ['label' => '重要度']);
+            echo $this->Form->input('weight', ['label' => '重要度', 'min' => MINPRIORITY, 'max' => MAXPRIORITY]);
             echo $this->Form->input('status', ['label' => '状態(0=ToDo,_1=タスクへ移動する)']);
         ?>
     </fieldset>

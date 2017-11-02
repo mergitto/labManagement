@@ -18,7 +18,7 @@
             echo $this->Form->text('user_id', ['type' => 'hidden', 'value' => $user['id']]);
             echo $this->Form->input('starttime');
             echo $this->Form->input('endtime');
-            echo $this->Form->input('weight');
+            echo $this->Form->input('weight', ['label' => '重要度', 'min' => MINPRIORITY, 'max' => MAXPRIORITY]);
             echo $this->Form->input('tasks._ids', ['options' => $tasks]);
         ?>
     </fieldset>

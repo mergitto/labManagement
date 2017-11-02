@@ -14,8 +14,8 @@
         <legend><?= __('ToDoを登録する') ?></legend>
         <?php
             echo $this->Form->input('todo');
-            echo $this->Form->input('weight', ['label' => '重要度']);
-            echo $this->Form->input('status', ['label' => '状態(0=ToDo, 1=タスクへ移動する)']);
+            echo $this->Form->input('weight', ['label' => '重要度', 'min' => MINPRIORITY, 'max' => MAXPRIORITY]);
+            echo $this->Form->input('status', ['type' => 'hidden', 'label' => '状態(0=ToDo, 1=タスクへ移動する)']);
             echo $this->Form->text('activity_id', ['type' => 'hidden', 'label' => $activity['theme'], 'value' => $activity['id']])
         ?>
     </fieldset>

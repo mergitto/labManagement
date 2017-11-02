@@ -15,9 +15,9 @@
         <?php
             echo $this->Form->input('description');
             echo $this->Form->input('status');
-            echo $this->Form->input('weight');
+            echo $this->Form->input('weight', ['label' => '重要度', 'min' => MINPRIORITY, 'max' => MAXPRIORITY]);
             echo $this->Form->text('user_id', ['type' => 'hidden', 'value' => $user['id']]);
-            echo $this->Form->input('startitme');
+            echo $this->Form->input('starttime');
             echo $this->Form->input('endtime');
         ?>
     </fieldset>

@@ -57,7 +57,7 @@
                 </td>
                 <td>
                     <?php if(isset($thread->posts[0]['modified'])): ?>
-                      <?= date('Y-m-d', strtotime($thread->posts[0]['modified'])) ?><?= $week[date('Y-m-d', strtotime($thread->posts[0]['modified']))]; ?>
+                      <?= date('Y-m-d', strtotime($thread->posts[0]['modified'])) ?><?= $week[date('w', strtotime($thread->posts[0]['modified']))]; ?>
                     <?php else: ?>
                       <?= date('Y-m-d', strtotime($thread['modified'])) ?>
                     <?php endif ?>
