@@ -10,16 +10,23 @@
           <div class="col-xs-2">
             <span class="font-16 "><?= __('進捗度'); ?></span>
           </div>
-          <div class="col-xs-10">
+          <div class="col-xs-8">
             <div class="progress">
-              <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" style="width: 60%;">
-                バリデーションの追加
-              </div>
-              <div class="progress-bar progress-bar-success" role="progressbar" style="width: 20%;">
-                スマホを購入する
-              </div>
+              <?php
+                $progressColor = ['success', 'info', 'warning', 'danger', 'striped'];
+                $count = 0;
+                foreach($taskRate[$user['id']]['subtaskWeight'] as $taskName => $taskTitle) {
+                  if (isset($taskTitle['closeRate'])) {
+                    print "<div class='progress-bar progress-bar-".$progressColor[$count % count($progressColor)]." progress-bar-striped active' role='progressbar' style='width:".$taskTitle["closeRate"]."%;'>";
+                    print __($taskName);
+                    print "</div>";
+                    $count++;
+                  }
+                }
+              ?>
             </div>
           </div>
+          <div class="col-xs-2"></div>
         </div>
       </h1>
     </div>
