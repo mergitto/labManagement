@@ -3,7 +3,7 @@
     <div class="col-xs-12">
       <h1 class="theme">
         <div class="themeHead">
-          <span class="font-20"><?= $user['nickname'].__('さんの研究テーマ') ?><?= $this->Html->link(__('研究テーマの修正'), ['action' => 'edit',$result['id']], ['class' => 'font-14']); ?></span>
+          <span class="font-20"><?= $user['name'].__('さんの研究テーマ') ?><?= $this->Html->link(__('研究テーマの修正'), ['action' => 'edit',$result['id']], ['class' => 'font-14']); ?></span>
         </div>
         <?= $result['theme']; ?>
         <div class="row">
@@ -81,7 +81,7 @@
     <div class="col-md-4">
       <div class="box box-todo">
         <h2><?= __('ToDo') ?></h2>
-        <?= $this->Html->link(__('ToDoの登録'), ['controller' => 'Plans', 'action' => 'add']); ?>
+        <?= $this->Html->link(__('ToDoの登録'), ['controller' => 'Plans', 'action' => 'add', $result['user_id']]); ?>
         <hr>
         <div class="pad-20">
           <?php $todoCount = 0; ?>
@@ -106,7 +106,7 @@
     <div class="col-md-4">
       <div class="box box-task">
         <h2><?= __('タスク') ?></h2>
-        <?= $this->Html->link(__('タスクの登録'), ['controller' => 'Tasks', 'action' => 'add']); ?>
+        <?= $this->Html->link(__('タスクの登録'), ['controller' => 'Tasks', 'action' => 'add', $result['user_id']]); ?>
         <hr>
         <div class="pad-20">
           <?php $taskCount = 0; ?>
@@ -144,7 +144,7 @@
     <div class="col-md-4">
       <div class="box box-subtask">
         <h2><?= __('サブタスク') ?></h2>
-        <?= $this->Html->link(__('サブタスクの登録'), ['controller' => 'Subtasks', 'action' => 'add']); ?>
+        <?= $this->Html->link(__('サブタスクの登録'), ['controller' => 'Subtasks', 'action' => 'add', $result['user_id']]); ?>
         <hr>
         <div class="pad-20">
           <?php $subtaskCount = 0; ?>
