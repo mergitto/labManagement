@@ -15,17 +15,21 @@ class PlansController extends AppController
      *
      * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($activityUserId = null)
     {
         $user = $this->Auth->user();
-        $activity = $this->Plans->Activities->find()->where(['user_id' => $user['id']])->first();
+        $activity = $this->Plans->Activities->find()->where(['user_id' => $activityUserId])->first();
         $plan = $this->Plans->newEntity();
         if ($this->request->is('post')) {
             $plan = $this->Plans->patchEntity($plan, $this->request->data);
             if ($this->Plans->save($plan)) {
                 $this->Flash->success(__('ToDoを追加しました。'));
 
-                return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
+                if ($user['role'] === 'admin') {
+                  return $this->redirect(['controller' => 'Admins', 'action' => 'activities', $activity['user_id']]);
+                } else {
+                  return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
+                }
             }
             $this->Flash->error(__('ToDoを追加できませんでした。もう一度試してください。'));
         }
@@ -44,13 +48,13 @@ class PlansController extends AppController
     public function edit($id = null)
     {
         $plan = $this->Plans->get($id, [
-            'contain' => []
+            'contain' => ['Activities']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
           $plan = $this->Plans->patchEntity($plan, $this->request->data);
+          $user = $this->Auth->user();
           if ($this->request->data['status'] == 1) {
             $tasksModel = $this->loadModel('Tasks');
-            $user = $this->Auth->user();
             // Tasksテーブルのための配列を作る
             $taskList = ['description' => $this->request->data['todo'], 'user_id' => $user['id'],'status' => 0, 'weight' => $this->request->data['weight']];
             $task = $tasksModel->newEntity();
@@ -58,13 +62,21 @@ class PlansController extends AppController
 
             if ($tasksModel->save($task) && $this->Plans->save($plan)) { // ToDoをタスクへと変更し、Plansのstatusを1へと更新する
                 $this->Flash->success(__('ToDoをタスクへ変更しました。ToDoの開始時間と締め切り時間を設定してください'));
-                return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
+                if ($user['role'] === 'admin') {
+                  return $this->redirect(['controller' => 'Admins', 'action' => 'activities', $plan['activity']['user_id']]);
+                } else {
+                  return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
+                }
             }
             $this->Flash->error(__('ToDoをタスクへ変更できませんでした。'));
           } else {
             if ($this->Plans->save($plan)) {
                 $this->Flash->success(__('ToDoが登録されました'));
-                return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
+                if ($user['role'] === 'admin') {
+                  return $this->redirect(['controller' => 'Admins', 'action' => 'activities', $plan['activity']['user_id']]);
+                } else {
+                  return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
+                }
             }
             $this->Flash->error(__('ToDoが登録できませんでした。もう一度試してみてください。'));
           }

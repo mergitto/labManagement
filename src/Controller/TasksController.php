@@ -15,22 +15,26 @@ class TasksController extends AppController
      *
      * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($activityUserId = null)
     {
         $task = $this->Tasks->newEntity();
+        $user = $this->Auth->user();
         if ($this->request->is('post')) {
             $task = $this->Tasks->patchEntity($task, $this->request->data);
             if ($this->Tasks->save($task)) {
                 $this->Flash->success(__('タスクを追加しました。'));
 
-                return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
+                if ($user['role'] === 'admin') {
+                  return $this->redirect(['controller' => 'Admins', 'action' => 'activities', $activityUserId]);
+                } else {
+                  return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
+                }
             }
             $this->Flash->error(__('タスクを追加できませんでした。もう一度試してください。'));
         }
-        $user = $this->Auth->user();
         $users = $this->Tasks->Users->find('list')->where(['id' => $user['id']]);
         $subtasks = $this->Tasks->Subtasks->find('list', ['limit' => 200]);
-        $this->set(compact('task', 'users', 'subtasks'));
+        $this->set(compact('task', 'users', 'subtasks', 'activityUserId'));
         $this->set('_serialize', ['task']);
     }
 
@@ -46,16 +50,20 @@ class TasksController extends AppController
         $task = $this->Tasks->get($id, [
             'contain' => ['Subtasks']
         ]);
+        $user = $this->Auth->user();
         if ($this->request->is(['patch', 'post', 'put'])) {
             $task = $this->Tasks->patchEntity($task, $this->request->data);
             if ($this->Tasks->save($task)) {
                 $this->Flash->success(__('タスクを修正しました。'));
 
-                return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
+                if ($user['role'] === 'admin') {
+                  return $this->redirect(['controller' => 'Admins', 'action' => 'activities', $task['user_id']]);
+                } else {
+                  return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
+                }
             }
             $this->Flash->error(__('タスクを修正できませんでした。もう一度試してください。'));
         }
-        $user = $this->Auth->user();
         $users = $this->Tasks->Users->find('list', ['limit' => 200]);
         $subtasks = $this->Tasks->Subtasks->find('list', ['limit' => 200]);
         $this->set(compact('task', 'users', 'subtasks'));
