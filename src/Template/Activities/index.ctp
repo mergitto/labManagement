@@ -185,10 +185,38 @@
     <div class="col-xs-12">
       <h2><?= __('みんなの進捗度') ?></h2>
       <hr>
-      <h3><strong><?= __('〇〇の試みと応用') ?></strong></h3>
+      <div class="row">
+        <?php foreach ($activities as $activityUser): ?>
+          <?php if($user['id'] != $activityUser['user']['id']): ?>
+          <div class="col-md-3">
+            <h3 class="font-20"><?= __($activityUser['user']['nickname']).__('さん') ?></h3>
+            <p class="font-16"><?= __('「').__($activityUser['theme']).__('」') ?></p>
+            <span class="font-16 color-1"><?= __('進捗度'); ?></span>
+            <?php
+              $progressColor = ['success', 'info', 'warning', 'danger', 'striped'];
+              $count = 0;
+              if (isset($taskRate[$activityUser['user']['id']])) {
+                print "<div class='progress'>";
+                foreach($taskRate[$activityUser['user']['id']]['subtaskWeight'] as $taskName => $taskTitle) {
+                  if (isset($taskTitle['closeRate'])) {
+                    print "<div class='progress-bar progress-bar-".$progressColor[$count % count($progressColor)]." progress-bar-striped active' role='progressbar' style='width:".$taskTitle["closeRate"]."%;'>";
+                    print __($taskName);
+                    print "</div>";
+                    $count++;
+                  }
+                }
+                print "</div>";
+              } else {
+                print "<p>まだタスクを１つ以上完了していないです。</p>";
+              }
+            ?>
+          </div>
+          <?php endif ?>
+        <?php endforeach ?>
+      </div>
     </div>
   </div>
-  <div class="row text-center">
+  <div class="row text-center margin-bt-50">
     <div class="col-xs-12">
       <h2><?= __('解決済みのタスク') ?></h2>
       <hr>

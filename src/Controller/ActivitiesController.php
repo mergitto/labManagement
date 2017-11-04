@@ -28,16 +28,18 @@ class ActivitiesController extends AppController
           $result = $activity->first();
         }
         $plans = $this->Activities->Plans->find()->where(['activity_id' => $result['id']])->order(['Plans.created' => 'ASC']);
-        $tasks = $tasksModel->find()->where(['user_id' => $user['id']])->contain(['Subtasks']);
-        $allTasks = $tasksModel->find()->contain(['Subtasks']);
+        $tasks = $tasksModel->find()->where(['user_id' => $user['id']])->contain(['Subtasks'])->order(['Tasks.created' => 'ASC']);
+        $allTasks = $tasksModel->find()->contain(['Subtasks'])->order(['Tasks.created' => 'ASC']);
         $todayTasks = $tasksModel->find()
           ->where(['user_id' => $user['id']])
           ->where(['starttime <=' => date('Y-m-d H:i:s')])
           ->where(['status =' => PROCESS]) // status=処理中(PROCESS)という条件を付加
-          ->contain(['Subtasks']);
+          ->contain(['Subtasks'])
+          ->order(['Tasks.created' => 'ASC']);
         $subList = $this->subTasksList($tasks);
         $taskRate = $this->taskProgressRate($allTasks);
-        $this->set(compact('result', 'plans', 'tasks', 'subList', 'todayTasks', 'taskRate'));
+        $activities = $this->Activities->find()->contain(['Users'])->order(['Activities.created' => 'ASC']);
+        $this->set(compact('result', 'plans', 'tasks', 'subList', 'todayTasks', 'taskRate', 'activities'));
     }
 
     /**

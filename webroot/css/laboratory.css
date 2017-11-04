@@ -194,6 +194,9 @@ table > thead > tr > th {
 .min-w-50{
   min-width: 50px;
 }
+.margin-bt-50 {
+  margin-bottom: 50px;
+}
 .ajaxFav{
   cursor: pointer;
 }
@@ -410,6 +413,7 @@ h1.theme span {
 }
 .box a {
   color: #fff;
+  text-decoration: underline;
 }
 .box-todo{
   padding: 0.5em 1em;
@@ -434,5 +438,9 @@ h1.theme span {
 }
 hr.today-plan-hr {
   border: solid 2px #54B8D9;
+}
+.progress {
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 /***************************************/
