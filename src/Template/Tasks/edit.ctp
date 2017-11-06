@@ -35,7 +35,7 @@
             <?= $this->Form->input('endtime',['type'=>'text', 'label'=> 'タスク締切日','id' => 'dp2' ,'class' => "form-control login-form"]); ?>
           </div>
           <div class="form-group col-sm-3">
-            <?= $this->Form->input('status', ['type' => 'text', 'label' => '0=処理中,_1=解決済みにする', 'value' => 0, 'min' => PROCESS, 'max' => CLOSE, 'class' => 'form-control']); ?>
+            <?= $this->Form->input('status', ['label' => '0=処理中,_1=解決済みにする', 'min' => PROCESS, 'max' => CLOSE, 'class' => 'form-control']); ?>
           </div>
         </div>
     </fieldset>

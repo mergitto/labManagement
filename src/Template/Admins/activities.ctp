@@ -245,7 +245,9 @@
             <?php if($task['status'] == 1): ?>
               <li>
                 <span class="font-20"><?= $task['description'] ?></span>
-                <?= $task['starttime']->i18nFormat('YYYY-MM-dd').$week[date('w', strtotime($task['starttime']))].__("〜").$task['endtime']->i18nFormat('YYYY-MM-dd').$week[date('w', strtotime($task['endtime']))] ?>
+                <?php if(isset($task['starttime']) && isset($task['endtime'])): ?>
+                  <?= $task['starttime']->i18nFormat('YYYY-MM-dd').$week[date('w', strtotime($task['starttime']))].__("〜").$task['endtime']->i18nFormat('YYYY-MM-dd').$week[date('w', strtotime($task['endtime']))] ?>
+                <?php endif ?>
                 <?= $this->Html->link(__('設定'), ['controller' => 'Tasks','action' => 'edit',$task['id']]); ?>
               </li>
             <?php endif ?>
@@ -256,7 +258,9 @@
                     <li>
                       <span class="font-18"><?= $subtask['subdescription'] ?></span>
                       <span class="font-14">
-                        <?= $subtask['starttime']->i18nFormat('YYYY-MM-dd').$week[date('w', strtotime($subtask['starttime']))].__("〜").$subtask['endtime']->i18nFormat('YYYY-MM-dd').$week[date('w', strtotime($subtask['endtime']))] ?>
+                        <?php if(isset($subtask['starttime']) && isset($subtask['endtime'])): ?>
+                          <?= $subtask['starttime']->i18nFormat('YYYY-MM-dd').$week[date('w', strtotime($subtask['starttime']))].__("〜").$subtask['endtime']->i18nFormat('YYYY-MM-dd').$week[date('w', strtotime($subtask['endtime']))] ?>
+                        <?php endif ?>
                       </span>
                       <?= $this->Html->link(__('設定'), ['controller' => 'Subtasks','action' => 'edit',$subtask['id']], ['class' => "status{$subtask['status']}"]); ?>
                     </li>

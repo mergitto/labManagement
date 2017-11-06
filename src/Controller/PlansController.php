@@ -50,13 +50,14 @@ class PlansController extends AppController
         $plan = $this->Plans->get($id, [
             'contain' => ['Activities']
         ]);
+        $userId = $plan->activity['user_id'];
         if ($this->request->is(['patch', 'post', 'put'])) {
           $plan = $this->Plans->patchEntity($plan, $this->request->data);
           $user = $this->Auth->user();
           if ($this->request->data['status'] == 1) {
             $tasksModel = $this->loadModel('Tasks');
             // Tasksテーブルのための配列を作る
-            $taskList = ['description' => $this->request->data['todo'], 'user_id' => $user['id'],'status' => 0, 'weight' => $this->request->data['weight']];
+            $taskList = ['description' => $this->request->data['todo'], 'user_id' => $userId,'status' => 0, 'weight' => $this->request->data['weight']];
             $task = $tasksModel->newEntity();
             $task = $tasksModel->patchEntity($task, $taskList);
 
