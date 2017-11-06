@@ -392,6 +392,9 @@ h1.theme span {
 .color-1{ /* status=1の時のフォント*/
   color: #999;
 }
+.color-bk {
+  color: #000;
+}
 .sub-color-1{ /* status=1の時のフォント*/
   color: #666;
 }

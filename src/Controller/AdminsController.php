@@ -68,12 +68,12 @@ class AdminsController extends AppController
         $tasksModel = $this->loadModel('Tasks');
         $activitiesModel = $this->loadModel('Activities');
         $user = $this->Auth->user();
+        $users = $activitiesModel->Users->find('list')->where(['Users.id !=' => $user['id']])->order(['Users.created' => 'ASC']);
         $activity = $activitiesModel->find()->where(['user_id' => $userId])->contain(['Users']);
-        if($activity->isEmpty()){ // 研究テーマを登録していない場合は登録画面へ遷移
-        } else {
+        if(!$activity->isEmpty()){ // 研究テーマを登録している場合はActivitiesテーブルの情報を取得する
           $result = $activity->first();
+          $plans = $activitiesModel->Plans->find()->where(['activity_id' => $result['id']])->order(['Plans.created' => 'ASC']);
         }
-        $plans = $activitiesModel->Plans->find()->where(['activity_id' => $result['id']])->order(['Plans.created' => 'ASC']);
         $tasks = $tasksModel->find()->where(['user_id' => $userId])->contain(['Subtasks'])->order(['Tasks.created' => 'ASC']);
         $allTasks = $tasksModel->find()->contain(['Subtasks'])->order(['Tasks.created' => 'ASC']);
         $todayTasks = $tasksModel->find()
@@ -85,7 +85,7 @@ class AdminsController extends AppController
         $subList = $this->AdminActivities->subTasksList($tasks);
         $taskRate = $this->AdminActivities->taskProgressRate($allTasks);
         $activities = $activitiesModel->find()->contain(['Users'])->order(['Activities.created' => 'ASC']);
-        $this->set(compact('result', 'plans', 'tasks', 'subList', 'todayTasks', 'taskRate', 'activities'));
+        $this->set(compact('result', 'plans', 'tasks', 'subList', 'todayTasks', 'taskRate', 'activities', 'users'));
     }
 
     /**

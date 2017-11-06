@@ -18,7 +18,11 @@
           <?= $this->Html->link(__('掲示板'), ['controller' => 'Threads', 'action' => 'index']) ?>
         </li>
         <li>
-          <?= $this->Html->link(__('行動計画'),['controller' => 'Activities', 'action' => 'index']) ?>
+          <?php if($user['role'] === 'admin'): ?>
+            <?= $this->Html->link(__('行動計画(管理者用)'),['controller' => 'Admins', 'action' => 'activities', 0]) ?>
+          <?php else: ?>
+            <?= $this->Html->link(__('行動計画'),['controller' => 'Activities', 'action' => 'index']) ?>
+          <?php endif ?>
         </li>
         <li>
           <?= $this->Html->link(__('ゼミ資料検索'),['controller' => 'Attachments', 'action' => 'view']) ?>
