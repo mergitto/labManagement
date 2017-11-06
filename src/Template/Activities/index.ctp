@@ -103,7 +103,7 @@
             <?php endforeach ?>
             </div>
           </ul>
-          <?php $todoCount == 0 ? print '<p>ToDoを登録してみましょう！</p>' : ''; ?>
+          <?php $todoCount == 0 ? print '<p>'.$this->Html->link(__('ToDoの登録をしてみましょう！'), ['controller' => 'Plans', 'action' => 'add', $result['user_id']]).'</p>' : ''; ?>
         </div>
       </div>
     </div>
@@ -141,7 +141,7 @@
             <?php endforeach ?>
             </div>
           </ul>
-          <?php $taskCount == 0 ? print '<p>タスクを登録してみましょう！</p>' : ''; ?>
+          <?php $taskCount == 0 ? print '<p>'.$this->Html->link(__('タスクの登録をしてみましょう！'), ['controller' => 'Tasks', 'action' => 'add', $result['user_id']]).'</p>' : ''; ?>
         </div>
       </div>
     </div>
@@ -180,7 +180,7 @@
             <?php endforeach ?>
             </div>
           </ul>
-          <?php $subtaskCount == 0 ? print '<p>サブタスクを登録してみましょう！</p>' : ''; ?>
+          <?php $subtaskCount == 0 ? print '<p>'.$this->Html->link(__('サブタスクの登録をしてみましょう！'), ['controller' => 'Subtasks', 'action' => 'add', $result['user_id']]).'</p>' : ''; ?>
         </div>
       </div>
     </div>
