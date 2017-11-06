@@ -30,10 +30,10 @@
           </div>
           <?= $this->Form->text('user_id', ['type' => 'hidden', 'value' => $activityUserId]); ?>
           <div class="form-group col-sm-3">
-            <?= $this->Form->input('starttime',['type'=>'text', 'label'=> 'サブタスク開始日','id' => 'dp1' ,'class' => "form-control login-form"]); ?>
+            <?= $this->Form->input('starttime',['type'=>'text', 'label'=> 'サブタスク開始日','id' => 'dp1' ,'class' => "form-control"]); ?>
           </div>
           <div class="form-group col-sm-3">
-            <?= $this->Form->input('endtime',['type'=>'text', 'label'=> 'サブタスク締切日','id' => 'dp2' ,'class' => "form-control login-form"]); ?>
+            <?= $this->Form->input('endtime',['type'=>'text', 'label'=> 'サブタスク締切日','id' => 'dp2' ,'class' => "form-control"]); ?>
           </div>
         </div>
         <div class="row">

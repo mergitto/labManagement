@@ -20,17 +20,23 @@ class SubtasksController extends AppController
         $subtask = $this->Subtasks->newEntity();
         $user = $this->Auth->user();
         if ($this->request->is('post')) {
-            $subtask = $this->Subtasks->patchEntity($subtask, $this->request->data);
+          $subtask = $this->Subtasks->patchEntity($subtask, $this->request->data);
+          $timeFlag = $this->taskTimeValid($this->request->data['tasks']['_ids'], $this->request->data['starttime'], $this->request->data['endtime']);
+          if (!$timeFlag['startFlag']) {
+            $this->Flash->error(__('「'.$timeFlag['description'].'」タスクの開始期間よりも早いです。開始期間を'.$timeFlag['starttime'].'よりも後の期間に修正してください。'));
+          } else if (!$timeFlag['endFlag']) {
+            $this->Flash->error(__('「'.$timeFlag['description'].'」タスクの締切期間よりも遅くなっています。締切期間を'.$timeFlag['endtime'].'よりも前の期間に修正してください。'));
+          } else {
             if ($this->Subtasks->save($subtask)) {
-                $this->Flash->success(__('サブタスクを追加しました。'));
-
-                if ($user['role'] === 'admin') {
-                  return $this->redirect(['controller' => 'Admins', 'action' => 'activities', $activityUserId]);
-                } else {
-                  return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
-                }
+              $this->Flash->success(__('サブタスクを追加しました。'));
+              if ($user['role'] === 'admin') {
+                return $this->redirect(['controller' => 'Admins', 'action' => 'activities', $activityUserId]);
+              } else {
+                return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
+              }
             }
             $this->Flash->error(__('サブタスクを追加できませんでした。もう一度試してください。'));
+          }
         }
         $users = $this->Subtasks->Users->find('list', ['limit' => 200]);
         $tasks = $this->Subtasks->Tasks->find('list', [
@@ -59,17 +65,24 @@ class SubtasksController extends AppController
         ]);
         $user = $this->Auth->user();
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $subtask = $this->Subtasks->patchEntity($subtask, $this->request->data);
+          $subtask = $this->Subtasks->patchEntity($subtask, $this->request->data);
+          $timeFlag = $this->taskTimeValid($this->request->data['tasks']['_ids'], $this->request->data['starttime'], $this->request->data['endtime']);
+          if (!$timeFlag['startFlag']) {
+            $this->Flash->error(__('「'.$timeFlag['description'].'」タスクの開始期間よりも早いです。開始期間を'.$timeFlag['starttime'].'よりも後の期間に修正してください。'));
+          } else if (!$timeFlag['endFlag']) {
+            $this->Flash->error(__('「'.$timeFlag['description'].'」タスクの締切期間よりも遅くなっています。締切期間を'.$timeFlag['endtime'].'よりも前の期間に修正してください。'));
+          } else {
             if ($this->Subtasks->save($subtask)) {
-                $this->Flash->success(__('サブタスクを修正しました。'));
+              $this->Flash->success(__('サブタスクを修正しました。'));
 
-                if ($user['role'] === 'admin') {
-                  return $this->redirect(['controller' => 'Admins', 'action' => 'activities', $subtask['user_id']]);
-                } else {
-                  return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
-                }
+              if ($user['role'] === 'admin') {
+                return $this->redirect(['controller' => 'Admins', 'action' => 'activities', $subtask['user_id']]);
+              } else {
+                return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
+              }
             }
-            $this->Flash->error(__('サブタスクを修正できませんでした。もう一度試してください。'));
+          $this->Flash->error(__('サブタスクを修正できませんでした。もう一度試してください。'));
+          }
         }
         $users = $this->Subtasks->Users->find('list', ['limit' => 200]);
         $tasks = $this->Subtasks->Tasks->find('list', [
@@ -78,6 +91,29 @@ class SubtasksController extends AppController
         ])->where(['user_id' => $subtask['user_id']]);
         $this->set(compact('subtask', 'users', 'tasks'));
         $this->set('_serialize', ['subtask']);
+    }
+
+    /**
+     * task validation list method
+     * @param array $taskId $starttime $endtime
+     * @return arrya tasks list
+     */
+    public function taskTimeValid($tasksId, $starttime, $endtime)
+    {
+      foreach ($tasksId as $taskId) {
+        $task = $this->Subtasks->Tasks->get($taskId);
+        if (isset($task['starttime']) && isset($task['endtime'])) {
+          if ($task['starttime']->i18nFormat("YYYY-MM-dd") > $starttime) {
+            $startValidFrag = ['starttime' => $task['starttime']->i18nFormat("YYYY-MM-dd"), 'description' => $task['description'], 'startFlag' => false, 'endFlag' => true];
+            return $startValidFrag;
+          }
+          if ($task['endtime']->i18nFormat("YYYY-MM-dd") < $endtime) {
+            $endValidFrag = ['endtime' => $task['endtime']->i18nFormat("YYYY-MM-dd"), 'description' => $task['description'], 'startFlag' => true, 'endFlag' => false];
+            return $endValidFrag;
+          }
+        }
+      }
+      return ['startFlag' => true, 'endFlag' => true];
     }
 
     /**
