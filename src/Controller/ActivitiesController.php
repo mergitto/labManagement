@@ -196,7 +196,7 @@ class ActivitiesController extends AppController
     {
         $action = $this->request->params['action'];
         // indexページは誰でも見れる
-        if (in_array($action, ['index', 'add', 'logout'])) {
+        if (in_array($action, ['index', 'logout'])) {
             return true;
         }
         if (isset($user['role']) && $user['role'] === 'admin') {
@@ -209,7 +209,7 @@ class ActivitiesController extends AppController
         if ($activityUserId['user_id'] == $user['id']) {
             return true;
         }else{
-            $this->Flash->error(__('他のユーザーのファイルは操作できません'));
+            $this->Flash->error(__('他のユーザーのテーマは操作できません'));
             return false;
         }
         $this->Flash->error(__('管理者の機能です'));

@@ -93,14 +93,23 @@ class TasksController extends AppController
     public function isAuthorized($user)
     {
         $action = $this->request->params['action'];
-        // add, editページは誰でも見れる
-        if (in_array($action, ['add','edit','logout'])) {
-            return true;
-        }
         if (isset($user['role']) && $user['role'] === 'admin') {
-            return true;
+          return true;
         }
-        $this->Flash->error(__('管理者の機能です'));
+        if (in_array($action, ['logout'])) {
+          return true;
+        }
+        // ログインユーザーが扱っているタスクなら編集可能
+        if ($this->request->params['pass'][0] == $user['id']) {
+          return true;
+        }
+        $task = $this->Tasks->get($this->request->params['pass'][0]);
+        if ($task->user_id == $user['id']) {
+          return true;
+        } else {
+          $this->Flash->error(__('他の人のタスクです'));
+          return false;
+        }
         return false;
     }
 }

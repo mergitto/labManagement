@@ -109,15 +109,24 @@ class PlansController extends AppController
 
     public function isAuthorized($user)
     {
-        $action = $this->request->params['action'];
-        // index, add, edit, deleteページは誰でも見れる
-        if (in_array($action, ['index','add','edit','delete','logout'])) {
-            return true;
-        }
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
         }
-        $this->Flash->error(__('管理者の機能です'));
+        $action = $this->request->params['action'];
+        if (in_array($action, ['logout'])) {
+            return true;
+        }
+        // ログインユーザーが扱っているToDoなら編集可能
+        if ($this->request->params['pass'][0] == $user['id']) {
+          return true;
+        }
+        $plan = $this->Plans->get($this->request->params['pass'][0], ['contain' => 'Activities']);
+        if ($plan->activity['user_id'] == $user['id']) {
+          return true;
+        } else {
+          $this->Flash->error(__('他の人のタスクです'));
+          return false;
+        }
         return false;
     }
 }
