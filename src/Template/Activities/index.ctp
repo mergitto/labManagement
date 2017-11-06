@@ -3,7 +3,7 @@
     <div class="col-xs-12">
       <h1 class="theme">
         <div class="themeHead">
-          <span class="font-20"><?= $user['name'].__('さんの研究テーマ') ?><?= $this->Html->link(__('研究テーマの修正'), ['action' => 'edit',$result['id']], ['class' => 'font-14']); ?></span>
+          <span class="font-20"><?= $tmpUserName.__('さんの研究テーマ') ?><?= $this->Html->link(__('研究テーマの修正'), ['action' => 'edit',$result['id']], ['class' => 'font-14']); ?></span>
         </div>
         <?= $result['theme']; ?>
         <div class="row">
@@ -15,10 +15,10 @@
               <?php
                 $progressColor = ['success', 'info', 'warning', 'danger', 'striped'];
                 $count = 0;
-                if (!isset($taskRate[$user['id']])) {
+                if (!isset($taskRate[$tmpUserId])) {
                   print __('<p class="font-16 color-bk">まだ研究活動が始まっていません。</p>');
                 } else {
-                  foreach($taskRate[$user['id']]['subtaskWeight'] as $taskName => $taskTitle) {
+                  foreach($taskRate[$tmpUserId]['subtaskWeight'] as $taskName => $taskTitle) {
                     if (isset($taskTitle['closeRate'])) {
                       print "<div class='progress-bar progress-bar-".$progressColor[$count % count($progressColor)]." progress-bar-striped active' role='progressbar' style='width:".$taskTitle["closeRate"]."%;'>";
                       print __($taskName);
@@ -191,9 +191,9 @@
       <hr>
       <div class="row">
         <?php foreach ($activities as $activityUser): ?>
-          <?php if($user['id'] != $activityUser['user']['id']): ?>
+          <?php if($tmpUserId != $activityUser['user']['id']): ?>
           <div class="col-md-3">
-            <h3 class="font-20"><?= __($activityUser['user']['nickname']).__('さん') ?></h3>
+            <h3 class="font-20"><?= $this->Form->postLink(__($activityUser['user']['nickname']), ['controller' => 'Activities' ,'action' => 'index', $activityUser['user']['id'] ]) ?><?= __("さん") ?></h3>
             <p class="font-16"><?= __('「').__($activityUser['theme']).__('」') ?></p>
             <span class="font-16 color-1"><?= __('進捗度'); ?></span>
             <?php
