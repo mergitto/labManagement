@@ -73,12 +73,10 @@ class TasksTable extends Table
             ->allowEmpty('weight');
 
         $validator
-            ->dateTime('start')
-            ->allowEmpty('start');
+            ->allowEmpty('starttime');
 
         $validator
-            ->dateTime('end')
-            ->allowEmpty('end');
+            ->allowEmpty('endtime');
 
         return $validator;
     }

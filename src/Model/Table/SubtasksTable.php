@@ -71,11 +71,9 @@ class SubtasksTable extends Table
             ->allowEmpty('status');
 
         $validator
-            ->dateTime('starttime')
             ->allowEmpty('starttime');
 
         $validator
-            ->dateTime('endtime')
             ->allowEmpty('endtime');
 
         $validator
