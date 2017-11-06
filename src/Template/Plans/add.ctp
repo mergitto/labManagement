@@ -16,13 +16,23 @@
     <?= $this->Form->create($plan) ?>
     <fieldset>
         <legend><?= __('ToDoを登録する') ?></legend>
+        <div class="row">
+          <div class="form-group col-xs-12">
+            <?= $this->Form->input('todo', ['type' => 'text', 'class' => 'form-control']); ?>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-3 col-sm-offset-9">
+            <?= $this->Form->input('weight', ['label' => '重要度(1~5)', 'min' => MINPRIORITY, 'max' => MAXPRIORITY, 'class' => 'form-control']); ?>
+          </div>
+        </div>
         <?php
-            echo $this->Form->input('todo');
-            echo $this->Form->input('weight', ['label' => '重要度', 'min' => MINPRIORITY, 'max' => MAXPRIORITY]);
-            echo $this->Form->input('status', ['type' => 'hidden', 'label' => '状態(0=ToDo, 1=タスクへ移動する)']);
+            echo $this->Form->input('status', ['type' => 'hidden']);
             echo $this->Form->text('activity_id', ['type' => 'hidden', 'label' => $activity['theme'], 'value' => $activity['id']])
         ?>
     </fieldset>
-    <?= $this->Form->button(__('登録する')) ?>
+    <div class="text-right">
+      <?= $this->Form->button(__('登録する'), ['class' => 'btn btn-raised btn-success']) ?>
+    </div>
     <?= $this->Form->end() ?>
 </div>

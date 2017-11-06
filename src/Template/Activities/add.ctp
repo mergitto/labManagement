@@ -12,9 +12,15 @@
     <?= $this->Form->create($activity) ?>
     <fieldset>
         <legend><?= __('研究テーマを設定する') ?></legend>
-        <?= $this->Form->input('theme', ['label' => '研究テーマ']); ?>
+        <div class="row">
+          <div class="form-group col-xs-12">
+            <?= $this->Form->input('theme', ['label' => '研究テーマ', 'type' => 'text', 'class' => 'form-control']); ?>
+          </div>
+        </div>
         <?= $this->Form->input('user_id', ['type' => 'hidden' ,'value' => $user['id']]); ?>
     </fieldset>
-    <?= $this->Form->button(__('設定する')) ?>
+    <div class="text-right">
+      <?= $this->Form->button(__('設定する'), ['class' => 'btn btn-raised btn-success']) ?>
+    </div>
     <?= $this->Form->end() ?>
 </div>

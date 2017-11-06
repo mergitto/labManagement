@@ -15,12 +15,16 @@
               <?php
                 $progressColor = ['success', 'info', 'warning', 'danger', 'striped'];
                 $count = 0;
-                foreach($taskRate[$user['id']]['subtaskWeight'] as $taskName => $taskTitle) {
-                  if (isset($taskTitle['closeRate'])) {
-                    print "<div class='progress-bar progress-bar-".$progressColor[$count % count($progressColor)]." progress-bar-striped active' role='progressbar' style='width:".$taskTitle["closeRate"]."%;'>";
-                    print __($taskName);
-                    print "</div>";
-                    $count++;
+                if (!isset($taskRate[$user['id']])) {
+                  print __('<p class="font-16 color-bk">まだ研究活動が始まっていません。</p>');
+                } else {
+                  foreach($taskRate[$user['id']]['subtaskWeight'] as $taskName => $taskTitle) {
+                    if (isset($taskTitle['closeRate'])) {
+                      print "<div class='progress-bar progress-bar-".$progressColor[$count % count($progressColor)]." progress-bar-striped active' role='progressbar' style='width:".$taskTitle["closeRate"]."%;'>";
+                      print __($taskName);
+                      print "</div>";
+                      $count++;
+                    }
                   }
                 }
               ?>
