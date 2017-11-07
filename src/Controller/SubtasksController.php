@@ -103,6 +103,8 @@ class SubtasksController extends AppController
       foreach ($tasksId as $taskId) {
         $task = $this->Subtasks->Tasks->get($taskId);
         if (isset($task['starttime']) && isset($task['endtime'])) {
+          $starttime = date('Y-m-d', strtotime($starttime));
+          $endtime = date('Y-m-d', strtotime($endtime));
           if ($task['starttime']->i18nFormat("YYYY-MM-dd") > $starttime) {
             $startValidFrag = ['starttime' => $task['starttime']->i18nFormat("YYYY-MM-dd"), 'description' => $task['description'], 'startFlag' => false, 'endFlag' => true];
             return $startValidFrag;
