@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class CreateTasks extends AbstractMigration
+class CreatePlans extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,32 +12,25 @@ class CreateTasks extends AbstractMigration
      */
     public function change()
     {
-        $table = $this->table('tasks');
-        $table->addColumn('description', 'text', [
+        $table = $this->table('plans');
+        $table->addColumn('todo', 'text', [
             'default' => null,
-            'null' => true,
+            'null' => false,
         ]);
-        $table->addColumn('status', 'integer', [
-            'default' => 0,
-            'null' => true,
+        $table->addColumn('activity_id', 'integer', [
+            'default' => null,
+            'limit' => 255,
+            'null' => false,
         ]);
         $table->addColumn('weight', 'integer', [
             'default' => null,
             'limit' => 10,
-            'null' => true,
+            'null' => false,
         ]);
-        $table->addColumn('user_id', 'integer', [
-            'default' => null,
-            'limit' => 255,
-            'null' => true,
-        ]);
-        $table->addColumn('starttime', 'timestamp', [
-            'default' => null,
-            'null' => true,
-        ]);
-        $table->addColumn('endtime', 'timestamp', [
-            'default' => null,
-            'null' => true,
+        $table->addColumn('status', 'integer', [
+            'default' => 0,
+            'limit' => 11,
+            'null' => false,
         ]);
         $table->addColumn('modified', 'timestamp', [
             'default' => null,

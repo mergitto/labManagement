@@ -1,9 +1,24 @@
+<?php if (!isset($result)): ?>
+<form class="form-horizontal" action="/hoge/foo" method="post">
+  <div class="form-group">
+    <?= $this->Form->input('users', ['type' => 'select', 'options' => $users, 'label' => '閲覧するユーザーを選択してください','class' => 'form-control', 'id' => 'userAc']) ?>
+  </div>
+</form>
+<?php if ($this->request->params['pass'][0] != 0): ?>
+  <h1><?= __('そのユーザーは行動計画をまだ始めていません。'); ?></h1>
+<?php endif ?>
+<?php else: ?>
+<form class="form-horizontal" action="/hoge/foo" method="post">
+  <div class="form-group">
+    <?= $this->Form->input('users', ['type' => 'select', 'options' => $users, 'label' => '閲覧するユーザーを選択してください','class' => 'form-control', 'id' => 'userAc']) ?>
+  </div>
+</form>
 <div class="activities content container">
   <div class="row text-center">
     <div class="col-xs-12">
       <h1 class="theme">
         <div class="themeHead">
-          <span class="font-20"><?= $tmpUserName.__('さんの研究テーマ') ?><?= $this->Html->link(__('研究テーマの修正'), ['action' => 'edit',$result['id']], ['class' => 'font-14']); ?></span>
+          <span class="font-20"><?= $result['user']['name'].__('さんの研究テーマ') ?></span>
         </div>
         <?= $result['theme']; ?>
         <div class="row">
@@ -15,10 +30,10 @@
               <?php
                 $progressColor = ['success', 'info', 'warning', 'danger', 'striped'];
                 $count = 0;
-                if (!isset($taskRate[$tmpUserId])) {
+                if (!isset($taskRate[$result['user']['id']])) {
                   print __('<p class="font-16 color-bk">まだ研究活動が始まっていません。</p>');
                 } else {
-                  foreach($taskRate[$tmpUserId]['subtaskWeight'] as $taskName => $taskTitle) {
+                  foreach($taskRate[$result['user']['id']]['subtaskWeight'] as $taskName => $taskTitle) {
                     if (isset($taskTitle['closeRate'])) {
                       print "<div class='progress-bar progress-bar-".$progressColor[$count % count($progressColor)]." progress-bar-striped active' role='progressbar' style='width:".$taskTitle["closeRate"]."%;'>";
                       print __($taskName);
@@ -103,7 +118,7 @@
             <?php endforeach ?>
             </div>
           </ul>
-          <?php $todoCount == 0 ? print '<p>'.$this->Html->link(__('ToDoの登録をしてみましょう！'), ['controller' => 'Plans', 'action' => 'add', $result['user_id']]).'</p>' : ''; ?>
+          <?php $todoCount == 0 ? print '<p>ToDoを登録してみましょう！</p>' : ''; ?>
         </div>
       </div>
     </div>
@@ -141,7 +156,7 @@
             <?php endforeach ?>
             </div>
           </ul>
-          <?php $taskCount == 0 ? print '<p>'.$this->Html->link(__('タスクの登録をしてみましょう！'), ['controller' => 'Tasks', 'action' => 'add', $result['user_id']]).'</p>' : ''; ?>
+          <?php $taskCount == 0 ? print '<p>タスクを登録してみましょう！</p>' : ''; ?>
         </div>
       </div>
     </div>
@@ -180,7 +195,7 @@
             <?php endforeach ?>
             </div>
           </ul>
-          <?php $subtaskCount == 0 ? print '<p>'.$this->Html->link(__('サブタスクの登録をしてみましょう！'), ['controller' => 'Subtasks', 'action' => 'add', $result['user_id']]).'</p>' : ''; ?>
+          <?php $subtaskCount == 0 ? print '<p>サブタスクを登録してみましょう！</p>' : ''; ?>
         </div>
       </div>
     </div>
@@ -191,9 +206,9 @@
       <hr>
       <div class="row">
         <?php foreach ($activities as $activityUser): ?>
-          <?php if($tmpUserId != $activityUser['user']['id']): ?>
+          <?php if($result['user']['id'] != $activityUser['user']['id']): ?>
           <div class="col-md-3">
-            <h3 class="font-20"><?= $this->Form->postLink(__($activityUser['user']['nickname']), ['controller' => 'Activities' ,'action' => 'index', $activityUser['user']['id'] ]) ?><?= __("さん") ?></h3>
+            <h3 class="font-20"><?= __($activityUser['user']['nickname']).__('さん') ?></h3>
             <p class="font-16"><?= __('「').__($activityUser['theme']).__('」') ?></p>
             <span class="font-16 color-1"><?= __('進捗度'); ?></span>
             <?php
@@ -259,4 +274,16 @@
     </div>
   </div>
 </div>
+<?php endif ?>
+<script>
+  $('#userAc').prepend($('<option>').html("---閲覧するユーザーを選択してください---").val("0").prop('selected', true));
+  var selectVal = <?= json_encode($this->request->params['pass'][0]); ?>;
+  $('#userAc').val(selectVal);
 
+  var url = <?= json_encode($this->Url->build(['controller' => 'Admins', 'action' => 'activities'])); ?>;
+
+  // セレクトされたユーザーのページへ遷移する
+  $('[name=users]').on('change', function(){
+    window.location.href = url + "/" + $('[name=users]').val();
+  });
+</script>

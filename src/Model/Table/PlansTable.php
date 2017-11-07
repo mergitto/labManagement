@@ -7,21 +7,21 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Tasks Model
+ * Plans Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Users
+ * @property \Cake\ORM\Association\BelongsTo $Activities
  *
- * @method \App\Model\Entity\Task get($primaryKey, $options = [])
- * @method \App\Model\Entity\Task newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Task[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Task|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Task patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Task[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Task findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Plan get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Plan newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Plan[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Plan|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Plan patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Plan[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Plan findOrCreate($search, callable $callback = null, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class TasksTable extends Table
+class PlansTable extends Table
 {
 
     /**
@@ -34,19 +34,15 @@ class TasksTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('tasks');
+        $this->table('plans');
         $this->displayField('id');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id'
-        ]);
-        $this->belongsToMany('Subtasks', [
-            'foreignKey' => 'task_id',
-            'targetForeignKey' => 'subtask_id',
-            'joinTable' => 'subtasks_tasks'
+        $this->belongsTo('Activities', [
+            'foreignKey' => 'activity_id',
+            'joinType' => 'INNER'
         ]);
     }
 
@@ -63,20 +59,18 @@ class TasksTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('description');
-
-        $validator
-            ->allowEmpty('status');
+            ->requirePresence('todo', 'create')
+            ->notEmpty('todo');
 
         $validator
             ->integer('weight')
-            ->allowEmpty('weight');
+            ->requirePresence('weight', 'create')
+            ->notEmpty('weight');
 
         $validator
-            ->allowEmpty('starttime');
-
-        $validator
-            ->allowEmpty('endtime');
+            ->integer('status')
+            ->requirePresence('status', 'create')
+            ->notEmpty('status');
 
         return $validator;
     }
@@ -90,7 +84,7 @@ class TasksTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
+        $rules->add($rules->existsIn(['activity_id'], 'Activities'));
 
         return $rules;
     }

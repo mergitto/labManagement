@@ -4,17 +4,19 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Activity Entity
+ * Plan Entity
  *
  * @property int $id
- * @property string $theme
- * @property int $user_id
+ * @property string $todo
+ * @property int $activity_id
+ * @property int $weight
+ * @property int $status
  * @property \Cake\I18n\Time $modified
  * @property \Cake\I18n\Time $created
  *
- * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Activity $activity
  */
-class Activity extends Entity
+class Plan extends Entity
 {
 
     /**

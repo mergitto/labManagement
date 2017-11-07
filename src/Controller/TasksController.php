@@ -10,60 +10,31 @@ use App\Controller\AppController;
  */
 class TasksController extends AppController
 {
-
-    /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
-    public function index()
-    {
-        $this->paginate = [
-            'contain' => ['Users']
-        ];
-        $tasks = $this->paginate($this->Tasks);
-
-        $this->set(compact('tasks'));
-        $this->set('_serialize', ['tasks']);
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Task id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $task = $this->Tasks->get($id, [
-            'contain' => ['Users', 'Subtasks']
-        ]);
-
-        $this->set('task', $task);
-        $this->set('_serialize', ['task']);
-    }
-
     /**
      * Add method
      *
      * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($activityUserId = null)
     {
         $task = $this->Tasks->newEntity();
+        $user = $this->Auth->user();
         if ($this->request->is('post')) {
             $task = $this->Tasks->patchEntity($task, $this->request->data);
             if ($this->Tasks->save($task)) {
-                $this->Flash->success(__('The task has been saved.'));
+                $this->Flash->success(__('タスクを追加しました。'));
 
-                return $this->redirect(['action' => 'index']);
+                if ($user['role'] === 'admin') {
+                  return $this->redirect(['controller' => 'Admins', 'action' => 'activities', $activityUserId]);
+                } else {
+                  return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
+                }
             }
-            $this->Flash->error(__('The task could not be saved. Please, try again.'));
+            $this->Flash->error(__('タスクを追加できませんでした。もう一度試してください。'));
         }
-        $users = $this->Tasks->Users->find('list', ['limit' => 200]);
+        $users = $this->Tasks->Users->find('list')->where(['id' => $user['id']]);
         $subtasks = $this->Tasks->Subtasks->find('list', ['limit' => 200]);
-        $this->set(compact('task', 'users', 'subtasks'));
+        $this->set(compact('task', 'users', 'subtasks', 'activityUserId'));
         $this->set('_serialize', ['task']);
     }
 
@@ -79,14 +50,19 @@ class TasksController extends AppController
         $task = $this->Tasks->get($id, [
             'contain' => ['Subtasks']
         ]);
+        $user = $this->Auth->user();
         if ($this->request->is(['patch', 'post', 'put'])) {
             $task = $this->Tasks->patchEntity($task, $this->request->data);
             if ($this->Tasks->save($task)) {
-                $this->Flash->success(__('The task has been saved.'));
+                $this->Flash->success(__('タスクを修正しました。'));
 
-                return $this->redirect(['action' => 'index']);
+                if ($user['role'] === 'admin') {
+                  return $this->redirect(['controller' => 'Admins', 'action' => 'activities', $task['user_id']]);
+                } else {
+                  return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
+                }
             }
-            $this->Flash->error(__('The task could not be saved. Please, try again.'));
+            $this->Flash->error(__('タスクを修正できませんでした。もう一度試してください。'));
         }
         $users = $this->Tasks->Users->find('list', ['limit' => 200]);
         $subtasks = $this->Tasks->Subtasks->find('list', ['limit' => 200]);
@@ -106,35 +82,34 @@ class TasksController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $task = $this->Tasks->get($id);
         if ($this->Tasks->delete($task)) {
-            $this->Flash->success(__('The task has been deleted.'));
+            $this->Flash->success(__('タスクを削除しました。'));
         } else {
-            $this->Flash->error(__('The task could not be deleted. Please, try again.'));
+            $this->Flash->error(__('タスクを削除できませんでした。もう一度試してください。'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
     }
 
     public function isAuthorized($user)
     {
         $action = $this->request->params['action'];
-        // indexページは誰でも見れる
-        if (in_array($action, ['index'])) {
-            return true;
-        }
         if (isset($user['role']) && $user['role'] === 'admin') {
-            return true;
+          return true;
         }
-        // リクエストされたページのUser idと
-        // ログイン中のUseridが一致する場合はその他のアクションも許可する
-        $id = $this->request->params['pass'][0];
-        $current_user = $this->Tasks->get($id);
-        if ($current_user->user_id == $user['id']) {
-            return true;
-        }else{
-            $this->Flash->error(__('他のユーザーのファイルは操作できません'));
-            return false;
+        if (in_array($action, ['logout'])) {
+          return true;
         }
-        $this->Flash->error(__('管理者の機能です'));
+        // ログインユーザーが扱っているタスクなら編集可能
+        if ($this->request->params['pass'][0] == $user['id']) {
+          return true;
+        }
+        $task = $this->Tasks->get($this->request->params['pass'][0]);
+        if ($task->user_id == $user['id']) {
+          return true;
+        } else {
+          $this->Flash->error(__('他の人のタスクです'));
+          return false;
+        }
         return false;
     }
 }

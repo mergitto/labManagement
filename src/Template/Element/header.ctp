@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="#" class="navbar-brand" style="cursor:default"><?= __("ゼミ管理システム") ?></a>
+      <?= $this->Html->link(__('ゼミ管理システム'), ['controller' => 'Users', 'action' => 'index'], ['class' => 'navbar-brand']) ?>
     </div>
     <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
@@ -18,7 +18,11 @@
           <?= $this->Html->link(__('掲示板'), ['controller' => 'Threads', 'action' => 'index']) ?>
         </li>
         <li>
-          <?= $this->Html->link(__('ユーザー一覧'),['controller' => 'Users', 'action' => 'index']) ?>
+          <?php if($user['role'] === 'admin'): ?>
+            <?= $this->Html->link(__('行動計画(管理者用)'),['controller' => 'Admins', 'action' => 'activities', 0]) ?>
+          <?php else: ?>
+            <?= $this->Html->link(__('行動計画'),['controller' => 'Activities', 'action' => 'index']) ?>
+          <?php endif ?>
         </li>
         <li>
           <?= $this->Html->link(__('ゼミ資料検索'),['controller' => 'Attachments', 'action' => 'view']) ?>
