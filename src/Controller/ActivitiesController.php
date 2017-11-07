@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Exception;
 
 /**
  * Activities Controller
@@ -207,10 +208,21 @@ class ActivitiesController extends AppController
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;
         }
+
+        $id = $this->request->params['pass'][0];
+        // add ページ用の認証
+        if ($user['id'] == $id) {
+          return true;
+        }
+
         // リクエストされたページのActivitiesのuser_idと
         // ログイン中のUseridが一致する場合はその他のアクションも許可する
-        $id = $this->request->params['pass'][0];
-        $activityUserId = $this->Activities->get($id);
+        try {
+          $activityUserId = $this->Activities->get($id);
+        } catch (Exception $e) {
+          $this->Flash->error(__('他のユーザーのテーマの操作はできません。'));
+          return false;
+        }
         if ($activityUserId['user_id'] == $user['id']) {
             return true;
         }else{
