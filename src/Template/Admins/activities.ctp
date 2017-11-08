@@ -18,7 +18,7 @@
     <div class="col-xs-12">
       <h1 class="theme">
         <div class="themeHead">
-          <span class="font-20"><?= $result['user']['name'].__('さんの研究テーマ') ?></span>
+          <span class="font-20"><?= $result['user']['nickname'].__('さんの研究テーマ') ?></span>
         </div>
         <?= $result['theme']; ?>
         <div class="row">
