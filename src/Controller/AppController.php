@@ -82,7 +82,7 @@ class AppController extends Controller
     public function beforeFilter(Event $event){
       parent::beforeFilter($event);
       $user = $this->Auth->user();
-      $week = Configure::read("week");
+      $week = Configure::read("weekArr");
       $this->set(compact('user','week'));
     }
 

@@ -1,6 +1,9 @@
 <?php
-$config['week'] = array("(日)", "(月)", "(火)", "(水)", "(木)", "(金)", "(土)");
 return [
   define('MAXSCORE', 5),
+  define('MAXPRIORITY', 5),
+  define('MINPRIORITY', 1),
+  define('PROCESS', 0),
+  define('CLOSE', 1),
 ];
 ?>

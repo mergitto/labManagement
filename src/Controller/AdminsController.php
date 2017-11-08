@@ -15,6 +15,7 @@ class AdminsController extends AppController
     {
         parent::initialize();
         $this->loadComponent('Paginator');
+        $this->loadComponent('AdminActivities');
     }
     /**
      * Index method
@@ -57,6 +58,34 @@ class AdminsController extends AppController
         $admins = $this->Admins->find('list');
         $this->set(compact('user', 'admins'));
         $this->set('_serialize', ['user']);
+    }
+    /**
+     * Activities View method
+     * 管理者のみが全てのユーザーのActivitiesを変更追加できる
+     */
+    public function activities($userId = null)
+    {
+        $tasksModel = $this->loadModel('Tasks');
+        $activitiesModel = $this->loadModel('Activities');
+        $user = $this->Auth->user();
+        $users = $activitiesModel->Users->find('list')->where(['Users.id !=' => $user['id']])->order(['Users.created' => 'ASC']);
+        $activity = $activitiesModel->find()->where(['user_id' => $userId])->contain(['Users']);
+        if(!$activity->isEmpty()){ // 研究テーマを登録している場合はActivitiesテーブルの情報を取得する
+          $result = $activity->first();
+          $plans = $activitiesModel->Plans->find()->where(['activity_id' => $result['id']])->order(['Plans.created' => 'ASC']);
+        }
+        $tasks = $tasksModel->find()->where(['user_id' => $userId])->contain(['Subtasks'])->order(['Tasks.created' => 'ASC']);
+        $allTasks = $tasksModel->find()->contain(['Subtasks'])->order(['Tasks.created' => 'ASC']);
+        $todayTasks = $tasksModel->find()
+          ->where(['user_id' => $userId])
+          ->where(['starttime <=' => date('Y-m-d H:i:s')])
+          ->where(['status =' => PROCESS]) // status=処理中(PROCESS)という条件を付加
+          ->contain(['Subtasks'])
+          ->order(['Tasks.created' => 'ASC']);
+        $subList = $this->AdminActivities->subTasksList($tasks);
+        $taskRate = $this->AdminActivities->taskProgressRate($allTasks);
+        $activities = $activitiesModel->find()->contain(['Users'])->order(['Activities.created' => 'ASC']);
+        $this->set(compact('result', 'plans', 'tasks', 'subList', 'todayTasks', 'taskRate', 'activities', 'users'));
     }
 
     /**
