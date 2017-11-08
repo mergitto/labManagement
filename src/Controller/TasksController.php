@@ -52,6 +52,8 @@ class TasksController extends AppController
         ]);
         $user = $this->Auth->user();
         if ($this->request->is(['patch', 'post', 'put'])) {
+            $this->request->data['starttime'] = date('Y-m-d', strtotime($this->request->data['starttime']));
+            $this->request->data['endtime'] = date('Y-m-d', strtotime($this->request->data['endtime']));
             $task = $this->Tasks->patchEntity($task, $this->request->data);
             if ($this->Tasks->save($task)) {
                 $this->Flash->success(__('タスクを修正しました。'));
