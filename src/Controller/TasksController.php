@@ -90,6 +90,14 @@ class TasksController extends AppController
         return $this->redirect(['controller' => 'Activities', 'action' => 'index']);
     }
 
+    /**
+     * tasksList method
+     * @return array tasks for shell parameter
+     */
+    public function tasksList(){
+      return $this->Tasks->find()->contain(['Subtasks', 'Users']);
+    }
+
     public function isAuthorized($user)
     {
         $action = $this->request->params['action'];
