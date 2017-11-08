@@ -65,6 +65,8 @@ class SubtasksController extends AppController
         ]);
         $user = $this->Auth->user();
         if ($this->request->is(['patch', 'post', 'put'])) {
+          $this->request->data['starttime'] = date('Y-m-d', strtotime($this->request->data['starttime']));
+          $this->request->data['endtime'] = date('Y-m-d', strtotime($this->request->data['endtime']));
           $subtask = $this->Subtasks->patchEntity($subtask, $this->request->data);
           $timeFlag = $this->taskTimeValid($this->request->data['tasks']['_ids'], $this->request->data['starttime'], $this->request->data['endtime']);
           if (!$timeFlag['startFlag']) {

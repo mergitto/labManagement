@@ -63,20 +63,20 @@ class TasksTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('description');
+            ->notEmpty('description', 'タスクの内容を入力してください。');
 
         $validator
             ->allowEmpty('status');
 
         $validator
             ->integer('weight')
-            ->allowEmpty('weight');
+            ->notEmpty('weight', 'タスクの重みを設定してください。');
 
         $validator
-            ->allowEmpty('starttime');
+            ->notEmpty('starttime', 'タスクの開始期限を入力してください。');
 
         $validator
-            ->allowEmpty('endtime');
+            ->notEmpty('endtime', 'タスクの終了期限を入力してください。');
 
         return $validator;
     }
