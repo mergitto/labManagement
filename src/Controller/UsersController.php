@@ -99,6 +99,23 @@ class UsersController extends AppController
       $this->set(compact('user', 'attachments', 'iineEval', 'todayHour', 'attachmentFlag'));
     }
 
+    /**
+     * TaskModalFlag method
+     * @param integer $flag 0 or 1
+     */
+    public function taskModalFlag()
+    {
+      $this->autoRender = FALSE;
+      if($this->request->is('ajax')) {
+        $user = $this->Users->get($this->request->data['id']);
+        $user->accessible('task_modal_flg', true);
+        $user->task_modal_flg = $this->request->data['task_modal_flg'];
+        if($this->Users->save($user)){
+          echo json_encode($user);
+        }
+      }
+    }
+
 
     /**
      * Delete method
@@ -142,7 +159,7 @@ class UsersController extends AppController
     {
         $action = $this->request->params['action'];
         // index, login, logoutページは誰でも見れる
-        if (in_array($action, ['index', 'login', 'logout'])) {
+        if (in_array($action, ['index', 'taskModalFlag', 'login', 'logout'])) {
             return true;
         }
         // リクエストされたページのUser idと

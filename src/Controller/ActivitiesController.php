@@ -45,7 +45,8 @@ class ActivitiesController extends AppController
         $subList = $this->subTasksList($tasks);
         $taskRate = $this->taskProgressRate($allTasks);
         $activities = $this->Activities->find()->contain(['Users'])->order(['Activities.created' => 'ASC']);
-        $this->set(compact('result', 'plans', 'tasks', 'subList', 'todayTasks', 'taskRate', 'activities', 'tmpUserId', 'tmpUserName'));
+        $userFlag = $this->Activities->Users->get($user['id']);
+        $this->set(compact('result', 'plans', 'tasks', 'subList', 'todayTasks', 'taskRate', 'activities', 'tmpUserId', 'tmpUserName', 'userFlag'));
     }
 
     /**
