@@ -40,6 +40,15 @@ class EventsController extends FullCalendarAppController
             'limit'   => 4,
             'order'   => ['Events.start' => 'asc']
         ];
+        // その日のタスクをモーダルで表示するためのロード
+        $tasksModel = $this->loadModel('Tasks');
+        $user = $this->Auth->user();
+        $todayTasks = $tasksModel->find()
+          ->where(['user_id' => $user['id']])
+          ->where(['starttime <=' => date('Y-m-d H:i:s')])
+          ->where(['status =' => PROCESS]) // status=処理中(PROCESS)という条件を付加
+          ->contain(['Subtasks'])
+          ->order(['Tasks.created' => 'ASC']);
 
         $attachments = $this->Events->Attachments->find()->contain(['Tags','Favorites']);
         // お気に入り登録されたファイルのタグ配列をいじりやすいように変更
@@ -80,8 +89,9 @@ class EventsController extends FullCalendarAppController
           }
         }
         $this->set('json', h(json_encode($json,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES)));
+        $userFlag = $this->Events->Users->get($user['id']);
 
-        $this->set(compact('allEvent','checkUsers','countUsers','submittedUsers','threeTag'));
+        $this->set(compact('allEvent','checkUsers','countUsers','submittedUsers','threeTag', 'todayTasks', 'userFlag'));
         $this->set('events', $this->paginate($events));
         $this->set('_serialize', ['events']);
     }

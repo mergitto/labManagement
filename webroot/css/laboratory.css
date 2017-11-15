@@ -348,7 +348,7 @@ ul.rank-right{
   margin-bottom: 0;
 }
 /***************************************/
-/*********掲示板レスポンシブ用***********/
+/*********行動計画画面用***********/
 .theme{
   color: #54B8D9;
 }
@@ -445,5 +445,20 @@ hr.today-plan-hr {
 .progress {
   margin-top: 20px;
   margin-bottom: 10px;
+}
+.todayTaskLink a {
+  text-decoration: underline;
+}
+/***************************************/
+/*************タスクモーダル用**********/
+.modal-list li {
+  margin: 10px 0px;
+}
+#update-flg {
+  display: none;
+  color: #ff0000;
+}
+.flg-update {
+  display: none;
 }
 /***************************************/

@@ -37,7 +37,7 @@
   </div>
   <div class="row text-center">
     <div class="col-xs-12">
-      <h2><?= __('本日のタスク') ?></h2>
+      <h2><div class="todayTaskLink"><a href="#" class="taskModal"><?= __('本日のタスク') ?></a></div></h2>
       <hr class="today-plan-hr">
       <?php $todayTasks->isEmpty() ? print __('<div class="text-center font-20 color-1">本日のタスクはないです。タスクを設定してください。</div>') : ''; ?>
       <ul>
@@ -259,4 +259,12 @@
     </div>
   </div>
 </div>
-
+<!-- モーダルウィンドウのテンプレ -->
+<?= $this->element('taskModal'); ?>
+<?php if($userFlag['task_modal_flg'] == 0): ?>
+<script>
+  $(function(){
+    $('#taskModal').modal('show');
+  });
+</script>
+<?php endif ?>
