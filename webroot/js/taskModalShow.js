@@ -12,9 +12,9 @@ $('.taskModal').on('click', function(){
 // チェックボックスにチェックがつけられたら更新ボタンを表示させる
 $('[name=modal-flag]').change(function(){
   if($(this).prop("checked")){
-    $(".flg-update").show(300);
+    $(".flg-update").show();
   } else {
-    $(".flg-update").hide(300);
+    $(".flg-update").hide(100);
   }
 });
 
@@ -35,7 +35,8 @@ $('.flg-update').on('click', function(){
         $('body').removeClass('modal-open');
         $('.modal-backdrop').remove();
         $('#taskModal').modal('hide');
-      }, 1000)
+        $("[name=modal-flag]").prop("disabled", true);
+      }, 1500)
     }).fail(function(){
       console.log("failed");
     });

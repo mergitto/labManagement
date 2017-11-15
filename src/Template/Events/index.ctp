@@ -104,7 +104,7 @@
 </div>
 <!-- モーダルウィンドウのテンプレ -->
 <?= $this->element('taskModal'); ?>
-<?php if($userFlag['task_modal_flg'] == 0): ?>
+<?php if($userFlag['task_modal_flg'] == 0 && $userFlag['role'] == 'user'): ?>
 <script>
   $(function(){
     $('#taskModal').modal('show');

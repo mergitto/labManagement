@@ -15,6 +15,9 @@
               $myTodayTasks = $this->viewVars['todayTasks'];
             }
           ?>
+          <?php if ($myTodayTasks->isEmpty()): ?>
+            <?= __("本日のタスクはありません。") ?>
+          <?php else: ?>
             <?php foreach($myTodayTasks as $todayTask): ?>
             <li>
               <?= $todayTask['description']."  ".$todayTask['starttime']->i18nFormat("YYYY-MM-dd").$week[date('w', strtotime($todayTask['starttime']))]."~".$todayTask['endtime']->i18nFormat("YYYY-MM-dd") .$week[date('w', strtotime($todayTask['endtime']))] ?>
@@ -26,7 +29,8 @@
                 <?php endforeach ?>
               </ul>
             </li>
-          <?php endforeach ?>
+            <?php endforeach ?>
+          <?php endif ?>
         </ul>
       </div>
       <div class="modal-footer">
