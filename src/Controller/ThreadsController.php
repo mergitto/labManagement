@@ -24,7 +24,8 @@ class ThreadsController extends AppController
      */
     public function index()
     {
-        $threads = $this->paginate($this->Threads->find()->contain(['Posts' => function($q){
+        $threads = $this->paginate($this->Threads->find('search', $this->Threads->filterParams($this->request->query))
+          ->contain(['Posts' => function($q){
               return $q->order(['modified' => 'DESC']);
         }]));
         $this->set(compact('threads'));
