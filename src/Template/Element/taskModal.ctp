@@ -34,7 +34,7 @@
         </ul>
       </div>
       <div class="modal-footer">
-        <?php if ($userFlag['task_modal_flg'] == 0): ?>
+        <?php if ($userFlag['task_modal_flg'] == 0 && $user['id'] == $userFlag['id']): ?>
           <div class="text-left"><label><input type="checkbox" name="modal-flag" value="<?= $user['id'] ?>"><?= __("この通知を一日中表示しないようにする"); ?></label><span id="update-flg"><?= __("※正常に更新されました") ?></span></div>
           <button type="button" class="btn btn-success flg-update"><?= __("更新") ?></button>
         <?php endif ?>

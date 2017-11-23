@@ -261,7 +261,7 @@
 </div>
 <!-- モーダルウィンドウのテンプレ -->
 <?= $this->element('taskModal'); ?>
-<?php if($userFlag['task_modal_flg'] == 0): ?>
+<?php if($userFlag['task_modal_flg'] == 0 && $user['id'] == $tmpUserId): ?>
 <script>
   $(function(){
     $('#taskModal').modal('show');
