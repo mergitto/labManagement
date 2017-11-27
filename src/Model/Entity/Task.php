@@ -11,8 +11,8 @@ use Cake\ORM\Entity;
  * @property string $status
  * @property int $weight
  * @property int $user_id
- * @property \Cake\I18n\Time $start
- * @property \Cake\I18n\Time $end
+ * @property \Cake\I18n\Time $starttime
+ * @property \Cake\I18n\Time $endtime
  * @property \Cake\I18n\Time $modified
  * @property \Cake\I18n\Time $created
  *

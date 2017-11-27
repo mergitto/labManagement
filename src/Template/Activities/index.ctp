@@ -40,44 +40,48 @@
       <h2><div class="todayTaskLink"><a href="#" class="taskModal"><?= __('本日のタスク') ?></a></div></h2>
       <hr class="today-plan-hr">
       <?php $todayTasks->isEmpty() ? print __('<div class="text-center font-20 color-1">本日のタスクはないです。タスクを設定してください。</div>') : ''; ?>
-      <ul>
-        <div class="text-left">
+        <div class="row">
           <?php foreach($todayTasks as $todayTask): ?>
-            <li>
-              <?php date('Y-m-d') <= $todayTask['endtime']->i18nFormat('YYYY-MM-dd') ? print '<div>': print '<div class="limitOver">'; ?>
-                <span class="font-20"><?= $todayTask['description'] ?></span>
-                <span class="font-14"><?= $todayTask['starttime']->i18nFormat('YYYY-MM-dd').$week[date('w', strtotime($todayTask['starttime']))].__('〜').$todayTask['endtime']->i18nFormat('YYYY-MM-dd').$week[date('w', strtotime($todayTask['endtime']))] ?></span>
-                <?= $this->Html->link(__('設定'), ['controller' => 'Tasks','action' => 'edit',$todayTask['id']]); ?>
-              </div>
-            </li>
-            <ul>
-              <?php foreach($todayTask['subtasks'] as $todaySubtask): ?>
-                <?php $startSubtask = $todaySubtask['starttime']->i18nFormat('YYYY-MM-dd'); ?>
-                <?php $endSubtask = $todaySubtask['endtime']->i18nFormat('YYYY-MM-dd'); ?>
-                <?php $startWeek = $week[date('w', strtotime($todaySubtask['starttime']))] ?>
-                <?php $endWeek = $week[date('w', strtotime($todaySubtask['endtime']))] ?>
-                <li>
-                <span class="font-14 color-<?= $todaySubtask['status']?>"><?= $todaySubtask['subdescription'] ?></span>
-                <?php for($i=0; $todaySubtask['weight'] > $i; $i++){ echo "★"; } ?>
-                <?= $this->Html->link(__('設定'), ['controller' => 'Subtasks','action' => 'edit',$todaySubtask['id']], ['class' => "status{$todaySubtask['status']}"]); ?></p>
-                <?php if(date('Y-m-d') >= $startSubtask && date('Y-m-d') <= $endSubtask): ?>
-                  <?php if($todaySubtask['status'] != 0): ?><span class="color-<?= $todaySubtask['status'] ?>"><?= __("※このサブタスクは完了しています") ?></span><?php endif ?>
-                <?php elseif(date('Y-m-d H:i:s') <= $startSubtask): ?>
-                    <?= __("※まだ開始期間にはいっていません") ?>
-                <?php else: ?>
-                  <?php if($todaySubtask['status'] == 1): ?>
-                    <span class="color-<?= $todaySubtask['status'] ?>"><?= __("※このサブタスクは完了しています") ?></span>
-                  <?php else: ?>
-                    <span class="limitOver"><?= __("※期限が切れています。延長するか、サブタスクを終わらせてください") ?></span>
-                  <?php endif ?>
-                <?php endif ?>
-                  <p><span class="font-14 color-<?= $todaySubtask['status']?>"><?= $startSubtask.$startWeek.__('〜').$endSubtask.$endWeek ?></span>
-                </li>
-              <?php endforeach ?>
-            </ul>
+            <div class="col-md-4">
+              <ul>
+                <div class="text-left">
+                  <li>
+                    <?php date('Y-m-d') <= $todayTask['endtime']->i18nFormat('YYYY-MM-dd') ? print '<div>': print '<div class="limitOver">'; ?>
+                      <span class="font-20"><?= $todayTask['description'] ?></span>
+                      <span class="font-14"><?= $todayTask['starttime']->i18nFormat('YYYY-MM-dd').$week[date('w', strtotime($todayTask['starttime']))].__('〜').$todayTask['endtime']->i18nFormat('YYYY-MM-dd').$week[date('w', strtotime($todayTask['endtime']))] ?></span>
+                      <?= $this->Html->link(__('設定'), ['controller' => 'Tasks','action' => 'edit',$todayTask['id']]); ?>
+                    </div>
+                  </li>
+                  <ul>
+                    <?php foreach($todayTask['subtasks'] as $todaySubtask): ?>
+                      <?php $startSubtask = $todaySubtask['starttime']->i18nFormat('YYYY-MM-dd'); ?>
+                      <?php $endSubtask = $todaySubtask['endtime']->i18nFormat('YYYY-MM-dd'); ?>
+                      <?php $startWeek = $week[date('w', strtotime($todaySubtask['starttime']))] ?>
+                      <?php $endWeek = $week[date('w', strtotime($todaySubtask['endtime']))] ?>
+                      <li>
+                      <span class="font-14 color-<?= $todaySubtask['status']?>"><?= $todaySubtask['subdescription'] ?></span>
+                      <?php for($i=0; $todaySubtask['weight'] > $i; $i++){ echo "★"; } ?>
+                      <?= $this->Html->link(__('設定'), ['controller' => 'Subtasks','action' => 'edit',$todaySubtask['id']], ['class' => "status{$todaySubtask['status']}"]); ?></p>
+                      <?php if(date('Y-m-d') >= $startSubtask && date('Y-m-d') <= $endSubtask): ?>
+                        <?php if($todaySubtask['status'] != 0): ?><span class="color-<?= $todaySubtask['status'] ?>"><?= __("※このサブタスクは完了しています") ?></span><?php endif ?>
+                      <?php elseif(date('Y-m-d H:i:s') <= $startSubtask): ?>
+                          <?= __("※まだ開始期間にはいっていません") ?>
+                      <?php else: ?>
+                        <?php if($todaySubtask['status'] == 1): ?>
+                          <span class="color-<?= $todaySubtask['status'] ?>"><?= __("※このサブタスクは完了しています") ?></span>
+                        <?php else: ?>
+                          <span class="limitOver"><?= __("※期限が切れています。延長するか、サブタスクを終わらせてください") ?></span>
+                        <?php endif ?>
+                      <?php endif ?>
+                        <p><span class="font-14 color-<?= $todaySubtask['status']?>"><?= $startSubtask.$startWeek.__('〜').$endSubtask.$endWeek ?></span>
+                      </li>
+                    <?php endforeach ?>
+                  </ul>
+                </div>
+              </ul>
+            </div>
           <?php endforeach ?>
         </div>
-      </ul>
     </div>
   </div>
   <hr class="today-plan-hr">
@@ -164,6 +168,7 @@
                   </li>
                   <ul>
                     <?php foreach($task['subtasks'] as $subtask): ?>
+                      <?php if($subtask['status'] == 0): ?>
                         <li>
                           <span class="font-14"><?= $subtask['subdescription'] ?></span>
                           <?php for($i=0; $subtask['weight'] > $i; $i++){ echo "★"; } ?>
@@ -173,6 +178,7 @@
                           </span>
                           <?php (date('Y-m-d') > $subtask['endtime']->i18nFormat('YYYY-MM-dd') && $subtask['status'] != 1) ? print '※期限が切れています。延長してください。' : ''; ?>
                         </li>
+                      <?php endif ?>
                     <?php endforeach ?>
                   </ul>
                 <?php endif ?>
@@ -261,7 +267,7 @@
 </div>
 <!-- モーダルウィンドウのテンプレ -->
 <?= $this->element('taskModal'); ?>
-<?php if($userFlag['task_modal_flg'] == 0): ?>
+<?php if($userFlag['task_modal_flg'] == 0 && $user['id'] == $tmpUserId): ?>
 <script>
   $(function(){
     $('#taskModal').modal('show');

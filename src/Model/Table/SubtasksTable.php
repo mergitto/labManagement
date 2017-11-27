@@ -93,6 +93,18 @@ class SubtasksTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
+        $rules->add(
+          function ($entity) {
+            if ($entity->starttime > $entity->endtime) {
+              return false;
+            } else {
+              return true;
+            }
+          }, [
+            'errorField' => 'endtime',
+            'message' => '終了日が開始日よりも前になっています。'
+          ]
+        );
 
         return $rules;
     }
