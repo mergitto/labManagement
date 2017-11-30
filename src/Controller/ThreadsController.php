@@ -63,7 +63,7 @@ class ThreadsController extends AppController
         $user = $this->Auth->user();
         $thread = $this->Threads->get($id);
         $posts = $this->paginate($this->Threads->Posts->find()->where(['thread_id' => $id])->order(['Posts.modified' => 'DESC']));
-        $usersList = $this->paginate($this->Threads->Users->find());
+        $usersList = $this->Threads->Users->find();
         $post = $this->Threads->Posts->newEntity();
         if ($this->request->is('post')) {
             $post = $this->Threads->Posts->patchEntity($post, $this->request->data);

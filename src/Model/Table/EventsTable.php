@@ -67,8 +67,7 @@ class EventsTable extends Table
             ->allowEmpty('allday');
 
         $validator
-            ->dateTime('start')
-            ->allowEmpty('start');
+            ->notEmpty('start', '予定日を選択してください。');
 
         $validator
             ->dateTime('end')
