@@ -160,7 +160,6 @@ class EventsController extends FullCalendarAppController
     {
         $event = $this->Events->newEntity();
         if ($this->request->is('post')) {
-            $this->request->data['start'] = date('Y-m-d H:i:s' ,strtotime($this->request->data['start']));
             $event = $this->Events->patchEntity($event, $this->request->data);
             if ($this->Events->save($event)) {
                 $this->Flash->success(__('予定を追加しました。'));
