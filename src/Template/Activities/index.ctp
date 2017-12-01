@@ -100,7 +100,7 @@
                 <li>
                   <?php for($i=0; $plan['weight'] > $i; $i++){ echo "★"; } ?>
                   <span class="font-20"><?= $plan['todo'] ?></span>
-                  <?= $this->Html->link(__('設定(ToDoへ変更する)'), ['controller' => 'Plans','action' => 'edit',$plan['id']]); ?>
+                  <?= $this->Html->link(__('設定(ToDoからタスクへ変更する)'), ['controller' => 'Plans','action' => 'edit',$plan['id']]); ?>
                 </li>
                 <?php $todoCount++; ?>
               <?php endif ?>

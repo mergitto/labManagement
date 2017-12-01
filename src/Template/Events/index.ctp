@@ -1,6 +1,6 @@
 <div class="fu-frame-main">
   <div class="container">
-    <h3><?= __('ゼミ予定日');?></h3>
+    <h3><?= __('ゼミ予定日');?><span class="font-16"><?= $this->Html->link(__('(全ゼミ一覧)'), ['action' => 'views']); ?></span></h3>
     <hr class="mb0">
     <div class="row">
       <div class="col-md-7">
