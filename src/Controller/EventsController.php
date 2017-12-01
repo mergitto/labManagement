@@ -152,6 +152,24 @@ class EventsController extends FullCalendarAppController
     }
 
     /**
+     * views method
+     *
+     * @param string|null $id Event id.
+     * @return void
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function views()
+    {
+      $user = $this->Auth->user();
+      $this->paginate = [
+        'contain' => ['Users', 'Attachments']
+      ];
+      $this->set('events', $this->paginate($this->Events->find()->order(['Events.start' => 'DESC'])));
+      $this->set(compact('user'));
+    }
+
+
+    /**
      * Add method
      *
      * @return void Redirects on successful add, renders view otherwise.
@@ -235,8 +253,8 @@ class EventsController extends FullCalendarAppController
     public function isAuthorized($user)
     {
         $action = $this->request->params['action'];
-        // index, view, logoutページは誰でも見れる
-        if (in_array($action, ['index','view','logout'])) {
+        // index, viewページは誰でも見れる
+        if (in_array($action, ['index','view','views','logout'])) {
             return true;
         }
         if (isset($user['role']) && $user['role'] === 'admin') {
