@@ -1,0 +1,10 @@
+textarea.edit {
+  resize: vertical;
+  min-height: 300px;
+  font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
+}
+textarea.posts {
+  resize: vertical;
+  min-height: 200px;
+  font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
+}
