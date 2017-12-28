@@ -13,20 +13,12 @@
       <fieldset>
           <legend><?= $thread->title ?></legend>
           <div class="form-group">
-            <div class="col-xs-6"><?= __('コメント') ?></div>
-            <div class="col-xs-6"><?= __('プレビュー') ?></div>
-            <div class="col-xs-6">
-              <?= $this->Form->textarea('comment',['type'=>'text', 'label'=> 'コメント', 'class' => "comment-area form-control login-form posts", 'id' => 'editor', 'placeholder' => 'コメントを書いて投稿しましょう。参考にしたURLを貼ってみてください。markdown形式での入力が可能です。']); ?>
-            </div>
-            <div class="col-xs-6">
-              <div id="result">
-            </div>
+              <?= $this->element('commentForm') //markdown形式のコメントフォームの設置 ?>
               <?= $this->Form->input('url', ['type' => 'hidden', 'label' => '参考url','class' => 'form-control login-form']); ?>
               <?= $this->Form->input('user_id', ['type' =>
               'hidden' ,'value' => $user['id'], 'label' => 'タイトル名']); ?>
               <?= $this->Form->input('thread_id', ['type' =>
               'hidden' ,'value' => $thread->id, 'label' => 'タイトル名']); ?>
-          </div>
       </fieldset>
           <?php if($user['role'] == 'admin'): ?>
           <div class="form-group">
@@ -52,7 +44,7 @@
         <div class="row">
           <thead>
           <tr>
-              <th class="col-md-1"><?= __('名前'); ?></th>
+              <th class="col-md-1 minWidth70"><?= __('名前'); ?></th>
               <th class="col-md-8"><?= __('コメント'); ?></th>
               <th class="col-md-2"><?= $this->Paginator->sort('modified', __('投稿時間')); ?></th>
               <th class="col-md-1"><?= __(""); ?></th>

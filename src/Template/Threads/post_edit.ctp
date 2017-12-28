@@ -16,14 +16,7 @@
     <fieldset>
         <legend><?= __('コメント修正') ?></legend>
         <div class="row">
-          <div class="col-xs-12">
-            <?= $this->Form->textarea('comment',['type'=>'text', 'label'=> 'コメント', 'class' => "form-control login-form edit", 'id' => 'editor', 'placeholder' => 'コメントを書いて投稿しましょう。参考にしたURLを貼ってみてください。']); ?>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <div id="result">
-          </div>
+          <?= $this->element('commentForm') // markdown形式のコメントフォームの設置?>
         </div>
         <div class="form-group">
             <?= $this->Form->input('url',['type'=>'hidden', 'label'=> 'コメント', 'class' => "form-control login-form"]); ?>
