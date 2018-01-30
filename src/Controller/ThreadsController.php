@@ -69,21 +69,19 @@ class ThreadsController extends AppController
             $post = $this->Threads->Posts->patchEntity($post, $this->request->data);
             if ($this->Threads->Posts->save($post)) {
                 $this->Flash->success(__('コメントが新しく登録されました。'));
-                /* 管理者がコメントしたらゼミ管理システムに登録している人にメールを送るようにしている*/
-                if($user['role'] === 'admin'){
-                    $email = new Email('default');
-                    foreach($usersList as $user){
-                      if(isset($user['email']) && in_array($user['id'], $post->users['_ids'])){ // 管理者が選択したユーザーのみにメールを飛ばす
-                        $email
-                            ->template('zeminor', 'college')
-                            ->emailFormat('html')
-                            ->from(['xu.lab.fitc6@gmail.com' => 'ゼミ管理システム'])
-                            ->to($user['email'])
-                            ->subject('ゼミ管理システムにコメントされました!')
-                            ->viewVars(['value' => $post['comment']])
-                            ->send();
-                      }
-                    }
+                /* コメントしたらゼミ管理システムに登録している人にメールを送るようにしている*/
+                $email = new Email('default');
+                foreach($usersList as $user){
+                  if(isset($user['email']) && in_array($user['id'], $post->users['_ids'])){ // 選択したユーザーのみにメールを飛ばす
+                    $email
+                        ->template('zeminor', 'college')
+                        ->emailFormat('html')
+                        ->from(['xu.lab.fitc6@gmail.com' => 'ゼミ管理システム'])
+                        ->to($user['email'])
+                        ->subject('ゼミ管理システムにコメントされました!')
+                        ->viewVars(['value' => $post['comment']])
+                        ->send();
+                  }
                 }
                 /*管理者がコメントしたらメールを送る機能はここまでの部分*/
                 return $this->redirect(['action' => 'posts', $thread->id]);
@@ -92,7 +90,7 @@ class ThreadsController extends AppController
         }
         $users = $users->find('list', [
           'keyField' => 'id',
-          'valueField' => 'name'
+          'valueField' => 'nickname'
         ]);
         $this->set(compact('thread','post','posts','users','usersList'));
     }
