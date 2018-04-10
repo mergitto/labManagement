@@ -110,7 +110,10 @@ class UsersController extends AppController
         $user = $this->Users->get($this->request->data['id']);
         $user->accessible('task_modal_flg', true);
         $user->task_modal_flg = $this->request->data['task_modal_flg'];
-        if($this->Users->save($user)){
+        $logsModel = $this->loadModel('Logs');
+        $log = $logsModel->newEntity();
+        $log = $logsModel->patchEntity($log, ["user_id" => $user['id']]);
+        if($this->Users->save($user) && $logsModel->save($log)){
           echo json_encode($user);
         }
       }
