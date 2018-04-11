@@ -65,8 +65,10 @@ class UsersController extends AppController
                 return $this->redirect(['action' => 'edit', $user->id]);
             }
             $userName = $this->Auth->user();
-            $filePath = pathinfo($this->request->data['photo']['name']);
-            $this->request->data['photo']['name'] = $user['id'].'-user-'.date('Y').'.'.$filePath['extension'];
+            if (!empty($this->request->data['photo']['name'])){
+              $filePath = pathinfo($this->request->data['photo']['name']);
+              $this->request->data['photo']['name'] = $user['id'].'-user-'.date('Y').'.'.$filePath['extension'];
+            }
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('ユーザー情報を更新しました。'));

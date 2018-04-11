@@ -347,6 +347,18 @@ ul.rank-right{
 .post-nickname {
   margin-bottom: 0;
 }
+.maxWidth700 {
+  max-width: 700px;
+}
+.minWidth70 {
+  min-width: 70px;
+}
+#result {
+  word-wrap: break-word;
+}
+.markdown-margin {
+  margin-top: 10px;
+}
 /***************************************/
 /*********行動計画画面用***********/
 .theme{
