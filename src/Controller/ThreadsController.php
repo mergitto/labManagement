@@ -69,7 +69,11 @@ class ThreadsController extends AppController
             $post = $this->Threads->Posts->patchEntity($post, $this->request->data);
             if ($this->Threads->Posts->save($post)) {
                 $this->Flash->success(__('コメントが新しく登録されました。'));
-                /* コメントしたらゼミ管理システムに登録している人にメールを送るようにしている*/
+                /* 送信相手を選択していない場合は元のページへ戻る */
+                if(empty($post->users['_ids'])){
+                  return $this->redirect(['action' => 'posts', $thread->id]);
+                }
+                /* 送信相手を選択している場合はメールを送る */
                 $email = new Email('default');
                 foreach($usersList as $user){
                   if(isset($user['email']) && in_array($user['id'], $post->users['_ids'])){ // 選択したユーザーのみにメールを飛ばす
